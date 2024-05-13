@@ -35,6 +35,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		921694E92BF1BA74006DC44A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92DBDA062BCFCF5900E299E2 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		921694EA2BF1BA7C006DC44A /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */,
+				92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		921694EC2BF1BA8E006DC44A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		921694ED2BF1BB8B006DC44A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				921694E92BF1BA74006DC44A /* View */,
+				921694EC2BF1BA8E006DC44A /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		921694EE2BF1BBD1006DC44A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		921694EF2BF1BDD7006DC44A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				921694F02BF1BEA5006DC44A /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		921694F02BF1BEA5006DC44A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -54,9 +109,10 @@
 		92DBDA012BCFCF5900E299E2 /* roome */ = {
 			isa = PBXGroup;
 			children = (
-				92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */,
-				92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */,
-				92DBDA062BCFCF5900E299E2 /* ViewController.swift */,
+				921694EA2BF1BA7C006DC44A /* Application */,
+				921694EF2BF1BDD7006DC44A /* Data */,
+				921694ED2BF1BB8B006DC44A /* Presentation */,
+				921694EE2BF1BBD1006DC44A /* Domain */,
 				92DBDA0B2BCFCF5B00E299E2 /* Assets.xcassets */,
 				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
 				92DBDA102BCFCF5B00E299E2 /* Info.plist */,
