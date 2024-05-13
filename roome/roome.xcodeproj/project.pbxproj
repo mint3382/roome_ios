@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		921694F82BF21E70006DC44A /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921694F72BF21E70006DC44A /* HTTP.swift */; };
 		921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921694F92BF21F07006DC44A /* RequestBuilder.swift */; };
+		921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921694FB2BF2202A006DC44A /* URLBuilder.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		921694F72BF21E70006DC44A /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		921694F92BF21F07006DC44A /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
+		921694FB2BF2202A006DC44A /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				921694F72BF21E70006DC44A /* HTTP.swift */,
 				921694F92BF21F07006DC44A /* RequestBuilder.swift */,
+				921694FB2BF2202A006DC44A /* URLBuilder.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
+				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
