@@ -8,16 +8,22 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.distribution = .equalCentering
+        stack.spacing = 4
+        
+        return stack
+    }()
     //로그인 버튼
     lazy var kakaoLoginButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(pushedKakaoLoginButton), for: .touchUpInside)
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 20
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.image = UIImage(resource: .kakaoLoginButton).resize(newWidth: view.frame.width * 0.9)
-        buttonConfiguration.contentInsets = .init(top: 25, leading: 0, bottom: 0, trailing: 0)
         
         button.configuration = buttonConfiguration
         
@@ -30,7 +36,6 @@ class LoginViewController: UIViewController {
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.image = UIImage(resource: .appleLoginButton).resize(newWidth: view.frame.width * 0.9)
-        buttonConfiguration.contentInsets = .init(top: -20, leading: 0, bottom: 0, trailing: 0)
         
         button.configuration = buttonConfiguration
         
@@ -39,7 +44,19 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        configureUI()
+    }
+    
+    private func configureUI() {
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(kakaoLoginButton)
+        stackView.addArrangedSubview(appleLoginButton)
+        
+        NSLayoutConstraint.activate([
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
 
     @objc
@@ -52,4 +69,3 @@ class LoginViewController: UIViewController {
         
     }
 }
-
