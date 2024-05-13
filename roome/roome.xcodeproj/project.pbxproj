@@ -12,9 +12,10 @@
 		921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921694FB2BF2202A006DC44A /* URLBuilder.swift */; };
 		921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921694FD2BF2207A006DC44A /* APIProvider.swift */; };
 		921695012BF220A6006DC44A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695002BF220A6006DC44A /* NetworkError.swift */; };
+		921695042BF22DCD006DC44A /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695032BF22DCD006DC44A /* UIImage+.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
-		92DBDA072BCFCF5900E299E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* ViewController.swift */; };
+		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
 		92DBDA0C2BCFCF5B00E299E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DBDA0B2BCFCF5B00E299E2 /* Assets.xcassets */; };
 		92DBDA0F2BCFCF5B00E299E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -25,10 +26,11 @@
 		921694FB2BF2202A006DC44A /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
 		921694FD2BF2207A006DC44A /* APIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
 		921695002BF220A6006DC44A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		921695032BF22DCD006DC44A /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		92DBDA062BCFCF5900E299E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		92DBDA0B2BCFCF5B00E299E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92DBDA0E2BCFCF5B00E299E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92DBDA102BCFCF5B00E299E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,7 +50,7 @@
 		921694E92BF1BA74006DC44A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				92DBDA062BCFCF5900E299E2 /* ViewController.swift */,
+				92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -72,6 +74,7 @@
 		921694ED2BF1BB8B006DC44A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				921695022BF22DB4006DC44A /* Extension */,
 				921694E92BF1BA74006DC44A /* View */,
 				921694EC2BF1BA8E006DC44A /* ViewModel */,
 			);
@@ -126,6 +129,14 @@
 				921695002BF220A6006DC44A /* NetworkError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		921695022BF22DB4006DC44A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				921695032BF22DCD006DC44A /* UIImage+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
@@ -231,10 +242,11 @@
 			files = (
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
-				92DBDA072BCFCF5900E299E2 /* ViewController.swift in Sources */,
+				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
+				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
 				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,
 			);
