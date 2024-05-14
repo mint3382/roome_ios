@@ -19,9 +19,11 @@ protocol LoginViewModelOutput {
 
 class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOutput {
     var loginPublisher = PassthroughSubject<Void, Error>()
+    let loginUseCase: LoginUseCase?
     
-    override init() {
-        super.init()
+    init(loginUseCase: LoginUseCase) {
+        self.loginUseCase = loginUseCase
+//        super.init()
     }
     
     func pushedAppleLoginButton() {
@@ -40,7 +42,13 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
             return
         }
-        
+        //TODO: - 도메인에 넘겨줄 body Type 따로 정의해서 분리하기
+        let bodyJSON: [String: Any] = ["provider": LoginProvider.apple.name,
+                                        "code": "null",
+                                        "idToken": String(data: credential.identityToken ?? Data(), encoding: .utf8) ?? ""]
+        Task {
+            await loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+        }
         loginPublisher.send()
     }
 }

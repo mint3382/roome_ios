@@ -9,8 +9,17 @@ import UIKit
 import Combine
 
 class LoginViewController: UIViewController {
-    private var viewModel: LoginViewModel?
+    private var viewModel: LoginViewModel
     private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     let stackView: UIStackView = {
         let stack = UIStackView()
@@ -49,7 +58,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        viewModel = LoginViewModel()
         bind()
     }
     
@@ -72,11 +80,11 @@ class LoginViewController: UIViewController {
     
     @objc
     private func pushedAppleLoginButton() {
-        viewModel?.pushedAppleLoginButton()
+        viewModel.pushedAppleLoginButton()
     }
     
     private func bind() {
-        viewModel?.loginPublisher
+        viewModel.loginPublisher
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
