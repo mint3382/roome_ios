@@ -6,8 +6,21 @@
 //
 
 import UIKit
+import Combine
 
 class LoginViewController: UIViewController {
+    private var viewModel: LoginViewModel
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +58,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        bind()
     }
     
     private func configureUI() {
@@ -66,6 +80,20 @@ class LoginViewController: UIViewController {
     
     @objc
     private func pushedAppleLoginButton() {
-        
+        viewModel.pushedAppleLoginButton()
+    }
+    
+    private func bind() {
+        viewModel.loginPublisher
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    print("finished")
+                case .failure(let failure):
+                    print("\(failure)")
+                }
+            }, receiveValue: { _ in
+                print("로그인 성공")
+            }).store(in: &cancellables)
     }
 }
