@@ -15,6 +15,7 @@
 		921695042BF22DCD006DC44A /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695032BF22DCD006DC44A /* UIImage+.swift */; };
 		921695072BF26F23006DC44A /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695062BF26F23006DC44A /* APIConstants.swift */; };
 		921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695082BF302D2006DC44A /* LoginViewModel.swift */; };
+		9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216950E2BF33E9D006DC44A /* LoginDTO.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -32,6 +33,7 @@
 		921695052BF26E73006DC44A /* roome.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = roome.entitlements; sourceTree = "<group>"; };
 		921695062BF26F23006DC44A /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		921695082BF302D2006DC44A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		9216950E2BF33E9D006DC44A /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		9216950D2BF33DA7006DC44A /* DataMaping */ = {
 			isa = PBXGroup;
 			children = (
+				9216950E2BF33E9D006DC44A /* LoginDTO.swift */,
 			);
 			path = DataMaping;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
+				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
