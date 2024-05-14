@@ -90,6 +90,8 @@
 		921694EE2BF1BBD1006DC44A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				9216950A2BF31799006DC44A /* Repository */,
+				9216950B2BF317AC006DC44A /* UseCase */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -97,6 +99,8 @@
 		921694EF2BF1BDD7006DC44A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				9216950D2BF33DA7006DC44A /* DataMaping */,
+				9216950C2BF317CE006DC44A /* Repository */,
 				921694F02BF1BEA5006DC44A /* Network */,
 			);
 			path = Data;
@@ -144,6 +148,34 @@
 				921695032BF22DCD006DC44A /* UIImage+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		9216950A2BF31799006DC44A /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		9216950B2BF317AC006DC44A /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		9216950C2BF317CE006DC44A /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		9216950D2BF33DA7006DC44A /* DataMaping */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataMaping;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
