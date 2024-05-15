@@ -45,7 +45,7 @@
 		921695122BF34995006DC44A /* LoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
 		921695142BF35377006DC44A /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		9216951B2BF3CEBC006DC44A /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
-		9216951E2BF4C1C5006DC44A /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		921695262BF4EA39006DC44A /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 		92DBDA012BCFCF5900E299E2 /* roome */ = {
 			isa = PBXGroup;
 			children = (
-				9216951E2BF4C1C5006DC44A /* Secrets.xcconfig */,
+				921695262BF4EA39006DC44A /* Secrets.xcconfig */,
 				921695052BF26E73006DC44A /* roome.entitlements */,
 				921694EA2BF1BA7C006DC44A /* Application */,
 				921694EF2BF1BDD7006DC44A /* Data */,
@@ -354,7 +354,7 @@
 /* Begin XCBuildConfiguration section */
 		92DBDA112BCFCF5B00E299E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9216951E2BF4C1C5006DC44A /* Secrets.xcconfig */;
+			baseConfigurationReference = 921695262BF4EA39006DC44A /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -418,7 +418,7 @@
 		};
 		92DBDA122BCFCF5B00E299E2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9216951E2BF4C1C5006DC44A /* Secrets.xcconfig */;
+			baseConfigurationReference = 921695262BF4EA39006DC44A /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -475,7 +475,6 @@
 		};
 		92DBDA142BCFCF5B00E299E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9216951E2BF4C1C5006DC44A /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -504,7 +503,6 @@
 		};
 		92DBDA152BCFCF5B00E299E2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9216951E2BF4C1C5006DC44A /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
