@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import AuthenticationServices
+import KakaoSDKUser
 
 protocol LoginViewModelInput {
     func pushedAppleLoginButton()
@@ -34,6 +35,30 @@ class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOutput {
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.performRequests()
+    }
+    
+    func pushedKakaoLoginButton() {
+        if UserApi.isKakaoTalkLoginAvailable() {
+            UserApi.shared.loginWithKakaoTalk { (oauthToken, error) in
+                if let error {
+                    print(error)
+                } else {
+                    print("loginWithKakaoTalk() success.")
+                    //회원가입 성공 시 oauthToken 저장 가능
+                    let bodyJSON: [String: Any] = ["provider": LoginProvider.kakao.name,
+                                                   "code": "null",
+                                                   "idToken": oauthToken?.idToken ?? ""]
+                    
+                    Task {
+                        await self.loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+                    }
+                    
+                    self.loginPublisher.send()
+                }
+            }
+        } else { //카카오톡 미설치
+            print("카카오톡 미설치")
+        }
     }
 }
 

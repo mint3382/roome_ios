@@ -75,7 +75,7 @@ class LoginViewController: UIViewController {
 
     @objc
     private func pushedKakaoLoginButton() {
-        
+        viewModel.pushedKakaoLoginButton()
     }
     
     @objc
