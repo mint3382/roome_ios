@@ -95,6 +95,7 @@ class NicknameViewController: UIViewController {
         nicknameTextField.delegate = self
         nicknameTextField.becomeFirstResponder()
         configureUI()
+        registerKeyboardListener()
     }
     
     private func configureUI() {
@@ -148,5 +149,23 @@ class NicknameViewController: UIViewController {
 extension NicknameViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return true
+    }
+}
+
+extension NicknameViewController {
+    private func registerKeyboardListener() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        nextButton.layer.cornerRadius = 10
+        
+        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
+        nextButtonWidthConstraint?.isActive = true
     }
 }
