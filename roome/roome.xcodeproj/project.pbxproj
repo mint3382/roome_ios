@@ -23,6 +23,9 @@
 		921695212BF4D600006DC44A /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 921695202BF4D600006DC44A /* KakaoSDKCommon */; };
 		921695232BF4D60E006DC44A /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 921695222BF4D60E006DC44A /* KakaoSDKAuth */; };
 		921695252BF4D613006DC44A /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 921695242BF4D613006DC44A /* KakaoSDKUser */; };
+		921695292BF7126E006DC44A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 921695282BF7126E006DC44A /* Pretendard-Regular.otf */; };
+		9216952C2BF712F0006DC44A /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9216952B2BF712F0006DC44A /* Pretendard-Bold.otf */; };
+		9216952E2BF712FC006DC44A /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9216952D2BF712FC006DC44A /* Pretendard-Medium.otf */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -46,6 +49,9 @@
 		921695142BF35377006DC44A /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		9216951B2BF3CEBC006DC44A /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		921695262BF4EA39006DC44A /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		921695282BF7126E006DC44A /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		9216952B2BF712F0006DC44A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		9216952D2BF712FC006DC44A /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +103,7 @@
 		921694ED2BF1BB8B006DC44A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
 				921695022BF22DB4006DC44A /* Extension */,
 				921694E92BF1BA74006DC44A /* View */,
 				921694EC2BF1BA8E006DC44A /* ViewModel */,
@@ -207,6 +214,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		921695272BF71223006DC44A /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				9216952B2BF712F0006DC44A /* Pretendard-Bold.otf */,
+				9216952D2BF712FC006DC44A /* Pretendard-Medium.otf */,
+				921695282BF7126E006DC44A /* Pretendard-Regular.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		9216952A2BF712A0006DC44A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				921695272BF71223006DC44A /* Font */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -234,8 +259,8 @@
 				921694ED2BF1BB8B006DC44A /* Presentation */,
 				921694EE2BF1BBD1006DC44A /* Domain */,
 				921694F52BF21E5C006DC44A /* Infrastructure */,
+				9216952A2BF712A0006DC44A /* Resources */,
 				92DBDA0B2BCFCF5B00E299E2 /* Assets.xcassets */,
-				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
 				92DBDA102BCFCF5B00E299E2 /* Info.plist */,
 			);
 			path = roome;
@@ -308,6 +333,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				92DBDA0F2BCFCF5B00E299E2 /* LaunchScreen.storyboard in Resources */,
+				9216952E2BF712FC006DC44A /* Pretendard-Medium.otf in Resources */,
+				9216952C2BF712F0006DC44A /* Pretendard-Bold.otf in Resources */,
+				921695292BF7126E006DC44A /* Pretendard-Regular.otf in Resources */,
 				92DBDA0C2BCFCF5B00E299E2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
