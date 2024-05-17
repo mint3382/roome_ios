@@ -92,6 +92,8 @@ class NicknameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        nicknameTextField.delegate = self
+        nicknameTextField.becomeFirstResponder()
         configureUI()
     }
     
@@ -141,4 +143,10 @@ class NicknameViewController: UIViewController {
         ])
     }
 
+}
+
+extension NicknameViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
 }
