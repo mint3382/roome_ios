@@ -111,6 +111,10 @@ class NicknameViewController: UIViewController {
         bind()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     func bind() {
         let text = nicknameTextField.publisher
         let input = NicknameViewModel.NicknameViewModelInput(nickname: text)
@@ -134,7 +138,7 @@ class NicknameViewController: UIViewController {
         view.addSubview(welcomeLabel)
         
         NSLayoutConstraint.activate([
-            welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4),
             welcomeLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             welcomeLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
@@ -194,6 +198,13 @@ extension NicknameViewController {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -201,6 +212,14 @@ extension NicknameViewController {
         
         nextButtonWidthConstraint?.isActive = false
         nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width)
+        nextButtonWidthConstraint?.isActive = true
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        nextButton.layer.cornerRadius = 10
+        
+        nextButtonWidthConstraint?.isActive = false
+        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         nextButtonWidthConstraint?.isActive = true
     }
 }
