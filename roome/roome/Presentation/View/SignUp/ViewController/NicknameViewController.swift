@@ -189,16 +189,17 @@ extension NicknameViewController {
     private func registerKeyboardListener() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillHide(_:)),
-            name: UIResponder.keyboardWillHideNotification,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
     }
     
-    @objc private func keyboardWillHide(_ notification: Notification) {
-        nextButton.layer.cornerRadius = 10
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        nextButton.layer.cornerRadius = 0
         
-        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
+        nextButtonWidthConstraint?.isActive = false
+        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width)
         nextButtonWidthConstraint?.isActive = true
     }
 }
