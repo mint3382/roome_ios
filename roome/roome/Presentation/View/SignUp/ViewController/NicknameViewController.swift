@@ -106,6 +106,7 @@ class NicknameViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         nicknameTextField.delegate = self
+        nicknameTextField.becomeFirstResponder()
         configureUI()
         registerKeyboardListener()
         bind()
