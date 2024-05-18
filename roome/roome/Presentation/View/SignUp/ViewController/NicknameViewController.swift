@@ -62,6 +62,7 @@ class NicknameViewController: UIViewController {
         textField.clearButtonMode = .whileEditing
         textField.borderStyle = .none
         textField.backgroundColor = .systemGray6
+        textField.addLeftPadding()
         
         return textField
     }()
@@ -179,7 +180,7 @@ extension NicknameViewController: UITextFieldDelegate {
             formLabel.textColor = .label
             return true
         } else {
-            formLabel.textColor = .red
+            formLabel.textColor = .roomeMain
             return false
         }
     }
