@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class NicknameViewController: UIViewController {
     private let stackView: UIStackView = {
@@ -62,7 +63,6 @@ class NicknameViewController: UIViewController {
         textField.borderStyle = .none
         textField.backgroundColor = .systemGray6
         
-        
         return textField
     }()
     
@@ -76,7 +76,8 @@ class NicknameViewController: UIViewController {
     }()
     
     private let nextButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
+        button.isEnabled = false
         button.tintColor = .white
         button.layer.cornerRadius = 10
         button.backgroundColor = .gray
@@ -88,14 +89,38 @@ class NicknameViewController: UIViewController {
     }()
     
     private var nextButtonWidthConstraint: NSLayoutConstraint?
+    var viewModel: NicknameViewModel
+    var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: NicknameViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         nicknameTextField.delegate = self
-        nicknameTextField.becomeFirstResponder()
         configureUI()
         registerKeyboardListener()
+        bind()
+    }
+    
+    func bind() {
+        let text = nicknameTextField.publisher
+        let input = NicknameViewModel.NicknameViewModelInput(nickname: text)
+        let output = viewModel.transform(input)
+        
+        output.isButtonEnable.sink { [weak self] buttonOn in
+            if buttonOn {
+                self?.nextButton.isEnabled = true
+                self?.nextButton.backgroundColor = .red
+            }
+        }.store(in: &cancellables)
     }
     
     private func configureUI() {
@@ -148,7 +173,15 @@ class NicknameViewController: UIViewController {
 
 extension NicknameViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return true
+        let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        
+        if viewModel.canFillTextField(newText) {
+            formLabel.textColor = .label
+            return true
+        } else {
+            formLabel.textColor = .red
+            return false
+        }
     }
 }
 
