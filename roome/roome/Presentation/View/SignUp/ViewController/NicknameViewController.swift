@@ -118,7 +118,7 @@ class NicknameViewController: UIViewController {
         output.isButtonEnable.sink { [weak self] buttonOn in
             if buttonOn {
                 self?.nextButton.isEnabled = true
-                self?.nextButton.backgroundColor = .red
+                self?.nextButton.backgroundColor = .roomeMain
             }
         }.store(in: &cancellables)
     }
