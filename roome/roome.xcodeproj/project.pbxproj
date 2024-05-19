@@ -32,6 +32,7 @@
 		921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695352BF79BB7006DC44A /* NicknameViewModel.swift */; };
 		921695382BF84604006DC44A /* NicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695372BF84604006DC44A /* NicknameUseCase.swift */; };
 		9216953A2BF88FBB006DC44A /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695392BF88FBB006DC44A /* UITextField+.swift */; };
+		921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695452BF9B661006DC44A /* PaddingLabel.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -64,6 +65,7 @@
 		921695352BF79BB7006DC44A /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
 		921695372BF84604006DC44A /* NicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameUseCase.swift; sourceTree = "<group>"; };
 		921695392BF88FBB006DC44A /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		921695452BF9B661006DC44A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		921694ED2BF1BB8B006DC44A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				921695442BF9B64E006DC44A /* CustomUI */,
 				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
 				921695022BF22DB4006DC44A /* Extension */,
 				921694E92BF1BA74006DC44A /* View */,
@@ -274,6 +277,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		921695442BF9B64E006DC44A /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				921695452BF9B661006DC44A /* PaddingLabel.swift */,
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +411,7 @@
 				921695302BF71659006DC44A /* FontSize.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
+				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
