@@ -25,6 +25,7 @@ class TermsOfServiceViewController: UIViewController {
         label.numberOfLines = 2
         label.sizeToFit()
         label.textAlignment = .left
+        label.textColor = .label
         label.font = UIFont().pretendardBold(size: .headline2)
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -33,7 +34,7 @@ class TermsOfServiceViewController: UIViewController {
     
     private let allAgreeButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .black
+        configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.lightGray).resize(newWidth: 24)
         configuration.imagePadding = 8
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 15, bottom: 10, trailing: 20)
@@ -48,7 +49,7 @@ class TermsOfServiceViewController: UIViewController {
     
     private let ageAgreeButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .black
+        configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
         configuration.imagePadding = 12
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
@@ -63,14 +64,14 @@ class TermsOfServiceViewController: UIViewController {
     
     private let serviceAgreeButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .black
+        configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
         configuration.imagePadding = 12
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
         configuration.title = "서비스 이용약관에 동의 (필수)"
         
-        let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = UIFont().pretendardMedium(size: .label)
+        let button = LabelButton(frame: .zero, isDetailButton: true)
+        button.setMain(config: configuration)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -78,14 +79,14 @@ class TermsOfServiceViewController: UIViewController {
     
     private let personalInformationAgreeButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .black
+        configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
         configuration.imagePadding = 12
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
         configuration.title = "개인정보 수집 및 이용약관에 동의 (필수)"
         
-        let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = UIFont().pretendardMedium(size: .label)
+        let button = LabelButton(frame: .zero, isDetailButton: true)
+        button.setMain(config: configuration)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -93,14 +94,14 @@ class TermsOfServiceViewController: UIViewController {
     
     private let advertiseAgreeButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .black
+        configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
         configuration.imagePadding = 12
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
         configuration.title = "광고 및 마케팅 수신에 동의 (선택)"
         
-        let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = UIFont().pretendardMedium(size: .label)
+        let button = LabelButton(frame: .zero, isDetailButton: true)
+        button.setMain(config: configuration)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -139,6 +140,16 @@ class TermsOfServiceViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            
+            serviceAgreeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            serviceAgreeButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            
+            personalInformationAgreeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            personalInformationAgreeButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            
+            advertiseAgreeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            advertiseAgreeButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            
         ])
     }
 
