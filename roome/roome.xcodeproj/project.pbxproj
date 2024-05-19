@@ -35,6 +35,7 @@
 		921695412BF9008A006DC44A /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695402BF9008A006DC44A /* TermsOfServiceViewController.swift */; };
 		921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695452BF9B661006DC44A /* PaddingLabel.swift */; };
 		921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695472BF9FC5B006DC44A /* LabelButton.swift */; };
+		9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216954B2BFA65EE006DC44A /* UIControl+.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -70,6 +71,7 @@
 		921695402BF9008A006DC44A /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		921695452BF9B661006DC44A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		921695472BF9FC5B006DC44A /* LabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButton.swift; sourceTree = "<group>"; };
+		9216954B2BFA65EE006DC44A /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				921695032BF22DCD006DC44A /* UIImage+.swift */,
+				9216954B2BFA65EE006DC44A /* UIControl+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
+				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				921695152BF35377006DC44A /* LoginRepository.swift in Sources */,
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
 				921695302BF71659006DC44A /* FontSize.swift in Sources */,
