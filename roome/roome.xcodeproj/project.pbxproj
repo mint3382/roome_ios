@@ -32,6 +32,11 @@
 		921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695352BF79BB7006DC44A /* NicknameViewModel.swift */; };
 		921695382BF84604006DC44A /* NicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695372BF84604006DC44A /* NicknameUseCase.swift */; };
 		9216953A2BF88FBB006DC44A /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695392BF88FBB006DC44A /* UITextField+.swift */; };
+		921695412BF9008A006DC44A /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695402BF9008A006DC44A /* TermsOfServiceViewController.swift */; };
+		921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695452BF9B661006DC44A /* PaddingLabel.swift */; };
+		921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695472BF9FC5B006DC44A /* LabelButton.swift */; };
+		9216954A2BFA1A9D006DC44A /* TermsOfServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695492BFA1A9D006DC44A /* TermsOfServiceViewModel.swift */; };
+		9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216954B2BFA65EE006DC44A /* UIControl+.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -64,6 +69,11 @@
 		921695352BF79BB7006DC44A /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
 		921695372BF84604006DC44A /* NicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameUseCase.swift; sourceTree = "<group>"; };
 		921695392BF88FBB006DC44A /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		921695402BF9008A006DC44A /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
+		921695452BF9B661006DC44A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		921695472BF9FC5B006DC44A /* LabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButton.swift; sourceTree = "<group>"; };
+		921695492BFA1A9D006DC44A /* TermsOfServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewModel.swift; sourceTree = "<group>"; };
+		9216954B2BFA65EE006DC44A /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +120,7 @@
 			children = (
 				921695082BF302D2006DC44A /* LoginViewModel.swift */,
 				921695352BF79BB7006DC44A /* NicknameViewModel.swift */,
+				921695492BFA1A9D006DC44A /* TermsOfServiceViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -117,6 +128,7 @@
 		921694ED2BF1BB8B006DC44A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				921695442BF9B64E006DC44A /* CustomUI */,
 				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
 				921695022BF22DB4006DC44A /* Extension */,
 				921694E92BF1BA74006DC44A /* View */,
@@ -185,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				921695032BF22DCD006DC44A /* UIImage+.swift */,
+				9216954B2BFA65EE006DC44A /* UIControl+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -262,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				921695332BF765F2006DC44A /* NicknameViewController.swift */,
+				921695402BF9008A006DC44A /* TermsOfServiceViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -272,6 +286,15 @@
 				921695392BF88FBB006DC44A /* UITextField+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		921695442BF9B64E006DC44A /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				921695452BF9B661006DC44A /* PaddingLabel.swift */,
+				921695472BF9FC5B006DC44A /* LabelButton.swift */,
+			);
+			path = CustomUI;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
@@ -395,18 +418,23 @@
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
+				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				921695152BF35377006DC44A /* LoginRepository.swift in Sources */,
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
 				921695302BF71659006DC44A /* FontSize.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
+				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
+				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
+				921695412BF9008A006DC44A /* TermsOfServiceViewController.swift in Sources */,
 				921695072BF26F23006DC44A /* APIConstants.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
+				9216954A2BFA1A9D006DC44A /* TermsOfServiceViewModel.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,
 				9216951C2BF3CEBC006DC44A /* LoginUseCase.swift in Sources */,
