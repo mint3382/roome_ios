@@ -6,18 +6,9 @@
 //
 
 import UIKit
+import Combine
 
-class LabelButton: UIButton {
-    private let serviceLineStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.alignment = .center
-        stack.distribution = .equalSpacing
-        stack.spacing = 12
-        
-        return stack
-    }()
-    
+class LabelButton: UIView {
     private let mainButton: UIButton = {
         let button = UIButton()
         button.contentHorizontalAlignment = .leading
@@ -57,8 +48,18 @@ class LabelButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func tappedMainButtonPublisher() -> AnyPublisher<Void, Never> {
+        mainButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+    }
+    
     func setMain(config: UIButton.Configuration) {
         mainButton.configuration = config
+        mainButton.titleLabel?.font = UIFont().pretendardMedium(size: .label)
+    }
+    
+    func updateImageColor(_ color: UIColor) {
+        mainButton.configuration?.image = UIImage(systemName: "checkmark")?.resize(newWidth: 16).changeImageColor(color)
     }
     
     func setDetail() {
@@ -85,7 +86,7 @@ class LabelButton: UIButton {
             mainButton.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             mainButton.topAnchor.constraint(equalTo: self.topAnchor),
             mainButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            mainButton.trailingAnchor.constraint(equalTo: self.leadingAnchor)
+            mainButton.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
 }
