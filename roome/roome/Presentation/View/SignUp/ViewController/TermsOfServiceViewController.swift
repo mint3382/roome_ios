@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class TermsOfServiceViewController: UIViewController {
     private let stackView: UIStackView = {
@@ -47,7 +48,7 @@ class TermsOfServiceViewController: UIViewController {
         return button
     }()
     
-    private let ageAgreeButton: UIButton = {
+    private let ageAgreeButton: LabelButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
@@ -55,14 +56,15 @@ class TermsOfServiceViewController: UIViewController {
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
         configuration.title = "만 14세 이상입니다.(필수)"
         
-        let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = UIFont().pretendardMedium(size: .label)
+        let button = LabelButton(frame: .zero, isDetailButton: false)
+        button.setMain(config: configuration)
         button.translatesAutoresizingMaskIntoConstraints = false
+//        button.isSelected.toggle()
         
         return button
     }()
     
-    private let serviceAgreeButton: UIButton = {
+    private let serviceAgreeButton: LabelButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
@@ -77,7 +79,7 @@ class TermsOfServiceViewController: UIViewController {
         return button
     }()
     
-    private let personalInformationAgreeButton: UIButton = {
+    private let personalInformationAgreeButton: LabelButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
@@ -92,7 +94,7 @@ class TermsOfServiceViewController: UIViewController {
         return button
     }()
     
-    private let advertiseAgreeButton: UIButton = {
+    private let advertiseAgreeButton: LabelButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
@@ -119,11 +121,82 @@ class TermsOfServiceViewController: UIViewController {
         
         return button
     }()
-
+    
+    let viewModel: TermsOfServiceViewModel
+    var cancellable = Set<AnyCancellable>()
+    
+    init(viewModel: TermsOfServiceViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         configureStackView()
         configureNextButton()
+        bind()
+    }
+    
+    func bind() {
+        let all = allAgreeButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let age = ageAgreeButton.tappedMainButtonPublisher()
+        let service = serviceAgreeButton.tappedMainButtonPublisher()
+        let personal = personalInformationAgreeButton.tappedMainButtonPublisher()
+        let advertise = advertiseAgreeButton.tappedMainButtonPublisher()
+        
+        let output = viewModel.transform(TermsOfServiceViewModel.TermsOfServiceInput(allAgree: all,ageAgree: age, service: service, personal: personal, advertise: advertise))
+        
+        output.states
+            .sink { [weak self] states in
+                if states.ageAgree {
+                    self?.ageAgreeButton.updateImageColor(.roomeMain)
+                } else {
+                    self?.ageAgreeButton.updateImageColor(.lightGray)
+                }
+                
+                if states.service {
+                    self?.serviceAgreeButton.updateImageColor(.roomeMain)
+                } else {
+                    self?.serviceAgreeButton.updateImageColor(.lightGray)
+                }
+                
+                if states.personal {
+                    self?.personalInformationAgreeButton.updateImageColor(.roomeMain)
+                } else {
+                    self?.personalInformationAgreeButton.updateImageColor(.lightGray)
+                }
+                
+                if states.advertise {
+                    self?.advertiseAgreeButton.updateImageColor(.roomeMain)
+                } else {
+                    self?.advertiseAgreeButton.updateImageColor(.lightGray)
+                }
+            }.store(in: &cancellable)
+        
+        output.isNextButtonOn
+            .sink { [weak self] isEnable in
+                if isEnable {
+                    self?.nextButton.isEnabled = true
+                    self?.nextButton.backgroundColor = .roomeMain
+                } else {
+                    self?.nextButton.isEnabled = false
+                    self?.nextButton.backgroundColor = .gray
+                }
+            }.store(in: &cancellable)
+        
+        output.isAllAgreeOn
+            .sink { [weak self] isSelected in
+                if isSelected {
+                    self?.allAgreeButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.roomeMain).resize(newWidth: 24)
+                } else {
+                    self?.allAgreeButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.lightGray).resize(newWidth: 24)
+                }
+            }.store(in: &cancellable)
     }
     
     private func configureStackView() {
