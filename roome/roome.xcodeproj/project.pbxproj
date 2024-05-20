@@ -42,6 +42,7 @@
 		921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695522BFB2A3D006DC44A /* UserDTO.swift */; };
 		921695592BFB8D38006DC44A /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695582BFB8D38006DC44A /* UserRepository.swift */; };
 		9216955B2BFB8D4C006DC44A /* UserRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216955A2BFB8D4C006DC44A /* UserRepositoryType.swift */; };
+		9216955D2BFBBE2F006DC44A /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216955C2BFBBE2F006DC44A /* DIContainer.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -84,6 +85,7 @@
 		921695522BFB2A3D006DC44A /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		921695582BFB8D38006DC44A /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		9216955A2BFB8D4C006DC44A /* UserRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryType.swift; sourceTree = "<group>"; };
+		9216955C2BFBBE2F006DC44A /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
 				9216955B2BFB8D4C006DC44A /* UserRepositoryType.swift in Sources */,
 				921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */,
+				9216955D2BFBBE2F006DC44A /* DIContainer.swift in Sources */,
 				921695412BF9008A006DC44A /* TermsOfServiceViewController.swift in Sources */,
 				921695072BF26F23006DC44A /* APIConstants.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,

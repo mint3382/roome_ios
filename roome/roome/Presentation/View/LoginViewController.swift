@@ -95,10 +95,10 @@ class LoginViewController: UIViewController {
             case .registrationCompleted:
                 print("registrationCompleted")
             case .termsAgreement:
-                nextPage = TermsOfServiceViewController(viewModel: TermsOfServiceViewModel())
+                nextPage = DIContainer.shared.resolve(TermsOfServiceViewController.self)
                 print("termsAgreement")
             case .nickname:
-                nextPage = NicknameViewController(viewModel: NicknameViewModel(usecase: NicknameUseCase()))
+                nextPage = DIContainer.shared.resolve(NicknameViewController.self)
                 print("nickname")
             }
             navigationController?.pushViewController(nextPage, animated: true)
