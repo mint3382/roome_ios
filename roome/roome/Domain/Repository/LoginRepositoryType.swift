@@ -8,7 +8,5 @@
 import Foundation
 
 protocol LoginRepositoryType {
-//    private let loginRepository: LoginRepository
-    
     func requestLogin(body json: [String: Any], decodedDataType: LoginDTO.Type) async -> LoginDTO?
 }

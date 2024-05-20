@@ -28,21 +28,18 @@ class LoginViewModel: NSObject {
     
     func transform(_ input: LoginInput) -> LoginOutput {
         let apple = input.apple
-            .dropFirst()
             .handleEvents(receiveOutput:  { [weak self] _ in
                 self?.pushedAppleLoginButton()
             })
             .eraseToAnyPublisher()
         
         let kakao = input.kakao
-            .dropFirst()
             .handleEvents(receiveOutput:  { [weak self] _ in
                 self?.pushedKakaoLoginButton()
             })
             .eraseToAnyPublisher()
         
         let state = Publishers.Merge(apple, kakao)
-            .dropFirst()
             .eraseToAnyPublisher()
         
         return LoginOutput(state: state)
