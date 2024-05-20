@@ -19,19 +19,12 @@ class LoginUseCase {
             return
         }
         
-        let query: NSDictionary = [kSecClass: kSecClassGenericPassword,
-                             kSecAttrAccount: tokens.data.accessToken,
-                               kSecAttrLabel: tokens.data.refreshToken]
-        SecItemDelete(query)
+        KeyChain.create(key: .accessToken, data: tokens.data.accessToken)
+        KeyChain.create(key: .refreshToken, data: tokens.data.refreshToken)
+    }
+    
+    func callUserInformation() {
         
-        let status = SecItemAdd(query, nil)
-        print(status)
-        
-        if status == errSecSuccess {
-            print("success")
-        } else {
-            print("failure")
-        }
     }
     
 }
