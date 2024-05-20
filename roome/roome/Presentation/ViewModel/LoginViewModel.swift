@@ -74,9 +74,11 @@ class LoginViewModel: NSObject {
                     Task {
                         await self.loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
                     }
+                    
+                    KeyChain.create(key: .isAppleLogin, data: "false")
                 }
             }
-        } else { 
+        } else {
             print("카카오톡 미설치")
         }
     }
@@ -92,7 +94,8 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
                                         "code": "null",
                                         "idToken": String(data: credential.identityToken ?? Data(), encoding: .utf8) ?? ""]
         //키체인에 유저 정보 저장
-        KeyChain.create(key: .userID, data: credential.user)
+        KeyChain.create(key: .appleUserID, data: credential.user)
+        KeyChain.create(key: .isAppleLogin, data: "true")
         
         //서버에 idToken 전달, 서버 접근 토큰 요청
         Task {

@@ -9,7 +9,8 @@ import Foundation
 
 class KeyChain {
     enum keys: String {
-        case userID = "userID"
+        case appleUserID = "appleUserID"
+        case isAppleLogin = "isAppleLogin"
         case accessToken = "accessToken"
         case refreshToken = "refreshToken"
     }
