@@ -33,7 +33,6 @@ class LoginViewController: UIViewController {
     //로그인 버튼
     lazy var kakaoLoginButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(pushedKakaoLoginButton), for: .touchUpInside)
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.image = UIImage(resource: .kakaoLoginButton).resize(newWidth: view.frame.width * 0.9)
@@ -45,7 +44,6 @@ class LoginViewController: UIViewController {
     
     lazy var appleLoginButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(pushedAppleLoginButton), for: .touchUpInside)
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.image = UIImage(resource: .appleLoginButton).resize(newWidth: view.frame.width * 0.9)
@@ -72,19 +70,16 @@ class LoginViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
-
-    @objc
-    private func pushedKakaoLoginButton() {
-        viewModel.pushedKakaoLoginButton()
-    }
-    
-    @objc
-    private func pushedAppleLoginButton() {
-        viewModel.pushedAppleLoginButton()
-    }
     
     private func bind() {
-        viewModel.loginPublisher
+        let apple = appleLoginButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+        let kakao = kakaoLoginButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+        
+        let output = viewModel.transform(LoginViewModel.LoginInput(apple: apple, kakao: kakao))
+        
+        output.state
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -94,6 +89,12 @@ class LoginViewController: UIViewController {
                 }
             }, receiveValue: { _ in
                 print("로그인 성공")
+                //다음 페이지로 이동 (마이 페이지 OR 회원 가입)
+                goToNextPage()
             }).store(in: &cancellables)
+    }
+    
+    private func goToNextPage() {
+        
     }
 }

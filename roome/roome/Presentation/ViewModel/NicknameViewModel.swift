@@ -15,9 +15,7 @@ class NicknameViewModel {
     }
 
     struct NicknameViewModelOutput {
-//        var isTextFieldEnable: AnyPublisher<Bool, Never>
         var isButtonEnable: AnyPublisher<Bool, Never>
-//        var isLabelColorChange: PassthroughSubject<Bool, Never>
     }
     
     //비즈니스 로직 담당하는 UseCase - domain

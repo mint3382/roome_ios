@@ -10,21 +10,43 @@ import Combine
 import AuthenticationServices
 import KakaoSDKUser
 
-protocol LoginViewModelInput {
-    func pushedAppleLoginButton()
-}
-
-protocol LoginViewModelOutput {
-    var loginPublisher: PassthroughSubject<Void, Error> { get set}
-}
-
-class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOutput {
-    var loginPublisher = PassthroughSubject<Void, Error>()
-    let loginUseCase: LoginUseCase?
+class LoginViewModel: NSObject {
+    struct LoginInput {
+        let apple: AnyPublisher<Void, Never>
+        let kakao: AnyPublisher<Void, Never>
+    }
     
+    struct LoginOutput {
+        let state: AnyPublisher<Void, Never>
+    }
+    
+    let loginUseCase: LoginUseCase?
+
     init(loginUseCase: LoginUseCase) {
         self.loginUseCase = loginUseCase
-//        super.init()
+    }
+    
+    func transform(_ input: LoginInput) -> LoginOutput {
+        let apple = input.apple
+            .dropFirst()
+            .handleEvents(receiveOutput:  { [weak self] _ in
+                self?.pushedAppleLoginButton()
+            })
+            .eraseToAnyPublisher()
+        
+        let kakao = input.kakao
+            .dropFirst()
+            .handleEvents(receiveOutput:  { [weak self] _ in
+                self?.pushedKakaoLoginButton()
+            })
+            .eraseToAnyPublisher()
+        
+        let state = Publishers.Merge(apple, kakao)
+            .dropFirst()
+            .eraseToAnyPublisher()
+        
+        return LoginOutput(state: state)
+            
     }
     
     func pushedAppleLoginButton() {
@@ -52,11 +74,9 @@ class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOutput {
                     Task {
                         await self.loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
                     }
-                    
-                    self.loginPublisher.send()
                 }
             }
-        } else { //카카오톡 미설치
+        } else { 
             print("카카오톡 미설치")
         }
     }
@@ -71,9 +91,12 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         let bodyJSON: [String: Any] = ["provider": LoginProvider.apple.name,
                                         "code": "null",
                                         "idToken": String(data: credential.identityToken ?? Data(), encoding: .utf8) ?? ""]
+        //키체인에 유저 정보 저장
+        KeyChain.create(key: .userID, data: credential.user)
+        
+        //서버에 idToken 전달, 서버 접근 토큰 요청
         Task {
             await loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
         }
-        loginPublisher.send()
     }
 }
