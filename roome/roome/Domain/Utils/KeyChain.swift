@@ -21,10 +21,16 @@ class KeyChain {
             kSecValueData: data.data(using: .utf8, allowLossyConversion: false) as Any
         ]
         
-        delete(key: key)
-        
         let status = SecItemAdd(query, nil)
-        assert(status == noErr, "키체인 저장 실패")
+        
+        switch status {
+        case errSecSuccess:
+            print("keychain success")
+        case errSecDuplicateItem:
+            update(key: key, data: data)
+        default:
+            print("keychain create failure")
+        }
     }
     
     class func read(key: keys) -> String? {
@@ -44,6 +50,26 @@ class KeyChain {
             return value
         } else {
             return nil
+        }
+    }
+    
+    class func update(key: keys, data: String) {
+        let previousQuery: NSDictionary = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: key.rawValue,
+        ]
+        
+        let updateQuery: NSDictionary = [
+            kSecValueData: data.data(using: .utf8, allowLossyConversion: false) as Any
+        ]
+        
+        let status = SecItemUpdate(previousQuery, updateQuery)
+        
+        switch status {
+        case errSecSuccess:
+            print("keychain update success")
+        default:
+            print("keychain update failure")
         }
     }
     
