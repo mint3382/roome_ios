@@ -90,7 +90,7 @@ class LoginViewController: UIViewController {
             }, receiveValue: { _ in
                 print("로그인 성공")
                 //다음 페이지로 이동 (마이 페이지 OR 회원 가입)
-                goToNextPage()
+//                goToNextPage()
             }).store(in: &cancellables)
     }
     
