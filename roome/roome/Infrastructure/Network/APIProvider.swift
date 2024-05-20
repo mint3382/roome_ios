@@ -11,12 +11,16 @@ class APIProvider {
     private func fetchData(from request: URLRequest) async throws -> Data {
         let (data, response) = try await URLSession.shared.data(for: request)
         
-        guard let httpResponse = response as? HTTPURLResponse,              (200...299).contains(httpResponse.statusCode) else {
-            throw NetworkError.invalidStatus
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.noResponse
         }
-        
-        print(httpResponse.statusCode)
-        return data
+           
+        if (200...299).contains(httpResponse.statusCode) {
+            return data
+        } else {
+            print(httpResponse.statusCode)
+            throw NetworkError.invalidStatus(httpResponse.statusCode)
+        }
     }
     
     func fetchDecodedData<T: Decodable>(type: T.Type, from request: URLRequest) async throws -> T {

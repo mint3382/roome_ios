@@ -8,5 +8,6 @@
 import Foundation
 
 enum NetworkError: Error {
-    case invalidStatus
+    case invalidStatus(Int)
+    case noResponse
 }
