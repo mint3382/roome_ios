@@ -39,6 +39,9 @@
 		9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216954B2BFA65EE006DC44A /* UIControl+.swift */; };
 		9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216954E2BFAFC8D006DC44A /* KeyChain.swift */; };
 		921695512BFB1A71006DC44A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695502BFB1A71006DC44A /* SplashView.swift */; };
+		921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695522BFB2A3D006DC44A /* UserDTO.swift */; };
+		921695592BFB8D38006DC44A /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695582BFB8D38006DC44A /* UserRepository.swift */; };
+		9216955B2BFB8D4C006DC44A /* UserRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216955A2BFB8D4C006DC44A /* UserRepositoryType.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -78,6 +81,9 @@
 		9216954B2BFA65EE006DC44A /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		9216954E2BFAFC8D006DC44A /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		921695502BFB1A71006DC44A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		921695522BFB2A3D006DC44A /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
+		921695582BFB8D38006DC44A /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		9216955A2BFB8D4C006DC44A /* UserRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryType.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				921695102BF34256006DC44A /* LoginRepositoryType.swift */,
+				9216955A2BFB8D4C006DC44A /* UserRepositoryType.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -229,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				921695142BF35377006DC44A /* LoginRepository.swift */,
+				921695582BFB8D38006DC44A /* UserRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -237,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				9216950E2BF33E9D006DC44A /* LoginDTO.swift */,
+				921695522BFB2A3D006DC44A /* UserDTO.swift */,
 			);
 			path = DataMaping;
 			sourceTree = "<group>";
@@ -439,11 +448,14 @@
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
+				921695592BFB8D38006DC44A /* UserRepository.swift in Sources */,
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
+				9216955B2BFB8D4C006DC44A /* UserRepositoryType.swift in Sources */,
+				921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */,
 				921695412BF9008A006DC44A /* TermsOfServiceViewController.swift in Sources */,
 				921695072BF26F23006DC44A /* APIConstants.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,

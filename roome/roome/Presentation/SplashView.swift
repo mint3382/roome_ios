@@ -24,7 +24,10 @@ class SplashView: UIViewController {
     }
     
     func goToLogin() {
-        let viewController = LoginViewController(viewModel: LoginViewModel(loginUseCase: LoginUseCase(loginRepository: LoginRepository())))
+        let viewController = LoginViewController(
+            viewModel: LoginViewModel(
+                loginUseCase: LoginUseCase(loginRepository: LoginRepository(),
+                                           userRepository: UserRepository())))
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
             .changeRootViewController(viewController, animated: true)
