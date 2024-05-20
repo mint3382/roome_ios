@@ -15,7 +15,7 @@ struct RequestBuilder {
 
     init(url: URL,
          method: HTTPMethod,
-         bodyJSON: [String: Any]?,
+         bodyJSON: [String: Any]? = nil,
          headers: [String: String] = ["Content-Type": "application/json"]) {
 
         self.url = url
