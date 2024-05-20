@@ -17,11 +17,11 @@ class KeyChain {
     class func create(key: keys, data: String) {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: key,
+            kSecAttrAccount: key.rawValue,
             kSecValueData: data.data(using: .utf8, allowLossyConversion: false) as Any
         ]
         
-        SecItemDelete(query)
+        delete(key: key)
         
         let status = SecItemAdd(query, nil)
         assert(status == noErr, "키체인 저장 실패")
@@ -30,7 +30,7 @@ class KeyChain {
     class func read(key: keys) -> String? {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: key,
+            kSecAttrAccount: key.rawValue,
             kSecReturnData: kCFBooleanTrue as Any,
             kSecMatchLimit: kSecMatchLimitOne
         ]
@@ -50,7 +50,7 @@ class KeyChain {
     class func delete(key: keys) {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: key
+            kSecAttrAccount: key.rawValue
         ]
         
         let status = SecItemDelete(query)
