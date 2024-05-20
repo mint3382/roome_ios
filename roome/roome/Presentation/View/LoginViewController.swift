@@ -80,21 +80,28 @@ class LoginViewController: UIViewController {
         let output = viewModel.transform(LoginViewModel.LoginInput(apple: apple, kakao: kakao))
         
         output.state
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    print("finished")
-                case .failure(let failure):
-                    print("\(failure)")
-                }
-            }, receiveValue: { _ in
-                print("로그인 성공")
-                //다음 페이지로 이동 (마이 페이지 OR 회원 가입)
-//                goToNextPage()
-            }).store(in: &cancellables)
+            .sink { error in
+                print(error)
+            } receiveValue: { state in
+                self.goToNextPage(state)
+            }.store(in: &cancellables)
+
     }
     
-    private func goToNextPage() {
-        
+    private func goToNextPage(_ state: UserState) {
+        Task { @MainActor in
+            var nextPage = UIViewController()
+            switch state {
+            case .registrationCompleted:
+                print("registrationCompleted")
+            case .termsAgreement:
+                nextPage = TermsOfServiceViewController(viewModel: TermsOfServiceViewModel())
+                print("termsAgreement")
+            case .nickname:
+                nextPage = NicknameViewController(viewModel: NicknameViewModel(usecase: NicknameUseCase()))
+                print("nickname")
+            }
+            navigationController?.pushViewController(nextPage, animated: true)
+        }
     }
 }

@@ -17,10 +17,11 @@ class LoginViewModel: NSObject {
     }
     
     struct LoginOutput {
-        let state: AnyPublisher<Void, Never>
+        let state: AnyPublisher<UserState, Error>
     }
     
     let loginUseCase: LoginUseCase?
+    var userStates = PassthroughSubject<String?, Error>()
 
     init(loginUseCase: LoginUseCase) {
         self.loginUseCase = loginUseCase
@@ -28,18 +29,28 @@ class LoginViewModel: NSObject {
     
     func transform(_ input: LoginInput) -> LoginOutput {
         let apple = input.apple
-            .handleEvents(receiveOutput:  { [weak self] _ in
+            .map { [weak self] _ in
                 self?.pushedAppleLoginButton()
-            })
-            .eraseToAnyPublisher()
+            }
         
         let kakao = input.kakao
-            .handleEvents(receiveOutput:  { [weak self] _ in
+            .map { [weak self] _ in
                 self?.pushedKakaoLoginButton()
-            })
-            .eraseToAnyPublisher()
+            }
         
         let state = Publishers.Merge(apple, kakao)
+            .compactMap { [weak self] _ in
+                self
+            }
+            .flatMap { owner in
+                owner.userStates
+            }
+            .compactMap{
+                $0
+            }
+            .compactMap { state in
+                UserState(rawValue: state)
+            }
             .eraseToAnyPublisher()
         
         return LoginOutput(state: state)
@@ -69,7 +80,8 @@ class LoginViewModel: NSObject {
                                                    "idToken": oauthToken?.idToken ?? ""]
                     
                     Task {
-                        await self.loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+                        let state = await self.loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+                        self.userStates.send(state)
                     }
                     
                     KeyChain.create(key: .isAppleLogin, data: "false")
@@ -96,7 +108,9 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         
         //서버에 idToken 전달, 서버 접근 토큰 요청
         Task {
-            await loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+            let state = await loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+            
+            userStates.send(state)
         }
     }
 }
