@@ -42,35 +42,39 @@ class SplashView: UIViewController {
         let loginRepository = LoginRepository()
         let userRepository = UserRepository()
         let termsAgreeRepository = TermsAgreeRepository()
+        let nicknameRepository = NicknameRepository()
         
         DIContainer.shared.register(LoginRepository.self, dependency: loginRepository)
         DIContainer.shared.register(UserRepository.self, dependency: userRepository)
         DIContainer.shared.register(TermsAgreeRepository.self, dependency: termsAgreeRepository)
+        DIContainer.shared.register(NicknameRepository.self, dependency: nicknameRepository)
         
         let loginUseCase = LoginUseCase(loginRepository: loginRepository, userRepository: userRepository)
-        let nicknameUseCase = NicknameUseCase()
         let termsAgreeUseCase = TermsAgreeUseCase(termsAgreeRepository: termsAgreeRepository)
+        let nicknameUseCase = NicknameUseCase(nicknameRepository: nicknameRepository)
 
         DIContainer.shared.register(LoginUseCase.self, dependency: loginUseCase)
-        DIContainer.shared.register(NicknameUseCase.self, dependency: nicknameUseCase)
         DIContainer.shared.register(TermsAgreeUseCase.self, dependency: termsAgreeUseCase)
+        DIContainer.shared.register(NicknameUseCase.self, dependency: nicknameUseCase)
         
         let loginViewModel = LoginViewModel(loginUseCase: loginUseCase)
-        let nicknameViewModel = NicknameViewModel(usecase: nicknameUseCase)
         let termsAgreeViewModel = TermsAgreeViewModel(termsUseCase: termsAgreeUseCase)
+        let nicknameViewModel = NicknameViewModel(usecase: nicknameUseCase)
         
         DIContainer.shared.register(LoginViewModel.self, dependency: loginViewModel)
-        DIContainer.shared.register(NicknameViewModel.self, dependency: nicknameViewModel)
         DIContainer.shared.register(TermsAgreeViewModel.self, dependency: termsAgreeViewModel)
+        DIContainer.shared.register(NicknameViewModel.self, dependency: nicknameViewModel)
         
         
         let loginViewController = LoginViewController(viewModel: loginViewModel)
-        let nicknameViewController = NicknameViewController(viewModel: nicknameViewModel)
         let termsAgreeViewController = TermsAgreeViewController(viewModel: termsAgreeViewModel)
+        let nicknameViewController = NicknameViewController(viewModel: nicknameViewModel)
+        let celebrateSignUpViewController = CelebrateSignUPViewController()
         
         DIContainer.shared.register(LoginViewController.self, dependency: loginViewController)
-        DIContainer.shared.register(NicknameViewController.self, dependency: nicknameViewController)
         DIContainer.shared.register(TermsAgreeViewController.self, dependency: termsAgreeViewController)
+        DIContainer.shared.register(NicknameViewController.self, dependency: nicknameViewController)
+        DIContainer.shared.register(CelebrateSignUPViewController.self, dependency: celebrateSignUpViewController)
         
     }
 }
