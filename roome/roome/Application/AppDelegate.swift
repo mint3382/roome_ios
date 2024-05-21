@@ -15,8 +15,10 @@ import KakaoSDKAuth
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var isLogin: Bool = false {
         didSet {
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                .changeRootViewController(SplashView(), animated: true)
+            Task { @MainActor in
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .changeRootViewController(SplashView(), animated: true)
+            }
         }
     }
     
