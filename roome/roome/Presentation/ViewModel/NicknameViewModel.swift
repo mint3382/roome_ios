@@ -10,16 +10,18 @@ import Combine
 
 class NicknameViewModel {
     struct NicknameViewModelInput {
-//        var pushedNextButton = PassthroughSubject<Void, Never>() //나중에 서버랑 연결
         var nickname: AnyPublisher<String, Never>
+        var nextButton: AnyPublisher<Void, Never>
     }
 
     struct NicknameViewModelOutput {
         var isButtonEnable: AnyPublisher<Bool, Never>
+        var canGoNext: AnyPublisher<Void, NicknameError>
     }
     
-    //비즈니스 로직 담당하는 UseCase - domain
     private let usecase: NicknameUseCase
+    private let goToNext = PassthroughSubject<Void, Error>()
+    private var nickname: String = ""
     
     init(usecase: NicknameUseCase) {
         self.usecase = usecase
@@ -33,10 +35,60 @@ class NicknameViewModel {
                 self?.usecase.checkNicknameCount($0)
             }.eraseToAnyPublisher()
         
-        return NicknameViewModelOutput(isButtonEnable: isButtonEnable)
+        let canGoNext = input.nextButton
+            .map { [weak self] in
+                self?.pushedNextButton()
+            }
+            .compactMap { [weak self] _ in
+                self
+            }
+            .flatMap{ owner in
+                owner.goToNext
+            }
+            .mapError { error -> NicknameError in
+                guard let error = error as? NetworkError else {
+                    return NicknameError.network
+                }
+                
+                switch error {
+                case .invalidStatus(let statusCode):
+                    if statusCode == 2004 {
+                        return NicknameError.invalidWord
+                    } else if statusCode == 2005 {
+                        return NicknameError.duplication
+                    }
+                default:
+                    return NicknameError.network
+                }
+                return NicknameError.network
+            }
+            .eraseToAnyPublisher()
+        
+        return NicknameViewModelOutput(isButtonEnable: isButtonEnable, canGoNext: canGoNext)
     }
     
     func canFillTextField(_ text: String) -> Bool {
-        usecase.checkNicknameText(text)
+        if usecase.checkNicknameText(text) {
+            self.nickname = text
+            return true
+        } else {
+            return false
+        }
     }
+    
+    func pushedNextButton() {
+        Task {
+            do {
+                try await usecase.nicknameCheckWithAPI(nickname)
+            } catch {
+                goToNext.send(completion: .failure(error))
+            }
+        }
+    }
+}
+
+enum NicknameError: Error {
+    case network
+    case duplication
+    case invalidWord
 }
