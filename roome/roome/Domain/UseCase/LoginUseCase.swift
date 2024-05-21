@@ -9,29 +9,23 @@ import Foundation
 
 class LoginUseCase {
     private let loginRepository: LoginRepositoryType
+    private let userRepository: UserRepositoryType
     
-    init(loginRepository: LoginRepositoryType) {
+    init(loginRepository: LoginRepositoryType, userRepository: UserRepositoryType) {
         self.loginRepository = loginRepository
+        self.userRepository = userRepository
     }
     
-    func loginWithAPI(body json: [String: Any], decodedDataType: LoginDTO.Type) async {
+    func loginWithAPI(body json: [String: Any], decodedDataType: LoginDTO.Type) async -> String? {
         guard let tokens = await loginRepository.requestLogin(body: json, decodedDataType: decodedDataType) else {
-            return
+            return nil
         }
         
-        let query: NSDictionary = [kSecClass: kSecClassGenericPassword,
-                             kSecAttrAccount: tokens.data.accessToken,
-                               kSecAttrLabel: tokens.data.refreshToken]
-        SecItemDelete(query)
+        KeyChain.create(key: .accessToken, data: tokens.data.accessToken)
+        KeyChain.create(key: .refreshToken, data: tokens.data.refreshToken)
         
-        let status = SecItemAdd(query, nil)
-        print(status)
+        let user = await userRepository.userWithAPI(decodedDataType: UserDTO.self)
         
-        if status == errSecSuccess {
-            print("success")
-        } else {
-            print("failure")
-        }
+        return user?.data.state
     }
-    
 }

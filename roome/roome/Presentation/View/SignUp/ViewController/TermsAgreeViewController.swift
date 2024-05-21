@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class TermsOfServiceViewController: UIViewController {
+class TermsAgreeViewController: UIViewController {
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,6 @@ class TermsOfServiceViewController: UIViewController {
         let button = LabelButton(frame: .zero, isDetailButton: false)
         button.setMain(config: configuration)
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.isSelected.toggle()
         
         return button
     }()
@@ -122,10 +121,10 @@ class TermsOfServiceViewController: UIViewController {
         return button
     }()
     
-    let viewModel: TermsOfServiceViewModel
+    let viewModel: TermsAgreeViewModel
     var cancellable = Set<AnyCancellable>()
     
-    init(viewModel: TermsOfServiceViewModel) {
+    init(viewModel: TermsAgreeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -148,8 +147,9 @@ class TermsOfServiceViewController: UIViewController {
         let service = serviceAgreeButton.tappedMainButtonPublisher()
         let personal = personalInformationAgreeButton.tappedMainButtonPublisher()
         let advertise = advertiseAgreeButton.tappedMainButtonPublisher()
+        let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         
-        let output = viewModel.transform(TermsOfServiceViewModel.TermsOfServiceInput(allAgree: all,ageAgree: age, service: service, personal: personal, advertise: advertise))
+        let output = viewModel.transform(TermsAgreeViewModel.TermsAgreeInput(allAgree: all,ageAgree: age, service: service, personal: personal, advertise: advertise, next: next))
         
         output.states
             .sink { [weak self] states in
@@ -197,6 +197,21 @@ class TermsOfServiceViewController: UIViewController {
                     self?.allAgreeButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.lightGray).resize(newWidth: 24)
                 }
             }.store(in: &cancellable)
+        
+        output.goToNext
+            .sink { [weak self] _ in
+                Task { @MainActor in
+                    let nextPage = DIContainer.shared.resolve(LoginViewController.self)
+                    self?.navigationController?.pushViewController(nextPage, animated: true)
+                }
+            } receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextPage = DIContainer.shared.resolve(NicknameViewController.self)
+                    self?.navigationController?.pushViewController(nextPage, animated: true)
+                }
+            }
+            .store(in: &cancellable)
+
     }
     
     private func configureStackView() {

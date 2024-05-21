@@ -9,7 +9,7 @@ import Foundation
 
 class LoginRepository: LoginRepositoryType {
     func requestLogin(body json: [String: Any], decodedDataType: LoginDTO.Type) async -> LoginDTO? {
-        let loginURL = URLBuilder(host: APIConstants.roomeHost, path: APIConstants.Path.signIn.name, queries: nil)
+        let loginURL = URLBuilder(host: APIConstants.roomeHost, path: APIConstants.AuthPath.signIn.name, queries: nil)
         guard let url = loginURL.url else {
             return nil
         }

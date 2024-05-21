@@ -8,16 +8,36 @@
 struct APIConstants {
     static let roomeHost = "roome.site"
     
-    enum Path {
+    enum AuthPath {
         case signIn
         case withdrawal
+        case token
         
         var name: String {
             switch self {
             case .signIn:
                 "/signin"
-            case.withdrawal:
+            case .withdrawal:
                 "/withdrawal"
+            case .token:
+                "/token"
+            }
+        }
+    }
+    
+    enum UserPath {
+        case users
+        case termsAgree
+        case nickname
+        
+        var name: String {
+            switch self{
+            case .users:
+                "/users"
+            case .termsAgree:
+                "/users/terms-agreement"
+            case .nickname:
+                "/users/nickname"
             }
         }
     }

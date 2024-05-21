@@ -33,7 +33,6 @@ class LoginViewController: UIViewController {
     //로그인 버튼
     lazy var kakaoLoginButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(pushedKakaoLoginButton), for: .touchUpInside)
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.image = UIImage(resource: .kakaoLoginButton).resize(newWidth: view.frame.width * 0.9)
@@ -45,7 +44,6 @@ class LoginViewController: UIViewController {
     
     lazy var appleLoginButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(pushedAppleLoginButton), for: .touchUpInside)
         
         var buttonConfiguration = UIButton.Configuration.plain()
         buttonConfiguration.image = UIImage(resource: .appleLoginButton).resize(newWidth: view.frame.width * 0.9)
@@ -72,28 +70,39 @@ class LoginViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
-
-    @objc
-    private func pushedKakaoLoginButton() {
-        viewModel.pushedKakaoLoginButton()
-    }
-    
-    @objc
-    private func pushedAppleLoginButton() {
-        viewModel.pushedAppleLoginButton()
-    }
     
     private func bind() {
-        viewModel.loginPublisher
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    print("finished")
-                case .failure(let failure):
-                    print("\(failure)")
-                }
-            }, receiveValue: { _ in
-                print("로그인 성공")
-            }).store(in: &cancellables)
+        let apple = appleLoginButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+        let kakao = kakaoLoginButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+        
+        let output = viewModel.transform(LoginViewModel.LoginInput(apple: apple, kakao: kakao))
+        
+        output.state
+            .sink { error in
+                print(error)
+            } receiveValue: { state in
+                self.goToNextPage(state)
+            }.store(in: &cancellables)
+
+    }
+    
+    private func goToNextPage(_ state: UserState) {
+        Task { @MainActor in
+            var nextPage = UIViewController()
+            switch state {
+            case .registrationCompleted:
+                print("registrationCompleted")
+                nextPage = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
+            case .termsAgreement:
+                nextPage = DIContainer.shared.resolve(TermsAgreeViewController.self)
+                print("termsAgreement")
+            case .nickname:
+                nextPage = DIContainer.shared.resolve(NicknameViewController.self)
+                print("nickname")
+            }
+            navigationController?.pushViewController(nextPage, animated: true)
+        }
     }
 }

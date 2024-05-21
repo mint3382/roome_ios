@@ -118,15 +118,52 @@ class NicknameViewController: UIViewController {
     
     func bind() {
         let text = nicknameTextField.publisher
-        let input = NicknameViewModel.NicknameViewModelInput(nickname: text)
+        let nextButton = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let input = NicknameViewModel.NicknameViewModelInput(nickname: text, nextButton: nextButton)
         let output = viewModel.transform(input)
         
-        output.isButtonEnable.sink { [weak self] buttonOn in
+        output.isButtonEnable
+            .sink { [weak self] buttonOn in
             if buttonOn {
                 self?.nextButton.isEnabled = true
                 self?.nextButton.backgroundColor = .roomeMain
             }
         }.store(in: &cancellables)
+        
+        output.canGoNext
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    print("Nickname finish")
+                case .failure(let error):
+                    self?.handleError(error)
+                }
+            } receiveValue: { [weak self] _ in
+                self?.handleNextPage()
+            }.store(in: &cancellables)
+
+    }
+    
+    func handleError(_ error: NicknameError) {
+        switch error {
+        case .form(let data):
+            Task { @MainActor in
+                formLabel.text = data.message
+                formLabel.textColor = .roomeMain
+                nicknameLabel.textColor = .roomeMain
+            }
+        case .network:
+            Task { @MainActor in
+                let loginPage = DIContainer.shared.resolve(LoginViewController.self)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .changeRootViewController(loginPage, animated: true)
+            }
+        }
+    }
+    
+    func handleNextPage() {
+        let nextPage = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
+        self.navigationController?.pushViewController(nextPage, animated: true)
     }
     
     private func configureUI() {
@@ -183,9 +220,12 @@ extension NicknameViewController: UITextFieldDelegate {
         
         if viewModel.canFillTextField(newText) {
             formLabel.textColor = .label
+            nicknameLabel.textColor = .label
+            formLabel.text = "2-8자리 한글, 영문, 숫자"
             return true
         } else {
             formLabel.textColor = .roomeMain
+            nicknameLabel.textColor = .roomeMain
             return false
         }
     }
