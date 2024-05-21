@@ -8,7 +8,7 @@
 import Foundation
 
 class APIProvider {
-    private func fetchData(from request: URLRequest) async throws -> Data {
+    func fetchData(from request: URLRequest) async throws -> Data {
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
