@@ -8,6 +8,12 @@
 import Foundation
 
 class NicknameUseCase {
+    private let nicknameRepository: NicknameRepositoryType
+    
+    init(nicknameRepository: NicknameRepositoryType) {
+        self.nicknameRepository = nicknameRepository
+    }
+    
     func checkNicknameText(_ text: String) -> Bool {
         let pattern = "^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]{0,8}$"
         let predicate = NSPredicate(format:"SELF MATCHES %@", pattern)
@@ -20,5 +26,9 @@ class NicknameUseCase {
         } else {
             return false
         }
+    }
+    
+    func nicknameCheckWithAPI(_ text: String) async throws {
+        try await nicknameRepository.requestNickname(text)
     }
 }

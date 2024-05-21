@@ -47,6 +47,8 @@
 		921695632BFC6362006DC44A /* TermsAgreeRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695622BFC6362006DC44A /* TermsAgreeRepositoryType.swift */; };
 		921695652BFC67D0006DC44A /* TermsAgreeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695642BFC67D0006DC44A /* TermsAgreeRepository.swift */; };
 		921695672BFC68A7006DC44A /* TypeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695662BFC68A7006DC44A /* TypeError.swift */; };
+		921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695682BFC8839006DC44A /* NicknameRepositoryType.swift */; };
+		9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216956A2BFC8891006DC44A /* NicknameRepository.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -94,6 +96,8 @@
 		921695622BFC6362006DC44A /* TermsAgreeRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAgreeRepositoryType.swift; sourceTree = "<group>"; };
 		921695642BFC67D0006DC44A /* TermsAgreeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAgreeRepository.swift; sourceTree = "<group>"; };
 		921695662BFC68A7006DC44A /* TypeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeError.swift; sourceTree = "<group>"; };
+		921695682BFC8839006DC44A /* NicknameRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameRepositoryType.swift; sourceTree = "<group>"; };
+		9216956A2BFC8891006DC44A /* NicknameRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameRepository.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 				921695102BF34256006DC44A /* LoginRepositoryType.swift */,
 				921695622BFC6362006DC44A /* TermsAgreeRepositoryType.swift */,
 				9216955A2BFB8D4C006DC44A /* UserRepositoryType.swift */,
+				921695682BFC8839006DC44A /* NicknameRepositoryType.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				921695142BF35377006DC44A /* LoginRepository.swift */,
 				921695582BFB8D38006DC44A /* UserRepository.swift */,
 				921695642BFC67D0006DC44A /* TermsAgreeRepository.swift */,
+				9216956A2BFC8891006DC44A /* NicknameRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -463,6 +469,7 @@
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
 				921695302BF71659006DC44A /* FontSize.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
+				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
 				921695592BFB8D38006DC44A /* UserRepository.swift in Sources */,
@@ -485,6 +492,7 @@
 				9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */,
 				921695672BFC68A7006DC44A /* TypeError.swift in Sources */,
 				921695512BFB1A71006DC44A /* SplashView.swift in Sources */,
+				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
 				9216951C2BF3CEBC006DC44A /* LoginUseCase.swift in Sources */,
 				9216953A2BF88FBB006DC44A /* UITextField+.swift in Sources */,
 			);
