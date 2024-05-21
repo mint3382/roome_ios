@@ -199,7 +199,7 @@ class TermsAgreeViewController: UIViewController {
             }.store(in: &cancellable)
         
         output.goToNext
-            .sink { [weak self] error in
+            .sink { [weak self] _ in
                 Task { @MainActor in
                     let nextPage = DIContainer.shared.resolve(LoginViewController.self)
                     self?.navigationController?.pushViewController(nextPage, animated: true)
