@@ -9,32 +9,40 @@ import Foundation
 import Combine
 
 
-class TermsOfServiceViewModel {
-    struct ButtonStates {
-        var allAgree: Bool = false
-        var ageAgree: Bool = false
-        var service: Bool = false
-        var personal: Bool = false
-        var advertise: Bool = false
-    }
+struct TermsButtonStates {
+    var allAgree: Bool = false
+    var ageAgree: Bool = false
+    var service: Bool = false
+    var personal: Bool = false
+    var advertise: Bool = false
+}
+
+class TermsAgreeViewModel {
+    var buttonStates = TermsButtonStates()
+    var termsUseCase: TermsAgreeUseCase?
+    let goToNext = PassthroughSubject<Void, Error>()
     
-    var buttonStates = ButtonStates()
-    
-    struct TermsOfServiceInput {
+    struct TermsAgreeInput {
         let allAgree: AnyPublisher<Void, Never>
         let ageAgree: AnyPublisher<Void, Never>
         let service: AnyPublisher<Void, Never>
         let personal: AnyPublisher<Void, Never>
         let advertise: AnyPublisher<Void, Never>
+        let next: AnyPublisher<Void, Never>
     }
     
-    struct TermsOfServiceOutput {
+    struct TermsAgreeOutput {
         let isAllAgreeOn: AnyPublisher<Bool, Never>
         let isNextButtonOn: AnyPublisher<Bool, Never>
-        let states: AnyPublisher<ButtonStates, Never>
+        let states: AnyPublisher<TermsButtonStates, Never>
+        let goToNext: AnyPublisher<Void, Error>
     }
     
-    func transform(_ input: TermsOfServiceInput) -> TermsOfServiceOutput {
+    init(termsUseCase: TermsAgreeUseCase?) {
+        self.termsUseCase = termsUseCase
+    }
+    
+    func transform(_ input: TermsAgreeInput) -> TermsAgreeOutput {
         let all = input.allAgree
             .handleEvents(receiveOutput: { [weak self] _ in
                 guard let self else { return }
@@ -100,6 +108,28 @@ class TermsOfServiceViewModel {
                     self.buttonStates.advertise
             }.eraseToAnyPublisher()
         
-        return TermsOfServiceOutput(isAllAgreeOn: isAllAgreeOn, isNextButtonOn: nextButton, states: state)
+        let goNext = input.next
+            .map { [weak self] in
+                self?.pushedNextButton()
+            }
+            .compactMap { [weak self] _ in
+                self
+            }
+            .flatMap{ owner in
+                owner.goToNext
+            }
+            .eraseToAnyPublisher()
+            
+        
+        return TermsAgreeOutput(isAllAgreeOn: isAllAgreeOn, isNextButtonOn: nextButton, states: state, goToNext: goNext)
+    }
+}
+
+extension TermsAgreeViewModel {
+    func pushedNextButton() {
+        Task {
+            try await termsUseCase?.termsWithAPI(states: buttonStates)
+            goToNext.send()
+        }
     }
 }

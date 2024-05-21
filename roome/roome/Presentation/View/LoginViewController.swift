@@ -95,7 +95,7 @@ class LoginViewController: UIViewController {
             case .registrationCompleted:
                 print("registrationCompleted")
             case .termsAgreement:
-                nextPage = DIContainer.shared.resolve(TermsOfServiceViewController.self)
+                nextPage = DIContainer.shared.resolve(TermsAgreeViewController.self)
                 print("termsAgreement")
             case .nickname:
                 nextPage = DIContainer.shared.resolve(NicknameViewController.self)

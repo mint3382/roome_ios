@@ -41,32 +41,36 @@ class SplashView: UIViewController {
     func registerDependency() {
         let loginRepository = LoginRepository()
         let userRepository = UserRepository()
+        let termsAgreeRepository = TermsAgreeRepository()
         
         DIContainer.shared.register(LoginRepository.self, dependency: loginRepository)
         DIContainer.shared.register(UserRepository.self, dependency: userRepository)
+        DIContainer.shared.register(TermsAgreeRepository.self, dependency: termsAgreeRepository)
         
         let loginUseCase = LoginUseCase(loginRepository: loginRepository, userRepository: userRepository)
         let nicknameUseCase = NicknameUseCase()
+        let termsAgreeUseCase = TermsAgreeUseCase(termsAgreeRepository: termsAgreeRepository)
 
         DIContainer.shared.register(LoginUseCase.self, dependency: loginUseCase)
         DIContainer.shared.register(NicknameUseCase.self, dependency: nicknameUseCase)
+        DIContainer.shared.register(TermsAgreeUseCase.self, dependency: termsAgreeUseCase)
         
         let loginViewModel = LoginViewModel(loginUseCase: loginUseCase)
         let nicknameViewModel = NicknameViewModel(usecase: nicknameUseCase)
-        let termsOfServiceViewModel = TermsOfServiceViewModel()
+        let termsAgreeViewModel = TermsAgreeViewModel(termsUseCase: termsAgreeUseCase)
         
         DIContainer.shared.register(LoginViewModel.self, dependency: loginViewModel)
         DIContainer.shared.register(NicknameViewModel.self, dependency: nicknameViewModel)
-        DIContainer.shared.register(TermsOfServiceViewModel.self, dependency: termsOfServiceViewModel)
+        DIContainer.shared.register(TermsAgreeViewModel.self, dependency: termsAgreeViewModel)
         
         
         let loginViewController = LoginViewController(viewModel: loginViewModel)
         let nicknameViewController = NicknameViewController(viewModel: nicknameViewModel)
-        let termsOfServiceViewController = TermsOfServiceViewController(viewModel: termsOfServiceViewModel)
+        let termsAgreeViewController = TermsAgreeViewController(viewModel: termsAgreeViewModel)
         
         DIContainer.shared.register(LoginViewController.self, dependency: loginViewController)
         DIContainer.shared.register(NicknameViewController.self, dependency: nicknameViewController)
-        DIContainer.shared.register(TermsOfServiceViewController.self, dependency: termsOfServiceViewController)
+        DIContainer.shared.register(TermsAgreeViewController.self, dependency: termsAgreeViewController)
         
     }
 }
