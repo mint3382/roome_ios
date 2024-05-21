@@ -131,16 +131,17 @@ class NicknameViewController: UIViewController {
         }.store(in: &cancellables)
         
         output.canGoNext
-            .sink { [weak self] completion in
+            .sink  (receiveCompletion: {[ weak self] completion in
                 switch completion {
                 case .finished:
                     print("Nickname finish")
                 case .failure(let error):
                     self?.handleError(error)
                 }
-            } receiveValue: { [weak self] _ in
+            }, receiveValue: { [weak self] _ in
                 self?.handleNextPage()
-            }.store(in: &cancellables)
+            })
+            .store(in: &cancellables)
 
     }
     
@@ -163,7 +164,9 @@ class NicknameViewController: UIViewController {
     
     func handleNextPage() {
         let nextPage = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
-        self.navigationController?.pushViewController(nextPage, animated: true)
+        Task { @MainActor in
+            self.navigationController?.pushViewController(nextPage, animated: true)
+        }
     }
     
     private func configureUI() {

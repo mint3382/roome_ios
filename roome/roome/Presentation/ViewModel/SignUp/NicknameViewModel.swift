@@ -74,6 +74,7 @@ class NicknameViewModel {
         Task {
             do {
                 try await usecase.nicknameCheckWithAPI(nickname)
+                try await UserContainer.shared.updateUserInformation()
                 goToNext.send()
             } catch {
                 goToNext.send(completion: .failure(error))
