@@ -64,12 +64,32 @@ class WelcomeSignUPViewController: UIViewController {
         
         return button
     }()
-
+    
+    private let viewModel: WelcomeViewModel
+    
+    init(viewModel: WelcomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureStackView()
         configureButton()
+        bind()
+    }
+    
+    func bind() {
+        let next = makeProfileButton.publisher(for: .touchUpInside)
+            .sink { [weak self] _ in
+                let nextPage = UIViewController()
+                self?.navigationController?.pushViewController(nextPage, animated: true)
+            }
     }
     
     func configureStackView() {

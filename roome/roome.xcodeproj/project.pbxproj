@@ -51,6 +51,7 @@
 		9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216956A2BFC8891006DC44A /* NicknameRepository.swift */; };
 		9216956E2BFC9381006DC44A /* WelcomeSignUPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */; };
 		921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216956F2BFCA5E2006DC44A /* ErrorDTO.swift */; };
+		921695782BFCE1F7006DC44A /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -102,6 +103,7 @@
 		9216956A2BFC8891006DC44A /* NicknameRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameRepository.swift; sourceTree = "<group>"; };
 		9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSignUPViewController.swift; sourceTree = "<group>"; };
 		9216956F2BFCA5E2006DC44A /* ErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDTO.swift; sourceTree = "<group>"; };
+		921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				921695082BF302D2006DC44A /* LoginViewModel.swift */,
 				921695712BFCB58D006DC44A /* SignUp */,
+				921695762BFCE1E0006DC44A /* Profile */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -393,6 +396,14 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		921695762BFCE1E0006DC44A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +552,7 @@
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
 				9216954A2BFA1A9D006DC44A /* TermsAgreeViewModel.swift in Sources */,
+				921695782BFCE1F7006DC44A /* WelcomeViewModel.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,
 				9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */,
