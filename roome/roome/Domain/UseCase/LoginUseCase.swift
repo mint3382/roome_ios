@@ -28,9 +28,4 @@ class LoginUseCase {
         
         return user?.data.state
     }
-    
-//    func callUserInformation() {
-//        
-//    }
-//    
 }

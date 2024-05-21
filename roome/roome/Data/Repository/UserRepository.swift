@@ -31,27 +31,11 @@ class UserRepository: UserRepositoryType {
             return user
         } catch NetworkError.invalidStatus(401) {
             print("토큰 재발급 필요")
+            //로그인 페이지로 돌아가야 함.
         } catch {
             print(error)
         }
         
         return nil
     }
-    
-//    func checkUserState() async -> String {
-//        let result = await Task {
-//            let user = await userWithAPI(decodedDataType: UserDTO.self)
-//            
-//            return user?.data.state
-//        }.result
-//        
-//        do {
-//            let statue = try result.get()
-//            return statue ?? ""
-//        } catch {
-//            print("error")
-//        }
-//        return ""
-//    }
-    
 }
