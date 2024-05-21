@@ -49,18 +49,12 @@ class NicknameViewModel {
                 guard let error = error as? NetworkError else {
                     return NicknameError.network
                 }
-                
                 switch error {
-                case .invalidStatus(let statusCode):
-                    if statusCode == 2004 {
-                        return NicknameError.invalidWord
-                    } else if statusCode == 2005 {
-                        return NicknameError.duplication
-                    }
+                case .failureCode(let errorDTO):
+                    return NicknameError.form(errorDTO)
                 default:
                     return NicknameError.network
                 }
-                return NicknameError.network
             }
             .eraseToAnyPublisher()
         
@@ -80,6 +74,7 @@ class NicknameViewModel {
         Task {
             do {
                 try await usecase.nicknameCheckWithAPI(nickname)
+                goToNext.send()
             } catch {
                 goToNext.send(completion: .failure(error))
             }
@@ -89,6 +84,5 @@ class NicknameViewModel {
 
 enum NicknameError: Error {
     case network
-    case duplication
-    case invalidWord
+    case form(ErrorDTO)
 }

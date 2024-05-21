@@ -146,14 +146,12 @@ class NicknameViewController: UIViewController {
     
     func handleError(_ error: NicknameError) {
         switch error {
-        case .invalidWord:
-            formLabel.text = "허용하지 않는 문자가 포함되어 있습니다."
-            formLabel.textColor = .roomeMain
-            nicknameLabel.textColor = .roomeMain
-        case .duplication:
-            formLabel.text = "이미 사용중인 닉네임입니다."
-            formLabel.textColor = .roomeMain
-            nicknameLabel.textColor = .roomeMain
+        case .form(let data):
+            Task { @MainActor in
+                formLabel.text = data.message
+                formLabel.textColor = .roomeMain
+                nicknameLabel.textColor = .roomeMain
+            }
         case .network:
             Task { @MainActor in
                 let loginPage = DIContainer.shared.resolve(LoginViewController.self)
@@ -164,7 +162,7 @@ class NicknameViewController: UIViewController {
     }
     
     func handleNextPage() {
-        let nextPage = DIContainer.shared.resolve(NicknameViewController.self)
+        let nextPage = DIContainer.shared.resolve(CelebrateSignUPViewController.self)
         self.navigationController?.pushViewController(nextPage, animated: true)
     }
     
@@ -222,10 +220,12 @@ extension NicknameViewController: UITextFieldDelegate {
         
         if viewModel.canFillTextField(newText) {
             formLabel.textColor = .label
+            nicknameLabel.textColor = .label
             formLabel.text = "2-8자리 한글, 영문, 숫자"
             return true
         } else {
             formLabel.textColor = .roomeMain
+            nicknameLabel.textColor = .roomeMain
             return false
         }
     }
