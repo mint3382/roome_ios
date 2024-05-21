@@ -32,7 +32,7 @@ class SplashView: UIViewController {
     }
     
     func goToMain() {
-        let viewController = DIContainer.shared.resolve(NicknameViewController.self)
+        let viewController = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
             .changeRootViewController(viewController, animated: true)
@@ -69,12 +69,12 @@ class SplashView: UIViewController {
         let loginViewController = LoginViewController(viewModel: loginViewModel)
         let termsAgreeViewController = TermsAgreeViewController(viewModel: termsAgreeViewModel)
         let nicknameViewController = NicknameViewController(viewModel: nicknameViewModel)
-        let celebrateSignUpViewController = CelebrateSignUPViewController()
+        let welcomeSignUPViewController = WelcomeSignUPViewController()
         
         DIContainer.shared.register(LoginViewController.self, dependency: loginViewController)
         DIContainer.shared.register(TermsAgreeViewController.self, dependency: termsAgreeViewController)
         DIContainer.shared.register(NicknameViewController.self, dependency: nicknameViewController)
-        DIContainer.shared.register(CelebrateSignUPViewController.self, dependency: celebrateSignUpViewController)
+        DIContainer.shared.register(WelcomeSignUPViewController.self, dependency: welcomeSignUPViewController)
         
     }
 }
