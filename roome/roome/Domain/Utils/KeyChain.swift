@@ -13,6 +13,7 @@ class KeyChain {
         case isAppleLogin = "isAppleLogin"
         case accessToken = "accessToken"
         case refreshToken = "refreshToken"
+        case hasToken = "hasToken"
     }
     
     class func create(key: keys, data: String) {

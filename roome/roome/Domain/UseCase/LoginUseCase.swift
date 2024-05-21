@@ -21,6 +21,7 @@ class LoginUseCase {
         
         KeyChain.create(key: .accessToken, data: tokens.data.accessToken)
         KeyChain.create(key: .refreshToken, data: tokens.data.refreshToken)
+        KeyChain.create(key: .hasToken, data: "true")
         
         try await UserContainer.shared.updateUserInformation()
     }

@@ -12,16 +12,23 @@ class SplashView: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        Task {
+        if KeyChain.read(key: .hasToken) == "true" {
+            Task { @MainActor in
+                registerLoginDependency()
+                registerSignUPDependency()
+                registerProfileDependency()
+                do {
+                    try await UserContainer.shared.updateUserInformation()
+                    setIsLogin()
+                } catch {
+                    goToLogin()
+                }
+            }
+        } else {
             registerLoginDependency()
             registerSignUPDependency()
             registerProfileDependency()
-            do {
-                try await UserContainer.shared.updateUserInformation()
-                setIsLogin()
-            } catch {
-                goToLogin()
-            }
+            setIsLogin()
         }
     }
     
