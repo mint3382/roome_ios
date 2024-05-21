@@ -11,14 +11,16 @@ struct APIConstants {
     enum AuthPath {
         case signIn
         case withdrawal
+        case token
         
         var name: String {
             switch self {
             case .signIn:
                 "/signin"
-            case.withdrawal:
+            case .withdrawal:
                 "/withdrawal"
-                
+            case .token:
+                "/token"
             }
         }
     }
