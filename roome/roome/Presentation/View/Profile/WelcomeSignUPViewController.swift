@@ -18,10 +18,10 @@ class WelcomeSignUPViewController: UIViewController {
         return stack
     }()
     
-    private let welcomeLabel: UILabel = {
+    private lazy var welcomeLabel: UILabel = {
         let label = PaddingLabel(padding: UIEdgeInsets(top: 20, left: 4, bottom: 0, right: 4))
         label.text = """
-                    {WWW}님
+                    {Error}님
                     가입을 축하드려요!
                     """
         label.numberOfLines = 2
@@ -66,6 +66,7 @@ class WelcomeSignUPViewController: UIViewController {
     }()
     
     private let viewModel: WelcomeViewModel
+//    private let nickname: String? = UserContainer.shared.user?.data.nickname 
     
     init(viewModel: WelcomeViewModel) {
         self.viewModel = viewModel
@@ -79,13 +80,22 @@ class WelcomeSignUPViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        navigationController?.setNavigationBarHidden(true, animated: true)
         configureStackView()
         configureButton()
+        updateNickName()
         bind()
     }
     
+    func updateNickName() {
+        welcomeLabel.text = """
+                            \(UserContainer.shared.user?.data.nickname ?? "{Error2}")님,
+                            가입을 축하드려요!
+                            """
+    }
+    
     func bind() {
-        let next = makeProfileButton.publisher(for: .touchUpInside)
+        _ = makeProfileButton.publisher(for: .touchUpInside)
             .sink { [weak self] _ in
                 let nextPage = UIViewController()
                 self?.navigationController?.pushViewController(nextPage, animated: true)
