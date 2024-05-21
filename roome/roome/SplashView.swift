@@ -12,18 +12,24 @@ class SplashView: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        registerLoginDependency()
-        setIsLogin()
+        Task {
+            registerLoginDependency()
+            registerSignUPDependency()
+            registerProfileDependency()
+            do {
+                try await UserContainer.shared.updateUserInformation()
+                setIsLogin()
+            } catch {
+                goToLogin()
+            }
+        }
     }
     
     private func setIsLogin() {
         if appDelegate?.isLogin  == true {
             goToMain()
-            registerProfileDependency()
         } else {
             goToLogin()
-            registerSignUPDependency()
-            registerProfileDependency()
         }
     }
     
@@ -43,12 +49,10 @@ class SplashView: UIViewController {
     
     func registerLoginDependency() {
         let loginRepository = LoginRepository()
-        let userRepository = UserRepository()
         
         DIContainer.shared.register(LoginRepository.self, dependency: loginRepository)
-        DIContainer.shared.register(UserRepository.self, dependency: userRepository)
         
-        let loginUseCase = LoginUseCase(loginRepository: loginRepository, userRepository: userRepository)
+        let loginUseCase = LoginUseCase(loginRepository: loginRepository)
 
         DIContainer.shared.register(LoginUseCase.self, dependency: loginUseCase)
         

@@ -80,7 +80,9 @@ class LoginViewModel: NSObject {
                                                    "idToken": oauthToken?.idToken ?? ""]
                     
                     Task {
-                        let state = await self.loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+                        try await self.loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+                        let state = UserContainer.shared.user?.data.state
+                        
                         self.userStates.send(state)
                     }
                     
@@ -108,7 +110,8 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         
         //서버에 idToken 전달, 서버 접근 토큰 요청
         Task {
-            let state = await loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+            try await loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
+            let state = UserContainer.shared.user?.data.state
             
             userStates.send(state)
         }

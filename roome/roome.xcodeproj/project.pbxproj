@@ -40,8 +40,7 @@
 		9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216954E2BFAFC8D006DC44A /* KeyChain.swift */; };
 		921695512BFB1A71006DC44A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695502BFB1A71006DC44A /* SplashView.swift */; };
 		921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695522BFB2A3D006DC44A /* UserDTO.swift */; };
-		921695592BFB8D38006DC44A /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695582BFB8D38006DC44A /* UserRepository.swift */; };
-		9216955B2BFB8D4C006DC44A /* UserRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216955A2BFB8D4C006DC44A /* UserRepositoryType.swift */; };
+		921695592BFB8D38006DC44A /* UserContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695582BFB8D38006DC44A /* UserContainer.swift */; };
 		9216955D2BFBBE2F006DC44A /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216955C2BFBBE2F006DC44A /* DIContainer.swift */; };
 		921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695602BFC62F7006DC44A /* TermsAgreeUseCase.swift */; };
 		921695632BFC6362006DC44A /* TermsAgreeRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695622BFC6362006DC44A /* TermsAgreeRepositoryType.swift */; };
@@ -92,8 +91,7 @@
 		9216954E2BFAFC8D006DC44A /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		921695502BFB1A71006DC44A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		921695522BFB2A3D006DC44A /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
-		921695582BFB8D38006DC44A /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
-		9216955A2BFB8D4C006DC44A /* UserRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryType.swift; sourceTree = "<group>"; };
+		921695582BFB8D38006DC44A /* UserContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContainer.swift; sourceTree = "<group>"; };
 		9216955C2BFBBE2F006DC44A /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		921695602BFC62F7006DC44A /* TermsAgreeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAgreeUseCase.swift; sourceTree = "<group>"; };
 		921695622BFC6362006DC44A /* TermsAgreeRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAgreeRepositoryType.swift; sourceTree = "<group>"; };
@@ -143,6 +141,7 @@
 				92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */,
 				92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */,
 				9216955C2BFBBE2F006DC44A /* DIContainer.swift */,
+				921695582BFB8D38006DC44A /* UserContainer.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -240,7 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				921695102BF34256006DC44A /* LoginRepositoryType.swift */,
-				9216955A2BFB8D4C006DC44A /* UserRepositoryType.swift */,
 				921695722BFCB5D0006DC44A /* SignUp */,
 			);
 			path = Repository;
@@ -259,7 +257,6 @@
 			isa = PBXGroup;
 			children = (
 				921695142BF35377006DC44A /* LoginRepository.swift */,
-				921695582BFB8D38006DC44A /* UserRepository.swift */,
 				921695752BFCB634006DC44A /* SignUp */,
 			);
 			path = Repository;
@@ -537,14 +534,13 @@
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
-				921695592BFB8D38006DC44A /* UserRepository.swift in Sources */,
+				921695592BFB8D38006DC44A /* UserContainer.swift in Sources */,
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
-				9216955B2BFB8D4C006DC44A /* UserRepositoryType.swift in Sources */,
 				921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */,
 				9216955D2BFBBE2F006DC44A /* DIContainer.swift in Sources */,
 				921695412BF9008A006DC44A /* TermsAgreeViewController.swift in Sources */,
