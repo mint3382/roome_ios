@@ -162,7 +162,7 @@ class NicknameViewController: UIViewController {
     }
     
     func handleNextPage() {
-        let nextPage = DIContainer.shared.resolve(CelebrateSignUPViewController.self)
+        let nextPage = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
         self.navigationController?.pushViewController(nextPage, animated: true)
     }
     
