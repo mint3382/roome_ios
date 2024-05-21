@@ -28,6 +28,7 @@ struct APIConstants {
     enum UserPath {
         case users
         case termsAgree
+        case nickname
         
         var name: String {
             switch self{
@@ -35,6 +36,8 @@ struct APIConstants {
                 "/users"
             case .termsAgree:
                 "/users/terms-agreement"
+            case .nickname:
+                "/users/nickname"
             }
         }
     }
