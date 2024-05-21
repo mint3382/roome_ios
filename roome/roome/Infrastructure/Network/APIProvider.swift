@@ -14,9 +14,11 @@ class APIProvider {
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.noResponse
         }
-           
+        
         if (200...299).contains(httpResponse.statusCode) {
             return data
+        } else if httpResponse.statusCode == 400 {
+            throw NetworkError.failureCode(try fetchErrorData(data))
         } else if httpResponse.statusCode == 401 {
             let newData = try await retryWithUpdateToken(request: request)
             return newData
@@ -29,6 +31,12 @@ class APIProvider {
     func fetchDecodedData<T: Decodable>(type: T.Type, from request: URLRequest) async throws -> T {
         let data = try await fetchData(from: request)
         let jsonData = try JSONDecoder().decode(type, from: data)
+        
+        return jsonData
+    }
+    
+    func fetchErrorData(_ data: Data) throws -> ErrorDTO {
+        let jsonData = try JSONDecoder().decode(ErrorDTO.self, from: data)
         
         return jsonData
     }
