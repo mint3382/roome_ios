@@ -128,8 +128,12 @@ class TermsAgreeViewModel {
 extension TermsAgreeViewModel {
     func pushedNextButton() {
         Task {
-            try await termsUseCase?.termsWithAPI(states: buttonStates)
-            goToNext.send()
+            do {
+                try await termsUseCase?.termsWithAPI(states: buttonStates)
+                goToNext.send()
+            } catch {
+                goToNext.send(completion: .failure(error))
+            }
         }
     }
 }
