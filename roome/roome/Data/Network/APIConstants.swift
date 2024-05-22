@@ -41,4 +41,8 @@ struct APIConstants {
             }
         }
     }
+    
+    enum Profile: String {
+        case roomCount = "/profiles/room-count"
+    }
 }

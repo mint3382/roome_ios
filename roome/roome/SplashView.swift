@@ -56,49 +56,51 @@ class SplashView: UIViewController {
     
     func registerLoginDependency() {
         let loginRepository = LoginRepository()
-        
-        DIContainer.shared.register(LoginRepository.self, dependency: loginRepository)
-        
         let loginUseCase = LoginUseCase(loginRepository: loginRepository)
-
-        DIContainer.shared.register(LoginUseCase.self, dependency: loginUseCase)
-        
         let loginViewModel = LoginViewModel(loginUseCase: loginUseCase)
-        
-        DIContainer.shared.register(LoginViewModel.self, dependency: loginViewModel)
-        
         let loginViewController = LoginViewController(viewModel: loginViewModel)
-
+        DIContainer.shared.register(LoginRepository.self, dependency: loginRepository)
+        DIContainer.shared.register(LoginUseCase.self, dependency: loginUseCase)
+        DIContainer.shared.register(LoginViewModel.self, dependency: loginViewModel)
         DIContainer.shared.register(LoginViewController.self, dependency: loginViewController)
     }
     
     func registerSignUPDependency() {
         let termsAgreeRepository = TermsAgreeRepository()
-        let nicknameRepository = NicknameRepository()
-        DIContainer.shared.register(TermsAgreeRepository.self, dependency: termsAgreeRepository)
-        DIContainer.shared.register(NicknameRepository.self, dependency: nicknameRepository)
-        
         let termsAgreeUseCase = TermsAgreeUseCase(termsAgreeRepository: termsAgreeRepository)
-        let nicknameUseCase = NicknameUseCase(nicknameRepository: nicknameRepository)
-        DIContainer.shared.register(TermsAgreeUseCase.self, dependency: termsAgreeUseCase)
-        DIContainer.shared.register(NicknameUseCase.self, dependency: nicknameUseCase)
-        
         let termsAgreeViewModel = TermsAgreeViewModel(termsUseCase: termsAgreeUseCase)
-        let nicknameViewModel = NicknameViewModel(usecase: nicknameUseCase)
-        DIContainer.shared.register(TermsAgreeViewModel.self, dependency: termsAgreeViewModel)
-        DIContainer.shared.register(NicknameViewModel.self, dependency: nicknameViewModel)
-        
         let termsAgreeViewController = TermsAgreeViewController(viewModel: termsAgreeViewModel)
-        let nicknameViewController = NicknameViewController(viewModel: nicknameViewModel)
+        DIContainer.shared.register(TermsAgreeRepository.self, dependency: termsAgreeRepository)
+        DIContainer.shared.register(TermsAgreeUseCase.self, dependency: termsAgreeUseCase)
+        DIContainer.shared.register(TermsAgreeViewModel.self, dependency: termsAgreeViewModel)
         DIContainer.shared.register(TermsAgreeViewController.self, dependency: termsAgreeViewController)
+
+        let nicknameRepository = NicknameRepository()
+        let nicknameUseCase = NicknameUseCase(nicknameRepository: nicknameRepository)
+        let nicknameViewModel = NicknameViewModel(usecase: nicknameUseCase)
+        let nicknameViewController = NicknameViewController(viewModel: nicknameViewModel)
+        DIContainer.shared.register(NicknameRepository.self, dependency: nicknameRepository)
+        DIContainer.shared.register(NicknameUseCase.self, dependency: nicknameUseCase)
+        DIContainer.shared.register(NicknameViewModel.self, dependency: nicknameViewModel)
         DIContainer.shared.register(NicknameViewController.self, dependency: nicknameViewController)
     }
     
     func registerProfileDependency() {
         let welcomeViewModel = WelcomeViewModel()
-        DIContainer.shared.register(WelcomeViewModel.self, dependency: welcomeViewModel)
-        
         let welcomeSignUPViewController = WelcomeSignUPViewController(viewModel: welcomeViewModel)
+        DIContainer.shared.register(WelcomeViewModel.self, dependency: welcomeViewModel)
         DIContainer.shared.register(WelcomeSignUPViewController.self, dependency: welcomeSignUPViewController)
+        
+        let roomCountRepository = RoomCountRepository()
+        let roomCountUseCase = RoomCountUseCase(repository: roomCountRepository)
+        let roomCountViewModel = RoomCountViewModel(usecase: roomCountUseCase)
+        let roomCountViewController = RoomCountViewController(viewModel: roomCountViewModel)
+        DIContainer.shared.register(RoomCountRepository.self, dependency: roomCountRepository)
+        DIContainer.shared.register(RoomCountUseCase.self, dependency: roomCountUseCase)
+        DIContainer.shared.register(RoomCountViewModel.self, dependency: roomCountViewModel)
+        DIContainer.shared.register(RoomCountViewController.self, dependency: roomCountViewController)
+        
+        let genreViewController = GenreViewController()
+        DIContainer.shared.register(GenreViewController.self, dependency: genreViewController)
     }
 }

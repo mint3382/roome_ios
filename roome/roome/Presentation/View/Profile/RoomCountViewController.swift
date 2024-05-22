@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class RoomCountViewController: UIViewController {
     private let stackView: UIStackView = {
@@ -55,13 +56,21 @@ class RoomCountViewController: UIViewController {
         return label
     }()
     
-    private let nextButton = NextButton()
-    
     lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 50, width: view.frame.width * 0.9 - 10, height: view.frame.height))
-    
     private let backButton = BackButton()
-
+    private let nextButton = NextButton()
     private var nextButtonWidthConstraint: NSLayoutConstraint?
+    private var viewModel: RoomCountViewModel?
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: RoomCountViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +83,49 @@ class RoomCountViewController: UIViewController {
         configureUI()
         configureNextButton()
 //        additionalSafeAreaInsets.top = 50
-
+        bind()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func bind() {
+        let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let count = numberTextField.publisher
+        
+        let output = viewModel?.transform(RoomCountViewModel.Input(count: count, nextButton: next))
+        
+        output?.handleNextButton
+            .sink(receiveValue: { [weak self] isNextButtonOn in
+                if isNextButtonOn {
+                    self?.nextButton.isEnabled = true
+                    self?.nextButton.backgroundColor = .roomeMain
+                } else {
+                    self?.nextButton.isEnabled = false
+                    self?.nextButton.backgroundColor = .gray
+                }
+            }).store(in: &cancellables)
+        
+        output?.handleNextPage
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    print("roomcount finish")
+                case .failure(_):
+                    Task { @MainActor in
+                        let loginPage = DIContainer.shared.resolve(LoginViewController.self)
+                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                            .changeRootViewController(loginPage, animated: true)
+                    }
+                }
+            }, receiveValue: { _ in
+                let nextPage = DIContainer.shared.resolve(GenreViewController.self)
+                Task { @MainActor in
+                    self.navigationController?.pushViewController(nextPage, animated: true)
+                }
+            })
+            .store(in: &cancellables)
     }
     
     func configureUI() {

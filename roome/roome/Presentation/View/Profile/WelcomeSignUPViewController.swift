@@ -103,7 +103,7 @@ class WelcomeSignUPViewController: UIViewController {
         
         output.handleNext
             .sink { [weak self] _ in
-                let nextPage = RoomCountViewController()
+                let nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
                 self?.navigationController?.pushViewController(nextPage, animated: true)
             }.store(in: &cancellables)
     }
