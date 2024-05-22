@@ -10,8 +10,8 @@ import UIKit
 class ProfileStateLineView: UIView {
     let colorCount: CGFloat
     let grayCount: CGFloat
-    lazy var bar = (frame.width / 12) * 0.79
-    lazy var space = (frame.width / 12) * 0.2
+    lazy var bar = (frame.width / 11) * 0.79
+    lazy var space = (frame.width / 11) * 0.2
     
     init(pageNumber: CGFloat, frame: CGRect) {
         self.colorCount = pageNumber
@@ -30,7 +30,7 @@ class ProfileStateLineView: UIView {
     
     func drawColorLine() {
         let path = UIBezierPath()
-        let end = (frame.width / CGFloat(12)) * colorCount
+        let end = (frame.width / CGFloat(11)) * colorCount
         
         let pattern: [CGFloat] = [bar, space]
         UIColor.roomeMain.set()
@@ -49,7 +49,7 @@ class ProfileStateLineView: UIView {
     
     func drawGrayLine() {
         let path = UIBezierPath()
-        let start = (frame.width / CGFloat(12)) * colorCount
+        let start = (frame.width / CGFloat(11)) * colorCount
         
         let pattern: [CGFloat] = [bar, space]
         UIColor.lightGray.set()
