@@ -19,8 +19,7 @@ class BackButton: UIButton {
     
     func customBackButton() {
         var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.image = UIImage(systemName: "chevron.backward")?.resize(newWidth: 20)
-        buttonConfiguration.baseForegroundColor = .label
+        buttonConfiguration.image = UIImage(systemName: "chevron.backward")?.resize(newWidth: 20).changeImageColor(.label)
         
         self.configuration = buttonConfiguration
         self.translatesAutoresizingMaskIntoConstraints = false
