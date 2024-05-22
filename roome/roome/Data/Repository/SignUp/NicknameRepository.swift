@@ -11,7 +11,7 @@ class NicknameRepository: NicknameRepositoryType {
     func requestNickname(_ name: String) async throws {
         
         let nicknameURL = URLBuilder(host: APIConstants.roomeHost,
-                                     path: APIConstants.UserPath.nickname.name,
+                                     path: APIConstants.User.nickname.name,
                                      queries: nil)
         guard let url = nicknameURL.url else {
             throw TypeError.bindingFailure
