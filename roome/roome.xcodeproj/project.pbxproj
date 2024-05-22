@@ -65,6 +65,7 @@
 		921695982BFE4E18006DC44A /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695972BFE4E18006DC44A /* ProfileModel.swift */; };
 		9216959B2BFE65AC006DC44A /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959A2BFE65AC006DC44A /* ButtonCell.swift */; };
 		9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959C2BFE72D1006DC44A /* StrengthViewController.swift */; };
+		921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -130,6 +131,7 @@
 		921695972BFE4E18006DC44A /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		9216959A2BFE65AC006DC44A /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		9216959C2BFE72D1006DC44A /* StrengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthViewController.swift; sourceTree = "<group>"; };
+		921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */,
 				921695932BFE1B8C006DC44A /* GenreViewController.swift */,
 				9216959C2BFE72D1006DC44A /* StrengthViewController.swift */,
+				921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				921695072BF26F23006DC44A /* APIConstants.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
+				921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */,
 				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
 				9216954A2BFA1A9D006DC44A /* TermsAgreeViewModel.swift in Sources */,
 				921695782BFCE1F7006DC44A /* WelcomeViewModel.swift in Sources */,
