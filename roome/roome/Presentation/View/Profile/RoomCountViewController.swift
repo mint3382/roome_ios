@@ -87,27 +87,37 @@ class RoomCountViewController: UIViewController {
     }()
     
     lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 50, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    
+    private let backButton: UIButton = {
+        let button = UIButton()
+        
+        var buttonConfiguration = UIButton.Configuration.plain()
+        buttonConfiguration.image = UIImage(systemName: "chevron.backward")?.resize(newWidth: 20).changeImageColor(.label)
+        
+        button.configuration = buttonConfiguration
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
 
     private var nextButtonWidthConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.backgroundColor = .clear
-        navigationController?.navigationBar.tintColor = .roomeMain
-        
         profileCount.backgroundColor = .systemBackground
         numberTextField.delegate = self
         registerKeyboardListener()
         numberTextField.becomeFirstResponder()
         configureUI()
         configureNextButton()
+//        additionalSafeAreaInsets.top = 50
 
     }
     
     func configureUI() {
         view.addSubview(profileCount)
+        view.addSubview(backButton)
         view.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(descriptionLabel)
@@ -117,9 +127,12 @@ class RoomCountViewController: UIViewController {
         numberLineStackView.addArrangedSubview(textFieldLabel)
         
         NSLayoutConstraint.activate([
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
             
             numberLineStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 50),
             numberLineStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
