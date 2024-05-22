@@ -12,10 +12,16 @@ class NextButton: UIButton {
         super.init(frame: frame)
         self.tintColor = .white
         self.layer.cornerRadius = 10
-        self.backgroundColor = .roomeMain
         self.setTitle("다음", for: .normal)
         self.titleLabel?.font = UIFont().pretendardBold(size: .label)
+        self.isEnabled = false
         self.translatesAutoresizingMaskIntoConstraints = false
+        
+        if self.isEnabled {
+            self.backgroundColor = .gray
+        } else {
+            self.backgroundColor = .roomeMain
+        }
     }
     
     required init?(coder: NSCoder) {

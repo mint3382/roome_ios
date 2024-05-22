@@ -127,6 +127,9 @@ class NicknameViewController: UIViewController {
             if buttonOn {
                 self?.nextButton.isEnabled = true
                 self?.nextButton.backgroundColor = .roomeMain
+            } else {
+                self?.nextButton.isEnabled = false
+                self?.nextButton.backgroundColor = .gray
             }
         }.store(in: &cancellables)
         

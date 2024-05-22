@@ -19,28 +19,9 @@ class RoomCountViewController: UIViewController {
         return stack
     }()
     
-    private let titleLabel: UILabel = {
-        let label = PaddingLabel(padding: UIEdgeInsets(top: 20, left: 24, bottom: 0, right: 24))
-        label.text = """
-                    현재까지 경험한 방 수를
-                    알려주세요
-                    """
-        label.numberOfLines = 2
-        label.font = UIFont().pretendardBold(size: .headline3)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
+    private let titleLabel = TitleLabel(text: "현재까지 경험한 방 수를\n알려주세요")
     
-    private let descriptionLabel: UILabel = {
-        let label = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 24, bottom: 20, right: 24))
-        label.text = "프로필 생성 후 마이페이지에서 수정할 수 있어요"
-        label.numberOfLines = 2
-        label.font = UIFont().pretendardRegular(size: .body1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
+    private let descriptionLabel = DescriptionLabel(text: "프로필 생성 후 마이페이지에서 수정할 수 있어요")
     
     private let numberLineStackView: UIStackView = {
         let stack = UIStackView()
@@ -74,31 +55,11 @@ class RoomCountViewController: UIViewController {
         return label
     }()
     
-    private let nextButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.tintColor = .white
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .roomeMain
-        button.setTitle("다음", for: .normal)
-        button.titleLabel?.font = UIFont().pretendardBold(size: .label)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
+    private let nextButton = NextButton()
     
     lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 50, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     
-    private let backButton: UIButton = {
-        let button = UIButton()
-        
-        var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.image = UIImage(systemName: "chevron.backward")?.resize(newWidth: 20).changeImageColor(.label)
-        
-        button.configuration = buttonConfiguration
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
+    private let backButton = BackButton()
 
     private var nextButtonWidthConstraint: NSLayoutConstraint?
     
@@ -106,6 +67,7 @@ class RoomCountViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         profileCount.backgroundColor = .systemBackground
+        nextButton.isEnabled = true
         numberTextField.delegate = self
         registerKeyboardListener()
         numberTextField.becomeFirstResponder()
