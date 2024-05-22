@@ -16,12 +16,7 @@ class NextButton: UIButton {
         self.titleLabel?.font = UIFont().pretendardBold(size: .label)
         self.isEnabled = false
         self.translatesAutoresizingMaskIntoConstraints = false
-        
-        if self.isEnabled {
-            self.backgroundColor = .gray
-        } else {
-            self.backgroundColor = .roomeMain
-        }
+        self.backgroundColor = .gray
     }
     
     required init?(coder: NSCoder) {

@@ -75,15 +75,15 @@ class RoomCountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        profileCount.backgroundColor = .systemBackground
         nextButton.isEnabled = true
+        nextButton.backgroundColor = .roomeMain
         numberTextField.delegate = self
-        registerKeyboardListener()
         numberTextField.becomeFirstResponder()
         configureUI()
         configureNextButton()
-//        additionalSafeAreaInsets.top = 50
         bind()
+        registerKeyboardListener()
+        //        additionalSafeAreaInsets.top = 50
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

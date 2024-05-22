@@ -76,20 +76,11 @@ class NicknameViewController: UIViewController {
         return label
     }()
     
-    private let nextButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.isEnabled = false
-        button.tintColor = .white
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .gray
-        button.setTitle("다음", for: .normal)
-        button.titleLabel?.font = UIFont().pretendardBold(size: .label)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
+    private let nextButton = NextButton()
     
     private var nextButtonWidthConstraint: NSLayoutConstraint?
+    private let backButton = BackButton()
+    
     var viewModel: NicknameViewModel
     var cancellables = Set<AnyCancellable>()
     
