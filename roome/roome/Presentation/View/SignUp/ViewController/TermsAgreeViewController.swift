@@ -109,6 +109,7 @@ class TermsAgreeViewController: UIViewController {
     }()
     
     private let nextButton = NextButton()
+    private let backButton = BackButton()
     
     let viewModel: TermsAgreeViewModel
     var cancellable = Set<AnyCancellable>()
@@ -137,8 +138,9 @@ class TermsAgreeViewController: UIViewController {
         let personal = personalInformationAgreeButton.tappedMainButtonPublisher()
         let advertise = advertiseAgreeButton.tappedMainButtonPublisher()
         let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         
-        let output = viewModel.transform(TermsAgreeViewModel.TermsAgreeInput(allAgree: all,ageAgree: age, service: service, personal: personal, advertise: advertise, next: next))
+        let output = viewModel.transform(TermsAgreeViewModel.TermsAgreeInput(allAgree: all,ageAgree: age, service: service, personal: personal, advertise: advertise, next: next, back: back))
         
         output.states
             .sink { [weak self] states in
@@ -201,9 +203,17 @@ class TermsAgreeViewController: UIViewController {
             }
             .store(in: &cancellable)
 
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &cancellable)
     }
     
     private func configureStackView() {
+        view.addSubview(backButton)
+        view.addSubview(stackView)
+        
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(allAgreeButton)
         stackView.addArrangedSubview(ageAgreeButton)
@@ -211,12 +221,14 @@ class TermsAgreeViewController: UIViewController {
         stackView.addArrangedSubview(personalInformationAgreeButton)
         stackView.addArrangedSubview(advertiseAgreeButton)
         
-        view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            stackView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 24),
             
             serviceAgreeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             serviceAgreeButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),

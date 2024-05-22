@@ -110,7 +110,9 @@ class NicknameViewController: UIViewController {
     func bind() {
         let text = nicknameTextField.publisher
         let nextButton = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let input = NicknameViewModel.NicknameViewModelInput(nickname: text, nextButton: nextButton)
+        let backButton = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        
+        let input = NicknameViewModel.NicknameViewModelInput(nickname: text, nextButton: nextButton, back: backButton)
         let output = viewModel.transform(input)
         
         text.receive(on: RunLoop.main)
@@ -140,6 +142,11 @@ class NicknameViewController: UIViewController {
             })
             .store(in: &cancellables)
 
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &cancellables)
     }
     
     func handleError(_ error: NicknameError) {
@@ -173,10 +180,14 @@ class NicknameViewController: UIViewController {
     }
     
     private func configureWelcomeLabel() {
+        view.addSubview(backButton)
         view.addSubview(welcomeLabel)
         
         NSLayoutConstraint.activate([
-            welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4),
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            
+            welcomeLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
             welcomeLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             welcomeLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])

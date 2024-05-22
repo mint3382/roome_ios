@@ -10,13 +10,15 @@ import Combine
 
 class NicknameViewModel {
     struct NicknameViewModelInput {
-        var nickname: AnyPublisher<String, Never>
-        var nextButton: AnyPublisher<Void, Never>
+        let nickname: AnyPublisher<String, Never>
+        let nextButton: AnyPublisher<Void, Never>
+        let back: AnyPublisher<Void, Never>
     }
 
     struct NicknameViewModelOutput {
-        var isButtonEnable: AnyPublisher<Bool, Never>
-        var canGoNext: AnyPublisher<Void, NicknameError>
+        let isButtonEnable: AnyPublisher<Bool, Never>
+        let canGoNext: AnyPublisher<Void, NicknameError>
+        let handleBackButton: AnyPublisher<Void, Never>
     }
     
     private let usecase: NicknameUseCase
@@ -58,7 +60,10 @@ class NicknameViewModel {
             }
             .eraseToAnyPublisher()
         
-        return NicknameViewModelOutput(isButtonEnable: isButtonEnable, canGoNext: canGoNext)
+        let back = input.back
+            .eraseToAnyPublisher()
+        
+        return NicknameViewModelOutput(isButtonEnable: isButtonEnable, canGoNext: canGoNext, handleBackButton: back)
     }
     
     func canFillTextField(_ text: String) -> Bool {
