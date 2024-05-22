@@ -64,6 +64,7 @@
 		921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695932BFE1B8C006DC44A /* GenreViewController.swift */; };
 		921695982BFE4E18006DC44A /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695972BFE4E18006DC44A /* ProfileModel.swift */; };
 		9216959B2BFE65AC006DC44A /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959A2BFE65AC006DC44A /* ButtonCell.swift */; };
+		9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959C2BFE72D1006DC44A /* StrengthViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -128,6 +129,7 @@
 		921695932BFE1B8C006DC44A /* GenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewController.swift; sourceTree = "<group>"; };
 		921695972BFE4E18006DC44A /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		9216959A2BFE65AC006DC44A /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		9216959C2BFE72D1006DC44A /* StrengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
 				9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */,
 				921695932BFE1B8C006DC44A /* GenreViewController.swift */,
+				9216959C2BFE72D1006DC44A /* StrengthViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				921695302BF71659006DC44A /* FontSize.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
 				921695882BFE0958006DC44A /* NextButton.swift in Sources */,
+				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,

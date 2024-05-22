@@ -13,7 +13,7 @@ class TitleLabel: UILabel {
     convenience init(text: String) {
         self.init()
         self.text = text
-        self.numberOfLines = 2
+        self.numberOfLines = 3
         self.font = UIFont().pretendardBold(size: .headline2)
         self.translatesAutoresizingMaskIntoConstraints = false
     }
