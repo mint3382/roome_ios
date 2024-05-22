@@ -85,6 +85,8 @@ class RoomCountViewController: UIViewController {
         
         return button
     }()
+    
+    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 50, width: view.frame.width * 0.9 - 10, height: view.frame.height))
 
     private var nextButtonWidthConstraint: NSLayoutConstraint?
     
@@ -92,8 +94,10 @@ class RoomCountViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.tintColor = .roomeMain
         
+        profileCount.backgroundColor = .systemBackground
         numberTextField.delegate = self
         registerKeyboardListener()
         numberTextField.becomeFirstResponder()
@@ -103,6 +107,7 @@ class RoomCountViewController: UIViewController {
     }
     
     func configureUI() {
+        view.addSubview(profileCount)
         view.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(descriptionLabel)
