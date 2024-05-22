@@ -218,7 +218,7 @@ class NicknameViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             nextButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
-            nextButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }

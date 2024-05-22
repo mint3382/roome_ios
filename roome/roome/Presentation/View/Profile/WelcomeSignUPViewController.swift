@@ -125,7 +125,7 @@ class WelcomeSignUPViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             makeProfileButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            makeProfileButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
+            makeProfileButton.heightAnchor.constraint(equalToConstant: 50),
             makeProfileButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             makeProfileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])

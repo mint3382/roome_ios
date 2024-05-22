@@ -21,7 +21,7 @@ class GenreViewController: UIViewController {
     
     private let titleLabel = TitleLabel(text: "선호하는 방탈출 장르를\n알려주세요")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 2, frame: CGRect(x: 24, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 2, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private let nextButton = NextButton()
     private lazy var flowLayout = self.createFlowLayout()
@@ -81,7 +81,7 @@ class GenreViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            nextButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         ])
