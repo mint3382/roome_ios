@@ -357,14 +357,10 @@
 		921695442BF9B64E006DC44A /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				9216959F2BFE72F7006DC44A /* Label */,
+				9216959E2BFE72E2006DC44A /* Button */,
 				921695992BFE65A1006DC44A /* Cell */,
-				921695452BF9B661006DC44A /* PaddingLabel.swift */,
-				921695472BF9FC5B006DC44A /* LabelButton.swift */,
 				9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */,
-				921695812BFE021B006DC44A /* BackButton.swift */,
-				921695832BFE03AE006DC44A /* TitleLabel.swift */,
-				921695852BFE08C9006DC44A /* DescriptionLabel.swift */,
-				921695872BFE0958006DC44A /* NextButton.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -470,6 +466,26 @@
 				9216959A2BFE65AC006DC44A /* ButtonCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		9216959E2BFE72E2006DC44A /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				921695472BF9FC5B006DC44A /* LabelButton.swift */,
+				921695812BFE021B006DC44A /* BackButton.swift */,
+				921695872BFE0958006DC44A /* NextButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		9216959F2BFE72F7006DC44A /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				921695452BF9B661006DC44A /* PaddingLabel.swift */,
+				921695832BFE03AE006DC44A /* TitleLabel.swift */,
+				921695852BFE08C9006DC44A /* DescriptionLabel.swift */,
+			);
+			path = Label;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
