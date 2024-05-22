@@ -56,7 +56,7 @@ class RoomCountViewController: UIViewController {
         return label
     }()
     
-    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 50, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 24, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private let nextButton = NextButton()
     private var nextButtonWidthConstraint: NSLayoutConstraint?
