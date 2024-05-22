@@ -60,7 +60,7 @@ class RoomCountViewController: UIViewController {
     private let backButton = BackButton()
     private let nextButton = NextButton()
     private var nextButtonWidthConstraint: NSLayoutConstraint?
-    private var viewModel: RoomCountViewModel?
+    private var viewModel: RoomCountViewModel
     private var cancellables = Set<AnyCancellable>()
     
     init(viewModel: RoomCountViewModel) {
@@ -93,10 +93,14 @@ class RoomCountViewController: UIViewController {
     func bind() {
         let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         let count = numberTextField.publisher
+        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         
-        let output = viewModel?.transform(RoomCountViewModel.Input(count: count, nextButton: next))
+        count.receive(on: RunLoop.main)
+            .assign(to: &viewModel.$textInput)
         
-        output?.handleNextButton
+        let output = viewModel.transform(RoomCountViewModel.Input(count: count, nextButton: next, backButton: back))
+        
+        output.handleNextButton
             .sink(receiveValue: { [weak self] isNextButtonOn in
                 if isNextButtonOn {
                     self?.nextButton.isEnabled = true
@@ -107,16 +111,14 @@ class RoomCountViewController: UIViewController {
                 }
             }).store(in: &cancellables)
         
-        output?.handleNextPage
+        output.handleNextPage
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     print("roomcount finish")
                 case .failure(_):
                     Task { @MainActor in
-                        let loginPage = DIContainer.shared.resolve(LoginViewController.self)
-                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                            .changeRootViewController(loginPage, animated: true)
+                        self.navigationController?.popToRootViewController(animated: true)
                     }
                 }
             }, receiveValue: { _ in
@@ -126,6 +128,11 @@ class RoomCountViewController: UIViewController {
                 }
             })
             .store(in: &cancellables)
+        
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }.store(in: &cancellables)
     }
     
     func configureUI() {

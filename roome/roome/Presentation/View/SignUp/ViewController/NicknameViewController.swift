@@ -122,6 +122,9 @@ class NicknameViewController: UIViewController {
         let input = NicknameViewModel.NicknameViewModelInput(nickname: text, nextButton: nextButton)
         let output = viewModel.transform(input)
         
+        text.receive(on: RunLoop.main)
+            .assign(to: &viewModel.$textInput)
+        
         output.isButtonEnable
             .sink { [weak self] buttonOn in
             if buttonOn {

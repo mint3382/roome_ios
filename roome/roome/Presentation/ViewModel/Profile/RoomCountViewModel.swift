@@ -12,15 +12,18 @@ class RoomCountViewModel {
     struct Input {
         var count: AnyPublisher<String, Never>
         var nextButton: AnyPublisher<Void, Never>
+        var backButton: AnyPublisher<Void, Never>
     }
     
     struct Output {
         var handleNextButton: AnyPublisher<Bool, Never>
         var handleNextPage: AnyPublisher<Void, Error>
+        var handleBackButton: AnyPublisher<Void, Never>
     }
     
     private let usecase: RoomCountUseCase
     private let goToNext = PassthroughSubject<Void, Error>()
+    @Published var textInput = ""
     
     init(usecase: RoomCountUseCase) {
         self.usecase = usecase
@@ -32,9 +35,9 @@ class RoomCountViewModel {
                 self?.usecase.canGoNext(count)
             }.eraseToAnyPublisher()
         
-        let handleNextPage = Publishers.Zip(input.count, input.nextButton)
-            .map { [weak self] (count ,_) in
-                self?.handlePage(count)
+        let handleNextPage = input.nextButton
+            .map { [weak self] _ in
+                self?.handlePage(self?.textInput)
             }.compactMap { [weak self] _ in
                 self
             }
@@ -43,10 +46,13 @@ class RoomCountViewModel {
             }
             .eraseToAnyPublisher()
         
-        return Output(handleNextButton: handleNextButton, handleNextPage: handleNextPage)
+        let handleBackButton = input.backButton
+            .eraseToAnyPublisher()
+        
+        return Output(handleNextButton: handleNextButton, handleNextPage: handleNextPage, handleBackButton: handleBackButton)
     }
     
-    func handlePage(_ count: String) {
+    func handlePage(_ count: String?) {
         Task {
             do {
                 try await usecase.roomCountWithAPI(count, isPlusEnabled: false)

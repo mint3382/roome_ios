@@ -20,8 +20,8 @@ class RoomCountUseCase {
         return predicate.evaluate(with: text)
     }
     
-    func roomCountWithAPI(_ count: String, isPlusEnabled: Bool) async throws {
-        guard let count = Int(count) else {
+    func roomCountWithAPI(_ count: String?, isPlusEnabled: Bool) async throws {
+        guard let count = Int(count ?? "") else {
             throw TypeError.bindingFailure
         }
         
