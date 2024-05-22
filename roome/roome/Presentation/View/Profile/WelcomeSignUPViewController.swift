@@ -60,7 +60,7 @@ class WelcomeSignUPViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.backgroundColor = .roomeMain
         button.setTitle("프로필 만들기", for: .normal)
-        button.titleLabel?.font = UIFont().pretendardBold(size: .label)
+        button.titleLabel?.font = UIFont().pretendardBold(size: .title2)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -68,7 +68,6 @@ class WelcomeSignUPViewController: UIViewController {
     
     private let viewModel: WelcomeViewModel
     private var cancellables = Set<AnyCancellable>()
-//    private let nickname: String? = UserContainer.shared.user?.data.nickname
     
     init(viewModel: WelcomeViewModel) {
         self.viewModel = viewModel
