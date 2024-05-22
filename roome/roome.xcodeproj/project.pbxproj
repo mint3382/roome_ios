@@ -54,6 +54,7 @@
 		9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */; };
 		921695802BFDCC88006DC44A /* ProfileStateLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */; };
 		921695822BFE021C006DC44A /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695812BFE021B006DC44A /* BackButton.swift */; };
+		921695882BFE0958006DC44A /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695872BFE0958006DC44A /* NextButton.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -108,6 +109,7 @@
 		9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountViewController.swift; sourceTree = "<group>"; };
 		9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStateLineView.swift; sourceTree = "<group>"; };
 		921695812BFE021B006DC44A /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		921695872BFE0958006DC44A /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				921695472BF9FC5B006DC44A /* LabelButton.swift */,
 				9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */,
 				921695812BFE021B006DC44A /* BackButton.swift */,
+				921695872BFE0958006DC44A /* NextButton.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
 				921695302BF71659006DC44A /* FontSize.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
+				921695882BFE0958006DC44A /* NextButton.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
