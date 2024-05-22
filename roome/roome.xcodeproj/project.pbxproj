@@ -54,6 +54,7 @@
 		9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */; };
 		921695802BFDCC88006DC44A /* ProfileStateLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */; };
 		921695822BFE021C006DC44A /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695812BFE021B006DC44A /* BackButton.swift */; };
+		921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695832BFE03AE006DC44A /* TitleLabel.swift */; };
 		921695882BFE0958006DC44A /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695872BFE0958006DC44A /* NextButton.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
@@ -109,6 +110,7 @@
 		9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountViewController.swift; sourceTree = "<group>"; };
 		9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStateLineView.swift; sourceTree = "<group>"; };
 		921695812BFE021B006DC44A /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		921695832BFE03AE006DC44A /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		921695872BFE0958006DC44A /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				921695472BF9FC5B006DC44A /* LabelButton.swift */,
 				9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */,
 				921695812BFE021B006DC44A /* BackButton.swift */,
+				921695832BFE03AE006DC44A /* TitleLabel.swift */,
 				921695872BFE0958006DC44A /* NextButton.swift */,
 			);
 			path = CustomUI;
@@ -564,6 +567,7 @@
 				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
 				9216954A2BFA1A9D006DC44A /* TermsAgreeViewModel.swift in Sources */,
 				921695782BFCE1F7006DC44A /* WelcomeViewModel.swift in Sources */,
+				921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,
 				9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */,
