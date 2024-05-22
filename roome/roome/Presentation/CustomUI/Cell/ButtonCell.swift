@@ -14,7 +14,7 @@ class ButtonCell: UICollectionViewCell {
         super.init(frame: frame)
         self.addSubview(titleLabel)
         contentView.layer.borderColor = UIColor.gray.cgColor
-        contentView.layer.borderWidth = 2
+        contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -38,13 +38,13 @@ class ButtonCell: UICollectionViewCell {
             if isSelected {
                 contentView.layer.borderColor = UIColor.roomeMain.cgColor
             } else {
-                contentView.layer.borderColor = UIColor.gray.cgColor
+                contentView.layer.borderColor = UIColor.lightGray.cgColor
             }
         }
     }
     
     func changeTitle(_ text: String) {
         titleLabel.text = text
-        titleLabel.font = UIFont().pretendardBold(size: .label)
+        titleLabel.font = UIFont().pretendardBold(size: .title2)
     }
 }
