@@ -21,7 +21,6 @@ class NicknameViewModel {
     
     private let usecase: NicknameUseCase
     private let goToNext = PassthroughSubject<Void, Error>()
-    private var nickname: String = ""
     
     init(usecase: NicknameUseCase) {
         self.usecase = usecase
@@ -35,9 +34,9 @@ class NicknameViewModel {
                 self?.usecase.checkNicknameCount($0)
             }.eraseToAnyPublisher()
         
-        let canGoNext = input.nextButton
-            .map { [weak self] in
-                self?.pushedNextButton()
+        let canGoNext = Publishers.Zip(input.nickname, input.nextButton)
+            .map { [weak self] (nickname, _) in
+                self?.pushedNextButton(nickname)
             }
             .compactMap { [weak self] _ in
                 self
@@ -63,14 +62,13 @@ class NicknameViewModel {
     
     func canFillTextField(_ text: String) -> Bool {
         if usecase.checkNicknameText(text) {
-            self.nickname = text
             return true
         } else {
             return false
         }
     }
     
-    func pushedNextButton() {
+    func pushedNextButton(_ nickname: String) {
         Task {
             do {
                 try await usecase.nicknameCheckWithAPI(nickname)
