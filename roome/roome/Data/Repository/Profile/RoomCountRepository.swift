@@ -1,29 +1,29 @@
 //
-//  NicknameRepository.swift
+//  RoomCountRepository.swift
 //  roome
 //
-//  Created by minsong kim on 5/21/24.
+//  Created by minsong kim on 5/22/24.
 //
 
 import Foundation
 
-class NicknameRepository: NicknameRepositoryType {
-    func requestNickname(_ name: String) async throws {
-        
+class RoomCountRepository: RoomCountRepositoryType {
+    func registerCount(_ count: Int, isPlusEnabled: Bool) async throws {
         let nicknameURL = URLBuilder(host: APIConstants.roomeHost,
-                                     path: APIConstants.User.nickname.name,
+                                     path: APIConstants.Profile.roomCount.rawValue,
                                      queries: nil)
         guard let url = nicknameURL.url else {
             throw TypeError.bindingFailure
         }
         
         
-        let body: [String: Any] = ["nickname": name]
+        let body: [String: Any] = ["count": count,
+                                   "isPlusEnabled": isPlusEnabled]
         let accessToken = KeyChain.read(key: .accessToken) ?? ""
         let header = ["Content-Type": "application/json",
                       "Authorization": "Bearer \(accessToken)"]
         
-        let requestBuilder = RequestBuilder(url: url, 
+        let requestBuilder = RequestBuilder(url: url,
                                             method: .put,
                                             bodyJSON: body,
                                             headers: header)

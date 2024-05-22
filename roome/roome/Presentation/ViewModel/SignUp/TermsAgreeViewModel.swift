@@ -29,6 +29,7 @@ class TermsAgreeViewModel {
         let personal: AnyPublisher<Void, Never>
         let advertise: AnyPublisher<Void, Never>
         let next: AnyPublisher<Void, Never>
+        let back: AnyPublisher<Void, Never>
     }
     
     struct TermsAgreeOutput {
@@ -36,6 +37,7 @@ class TermsAgreeViewModel {
         let isNextButtonOn: AnyPublisher<Bool, Never>
         let states: AnyPublisher<TermsButtonStates, Never>
         let goToNext: AnyPublisher<Void, Error>
+        let handleBackButton: AnyPublisher<Void, Never>
     }
     
     init(termsUseCase: TermsAgreeUseCase?) {
@@ -120,8 +122,10 @@ class TermsAgreeViewModel {
             }
             .eraseToAnyPublisher()
             
+        let back = input.back
+            .eraseToAnyPublisher()
         
-        return TermsAgreeOutput(isAllAgreeOn: isAllAgreeOn, isNextButtonOn: nextButton, states: state, goToNext: goNext)
+        return TermsAgreeOutput(isAllAgreeOn: isAllAgreeOn, isNextButtonOn: nextButton, states: state, goToNext: goNext, handleBackButton: back)
     }
 }
 

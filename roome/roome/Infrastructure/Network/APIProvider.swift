@@ -58,7 +58,7 @@ extension APIProvider {
     
     private func refreshAccessToken() async throws -> LoginDTO? {
         let userURL = URLBuilder(host: APIConstants.roomeHost,
-                                 path: APIConstants.AuthPath.token.name,
+                                 path: APIConstants.Auth.token.name,
                                  queries: nil)
         guard let url = userURL.url else {
             return nil

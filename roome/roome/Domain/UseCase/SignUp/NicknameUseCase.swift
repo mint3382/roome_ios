@@ -28,7 +28,11 @@ class NicknameUseCase {
         }
     }
     
-    func nicknameCheckWithAPI(_ text: String) async throws {
+    func nicknameCheckWithAPI(_ text: String?) async throws {
+        guard let text else {
+            throw TypeError.bindingFailure
+        }
+        
         try await nicknameRepository.requestNickname(text)
     }
 }

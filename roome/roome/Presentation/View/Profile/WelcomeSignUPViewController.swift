@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class WelcomeSignUPViewController: UIViewController {
     private let stackView: UIStackView = {
@@ -66,7 +67,8 @@ class WelcomeSignUPViewController: UIViewController {
     }()
     
     private let viewModel: WelcomeViewModel
-//    private let nickname: String? = UserContainer.shared.user?.data.nickname 
+    private var cancellables = Set<AnyCancellable>()
+//    private let nickname: String? = UserContainer.shared.user?.data.nickname
     
     init(viewModel: WelcomeViewModel) {
         self.viewModel = viewModel
@@ -80,7 +82,6 @@ class WelcomeSignUPViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navigationController?.setNavigationBarHidden(true, animated: true)
         configureStackView()
         configureButton()
         updateNickName()
@@ -95,11 +96,15 @@ class WelcomeSignUPViewController: UIViewController {
     }
     
     func bind() {
-        _ = makeProfileButton.publisher(for: .touchUpInside)
+        let input = makeProfileButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        
+        let output = viewModel.transforms(WelcomeViewModel.Input(nextButton: input))
+        
+        output.handleNext
             .sink { [weak self] _ in
-                let nextPage = UIViewController()
+                let nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
                 self?.navigationController?.pushViewController(nextPage, animated: true)
-            }
+            }.store(in: &cancellables)
     }
     
     func configureStackView() {

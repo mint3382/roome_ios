@@ -9,7 +9,7 @@ import Foundation
 
 class TermsAgreeRepository: TermsAgreeRepositoryType {
     func requestTerms(states: TermsButtonStates) async throws {
-        let termsURL = URLBuilder(host: APIConstants.roomeHost, path: APIConstants.UserPath.termsAgree.name, queries: nil)
+        let termsURL = URLBuilder(host: APIConstants.roomeHost, path: APIConstants.User.termsAgree.name, queries: nil)
         guard let url = termsURL.url else {
             throw TypeError.bindingFailure
         }

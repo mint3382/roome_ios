@@ -15,7 +15,7 @@ class UserContainer {
     
     func updateUserInformation() async throws {
         let userURL = URLBuilder(host: APIConstants.roomeHost,
-                                 path: APIConstants.UserPath.users.name,
+                                 path: APIConstants.User.users.name,
                                  queries: nil)
         guard let url = userURL.url else {
             throw TypeError.bindingFailure

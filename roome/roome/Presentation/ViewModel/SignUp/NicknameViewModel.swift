@@ -10,18 +10,20 @@ import Combine
 
 class NicknameViewModel {
     struct NicknameViewModelInput {
-        var nickname: AnyPublisher<String, Never>
-        var nextButton: AnyPublisher<Void, Never>
+        let nickname: AnyPublisher<String, Never>
+        let nextButton: AnyPublisher<Void, Never>
+        let back: AnyPublisher<Void, Never>
     }
 
     struct NicknameViewModelOutput {
-        var isButtonEnable: AnyPublisher<Bool, Never>
-        var canGoNext: AnyPublisher<Void, NicknameError>
+        let isButtonEnable: AnyPublisher<Bool, Never>
+        let canGoNext: AnyPublisher<Void, NicknameError>
+        let handleBackButton: AnyPublisher<Void, Never>
     }
     
     private let usecase: NicknameUseCase
     private let goToNext = PassthroughSubject<Void, Error>()
-    private var nickname: String = ""
+    @Published var textInput = ""
     
     init(usecase: NicknameUseCase) {
         self.usecase = usecase
@@ -36,8 +38,8 @@ class NicknameViewModel {
             }.eraseToAnyPublisher()
         
         let canGoNext = input.nextButton
-            .map { [weak self] in
-                self?.pushedNextButton()
+            .map { [weak self] _ in
+                self?.pushedNextButton(self?.textInput)
             }
             .compactMap { [weak self] _ in
                 self
@@ -58,19 +60,21 @@ class NicknameViewModel {
             }
             .eraseToAnyPublisher()
         
-        return NicknameViewModelOutput(isButtonEnable: isButtonEnable, canGoNext: canGoNext)
+        let back = input.back
+            .eraseToAnyPublisher()
+        
+        return NicknameViewModelOutput(isButtonEnable: isButtonEnable, canGoNext: canGoNext, handleBackButton: back)
     }
     
     func canFillTextField(_ text: String) -> Bool {
         if usecase.checkNicknameText(text) {
-            self.nickname = text
             return true
         } else {
             return false
         }
     }
     
-    func pushedNextButton() {
+    func pushedNextButton(_ nickname: String?) {
         Task {
             do {
                 try await usecase.nicknameCheckWithAPI(nickname)

@@ -51,6 +51,17 @@
 		9216956E2BFC9381006DC44A /* WelcomeSignUPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */; };
 		921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216956F2BFCA5E2006DC44A /* ErrorDTO.swift */; };
 		921695782BFCE1F7006DC44A /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */; };
+		9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */; };
+		921695802BFDCC88006DC44A /* ProfileStateLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */; };
+		921695822BFE021C006DC44A /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695812BFE021B006DC44A /* BackButton.swift */; };
+		921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695832BFE03AE006DC44A /* TitleLabel.swift */; };
+		921695862BFE08C9006DC44A /* DescriptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695852BFE08C9006DC44A /* DescriptionLabel.swift */; };
+		921695882BFE0958006DC44A /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695872BFE0958006DC44A /* NextButton.swift */; };
+		9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695892BFE100F006DC44A /* RoomCountViewModel.swift */; };
+		9216958D2BFE10F7006DC44A /* RoomCountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216958C2BFE10F7006DC44A /* RoomCountUseCase.swift */; };
+		9216958F2BFE1121006DC44A /* RoomCountRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */; };
+		921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695912BFE15DB006DC44A /* RoomCountRepository.swift */; };
+		921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695932BFE1B8C006DC44A /* GenreViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -102,6 +113,17 @@
 		9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSignUPViewController.swift; sourceTree = "<group>"; };
 		9216956F2BFCA5E2006DC44A /* ErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDTO.swift; sourceTree = "<group>"; };
 		921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountViewController.swift; sourceTree = "<group>"; };
+		9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStateLineView.swift; sourceTree = "<group>"; };
+		921695812BFE021B006DC44A /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		921695832BFE03AE006DC44A /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		921695852BFE08C9006DC44A /* DescriptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionLabel.swift; sourceTree = "<group>"; };
+		921695872BFE0958006DC44A /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
+		921695892BFE100F006DC44A /* RoomCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountViewModel.swift; sourceTree = "<group>"; };
+		9216958C2BFE10F7006DC44A /* RoomCountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountUseCase.swift; sourceTree = "<group>"; };
+		9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountRepositoryType.swift; sourceTree = "<group>"; };
+		921695912BFE15DB006DC44A /* RoomCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountRepository.swift; sourceTree = "<group>"; };
+		921695932BFE1B8C006DC44A /* GenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -240,6 +262,7 @@
 			children = (
 				921695102BF34256006DC44A /* LoginRepositoryType.swift */,
 				921695722BFCB5D0006DC44A /* SignUp */,
+				9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -249,6 +272,7 @@
 			children = (
 				9216951B2BF3CEBC006DC44A /* LoginUseCase.swift */,
 				921695732BFCB5E5006DC44A /* SignUp */,
+				9216958B2BFE10DD006DC44A /* Profile */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -258,6 +282,7 @@
 			children = (
 				921695142BF35377006DC44A /* LoginRepository.swift */,
 				921695752BFCB634006DC44A /* SignUp */,
+				921695902BFE15BF006DC44A /* Profile */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -329,6 +354,11 @@
 			children = (
 				921695452BF9B661006DC44A /* PaddingLabel.swift */,
 				921695472BF9FC5B006DC44A /* LabelButton.swift */,
+				9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */,
+				921695812BFE021B006DC44A /* BackButton.swift */,
+				921695832BFE03AE006DC44A /* TitleLabel.swift */,
+				921695852BFE08C9006DC44A /* DescriptionLabel.swift */,
+				921695872BFE0958006DC44A /* NextButton.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -345,6 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
+				9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */,
+				921695932BFE1B8C006DC44A /* GenreViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -397,6 +429,23 @@
 			isa = PBXGroup;
 			children = (
 				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
+				921695892BFE100F006DC44A /* RoomCountViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		9216958B2BFE10DD006DC44A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9216958C2BFE10F7006DC44A /* RoomCountUseCase.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		921695902BFE15BF006DC44A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				921695912BFE15DB006DC44A /* RoomCountRepository.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -527,10 +576,12 @@
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
+				921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */,
 				921695152BF35377006DC44A /* LoginRepository.swift in Sources */,
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
 				921695302BF71659006DC44A /* FontSize.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
+				921695882BFE0958006DC44A /* NextButton.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
@@ -541,15 +592,22 @@
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
+				9216958D2BFE10F7006DC44A /* RoomCountUseCase.swift in Sources */,
 				921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */,
+				921695822BFE021C006DC44A /* BackButton.swift in Sources */,
 				9216955D2BFBBE2F006DC44A /* DIContainer.swift in Sources */,
 				921695412BF9008A006DC44A /* TermsAgreeViewController.swift in Sources */,
 				921695072BF26F23006DC44A /* APIConstants.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
+				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
 				9216954A2BFA1A9D006DC44A /* TermsAgreeViewModel.swift in Sources */,
 				921695782BFCE1F7006DC44A /* WelcomeViewModel.swift in Sources */,
+				921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */,
+				921695862BFE08C9006DC44A /* DescriptionLabel.swift in Sources */,
+				921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
+				9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */,
 				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,
 				9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */,
 				9216956E2BFC9381006DC44A /* WelcomeSignUPViewController.swift in Sources */,
@@ -557,6 +615,8 @@
 				921695512BFB1A71006DC44A /* SplashView.swift in Sources */,
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
 				921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */,
+				9216958F2BFE1121006DC44A /* RoomCountRepositoryType.swift in Sources */,
+				921695802BFDCC88006DC44A /* ProfileStateLineView.swift in Sources */,
 				9216951C2BF3CEBC006DC44A /* LoginUseCase.swift in Sources */,
 				9216953A2BF88FBB006DC44A /* UITextField+.swift in Sources */,
 			);

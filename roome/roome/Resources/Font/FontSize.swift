@@ -8,6 +8,7 @@
 import Foundation
 
 enum FontSize {
+    case custom(CGFloat)
     case headline1
     case headline2
     case headline3
@@ -22,6 +23,8 @@ enum FontSize {
     
     var number: CGFloat {
         switch self {
+        case .custom(let number):
+            return number
         case .headline1:
             return 32
         case .headline2:

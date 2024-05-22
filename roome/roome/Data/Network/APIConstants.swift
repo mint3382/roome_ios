@@ -8,7 +8,7 @@
 struct APIConstants {
     static let roomeHost = "roome.site"
     
-    enum AuthPath {
+    enum Auth {
         case signIn
         case withdrawal
         case token
@@ -25,7 +25,7 @@ struct APIConstants {
         }
     }
     
-    enum UserPath {
+    enum User {
         case users
         case termsAgree
         case nickname
@@ -40,5 +40,9 @@ struct APIConstants {
                 "/users/nickname"
             }
         }
+    }
+    
+    enum Profile: String {
+        case roomCount = "/profiles/room-count"
     }
 }

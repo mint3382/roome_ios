@@ -76,20 +76,11 @@ class NicknameViewController: UIViewController {
         return label
     }()
     
-    private let nextButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.isEnabled = false
-        button.tintColor = .white
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .gray
-        button.setTitle("다음", for: .normal)
-        button.titleLabel?.font = UIFont().pretendardBold(size: .label)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
+    private let nextButton = NextButton()
     
     private var nextButtonWidthConstraint: NSLayoutConstraint?
+    private let backButton = BackButton()
+    
     var viewModel: NicknameViewModel
     var cancellables = Set<AnyCancellable>()
     
@@ -119,14 +110,22 @@ class NicknameViewController: UIViewController {
     func bind() {
         let text = nicknameTextField.publisher
         let nextButton = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let input = NicknameViewModel.NicknameViewModelInput(nickname: text, nextButton: nextButton)
+        let backButton = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        
+        let input = NicknameViewModel.NicknameViewModelInput(nickname: text, nextButton: nextButton, back: backButton)
         let output = viewModel.transform(input)
+        
+        text.receive(on: RunLoop.main)
+            .assign(to: &viewModel.$textInput)
         
         output.isButtonEnable
             .sink { [weak self] buttonOn in
             if buttonOn {
                 self?.nextButton.isEnabled = true
                 self?.nextButton.backgroundColor = .roomeMain
+            } else {
+                self?.nextButton.isEnabled = false
+                self?.nextButton.backgroundColor = .gray
             }
         }.store(in: &cancellables)
         
@@ -143,6 +142,11 @@ class NicknameViewController: UIViewController {
             })
             .store(in: &cancellables)
 
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &cancellables)
     }
     
     func handleError(_ error: NicknameError) {
@@ -176,10 +180,14 @@ class NicknameViewController: UIViewController {
     }
     
     private func configureWelcomeLabel() {
+        view.addSubview(backButton)
         view.addSubview(welcomeLabel)
         
         NSLayoutConstraint.activate([
-            welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4),
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            
+            welcomeLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
             welcomeLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             welcomeLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
