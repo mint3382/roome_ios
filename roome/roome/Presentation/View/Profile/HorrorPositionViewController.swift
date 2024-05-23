@@ -43,7 +43,6 @@ class HorrorPositionViewController: UIViewController {
         
     }
     
-    
     func configureStackView() {
         view.addSubview(profileCount)
         view.addSubview(backButton)
@@ -68,7 +67,6 @@ class HorrorPositionViewController: UIViewController {
         
         return layout
     }
-
 }
 
 extension HorrorPositionViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
@@ -86,5 +84,4 @@ extension HorrorPositionViewController: UICollectionViewDataSource, UICollection
         
         return cell
     }
-    
 }
