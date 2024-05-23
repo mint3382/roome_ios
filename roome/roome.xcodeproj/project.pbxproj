@@ -71,6 +71,7 @@
 		9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7852BFEF9A700586AFD /* MBTIViewController.swift */; };
 		9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */; };
 		9271F78A2BFF043D00586AFD /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7892BFF043D00586AFD /* HintViewController.swift */; };
+		9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78B2BFF049F00586AFD /* ActivityViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -142,6 +143,7 @@
 		9271F7852BFEF9A700586AFD /* MBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewController.swift; sourceTree = "<group>"; };
 		9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewController.swift; sourceTree = "<group>"; };
 		9271F7892BFF043D00586AFD /* HintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
+		9271F78B2BFF049F00586AFD /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				9271F7852BFEF9A700586AFD /* MBTIViewController.swift */,
 				9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */,
 				9271F7892BFF043D00586AFD /* HintViewController.swift */,
+				9271F78B2BFF049F00586AFD /* ActivityViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */,
 				921695862BFE08C9006DC44A /* DescriptionLabel.swift in Sources */,
 				921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */,
+				9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */,
 				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,

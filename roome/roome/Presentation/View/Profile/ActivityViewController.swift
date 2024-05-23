@@ -1,5 +1,5 @@
 //
-//  HintViewController.swift
+//  ActivityViewController.swift
 //  roome
 //
 //  Created by minsong kim on 5/23/24.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class HintViewController: UIViewController {
-    private let titleLabel = TitleLabel(text: "힌트 사용에 대해,\n어떻게 생각하시나요?")
+class ActivityViewController: UIViewController {
+    private let titleLabel = TitleLabel(text: "어느 정도의 활동성을\n선호하시나요?")
     lazy var profileCount = ProfileStateLineView(pageNumber: 4, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private lazy var flowLayout = self.createFlowLayout()
@@ -39,7 +39,6 @@ class HintViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
         ])
-        
     }
     
     
@@ -67,12 +66,11 @@ class HintViewController: UIViewController {
         
         return layout
     }
-
 }
 
-extension HintViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
+extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.hintPrefer.count
+        ProfileModel.activity.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -80,11 +78,10 @@ extension HintViewController: UICollectionViewDataSource, UICollectionViewDelega
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.hintPrefer[indexPath.item].type)
-        cell.addDescription(ProfileModel.hintPrefer[indexPath.item].description)
+        cell.changeTitle(ProfileModel.activity[indexPath.item].type)
+        cell.addDescription(ProfileModel.activity[indexPath.item].description)
         
         return cell
     }
-    
 }
 
