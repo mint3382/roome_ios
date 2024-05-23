@@ -28,7 +28,6 @@ class ButtonCell: UICollectionViewCell {
         contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
-//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
