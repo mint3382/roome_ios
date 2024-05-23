@@ -9,6 +9,11 @@ import UIKit
 
 class SplashView: UIViewController {
     private let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemMint
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -100,7 +105,10 @@ class SplashView: UIViewController {
         DIContainer.shared.register(RoomCountViewModel.self, dependency: roomCountViewModel)
         DIContainer.shared.register(RoomCountViewController.self, dependency: roomCountViewController)
         
-        let genreViewController = GenreViewController()
+        let genreViewController = GenreViewController(viewModel: GenreViewModel())
         DIContainer.shared.register(GenreViewController.self, dependency: genreViewController)
+        
+        let mbtiViewController = MBTIViewController()
+        DIContainer.shared.register(MBTIViewController.self, dependency: mbtiViewController)
     }
 }
