@@ -31,7 +31,6 @@ class HorrorPositionViewController: UIViewController {
     func setUpCollectionView() {
         collectionView.alwaysBounceVertical = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.allowsMultipleSelection = true
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
