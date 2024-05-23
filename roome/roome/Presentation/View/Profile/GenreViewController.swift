@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class GenreViewController: UIViewController {
     private lazy var stackView: UIStackView = {
@@ -26,6 +27,18 @@ class GenreViewController: UIViewController {
     private let nextButton = NextButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+    
+    var viewModel: GenreViewModel
+    var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: GenreViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +47,44 @@ class GenreViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "cell")
         configureUI()
+        bind()
+    }
+    
+    func bind() {
+        let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        
+        let output = viewModel.transform(GenreViewModel.Input(tapNextButton: next, tapBackButton: back))
+        
+        output.handleCellSelect
+            .sink { [weak self] (result, item) in
+                if result == false {
+                    self?.collectionView.deselectItem(at: item, animated: false)
+                }
+            }.store(in: &cancellables)
+        
+        output.canGoNext
+            .sink { [weak self] result in
+                if result {
+                    self?.nextButton.isEnabled = true
+                    self?.nextButton.backgroundColor = .roomeMain
+                } else {
+                    self?.nextButton.isEnabled = false
+                    self?.nextButton.backgroundColor = .gray
+                }
+            }.store(in: &cancellables)
+        
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }.store(in: &cancellables)
+        
+        output.handleNextButton
+            .sink { [weak self] _ in
+                let nextViewController = DIContainer.shared.resolve(MBTIViewController.self)
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
+            }.store(in: &cancellables)
     }
     
     func configureUI() {
@@ -114,4 +165,11 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.selectCell.send(indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        viewModel.deselectItem(indexPath)
+    }
 }
