@@ -9,7 +9,7 @@ import UIKit
 
 class ActivityViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "어느 정도의 활동성을\n선호하시나요?")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 4, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 9, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)

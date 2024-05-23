@@ -395,14 +395,14 @@
 				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
 				9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */,
 				921695932BFE1B8C006DC44A /* GenreViewController.swift */,
+				9271F7852BFEF9A700586AFD /* MBTIViewController.swift */,
 				9216959C2BFE72D1006DC44A /* StrengthViewController.swift */,
 				921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */,
-				921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */,
-				921695A42BFE786B006DC44A /* DislikeViewController.swift */,
-				9271F7852BFEF9A700586AFD /* MBTIViewController.swift */,
 				9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */,
 				9271F7892BFF043D00586AFD /* HintViewController.swift */,
+				921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */,
 				9271F78B2BFF049F00586AFD /* ActivityViewController.swift */,
+				921695A42BFE786B006DC44A /* DislikeViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";

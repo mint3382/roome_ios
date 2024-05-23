@@ -21,7 +21,7 @@ class DeviceAndLockViewController: UIViewController {
     
     private let titleLabel = TitleLabel(text: "장치와 자물쇠 중\n어떤 것을 더 선호하시나요?")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 10, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 8, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private let nextButton = NextButton()
     private lazy var flowLayout = self.createFlowLayout()

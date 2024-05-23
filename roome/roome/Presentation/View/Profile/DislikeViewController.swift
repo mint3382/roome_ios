@@ -21,7 +21,7 @@ class DislikeViewController: UIViewController {
     
     private let titleLabel = TitleLabel(text: "방탈출 할 때,\n어떤 요소를\n싫어하시나요?")
     private let descriptionLabel = DescriptionLabel(text: "최대 3개까지 선택할 수 있어요")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 4, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 10, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private let nextButton = NextButton()
     private lazy var flowLayout = self.createFlowLayout()
