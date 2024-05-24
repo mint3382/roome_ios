@@ -21,7 +21,7 @@ class DislikeViewController: UIViewController, ToastAlertable {
     }()
     
     private let titleLabel = TitleLabel(text: "방탈출 할 때,\n어떤 요소를\n싫어하시나요?")
-    private let descriptionLabel = DescriptionLabel(text: "최대 3개까지 선택할 수 있어요")
+    private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
     lazy var profileCount = ProfileStateLineView(pageNumber: 10, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     var nextButton = NextButton()
     private let backButton = BackButton()
@@ -123,7 +123,7 @@ class DislikeViewController: UIViewController, ToastAlertable {
             stackView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
+            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.24)
         ])
     }
     
