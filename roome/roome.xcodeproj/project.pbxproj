@@ -83,6 +83,9 @@
 		9271F7A42C00A74C00586AFD /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7A32C00A74C00586AFD /* ActivityViewModel.swift */; };
 		9271F7A62C00A83600586AFD /* DislikeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7A52C00A83600586AFD /* DislikeViewModel.swift */; };
 		9271F7A82C00A8E100586AFD /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7A72C00A8E100586AFD /* ColorSelectViewController.swift */; };
+		9271F7C62C00B50600586AFD /* ColorPaletteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C52C00B50600586AFD /* ColorPaletteCell.swift */; };
+		9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C72C00B6D200586AFD /* UIColor+.swift */; };
+		9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C92C00B70200586AFD /* BackgroundColor.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -166,6 +169,9 @@
 		9271F7A32C00A74C00586AFD /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		9271F7A52C00A83600586AFD /* DislikeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewModel.swift; sourceTree = "<group>"; };
 		9271F7A72C00A8E100586AFD /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
+		9271F7C52C00B50600586AFD /* ColorPaletteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteCell.swift; sourceTree = "<group>"; };
+		9271F7C72C00B6D200586AFD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		9271F7C92C00B70200586AFD /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 				921695392BF88FBB006DC44A /* UITextField+.swift */,
 				921695032BF22DCD006DC44A /* UIImage+.swift */,
 				9216954B2BFA65EE006DC44A /* UIControl+.swift */,
+				9271F7C72C00B6D200586AFD /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -277,7 +284,6 @@
 				921695022BF22DB4006DC44A /* Extension */,
 				9216959F2BFE72F7006DC44A /* Label */,
 				9216959E2BFE72E2006DC44A /* Button */,
-				921695992BFE65A1006DC44A /* Cell */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				9216959A2BFE65AC006DC44A /* ButtonCell.swift */,
+				9271F7C52C00B50600586AFD /* ColorPaletteCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -452,6 +459,7 @@
 		9271F7B82C00AD7100586AFD /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9271F7C42C00B4B800586AFD /* CustomUI */,
 				9271F7BA2C00AD8100586AFD /* View */,
 				9271F7B92C00AD7A00586AFD /* ViewModel */,
 			);
@@ -564,8 +572,17 @@
 			isa = PBXGroup;
 			children = (
 				921695972BFE4E18006DC44A /* ProfileModel.swift */,
+				9271F7C92C00B70200586AFD /* BackgroundColor.swift */,
 			);
 			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		9271F7C42C00B4B800586AFD /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				921695992BFE65A1006DC44A /* Cell */,
+			);
+			path = CustomUI;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
@@ -697,9 +714,11 @@
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
 				921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */,
+				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
+				9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */,
 				921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */,
 				921695152BF35377006DC44A /* LoginRepository.swift in Sources */,
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
@@ -757,6 +776,7 @@
 				9271F7A22C00A64500586AFD /* DeviceAndLockViewModel.swift in Sources */,
 				921695802BFDCC88006DC44A /* ProfileStateLineView.swift in Sources */,
 				9271F78A2BFF043D00586AFD /* HintViewController.swift in Sources */,
+				9271F7C62C00B50600586AFD /* ColorPaletteCell.swift in Sources */,
 				9216951C2BF3CEBC006DC44A /* LoginUseCase.swift in Sources */,
 				9216953A2BF88FBB006DC44A /* UITextField+.swift in Sources */,
 			);
