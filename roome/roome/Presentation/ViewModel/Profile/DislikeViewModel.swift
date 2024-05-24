@@ -41,7 +41,7 @@ class DislikeViewModel {
         
         let canGoNext = goToNext
             .map { count in
-                0 < count && count <= 3
+                0 < count && count <= 2
             }.eraseToAnyPublisher()
         
         let handleNextButton = input.tapNextButton
@@ -66,7 +66,7 @@ class DislikeViewModel {
     func canSelectCount(_ item: IndexPath) -> Bool? {
         deselectCell.send(item)
         print(ProfileModel.dislike[item.item])
-        if list.count < 3 {
+        if list.count < 2 {
             list.insert(item)
             goToNext.send(list.count)
             return true
