@@ -126,8 +126,10 @@ class SplashView: UIViewController {
         let deviceAndLockViewController = DeviceAndLockViewController(viewModel: DeviceAndLockViewModel())
         DIContainer.shared.register(DeviceAndLockViewController.self, dependency: deviceAndLockViewController)
         
-        let activityViewController = ActivityViewController()
+        let activityViewController = ActivityViewController(viewModel: ActivityViewModel())
         DIContainer.shared.register(ActivityViewController.self, dependency: activityViewController)
         
+        let dislikeViewController = DislikeViewController()
+        DIContainer.shared.register(DislikeViewController.self, dependency: dislikeViewController)
     }
 }

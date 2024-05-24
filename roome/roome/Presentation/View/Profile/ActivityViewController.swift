@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ActivityViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "어느 정도의 활동성을\n선호하시나요?")
@@ -13,6 +14,17 @@ class ActivityViewController: UIViewController {
     private let backButton = BackButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+    var viewModel: ActivityViewModel
+    var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: ActivityViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +33,26 @@ class ActivityViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "cell")
         configureUI()
+        bind()
+    }
+    
+    func bind() {
+        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        
+        let output = viewModel.transform(ActivityViewModel.Input(tapBackButton: back))
+        
+        output.handleCellSelect
+            .sink { [weak self] _ in
+                let nextViewController = DIContainer.shared.resolve(DislikeViewController.self)
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
+            }.store(in: &cancellables)
+        
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }.store(in: &cancellables)
+        
     }
     
     func configureUI() {
@@ -82,6 +114,10 @@ extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDe
         cell.addDescription(ProfileModel.activity[indexPath.item].description)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.selectCell.send(indexPath)
     }
 }
 
