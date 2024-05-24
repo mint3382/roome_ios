@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class HorrorPositionViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "공포 테마에서,\n어떤 포지션인가요?")
@@ -13,6 +14,17 @@ class HorrorPositionViewController: UIViewController {
     private let backButton = BackButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+    var viewModel: HorrorPositionViewModel
+    var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: HorrorPositionViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +33,26 @@ class HorrorPositionViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "cell")
         configureUI()
+        bind()
+    }
+    
+    func bind() {
+        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        
+        let output = viewModel.transform(HorrorPositionViewModel.Input(tapBackButton: back))
+        
+        output.handleCellSelect
+            .sink { [weak self] _ in
+                let nextViewController = DIContainer.shared.resolve(HintViewController.self)
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
+            }.store(in: &cancellables)
+        
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }.store(in: &cancellables)
+        
     }
     
     func configureUI() {
@@ -82,5 +114,9 @@ extension HorrorPositionViewController: UICollectionViewDataSource, UICollection
         cell.addDescription(ProfileModel.horrorPosition[indexPath.item].description)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.selectCell.send(indexPath)
     }
 }
