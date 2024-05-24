@@ -60,6 +60,7 @@ class GenreViewController: UIViewController {
             .sink { [weak self] (result, item) in
                 if result == false {
                     self?.collectionView.deselectItem(at: item, animated: false)
+                    self?.showToast(message: "최대 2개까지 선택할 수 있어요.")
                 }
             }.store(in: &cancellables)
         
@@ -171,5 +172,24 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         viewModel.deselectItem(indexPath)
+    }
+}
+
+extension GenreViewController {
+    func showToast(message: String) {
+        let toastLabel = ToastLabel(frame: CGRect(
+            x: self.nextButton.frame.minX,
+            y: self.view.frame.size.height - 100,
+            width: self.nextButton.frame.width,
+            height: self.nextButton.frame.height
+        ))
+        toastLabel.text = message
+        
+        view.addSubview(toastLabel)
+        UIView.animate(withDuration: 5.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: { _ in
+            toastLabel.removeFromSuperview()
+        })
     }
 }
