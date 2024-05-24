@@ -12,7 +12,6 @@ class DeviceAndLockViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "장치와 자물쇠 중\n어떤 것을 더 선호하시나요?")
     lazy var profileCount = ProfileStateLineView(pageNumber: 8, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
-    private let nextButton = NextButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
     var viewModel: DeviceAndLockViewModel
@@ -59,7 +58,6 @@ class DeviceAndLockViewController: UIViewController {
     func configureUI() {
         configureStackView()
         setUpCollectionView()
-        configureNextButton()
     }
     
     func setUpCollectionView() {
@@ -76,7 +74,6 @@ class DeviceAndLockViewController: UIViewController {
         
     }
     
-    
     func configureStackView() {
         view.addSubview(profileCount)
         view.addSubview(backButton)
@@ -89,17 +86,6 @@ class DeviceAndLockViewController: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
-    }
-    
-    private func configureNextButton() {
-        view.addSubview(nextButton)
-        
-        NSLayoutConstraint.activate([
-            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         ])
     }
     
