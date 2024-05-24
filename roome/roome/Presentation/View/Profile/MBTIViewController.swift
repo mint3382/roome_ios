@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class MBTIViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "MBTI를 알려주세요")
@@ -30,6 +31,18 @@ class MBTIViewController: UIViewController {
         
         return button
     }()
+    
+    var viewModel: MBTIViewModel
+    var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: MBTIViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +51,57 @@ class MBTIViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "cell")
         configureUI()
+        bind()
+    }
+    
+    func bind() {
+        let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let notAdd = willNotAddButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        
+        let output = viewModel.transform(MBTIViewModel.Input(tapNextButton: next, tapBackButton: back, tapWillNotAddButton: notAdd))
+        
+        output.handleCellSelect
+            .sink { [weak self] (result, item) in
+                if result == false {
+                    self?.collectionView.deselectItem(at: item, animated: false)
+                }
+            }.store(in: &cancellables)
+        
+        output.canGoNext
+            .sink { [weak self] result in
+                if result {
+                    self?.nextButton.isEnabled = true
+                    self?.nextButton.backgroundColor = .roomeMain
+                } else {
+                    self?.nextButton.isEnabled = false
+                    self?.nextButton.backgroundColor = .gray
+                }
+            }.store(in: &cancellables)
+        
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }.store(in: &cancellables)
+        
+        output.handleNextButton
+            .sink { [weak self] _ in
+                let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
+            }.store(in: &cancellables)
+        
+        output.handleWillNotAddButton
+            .sink { [weak self] result in
+                if result {
+                    self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.roomeMain).resize(newWidth: 24)
+                    self?.collectionView.allowsSelection = false
+                } else {
+                    self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.lightGray).resize(newWidth: 24)
+                    self?.collectionView.allowsSelection = true
+                    self?.collectionView.allowsMultipleSelection = true
+                }
+            }.store(in: &cancellables)
     }
     
     func configureUI() {
@@ -127,5 +191,12 @@ extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelega
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.selectCell.send(indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        viewModel.deselectItem(indexPath)
+    }
 }
 

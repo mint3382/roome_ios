@@ -108,7 +108,11 @@ class SplashView: UIViewController {
         let genreViewController = GenreViewController(viewModel: GenreViewModel())
         DIContainer.shared.register(GenreViewController.self, dependency: genreViewController)
         
-        let mbtiViewController = MBTIViewController()
+        let mbtiViewController = MBTIViewController(viewModel: MBTIViewModel())
         DIContainer.shared.register(MBTIViewController.self, dependency: mbtiViewController)
+        
+        let strengthViewController = StrengthViewController()
+        DIContainer.shared.register(StrengthViewController.self, dependency: strengthViewController)
+        
     }
 }
