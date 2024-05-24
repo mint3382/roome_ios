@@ -79,6 +79,7 @@
 		9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */; };
 		9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */; };
 		9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79F2C00A53100586AFD /* HintViewModel.swift */; };
+		9271F7A22C00A64500586AFD /* DeviceAndLockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -158,6 +159,7 @@
 		9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewModel.swift; sourceTree = "<group>"; };
 		9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewModel.swift; sourceTree = "<group>"; };
 		9271F79F2C00A53100586AFD /* HintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewModel.swift; sourceTree = "<group>"; };
+		9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewModel.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */,
 				9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */,
 				9271F79F2C00A53100586AFD /* HintViewModel.swift */,
+				9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
 				921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */,
 				9216958F2BFE1121006DC44A /* RoomCountRepositoryType.swift in Sources */,
+				9271F7A22C00A64500586AFD /* DeviceAndLockViewModel.swift in Sources */,
 				921695802BFDCC88006DC44A /* ProfileStateLineView.swift in Sources */,
 				9271F78A2BFF043D00586AFD /* HintViewController.swift in Sources */,
 				9216951C2BF3CEBC006DC44A /* LoginUseCase.swift in Sources */,

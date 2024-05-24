@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class DeviceAndLockViewController: UIViewController {
     private lazy var stackView: UIStackView = {
@@ -26,6 +27,17 @@ class DeviceAndLockViewController: UIViewController {
     private let nextButton = NextButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+    var viewModel: DeviceAndLockViewModel
+    var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: DeviceAndLockViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +46,26 @@ class DeviceAndLockViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "cell")
         configureUI()
+        bind()
+    }
+    
+    func bind() {
+        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        
+        let output = viewModel.transform(DeviceAndLockViewModel.Input(tapBackButton: back))
+        
+        output.handleCellSelect
+            .sink { [weak self] _ in
+                let nextViewController = DIContainer.shared.resolve(ActivityViewController.self)
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
+            }.store(in: &cancellables)
+        
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }.store(in: &cancellables)
+        
     }
     
     func configureUI() {
@@ -113,6 +145,9 @@ extension DeviceAndLockViewController: UICollectionViewDataSource, UICollectionV
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.selectCell.send(indexPath)
+    }
 }
 
 

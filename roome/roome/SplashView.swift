@@ -123,8 +123,11 @@ class SplashView: UIViewController {
         let hintViewController = HintViewController(viewModel: HintViewModel())
         DIContainer.shared.register(HintViewController.self, dependency: hintViewController)
         
-        let deviceAndLockViewController = DeviceAndLockViewController()
+        let deviceAndLockViewController = DeviceAndLockViewController(viewModel: DeviceAndLockViewModel())
         DIContainer.shared.register(DeviceAndLockViewController.self, dependency: deviceAndLockViewController)
+        
+        let activityViewController = ActivityViewController()
+        DIContainer.shared.register(ActivityViewController.self, dependency: activityViewController)
         
     }
 }
