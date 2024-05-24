@@ -120,8 +120,11 @@ class SplashView: UIViewController {
         let horrorPositionViewController = HorrorPositionViewController(viewModel: HorrorPositionViewModel())
         DIContainer.shared.register(HorrorPositionViewController.self, dependency: horrorPositionViewController)
         
-        let hintViewController = HintViewController()
+        let hintViewController = HintViewController(viewModel: HintViewModel())
         DIContainer.shared.register(HintViewController.self, dependency: hintViewController)
+        
+        let deviceAndLockViewController = DeviceAndLockViewController()
+        DIContainer.shared.register(DeviceAndLockViewController.self, dependency: deviceAndLockViewController)
         
     }
 }

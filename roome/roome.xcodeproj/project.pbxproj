@@ -78,6 +78,7 @@
 		9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7992C009A3E00586AFD /* ToastAlertable.swift */; };
 		9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */; };
 		9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */; };
+		9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79F2C00A53100586AFD /* HintViewModel.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -156,6 +157,7 @@
 		9271F7992C009A3E00586AFD /* ToastAlertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAlertable.swift; sourceTree = "<group>"; };
 		9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewModel.swift; sourceTree = "<group>"; };
 		9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewModel.swift; sourceTree = "<group>"; };
+		9271F79F2C00A53100586AFD /* HintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewModel.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				9271F7952C00863E00586AFD /* StrengthViewModel.swift */,
 				9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */,
 				9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */,
+				9271F79F2C00A53100586AFD /* HintViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				921695412BF9008A006DC44A /* TermsAgreeViewController.swift in Sources */,
 				921695072BF26F23006DC44A /* APIConstants.swift in Sources */,
 				9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */,
+				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
