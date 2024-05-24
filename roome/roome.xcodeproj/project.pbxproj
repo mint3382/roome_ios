@@ -76,6 +76,7 @@
 		9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */; };
 		9271F7962C00863E00586AFD /* StrengthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7952C00863E00586AFD /* StrengthViewModel.swift */; };
 		9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7992C009A3E00586AFD /* ToastAlertable.swift */; };
+		9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -152,6 +153,7 @@
 		9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewModel.swift; sourceTree = "<group>"; };
 		9271F7952C00863E00586AFD /* StrengthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthViewModel.swift; sourceTree = "<group>"; };
 		9271F7992C009A3E00586AFD /* ToastAlertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAlertable.swift; sourceTree = "<group>"; };
+		9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewModel.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 				9271F78D2BFF509100586AFD /* GenreViewModel.swift */,
 				9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */,
 				9271F7952C00863E00586AFD /* StrengthViewModel.swift */,
+				9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				921695132BF34995006DC44A /* LoginProvider.swift in Sources */,
 				921695382BF84604006DC44A /* NicknameUseCase.swift in Sources */,
 				921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */,
+				9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */,
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,

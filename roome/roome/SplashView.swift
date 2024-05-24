@@ -111,8 +111,14 @@ class SplashView: UIViewController {
         let mbtiViewController = MBTIViewController(viewModel: MBTIViewModel())
         DIContainer.shared.register(MBTIViewController.self, dependency: mbtiViewController)
         
-        let strengthViewController = StrengthViewController()
+        let strengthViewController = StrengthViewController(viewModel: StrengthViewModel())
         DIContainer.shared.register(StrengthViewController.self, dependency: strengthViewController)
+        
+        let themeSelectViewController = ThemeSelectViewController(viewModel: ThemeSelectViewModel())
+        DIContainer.shared.register(ThemeSelectViewController.self, dependency: themeSelectViewController)
+        
+        let horrorPositionViewController = HorrorPositionViewController()
+        DIContainer.shared.register(HorrorPositionViewController.self, dependency: horrorPositionViewController)
         
     }
 }
