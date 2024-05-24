@@ -74,7 +74,7 @@
 		9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78B2BFF049F00586AFD /* ActivityViewController.swift */; };
 		9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78D2BFF509100586AFD /* GenreViewModel.swift */; };
 		9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */; };
-		9271F7982C00991B00586AFD /* ToastLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7972C00991B00586AFD /* ToastLabel.swift */; };
+		9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7992C009A3E00586AFD /* ToastAlertable.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -149,7 +149,7 @@
 		9271F78B2BFF049F00586AFD /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		9271F78D2BFF509100586AFD /* GenreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewModel.swift; sourceTree = "<group>"; };
 		9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewModel.swift; sourceTree = "<group>"; };
-		9271F7972C00991B00586AFD /* ToastLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastLabel.swift; sourceTree = "<group>"; };
+		9271F7992C009A3E00586AFD /* ToastAlertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAlertable.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -379,6 +379,7 @@
 		921695442BF9B64E006DC44A /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				9271F7992C009A3E00586AFD /* ToastAlertable.swift */,
 				9216959F2BFE72F7006DC44A /* Label */,
 				9216959E2BFE72E2006DC44A /* Button */,
 				921695992BFE65A1006DC44A /* Cell */,
@@ -516,7 +517,6 @@
 				921695452BF9B661006DC44A /* PaddingLabel.swift */,
 				921695832BFE03AE006DC44A /* TitleLabel.swift */,
 				921695852BFE08C9006DC44A /* DescriptionLabel.swift */,
-				9271F7972C00991B00586AFD /* ToastLabel.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -650,6 +650,7 @@
 				921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
+				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
 				921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */,
 				921695152BF35377006DC44A /* LoginRepository.swift in Sources */,
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
@@ -691,7 +692,6 @@
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */,
 				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,
-				9271F7982C00991B00586AFD /* ToastLabel.swift in Sources */,
 				9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */,
 				9216956E2BFC9381006DC44A /* WelcomeSignUPViewController.swift in Sources */,
 				921695672BFC68A7006DC44A /* TypeError.swift in Sources */,

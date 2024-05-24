@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class GenreViewController: UIViewController {
+class GenreViewController: UIViewController, ToastAlertable {
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -23,8 +23,8 @@ class GenreViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "선호하는 방탈출 장르를\n알려주세요")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
     lazy var profileCount = ProfileStateLineView(pageNumber: 2, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    var nextButton = NextButton()
     private let backButton = BackButton()
-    private let nextButton = NextButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
     
@@ -60,7 +60,7 @@ class GenreViewController: UIViewController {
             .sink { [weak self] (result, item) in
                 if result == false {
                     self?.collectionView.deselectItem(at: item, animated: false)
-                    self?.showToast(message: "최대 2개까지 선택할 수 있어요.")
+                    self?.showToast(count: 2)
                 }
             }.store(in: &cancellables)
         
@@ -172,24 +172,5 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         viewModel.deselectItem(indexPath)
-    }
-}
-
-extension GenreViewController {
-    func showToast(message: String) {
-        let toastLabel = ToastLabel(frame: CGRect(
-            x: self.nextButton.frame.minX,
-            y: self.view.frame.size.height - 100,
-            width: self.nextButton.frame.width,
-            height: self.nextButton.frame.height
-        ))
-        toastLabel.text = message
-        
-        view.addSubview(toastLabel)
-        UIView.animate(withDuration: 5.0, delay: 0.1, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: { _ in
-            toastLabel.removeFromSuperview()
-        })
     }
 }
