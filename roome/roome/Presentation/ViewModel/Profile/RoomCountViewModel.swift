@@ -23,7 +23,7 @@ class RoomCountViewModel {
     
     private let usecase: RoomCountUseCase
     private let goToNext = PassthroughSubject<Void, Error>()
-    @Published var textInput = ""
+    @Published var textInput = "0"
     
     init(usecase: RoomCountUseCase) {
         self.usecase = usecase
@@ -62,5 +62,4 @@ class RoomCountViewModel {
             }
         }
     }
-    
 }
