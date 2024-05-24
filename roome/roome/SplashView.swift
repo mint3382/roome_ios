@@ -132,7 +132,10 @@ class SplashView: UIViewController {
         let dislikeViewController = DislikeViewController(viewModel: DislikeViewModel())
         DIContainer.shared.register(DislikeViewController.self, dependency: dislikeViewController)
         
-        let colorSelectViewController = ColorSelectViewController()
+        let colorSelectViewController = ColorSelectViewController(viewModel: ColorSelectViewModel())
         DIContainer.shared.register(ColorSelectViewController.self, dependency: colorSelectViewController)
+        
+        let waitingViewController = WaitingViewController()
+        DIContainer.shared.register(WaitingViewController.self, dependency: waitingViewController)
     }
 }
