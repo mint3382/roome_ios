@@ -86,6 +86,8 @@
 		9271F7C62C00B50600586AFD /* ColorPaletteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C52C00B50600586AFD /* ColorPaletteCell.swift */; };
 		9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C72C00B6D200586AFD /* UIColor+.swift */; };
 		9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C92C00B70200586AFD /* BackgroundColor.swift */; };
+		9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */; };
+		9271F7CE2C00E71300586AFD /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7CD2C00E71300586AFD /* WaitingViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -172,6 +174,8 @@
 		9271F7C52C00B50600586AFD /* ColorPaletteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteCell.swift; sourceTree = "<group>"; };
 		9271F7C72C00B6D200586AFD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		9271F7C92C00B70200586AFD /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
+		9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewModel.swift; sourceTree = "<group>"; };
+		9271F7CD2C00E71300586AFD /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -479,6 +483,7 @@
 				9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */,
 				9271F7A32C00A74C00586AFD /* ActivityViewModel.swift */,
 				9271F7A52C00A83600586AFD /* DislikeViewModel.swift */,
+				9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -497,6 +502,7 @@
 				9271F78B2BFF049F00586AFD /* ActivityViewController.swift */,
 				921695A42BFE786B006DC44A /* DislikeViewController.swift */,
 				9271F7A72C00A8E100586AFD /* ColorSelectViewController.swift */,
+				9271F7CD2C00E71300586AFD /* WaitingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -713,6 +719,7 @@
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
+				9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */,
 				921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */,
 				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
@@ -734,6 +741,7 @@
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
+				9271F7CE2C00E71300586AFD /* WaitingViewController.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,

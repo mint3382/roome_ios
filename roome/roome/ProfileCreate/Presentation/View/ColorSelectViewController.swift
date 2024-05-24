@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ColorSelectViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "프로필 배경으로 쓰일\n색상을 골라주세요")
@@ -13,6 +14,17 @@ class ColorSelectViewController: UIViewController {
     private let backButton = BackButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+    var viewModel: ColorSelectViewModel
+    var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: ColorSelectViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +33,26 @@ class ColorSelectViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(ColorPaletteCell.self, forCellWithReuseIdentifier: "cell")
         configureUI()
+        bind()
+    }
+    
+    func bind() {
+        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        
+        let output = viewModel.transform(ColorSelectViewModel.Input(tapBackButton: back))
+        
+        output.handleCellSelect
+            .sink { [weak self] _ in
+                let nextViewController = DIContainer.shared.resolve(WaitingViewController.self)
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
+            }.store(in: &cancellables)
+        
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }.store(in: &cancellables)
+        
     }
     
     func configureUI() {
@@ -80,5 +112,9 @@ extension ColorSelectViewController: UICollectionViewDataSource, UICollectionVie
         cell.changeColor(ProfileModel.color[indexPath.row])
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.selectCell.send(indexPath)
     }
 }
