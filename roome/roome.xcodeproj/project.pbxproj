@@ -74,6 +74,7 @@
 		9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78B2BFF049F00586AFD /* ActivityViewController.swift */; };
 		9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78D2BFF509100586AFD /* GenreViewModel.swift */; };
 		9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */; };
+		9271F7962C00863E00586AFD /* StrengthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7952C00863E00586AFD /* StrengthViewModel.swift */; };
 		9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7992C009A3E00586AFD /* ToastAlertable.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
@@ -149,6 +150,7 @@
 		9271F78B2BFF049F00586AFD /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		9271F78D2BFF509100586AFD /* GenreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewModel.swift; sourceTree = "<group>"; };
 		9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewModel.swift; sourceTree = "<group>"; };
+		9271F7952C00863E00586AFD /* StrengthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthViewModel.swift; sourceTree = "<group>"; };
 		9271F7992C009A3E00586AFD /* ToastAlertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAlertable.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				921695892BFE100F006DC44A /* RoomCountViewModel.swift */,
 				9271F78D2BFF509100586AFD /* GenreViewModel.swift */,
 				9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */,
+				9271F7952C00863E00586AFD /* StrengthViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
 				921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */,
 				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
+				9271F7962C00863E00586AFD /* StrengthViewModel.swift in Sources */,
 				9216954A2BFA1A9D006DC44A /* TermsAgreeViewModel.swift in Sources */,
 				921695782BFCE1F7006DC44A /* WelcomeViewModel.swift in Sources */,
 				921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */,
