@@ -1,0 +1,21 @@
+name: Discord Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify_discord:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }} 
+        uses: Ilshidur/action-discord@master
+        with:
+          args: '😈민송님의 새로운 PR이 올라왔어요! @김동주, @이승기님은 PR 리뷰를 남겨주세요!'
