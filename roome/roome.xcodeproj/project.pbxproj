@@ -212,6 +212,7 @@
 		921694F52BF21E5C006DC44A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				9271F7CF2C038C5A00586AFD /* Common */,
 				921695442BF9B64E006DC44A /* CustomUI */,
 				9271F7C22C00AF6800586AFD /* KeyChain */,
 				921694FF2BF22096006DC44A /* Error */,
@@ -591,6 +592,14 @@
 			path = CustomUI;
 			sourceTree = "<group>";
 		};
+		9271F7CF2C038C5A00586AFD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9271F7BB2C00AD9400586AFD /* User */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -618,7 +627,6 @@
 				921694EA2BF1BA7C006DC44A /* Application */,
 				9271F7A92C00ABAC00586AFD /* Login */,
 				9271F7AD2C00AC5600586AFD /* SignUp */,
-				9271F7BB2C00AD9400586AFD /* User */,
 				9271F7B52C00AD3F00586AFD /* ProfileCreate */,
 				921694F52BF21E5C006DC44A /* Infrastructure */,
 				9216952A2BF712A0006DC44A /* Resources */,
