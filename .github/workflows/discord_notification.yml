@@ -3,7 +3,7 @@ name: Discord Notification
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   notify_discord:
