@@ -9,6 +9,11 @@ import UIKit
 
 class SplashView: UIViewController {
     private let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemMint
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -100,7 +105,37 @@ class SplashView: UIViewController {
         DIContainer.shared.register(RoomCountViewModel.self, dependency: roomCountViewModel)
         DIContainer.shared.register(RoomCountViewController.self, dependency: roomCountViewController)
         
-        let genreViewController = GenreViewController()
+        let genreViewController = GenreViewController(viewModel: GenreViewModel())
         DIContainer.shared.register(GenreViewController.self, dependency: genreViewController)
+        
+        let mbtiViewController = MBTIViewController(viewModel: MBTIViewModel())
+        DIContainer.shared.register(MBTIViewController.self, dependency: mbtiViewController)
+        
+        let strengthViewController = StrengthViewController(viewModel: StrengthViewModel())
+        DIContainer.shared.register(StrengthViewController.self, dependency: strengthViewController)
+        
+        let themeSelectViewController = ThemeSelectViewController(viewModel: ThemeSelectViewModel())
+        DIContainer.shared.register(ThemeSelectViewController.self, dependency: themeSelectViewController)
+        
+        let horrorPositionViewController = HorrorPositionViewController(viewModel: HorrorPositionViewModel())
+        DIContainer.shared.register(HorrorPositionViewController.self, dependency: horrorPositionViewController)
+        
+        let hintViewController = HintViewController(viewModel: HintViewModel())
+        DIContainer.shared.register(HintViewController.self, dependency: hintViewController)
+        
+        let deviceAndLockViewController = DeviceAndLockViewController(viewModel: DeviceAndLockViewModel())
+        DIContainer.shared.register(DeviceAndLockViewController.self, dependency: deviceAndLockViewController)
+        
+        let activityViewController = ActivityViewController(viewModel: ActivityViewModel())
+        DIContainer.shared.register(ActivityViewController.self, dependency: activityViewController)
+        
+        let dislikeViewController = DislikeViewController(viewModel: DislikeViewModel())
+        DIContainer.shared.register(DislikeViewController.self, dependency: dislikeViewController)
+        
+        let colorSelectViewController = ColorSelectViewController(viewModel: ColorSelectViewModel())
+        DIContainer.shared.register(ColorSelectViewController.self, dependency: colorSelectViewController)
+        
+        let waitingViewController = WaitingViewController()
+        DIContainer.shared.register(WaitingViewController.self, dependency: waitingViewController)
     }
 }

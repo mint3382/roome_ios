@@ -62,6 +62,32 @@
 		9216958F2BFE1121006DC44A /* RoomCountRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */; };
 		921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695912BFE15DB006DC44A /* RoomCountRepository.swift */; };
 		921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695932BFE1B8C006DC44A /* GenreViewController.swift */; };
+		921695982BFE4E18006DC44A /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695972BFE4E18006DC44A /* ProfileModel.swift */; };
+		9216959B2BFE65AC006DC44A /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959A2BFE65AC006DC44A /* ButtonCell.swift */; };
+		9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959C2BFE72D1006DC44A /* StrengthViewController.swift */; };
+		921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */; };
+		921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */; };
+		921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A42BFE786B006DC44A /* DislikeViewController.swift */; };
+		9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7852BFEF9A700586AFD /* MBTIViewController.swift */; };
+		9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */; };
+		9271F78A2BFF043D00586AFD /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7892BFF043D00586AFD /* HintViewController.swift */; };
+		9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78B2BFF049F00586AFD /* ActivityViewController.swift */; };
+		9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78D2BFF509100586AFD /* GenreViewModel.swift */; };
+		9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */; };
+		9271F7962C00863E00586AFD /* StrengthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7952C00863E00586AFD /* StrengthViewModel.swift */; };
+		9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7992C009A3E00586AFD /* ToastAlertable.swift */; };
+		9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */; };
+		9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */; };
+		9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79F2C00A53100586AFD /* HintViewModel.swift */; };
+		9271F7A22C00A64500586AFD /* DeviceAndLockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */; };
+		9271F7A42C00A74C00586AFD /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7A32C00A74C00586AFD /* ActivityViewModel.swift */; };
+		9271F7A62C00A83600586AFD /* DislikeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7A52C00A83600586AFD /* DislikeViewModel.swift */; };
+		9271F7A82C00A8E100586AFD /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7A72C00A8E100586AFD /* ColorSelectViewController.swift */; };
+		9271F7C62C00B50600586AFD /* ColorPaletteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C52C00B50600586AFD /* ColorPaletteCell.swift */; };
+		9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C72C00B6D200586AFD /* UIColor+.swift */; };
+		9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C92C00B70200586AFD /* BackgroundColor.swift */; };
+		9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */; };
+		9271F7CE2C00E71300586AFD /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7CD2C00E71300586AFD /* WaitingViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -124,6 +150,32 @@
 		9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountRepositoryType.swift; sourceTree = "<group>"; };
 		921695912BFE15DB006DC44A /* RoomCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountRepository.swift; sourceTree = "<group>"; };
 		921695932BFE1B8C006DC44A /* GenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewController.swift; sourceTree = "<group>"; };
+		921695972BFE4E18006DC44A /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		9216959A2BFE65AC006DC44A /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		9216959C2BFE72D1006DC44A /* StrengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthViewController.swift; sourceTree = "<group>"; };
+		921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
+		921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewController.swift; sourceTree = "<group>"; };
+		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
+		9271F7852BFEF9A700586AFD /* MBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewController.swift; sourceTree = "<group>"; };
+		9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewController.swift; sourceTree = "<group>"; };
+		9271F7892BFF043D00586AFD /* HintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
+		9271F78B2BFF049F00586AFD /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		9271F78D2BFF509100586AFD /* GenreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewModel.swift; sourceTree = "<group>"; };
+		9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewModel.swift; sourceTree = "<group>"; };
+		9271F7952C00863E00586AFD /* StrengthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthViewModel.swift; sourceTree = "<group>"; };
+		9271F7992C009A3E00586AFD /* ToastAlertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAlertable.swift; sourceTree = "<group>"; };
+		9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewModel.swift; sourceTree = "<group>"; };
+		9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewModel.swift; sourceTree = "<group>"; };
+		9271F79F2C00A53100586AFD /* HintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewModel.swift; sourceTree = "<group>"; };
+		9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewModel.swift; sourceTree = "<group>"; };
+		9271F7A32C00A74C00586AFD /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
+		9271F7A52C00A83600586AFD /* DislikeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewModel.swift; sourceTree = "<group>"; };
+		9271F7A72C00A8E100586AFD /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
+		9271F7C52C00B50600586AFD /* ColorPaletteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteCell.swift; sourceTree = "<group>"; };
+		9271F7C72C00B6D200586AFD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		9271F7C92C00B70200586AFD /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
+		9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewModel.swift; sourceTree = "<group>"; };
+		9271F7CD2C00E71300586AFD /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,81 +199,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		921694E92BF1BA74006DC44A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */,
-				9216953B2BF88FDD006DC44A /* SignUp */,
-				9216956C2BFC9353006DC44A /* Profile */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		921694EA2BF1BA7C006DC44A /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */,
 				92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */,
 				9216955C2BFBBE2F006DC44A /* DIContainer.swift */,
-				921695582BFB8D38006DC44A /* UserContainer.swift */,
 			);
 			path = Application;
-			sourceTree = "<group>";
-		};
-		921694EC2BF1BA8E006DC44A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				921695082BF302D2006DC44A /* LoginViewModel.swift */,
-				921695712BFCB58D006DC44A /* SignUp */,
-				921695762BFCE1E0006DC44A /* Profile */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		921694ED2BF1BB8B006DC44A /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				921695442BF9B64E006DC44A /* CustomUI */,
-				921695022BF22DB4006DC44A /* Extension */,
-				921694E92BF1BA74006DC44A /* View */,
-				921694EC2BF1BA8E006DC44A /* ViewModel */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		921694EE2BF1BBD1006DC44A /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				9216954D2BFAFC72006DC44A /* Utils */,
-				9216950A2BF31799006DC44A /* Repository */,
-				9216950B2BF317AC006DC44A /* UseCase */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		921694EF2BF1BDD7006DC44A /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				921695742BFCB629006DC44A /* Error */,
-				9216950D2BF33DA7006DC44A /* DataMaping */,
-				9216950C2BF317CE006DC44A /* Repository */,
-				921694F02BF1BEA5006DC44A /* Network */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		921694F02BF1BEA5006DC44A /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				921695062BF26F23006DC44A /* APIConstants.swift */,
-				921695122BF34995006DC44A /* LoginProvider.swift */,
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		921694F52BF21E5C006DC44A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				921695442BF9B64E006DC44A /* CustomUI */,
+				9271F7C22C00AF6800586AFD /* KeyChain */,
 				921694FF2BF22096006DC44A /* Error */,
 				921694F62BF21E66006DC44A /* Network */,
 			);
@@ -231,6 +223,7 @@
 		921694F62BF21E66006DC44A /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				921695062BF26F23006DC44A /* APIConstants.swift */,
 				921694F72BF21E70006DC44A /* HTTP.swift */,
 				921694F92BF21F07006DC44A /* RequestBuilder.swift */,
 				921694FB2BF2202A006DC44A /* URLBuilder.swift */,
@@ -242,6 +235,7 @@
 		921694FF2BF22096006DC44A /* Error */ = {
 			isa = PBXGroup;
 			children = (
+				921695662BFC68A7006DC44A /* TypeError.swift */,
 				921695002BF220A6006DC44A /* NetworkError.swift */,
 				9216956F2BFCA5E2006DC44A /* ErrorDTO.swift */,
 			);
@@ -251,49 +245,12 @@
 		921695022BF22DB4006DC44A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				921695392BF88FBB006DC44A /* UITextField+.swift */,
 				921695032BF22DCD006DC44A /* UIImage+.swift */,
 				9216954B2BFA65EE006DC44A /* UIControl+.swift */,
+				9271F7C72C00B6D200586AFD /* UIColor+.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		9216950A2BF31799006DC44A /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				921695102BF34256006DC44A /* LoginRepositoryType.swift */,
-				921695722BFCB5D0006DC44A /* SignUp */,
-				9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */,
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
-		9216950B2BF317AC006DC44A /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-				9216951B2BF3CEBC006DC44A /* LoginUseCase.swift */,
-				921695732BFCB5E5006DC44A /* SignUp */,
-				9216958B2BFE10DD006DC44A /* Profile */,
-			);
-			path = UseCase;
-			sourceTree = "<group>";
-		};
-		9216950C2BF317CE006DC44A /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				921695142BF35377006DC44A /* LoginRepository.swift */,
-				921695752BFCB634006DC44A /* SignUp */,
-				921695902BFE15BF006DC44A /* Profile */,
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
-		9216950D2BF33DA7006DC44A /* DataMaping */ = {
-			isa = PBXGroup;
-			children = (
-				9216950E2BF33E9D006DC44A /* LoginDTO.swift */,
-				921695522BFB2A3D006DC44A /* UserDTO.swift */,
-			);
-			path = DataMaping;
 			sourceTree = "<group>";
 		};
 		9216951F2BF4D600006DC44A /* Frameworks */ = {
@@ -323,131 +280,315 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		9216953B2BF88FDD006DC44A /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				9216953D2BF88FF5006DC44A /* Extension */,
-				9216953C2BF88FE9006DC44A /* ViewController */,
-			);
-			path = SignUp;
-			sourceTree = "<group>";
-		};
-		9216953C2BF88FE9006DC44A /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				921695402BF9008A006DC44A /* TermsAgreeViewController.swift */,
-				921695332BF765F2006DC44A /* NicknameViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		9216953D2BF88FF5006DC44A /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				921695392BF88FBB006DC44A /* UITextField+.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		921695442BF9B64E006DC44A /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
-				921695452BF9B661006DC44A /* PaddingLabel.swift */,
-				921695472BF9FC5B006DC44A /* LabelButton.swift */,
+				9271F7992C009A3E00586AFD /* ToastAlertable.swift */,
 				9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */,
-				921695812BFE021B006DC44A /* BackButton.swift */,
-				921695832BFE03AE006DC44A /* TitleLabel.swift */,
-				921695852BFE08C9006DC44A /* DescriptionLabel.swift */,
-				921695872BFE0958006DC44A /* NextButton.swift */,
+				921695022BF22DB4006DC44A /* Extension */,
+				9216959F2BFE72F7006DC44A /* Label */,
+				9216959E2BFE72E2006DC44A /* Button */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
 		};
-		9216954D2BFAFC72006DC44A /* Utils */ = {
+		921695992BFE65A1006DC44A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				9216954E2BFAFC8D006DC44A /* KeyChain.swift */,
+				9216959A2BFE65AC006DC44A /* ButtonCell.swift */,
+				9271F7C52C00B50600586AFD /* ColorPaletteCell.swift */,
 			);
-			path = Utils;
+			path = Cell;
 			sourceTree = "<group>";
 		};
-		9216956C2BFC9353006DC44A /* Profile */ = {
+		9216959E2BFE72E2006DC44A /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
-				9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */,
-				921695932BFE1B8C006DC44A /* GenreViewController.swift */,
+				921695472BF9FC5B006DC44A /* LabelButton.swift */,
+				921695812BFE021B006DC44A /* BackButton.swift */,
+				921695872BFE0958006DC44A /* NextButton.swift */,
 			);
-			path = Profile;
+			path = Button;
 			sourceTree = "<group>";
 		};
-		921695712BFCB58D006DC44A /* SignUp */ = {
+		9216959F2BFE72F7006DC44A /* Label */ = {
 			isa = PBXGroup;
 			children = (
-				921695492BFA1A9D006DC44A /* TermsAgreeViewModel.swift */,
-				921695352BF79BB7006DC44A /* NicknameViewModel.swift */,
+				921695452BF9B661006DC44A /* PaddingLabel.swift */,
+				921695832BFE03AE006DC44A /* TitleLabel.swift */,
+				921695852BFE08C9006DC44A /* DescriptionLabel.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		9271F7A92C00ABAC00586AFD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9271F7AC2C00ABFD00586AFD /* Presentation */,
+				9271F7AB2C00ABF600586AFD /* Domain */,
+				9271F7AA2C00ABF100586AFD /* Data */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		9271F7AA2C00ABF100586AFD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9216950E2BF33E9D006DC44A /* LoginDTO.swift */,
+				921695142BF35377006DC44A /* LoginRepository.swift */,
+				921695122BF34995006DC44A /* LoginProvider.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9271F7AB2C00ABF600586AFD /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				921695102BF34256006DC44A /* LoginRepositoryType.swift */,
+				9216951B2BF3CEBC006DC44A /* LoginUseCase.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9271F7AC2C00ABFD00586AFD /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */,
+				921695082BF302D2006DC44A /* LoginViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9271F7AD2C00AC5600586AFD /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				9271F7B02C00AC7100586AFD /* Presentation */,
+				9271F7AF2C00AC6900586AFD /* Domain */,
+				9271F7AE2C00AC6300586AFD /* Data */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		921695722BFCB5D0006DC44A /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				921695682BFC8839006DC44A /* NicknameRepositoryType.swift */,
-				921695622BFC6362006DC44A /* TermsAgreeRepositoryType.swift */,
-			);
-			path = SignUp;
-			sourceTree = "<group>";
-		};
-		921695732BFCB5E5006DC44A /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				921695602BFC62F7006DC44A /* TermsAgreeUseCase.swift */,
-				921695372BF84604006DC44A /* NicknameUseCase.swift */,
-			);
-			path = SignUp;
-			sourceTree = "<group>";
-		};
-		921695742BFCB629006DC44A /* Error */ = {
-			isa = PBXGroup;
-			children = (
-				921695662BFC68A7006DC44A /* TypeError.swift */,
-			);
-			path = Error;
-			sourceTree = "<group>";
-		};
-		921695752BFCB634006DC44A /* SignUp */ = {
+		9271F7AE2C00AC6300586AFD /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				921695642BFC67D0006DC44A /* TermsAgreeRepository.swift */,
 				9216956A2BFC8891006DC44A /* NicknameRepository.swift */,
 			);
-			path = SignUp;
+			path = Data;
 			sourceTree = "<group>";
 		};
-		921695762BFCE1E0006DC44A /* Profile */ = {
+		9271F7AF2C00AC6900586AFD /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
+				9271F7B32C00ACD800586AFD /* Repository */,
+				9271F7B42C00ACE100586AFD /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9271F7B02C00AC7100586AFD /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9271F7B22C00AC7D00586AFD /* View */,
+				9271F7B12C00AC7700586AFD /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9271F7B12C00AC7700586AFD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				921695492BFA1A9D006DC44A /* TermsAgreeViewModel.swift */,
+				921695352BF79BB7006DC44A /* NicknameViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9271F7B22C00AC7D00586AFD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				921695402BF9008A006DC44A /* TermsAgreeViewController.swift */,
+				921695332BF765F2006DC44A /* NicknameViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9271F7B32C00ACD800586AFD /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				921695622BFC6362006DC44A /* TermsAgreeRepositoryType.swift */,
+				921695682BFC8839006DC44A /* NicknameRepositoryType.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		9271F7B42C00ACE100586AFD /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				921695602BFC62F7006DC44A /* TermsAgreeUseCase.swift */,
+				921695372BF84604006DC44A /* NicknameUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		9271F7B52C00AD3F00586AFD /* ProfileCreate */ = {
+			isa = PBXGroup;
+			children = (
+				9271F7B82C00AD7100586AFD /* Presentation */,
+				9271F7B72C00AD6B00586AFD /* Domain */,
+				9271F7B62C00AD6500586AFD /* Data */,
+			);
+			path = ProfileCreate;
+			sourceTree = "<group>";
+		};
+		9271F7B62C00AD6500586AFD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9271F7C32C00AF9600586AFD /* DataMapping */,
+				9271F7BF2C00AE6700586AFD /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9271F7B72C00AD6B00586AFD /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				9271F7C12C00AF3B00586AFD /* UseCase */,
+				9271F7C02C00AF3400586AFD /* Repository */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9271F7B82C00AD7100586AFD /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9271F7C42C00B4B800586AFD /* CustomUI */,
+				9271F7BA2C00AD8100586AFD /* View */,
+				9271F7B92C00AD7A00586AFD /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9271F7B92C00AD7A00586AFD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
 				921695892BFE100F006DC44A /* RoomCountViewModel.swift */,
+				9271F78D2BFF509100586AFD /* GenreViewModel.swift */,
+				9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */,
+				9271F7952C00863E00586AFD /* StrengthViewModel.swift */,
+				9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */,
+				9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */,
+				9271F79F2C00A53100586AFD /* HintViewModel.swift */,
+				9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */,
+				9271F7A32C00A74C00586AFD /* ActivityViewModel.swift */,
+				9271F7A52C00A83600586AFD /* DislikeViewModel.swift */,
+				9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */,
 			);
-			path = Profile;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		9216958B2BFE10DD006DC44A /* Profile */ = {
+		9271F7BA2C00AD8100586AFD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9216958C2BFE10F7006DC44A /* RoomCountUseCase.swift */,
+				9216957B2BFD18C7006DC44A /* RoomCountViewController.swift */,
+				921695932BFE1B8C006DC44A /* GenreViewController.swift */,
+				9271F7852BFEF9A700586AFD /* MBTIViewController.swift */,
+				9216959C2BFE72D1006DC44A /* StrengthViewController.swift */,
+				921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */,
+				9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */,
+				9271F7892BFF043D00586AFD /* HintViewController.swift */,
+				921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */,
+				9271F78B2BFF049F00586AFD /* ActivityViewController.swift */,
+				921695A42BFE786B006DC44A /* DislikeViewController.swift */,
+				9271F7A72C00A8E100586AFD /* ColorSelectViewController.swift */,
+				9271F7CD2C00E71300586AFD /* WaitingViewController.swift */,
 			);
-			path = Profile;
+			path = View;
 			sourceTree = "<group>";
 		};
-		921695902BFE15BF006DC44A /* Profile */ = {
+		9271F7BB2C00AD9400586AFD /* User */ = {
+			isa = PBXGroup;
+			children = (
+				9271F7BE2C00ADAD00586AFD /* Presentation */,
+				9271F7BD2C00ADA800586AFD /* Domain */,
+				9271F7BC2C00ADA200586AFD /* Data */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		9271F7BC2C00ADA200586AFD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				921695522BFB2A3D006DC44A /* UserDTO.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9271F7BD2C00ADA800586AFD /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				921695582BFB8D38006DC44A /* UserContainer.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9271F7BE2C00ADAD00586AFD /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
+				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9271F7BF2C00AE6700586AFD /* Repository */ = {
 			isa = PBXGroup;
 			children = (
 				921695912BFE15DB006DC44A /* RoomCountRepository.swift */,
 			);
-			path = Profile;
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		9271F7C02C00AF3400586AFD /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		9271F7C12C00AF3B00586AFD /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				9216958C2BFE10F7006DC44A /* RoomCountUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		9271F7C22C00AF6800586AFD /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				9216954E2BFAFC8D006DC44A /* KeyChain.swift */,
+			);
+			path = KeyChain;
+			sourceTree = "<group>";
+		};
+		9271F7C32C00AF9600586AFD /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				921695972BFE4E18006DC44A /* ProfileModel.swift */,
+				9271F7C92C00B70200586AFD /* BackgroundColor.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		9271F7C42C00B4B800586AFD /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				921695992BFE65A1006DC44A /* Cell */,
+			);
+			path = CustomUI;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
@@ -475,9 +616,10 @@
 				921695502BFB1A71006DC44A /* SplashView.swift */,
 				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
 				921694EA2BF1BA7C006DC44A /* Application */,
-				921694EF2BF1BDD7006DC44A /* Data */,
-				921694ED2BF1BB8B006DC44A /* Presentation */,
-				921694EE2BF1BBD1006DC44A /* Domain */,
+				9271F7A92C00ABAC00586AFD /* Login */,
+				9271F7AD2C00AC5600586AFD /* SignUp */,
+				9271F7BB2C00AD9400586AFD /* User */,
+				9271F7B52C00AD3F00586AFD /* ProfileCreate */,
 				921694F52BF21E5C006DC44A /* Infrastructure */,
 				9216952A2BF712A0006DC44A /* Resources */,
 				92DBDA0B2BCFCF5B00E299E2 /* Assets.xcassets */,
@@ -571,17 +713,27 @@
 				921695652BFC67D0006DC44A /* TermsAgreeRepository.swift in Sources */,
 				921695132BF34995006DC44A /* LoginProvider.swift in Sources */,
 				921695382BF84604006DC44A /* NicknameUseCase.swift in Sources */,
+				921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */,
+				9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */,
+				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
+				9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */,
+				921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */,
+				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
+				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
+				9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */,
 				921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */,
 				921695152BF35377006DC44A /* LoginRepository.swift in Sources */,
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
 				921695302BF71659006DC44A /* FontSize.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
 				921695882BFE0958006DC44A /* NextButton.swift in Sources */,
+				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
+				9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
@@ -589,26 +741,39 @@
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
+				9271F7CE2C00E71300586AFD /* WaitingViewController.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
 				9216958D2BFE10F7006DC44A /* RoomCountUseCase.swift in Sources */,
 				921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */,
+				921695982BFE4E18006DC44A /* ProfileModel.swift in Sources */,
 				921695822BFE021C006DC44A /* BackButton.swift in Sources */,
+				9216959B2BFE65AC006DC44A /* ButtonCell.swift in Sources */,
+				9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */,
 				9216955D2BFBBE2F006DC44A /* DIContainer.swift in Sources */,
 				921695412BF9008A006DC44A /* TermsAgreeViewController.swift in Sources */,
 				921695072BF26F23006DC44A /* APIConstants.swift in Sources */,
+				9271F7A82C00A8E100586AFD /* ColorSelectViewController.swift in Sources */,
+				9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */,
+				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
+				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
+				921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */,
 				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
+				9271F7962C00863E00586AFD /* StrengthViewModel.swift in Sources */,
 				9216954A2BFA1A9D006DC44A /* TermsAgreeViewModel.swift in Sources */,
+				9271F7A62C00A83600586AFD /* DislikeViewModel.swift in Sources */,
 				921695782BFCE1F7006DC44A /* WelcomeViewModel.swift in Sources */,
 				921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */,
 				921695862BFE08C9006DC44A /* DescriptionLabel.swift in Sources */,
 				921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */,
+				9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */,
 				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,
+				9271F7A42C00A74C00586AFD /* ActivityViewModel.swift in Sources */,
 				9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */,
 				9216956E2BFC9381006DC44A /* WelcomeSignUPViewController.swift in Sources */,
 				921695672BFC68A7006DC44A /* TypeError.swift in Sources */,
@@ -616,7 +781,10 @@
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
 				921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */,
 				9216958F2BFE1121006DC44A /* RoomCountRepositoryType.swift in Sources */,
+				9271F7A22C00A64500586AFD /* DeviceAndLockViewModel.swift in Sources */,
 				921695802BFDCC88006DC44A /* ProfileStateLineView.swift in Sources */,
+				9271F78A2BFF043D00586AFD /* HintViewController.swift in Sources */,
+				9271F7C62C00B50600586AFD /* ColorPaletteCell.swift in Sources */,
 				9216951C2BF3CEBC006DC44A /* LoginUseCase.swift in Sources */,
 				9216953A2BF88FBB006DC44A /* UITextField+.swift in Sources */,
 			);
