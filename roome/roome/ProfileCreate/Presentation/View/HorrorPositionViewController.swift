@@ -45,8 +45,10 @@ class HorrorPositionViewController: UIViewController {
             .sink(receiveCompletion: { error in
                 // 실패 시
             }, receiveValue: { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(HintViewController.self)
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(HintViewController.self)
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
             }).store(in: &cancellables)
         
         output.handleBackButton

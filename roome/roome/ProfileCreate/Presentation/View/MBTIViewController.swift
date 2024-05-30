@@ -88,9 +88,11 @@ class MBTIViewController: UIViewController {
             .sink(receiveCompletion: { error in
                 //연결 실패 시
             }, receiveValue: { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
             })
             .store(in: &cancellables)
         
