@@ -156,7 +156,7 @@ class StrengthViewController: UIViewController, ToastAlertable {
 
 extension StrengthViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.strength.count
+        StrengthDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -164,7 +164,7 @@ extension StrengthViewController: UICollectionViewDataSource, UICollectionViewDe
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.strength[indexPath.item])
+        cell.changeTitle(StrengthDTO(rawValue: indexPath.row + 1)!.title)
         
         return cell
     }

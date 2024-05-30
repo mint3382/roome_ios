@@ -7,33 +7,14 @@
 
 import Foundation
 
-enum ImportantFactorDTO {
-    case story
+enum ImportantFactorDTO: Int, CaseIterable {
+    case story = 1
     case direction
     case probability
     case interior
     case scale
     case new
     case logical
-    
-    var id: Int {
-        switch self {
-        case .story:
-            1
-        case .direction:
-            2
-        case .probability:
-            3
-        case .interior:
-            4
-        case .scale:
-            5
-        case .new:
-            6
-        case .logical:
-            7
-        }
-    }
     
     var title: String {
         switch self {
