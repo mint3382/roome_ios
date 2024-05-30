@@ -80,11 +80,13 @@ class DislikeViewController: UIViewController, ToastAlertable {
             }.store(in: &cancellables)
         
         output.handleNextButton
-            .sink { [weak self] _ in
+            .sink(receiveCompletion: { error in
+                //실패 시
+            }, receiveValue: { [weak self] _ in
                 let nextViewController = DIContainer.shared.resolve(ColorSelectViewController.self)
                 
                 self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            }).store(in: &cancellables)
     }
     
     func configureUI() {
@@ -152,7 +154,7 @@ class DislikeViewController: UIViewController, ToastAlertable {
 
 extension DislikeViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.dislike.count
+        DislikeDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,7 +162,7 @@ extension DislikeViewController: UICollectionViewDataSource, UICollectionViewDel
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.dislike[indexPath.item])
+        cell.changeTitle(DislikeDTO(rawValue: indexPath.row + 1)!.title)
         
         return cell
     }

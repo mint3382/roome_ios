@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum DislikeDTO {
-    case math
+enum DislikeDTO: Int, CaseIterable {
+    case math = 1
     case hardWork
     case longSentence
     case sounds
@@ -17,29 +17,6 @@ enum DislikeDTO {
     case questions
     case forcedEmotion
     case forcedActivity
-    
-    var id: Int {
-        switch self {
-        case .math:
-            1
-        case .hardWork:
-            2
-        case .longSentence:
-            3
-        case .sounds:
-            4
-        case .darkLight:
-            5
-        case .difficulty:
-            6
-        case .questions:
-            7
-        case .forcedEmotion:
-            8
-        case .forcedActivity:
-            9
-        }
-    }
     
     var title: String {
         switch self {
