@@ -49,6 +49,7 @@ extension APIProvider {
             throw NetworkError.noResponse
         }
         if (200...299).contains(httpResponse.statusCode) {
+            print("200")
             return data
         } else {
             print(httpResponse.statusCode)
@@ -93,7 +94,7 @@ extension APIProvider {
     }
     
     private func retryWithUpdateToken(request: URLRequest) async throws -> Data {
-        var newRequest = try await updateToken(request: request)
+        let newRequest = try await updateToken(request: request)
         let data = try await retry(request: newRequest)
         
         return data
