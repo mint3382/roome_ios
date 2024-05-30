@@ -7,21 +7,10 @@
 
 import Foundation
 
-enum HintDTO {
-    case noHint
+enum HintDTO: Int, CaseIterable {
+    case noHint = 1
     case atLeast
     case doNotCare
-    
-    var id: Int {
-        switch self {
-        case .noHint:
-            1
-        case .atLeast:
-            2
-        case .doNotCare:
-            3
-        }
-    }
     
     var title: String {
         switch self {

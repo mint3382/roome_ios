@@ -112,6 +112,9 @@
 		9271F7FB2C089E7C00586AFD /* HorrorThemeRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7FA2C089E7C00586AFD /* HorrorThemeRepositoryType.swift */; };
 		9271F7FD2C089E9D00586AFD /* HorrorThemeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7FC2C089E9D00586AFD /* HorrorThemeUseCase.swift */; };
 		9271F7FF2C089ECF00586AFD /* HorrorThemeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7FE2C089ECF00586AFD /* HorrorThemeRepository.swift */; };
+		9271F8012C08A0E100586AFD /* HintRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8002C08A0E100586AFD /* HintRepositoryType.swift */; };
+		9271F8032C08A10200586AFD /* HintUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8022C08A10200586AFD /* HintUseCase.swift */; };
+		9271F8052C08A12900586AFD /* HintRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8042C08A12900586AFD /* HintRepository.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -224,6 +227,9 @@
 		9271F7FA2C089E7C00586AFD /* HorrorThemeRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorThemeRepositoryType.swift; sourceTree = "<group>"; };
 		9271F7FC2C089E9D00586AFD /* HorrorThemeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorThemeUseCase.swift; sourceTree = "<group>"; };
 		9271F7FE2C089ECF00586AFD /* HorrorThemeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorThemeRepository.swift; sourceTree = "<group>"; };
+		9271F8002C08A0E100586AFD /* HintRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintRepositoryType.swift; sourceTree = "<group>"; };
+		9271F8022C08A10200586AFD /* HintUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintUseCase.swift; sourceTree = "<group>"; };
+		9271F8042C08A12900586AFD /* HintRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintRepository.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -600,6 +606,7 @@
 				9271F7F22C08993600586AFD /* StrengthRepository.swift */,
 				9271F7F82C089D0200586AFD /* ThemeSelectRepository.swift */,
 				9271F7FE2C089ECF00586AFD /* HorrorThemeRepository.swift */,
+				9271F8042C08A12900586AFD /* HintRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -613,6 +620,7 @@
 				9271F7EE2C08989C00586AFD /* StrengthRepositoryType.swift */,
 				9271F7F42C089CA400586AFD /* ThemeSelectRepositoryType.swift */,
 				9271F7FA2C089E7C00586AFD /* HorrorThemeRepositoryType.swift */,
+				9271F8002C08A0E100586AFD /* HintRepositoryType.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -626,6 +634,7 @@
 				9271F7F02C08990000586AFD /* StrengthUseCase.swift */,
 				9271F7F62C089CC300586AFD /* ThemeSelectUseCase.swift */,
 				9271F7FC2C089E9D00586AFD /* HorrorThemeUseCase.swift */,
+				9271F8022C08A10200586AFD /* HintUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -867,6 +876,7 @@
 				921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */,
 				921695862BFE08C9006DC44A /* DescriptionLabel.swift in Sources */,
 				921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */,
+				9271F8052C08A12900586AFD /* HintRepository.swift in Sources */,
 				9271F7D72C04B40900586AFD /* HorrorThemePositionDTO.swift in Sources */,
 				9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */,
 				9271F7E12C08604800586AFD /* GenreRepository.swift in Sources */,
@@ -881,9 +891,11 @@
 				921695512BFB1A71006DC44A /* SplashView.swift in Sources */,
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
 				9271F7DB2C0857E500586AFD /* DeviceLockDTO.swift in Sources */,
+				9271F8012C08A0E100586AFD /* HintRepositoryType.swift in Sources */,
 				9271F7D52C04B32400586AFD /* ImportantFactorDTO.swift in Sources */,
 				9271F7E32C08605A00586AFD /* GenreRepositoryType.swift in Sources */,
 				921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */,
+				9271F8032C08A10200586AFD /* HintUseCase.swift in Sources */,
 				9216958F2BFE1121006DC44A /* RoomCountRepositoryType.swift in Sources */,
 				9271F7A22C00A64500586AFD /* DeviceAndLockViewModel.swift in Sources */,
 				921695802BFDCC88006DC44A /* ProfileStateLineView.swift in Sources */,
