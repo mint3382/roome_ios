@@ -7,21 +7,10 @@
 
 import Foundation
 
-enum DeviceLockDTO {
-    case device
+enum DeviceLockDTO: Int, CaseIterable {
+    case device = 1
     case lock
     case both
-    
-    var id: Int {
-        switch self {
-        case .device:
-            1
-        case .lock:
-            2
-        case .both:
-            3
-        }
-    }
     
     var title: String {
         switch self {

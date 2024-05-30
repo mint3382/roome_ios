@@ -115,6 +115,9 @@
 		9271F8012C08A0E100586AFD /* HintRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8002C08A0E100586AFD /* HintRepositoryType.swift */; };
 		9271F8032C08A10200586AFD /* HintUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8022C08A10200586AFD /* HintUseCase.swift */; };
 		9271F8052C08A12900586AFD /* HintRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8042C08A12900586AFD /* HintRepository.swift */; };
+		9271F8072C08A29900586AFD /* DeviceLockRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8062C08A29900586AFD /* DeviceLockRepositoryType.swift */; };
+		9271F8092C08A2BE00586AFD /* DeviceLockUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8082C08A2BE00586AFD /* DeviceLockUseCase.swift */; };
+		9271F80B2C08A2EF00586AFD /* DeviceLockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F80A2C08A2EF00586AFD /* DeviceLockRepository.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -230,6 +233,9 @@
 		9271F8002C08A0E100586AFD /* HintRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintRepositoryType.swift; sourceTree = "<group>"; };
 		9271F8022C08A10200586AFD /* HintUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintUseCase.swift; sourceTree = "<group>"; };
 		9271F8042C08A12900586AFD /* HintRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintRepository.swift; sourceTree = "<group>"; };
+		9271F8062C08A29900586AFD /* DeviceLockRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLockRepositoryType.swift; sourceTree = "<group>"; };
+		9271F8082C08A2BE00586AFD /* DeviceLockUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLockUseCase.swift; sourceTree = "<group>"; };
+		9271F80A2C08A2EF00586AFD /* DeviceLockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLockRepository.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -607,6 +613,7 @@
 				9271F7F82C089D0200586AFD /* ThemeSelectRepository.swift */,
 				9271F7FE2C089ECF00586AFD /* HorrorThemeRepository.swift */,
 				9271F8042C08A12900586AFD /* HintRepository.swift */,
+				9271F80A2C08A2EF00586AFD /* DeviceLockRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -621,6 +628,7 @@
 				9271F7F42C089CA400586AFD /* ThemeSelectRepositoryType.swift */,
 				9271F7FA2C089E7C00586AFD /* HorrorThemeRepositoryType.swift */,
 				9271F8002C08A0E100586AFD /* HintRepositoryType.swift */,
+				9271F8062C08A29900586AFD /* DeviceLockRepositoryType.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -635,6 +643,7 @@
 				9271F7F62C089CC300586AFD /* ThemeSelectUseCase.swift */,
 				9271F7FC2C089E9D00586AFD /* HorrorThemeUseCase.swift */,
 				9271F8022C08A10200586AFD /* HintUseCase.swift */,
+				9271F8082C08A2BE00586AFD /* DeviceLockUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -816,6 +825,7 @@
 				921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */,
 				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
 				9271F7F92C089D0200586AFD /* ThemeSelectRepository.swift in Sources */,
+				9271F8092C08A2BE00586AFD /* DeviceLockUseCase.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
@@ -831,6 +841,7 @@
 				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
 				9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */,
 				9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */,
+				9271F80B2C08A2EF00586AFD /* DeviceLockRepository.swift in Sources */,
 				9271F7DF2C08594800586AFD /* DislikeDTO.swift in Sources */,
 				9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
@@ -856,6 +867,7 @@
 				9216955D2BFBBE2F006DC44A /* DIContainer.swift in Sources */,
 				921695412BF9008A006DC44A /* TermsAgreeViewController.swift in Sources */,
 				921695072BF26F23006DC44A /* APIConstants.swift in Sources */,
+				9271F8072C08A29900586AFD /* DeviceLockRepositoryType.swift in Sources */,
 				9271F7A82C00A8E100586AFD /* ColorSelectViewController.swift in Sources */,
 				9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */,
 				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
