@@ -7,24 +7,11 @@
 
 import Foundation
 
-enum ActivitiesDTO {
-    case high
+enum ActivitiesDTO: Int, CaseIterable {
+    case high = 1
     case middle
     case low
     case atLeast
-    
-    var id: Int {
-        switch self {
-        case .high:
-            1
-        case .middle:
-            2
-        case .low:
-            3
-        case .atLeast:
-            4
-        }
-    }
     
     var title: String {
         switch self {

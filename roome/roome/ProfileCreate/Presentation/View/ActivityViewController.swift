@@ -42,11 +42,13 @@ class ActivityViewController: UIViewController {
         let output = viewModel.transform(ActivityViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
-            .sink { [weak self] _ in
+            .sink(receiveCompletion: { error in
+                //실패 시
+            }, receiveValue: { [weak self] _ in
                 let nextViewController = DIContainer.shared.resolve(DislikeViewController.self)
                 
                 self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            }).store(in: &cancellables)
         
         output.handleBackButton
             .sink { [weak self] _ in
@@ -102,7 +104,7 @@ class ActivityViewController: UIViewController {
 
 extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.activity.count
+        ActivitiesDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -110,8 +112,8 @@ extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDe
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.activity[indexPath.item].type)
-        cell.addDescription(ProfileModel.activity[indexPath.item].description)
+        cell.changeTitle(ActivitiesDTO(rawValue: indexPath.row + 1)!.title)
+        cell.addDescription(ActivitiesDTO(rawValue: indexPath.row + 1)!.description)
         
         return cell
     }
