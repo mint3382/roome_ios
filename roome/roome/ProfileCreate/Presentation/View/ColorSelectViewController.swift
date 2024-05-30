@@ -42,11 +42,15 @@ class ColorSelectViewController: UIViewController {
         let output = viewModel.transform(ColorSelectViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(WaitingViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            .sink(receiveCompletion: { error in
+                //실패 시
+            }, receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(WaitingViewController.self)
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            }).store(in: &cancellables)
         
         output.handleBackButton
             .sink { [weak self] _ in
