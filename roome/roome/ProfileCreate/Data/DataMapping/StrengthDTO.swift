@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum StrengthDTO {
-    case observation
+enum StrengthDTO: Int, CaseIterable{
+    case observation = 1
     case analysis
     case reasoning
     case concentration
@@ -17,29 +17,6 @@ enum StrengthDTO {
     case creativity
     case composure
     case cooperative
-    
-    var id: Int {
-        switch self {
-        case .observation:
-            1
-        case .analysis:
-            2
-        case .reasoning:
-            3
-        case .concentration:
-            4
-        case .instantly:
-            5
-        case .executive:
-            6
-        case .creativity:
-            7
-        case .composure:
-            8
-        case .cooperative:
-            9
-        }
-    }
     
     var title: String {
         switch self {

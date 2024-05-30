@@ -109,6 +109,9 @@
 		9271F7F52C089CA400586AFD /* ThemeSelectRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7F42C089CA400586AFD /* ThemeSelectRepositoryType.swift */; };
 		9271F7F72C089CC300586AFD /* ThemeSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7F62C089CC300586AFD /* ThemeSelectUseCase.swift */; };
 		9271F7F92C089D0200586AFD /* ThemeSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7F82C089D0200586AFD /* ThemeSelectRepository.swift */; };
+		9271F7FB2C089E7C00586AFD /* HorrorThemeRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7FA2C089E7C00586AFD /* HorrorThemeRepositoryType.swift */; };
+		9271F7FD2C089E9D00586AFD /* HorrorThemeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7FC2C089E9D00586AFD /* HorrorThemeUseCase.swift */; };
+		9271F7FF2C089ECF00586AFD /* HorrorThemeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7FE2C089ECF00586AFD /* HorrorThemeRepository.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -218,6 +221,9 @@
 		9271F7F42C089CA400586AFD /* ThemeSelectRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectRepositoryType.swift; sourceTree = "<group>"; };
 		9271F7F62C089CC300586AFD /* ThemeSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectUseCase.swift; sourceTree = "<group>"; };
 		9271F7F82C089D0200586AFD /* ThemeSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectRepository.swift; sourceTree = "<group>"; };
+		9271F7FA2C089E7C00586AFD /* HorrorThemeRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorThemeRepositoryType.swift; sourceTree = "<group>"; };
+		9271F7FC2C089E9D00586AFD /* HorrorThemeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorThemeUseCase.swift; sourceTree = "<group>"; };
+		9271F7FE2C089ECF00586AFD /* HorrorThemeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorThemeRepository.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -593,6 +599,7 @@
 				9271F7EA2C086CA400586AFD /* MbtiRepository.swift */,
 				9271F7F22C08993600586AFD /* StrengthRepository.swift */,
 				9271F7F82C089D0200586AFD /* ThemeSelectRepository.swift */,
+				9271F7FE2C089ECF00586AFD /* HorrorThemeRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -605,6 +612,7 @@
 				9271F7E82C086C4200586AFD /* MbtiRepositoryType.swift */,
 				9271F7EE2C08989C00586AFD /* StrengthRepositoryType.swift */,
 				9271F7F42C089CA400586AFD /* ThemeSelectRepositoryType.swift */,
+				9271F7FA2C089E7C00586AFD /* HorrorThemeRepositoryType.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -617,6 +625,7 @@
 				9271F7EC2C086D0F00586AFD /* MbtiUseCase.swift */,
 				9271F7F02C08990000586AFD /* StrengthUseCase.swift */,
 				9271F7F62C089CC300586AFD /* ThemeSelectUseCase.swift */,
+				9271F7FC2C089E9D00586AFD /* HorrorThemeUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -819,6 +828,7 @@
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
 				921695592BFB8D38006DC44A /* UserContainer.swift in Sources */,
+				9271F7FF2C089ECF00586AFD /* HorrorThemeRepository.swift in Sources */,
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				9271F7F72C089CC300586AFD /* ThemeSelectUseCase.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
@@ -843,8 +853,10 @@
 				9271F7D92C08573B00586AFD /* HintDTO.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
+				9271F7FB2C089E7C00586AFD /* HorrorThemeRepositoryType.swift in Sources */,
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
 				9271F7E72C0865EB00586AFD /* MBTIDTO.swift in Sources */,
+				9271F7FD2C089E9D00586AFD /* HorrorThemeUseCase.swift in Sources */,
 				921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */,
 				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
 				9271F7962C00863E00586AFD /* StrengthViewModel.swift in Sources */,

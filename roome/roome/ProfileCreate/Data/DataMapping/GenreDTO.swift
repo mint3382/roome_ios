@@ -9,24 +9,24 @@ import Foundation
 
 enum GenreDTO: Int, CaseIterable {
     case horror = 1
-    case thriller = 2
-    case infiltration = 3
-    case jailbreak = 4
-    case crime = 5
-    case action = 6
-    case adventure = 7
-    case detective = 8
-    case mystery = 9
-    case sensitivity = 10
-    case drama = 11
-    case romance = 12
-    case fairyTale = 13
-    case fantasy = 14
-    case SF = 15
-    case history = 16
-    case comic = 17
-    case question = 18
-    case outdoor = 19
+    case thriller 
+    case infiltration
+    case jailbreak
+    case crime
+    case action
+    case adventure
+    case detective
+    case mystery
+    case sensitivity
+    case drama
+    case romance
+    case fairyTale
+    case fantasy
+    case SF
+    case history
+    case comic
+    case question
+    case outdoor
     
     var title: String {
         switch self {

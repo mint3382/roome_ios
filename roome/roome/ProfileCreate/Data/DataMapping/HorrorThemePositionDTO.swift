@@ -7,33 +7,14 @@
 
 import Foundation
 
-enum HorrorThemePositionDTO {
-    case extreme
+enum HorrorThemePositionDTO: Int, CaseIterable {
+    case extreme = 1
     case very
     case half
     case inevitably
     case noFear
     case enjoy
     case noExperience
-    
-    var id: Int {
-        switch self {
-        case .extreme:
-            1
-        case .very:
-            2
-        case .half:
-            3
-        case .inevitably:
-            4
-        case .noFear:
-            5
-        case .enjoy:
-            6
-        case .noExperience:
-            7
-        }
-    }
     
     var title: String {
         switch self {
