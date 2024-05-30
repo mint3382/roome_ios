@@ -101,7 +101,7 @@ class ColorSelectViewController: UIViewController {
 
 extension ColorSelectViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.color.count
+        BackgroundColorDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,7 +109,7 @@ extension ColorSelectViewController: UICollectionViewDataSource, UICollectionVie
         else {
             return UICollectionViewCell()
         }
-        cell.changeColor(ProfileModel.color[indexPath.row])
+        cell.changeColor(BackgroundColorDTO(rawValue: indexPath.row + 1)!.definition)
         
         return cell
     }

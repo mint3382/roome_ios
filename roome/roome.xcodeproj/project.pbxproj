@@ -62,7 +62,6 @@
 		9216958F2BFE1121006DC44A /* RoomCountRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */; };
 		921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695912BFE15DB006DC44A /* RoomCountRepository.swift */; };
 		921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695932BFE1B8C006DC44A /* GenreViewController.swift */; };
-		921695982BFE4E18006DC44A /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695972BFE4E18006DC44A /* ProfileModel.swift */; };
 		9216959B2BFE65AC006DC44A /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959A2BFE65AC006DC44A /* ButtonCell.swift */; };
 		9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959C2BFE72D1006DC44A /* StrengthViewController.swift */; };
 		921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */; };
@@ -124,6 +123,9 @@
 		9271F8132C08A53400586AFD /* DislikeRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8122C08A53400586AFD /* DislikeRepositoryType.swift */; };
 		9271F8152C08A55700586AFD /* DislikeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8142C08A55700586AFD /* DislikeUseCase.swift */; };
 		9271F8172C08A58000586AFD /* DislikeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8162C08A58000586AFD /* DislikeRepository.swift */; };
+		9271F8192C08D19600586AFD /* ColorRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8182C08D19600586AFD /* ColorRepositoryType.swift */; };
+		9271F81B2C08D1BE00586AFD /* ColorUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81A2C08D1BE00586AFD /* ColorUseCase.swift */; };
+		9271F81D2C08D21400586AFD /* ColorRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81C2C08D21400586AFD /* ColorRepository.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -186,7 +188,6 @@
 		9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountRepositoryType.swift; sourceTree = "<group>"; };
 		921695912BFE15DB006DC44A /* RoomCountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountRepository.swift; sourceTree = "<group>"; };
 		921695932BFE1B8C006DC44A /* GenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewController.swift; sourceTree = "<group>"; };
-		921695972BFE4E18006DC44A /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		9216959A2BFE65AC006DC44A /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		9216959C2BFE72D1006DC44A /* StrengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthViewController.swift; sourceTree = "<group>"; };
 		921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +249,9 @@
 		9271F8122C08A53400586AFD /* DislikeRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeRepositoryType.swift; sourceTree = "<group>"; };
 		9271F8142C08A55700586AFD /* DislikeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeUseCase.swift; sourceTree = "<group>"; };
 		9271F8162C08A58000586AFD /* DislikeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeRepository.swift; sourceTree = "<group>"; };
+		9271F8182C08D19600586AFD /* ColorRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRepositoryType.swift; sourceTree = "<group>"; };
+		9271F81A2C08D1BE00586AFD /* ColorUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUseCase.swift; sourceTree = "<group>"; };
+		9271F81C2C08D21400586AFD /* ColorRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRepository.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -628,6 +632,7 @@
 				9271F80A2C08A2EF00586AFD /* DeviceLockRepository.swift */,
 				9271F8102C08A45A00586AFD /* ActivityRepository.swift */,
 				9271F8162C08A58000586AFD /* DislikeRepository.swift */,
+				9271F81C2C08D21400586AFD /* ColorRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -645,6 +650,7 @@
 				9271F8062C08A29900586AFD /* DeviceLockRepositoryType.swift */,
 				9271F80C2C08A3FA00586AFD /* ActivityRepositoryType.swift */,
 				9271F8122C08A53400586AFD /* DislikeRepositoryType.swift */,
+				9271F8182C08D19600586AFD /* ColorRepositoryType.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -662,6 +668,7 @@
 				9271F8082C08A2BE00586AFD /* DeviceLockUseCase.swift */,
 				9271F80E2C08A42400586AFD /* ActivityUseCase.swift */,
 				9271F8142C08A55700586AFD /* DislikeUseCase.swift */,
+				9271F81A2C08D1BE00586AFD /* ColorUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -687,7 +694,6 @@
 				9271F7DC2C08588100586AFD /* ActivitiesDTO.swift */,
 				9271F7DE2C08594800586AFD /* DislikeDTO.swift */,
 				9271F7C92C00B70200586AFD /* BackgroundColor.swift */,
-				921695972BFE4E18006DC44A /* ProfileModel.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -883,7 +889,6 @@
 				9216958D2BFE10F7006DC44A /* RoomCountUseCase.swift in Sources */,
 				921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */,
 				9271F80F2C08A42400586AFD /* ActivityUseCase.swift in Sources */,
-				921695982BFE4E18006DC44A /* ProfileModel.swift in Sources */,
 				921695822BFE021C006DC44A /* BackButton.swift in Sources */,
 				9216959B2BFE65AC006DC44A /* ButtonCell.swift in Sources */,
 				9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */,
@@ -891,11 +896,13 @@
 				921695412BF9008A006DC44A /* TermsAgreeViewController.swift in Sources */,
 				921695072BF26F23006DC44A /* APIConstants.swift in Sources */,
 				9271F8072C08A29900586AFD /* DeviceLockRepositoryType.swift in Sources */,
+				9271F81B2C08D1BE00586AFD /* ColorUseCase.swift in Sources */,
 				9271F7A82C00A8E100586AFD /* ColorSelectViewController.swift in Sources */,
 				9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */,
 				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
 				9271F7D92C08573B00586AFD /* HintDTO.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
+				9271F81D2C08D21400586AFD /* ColorRepository.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
 				9271F8112C08A45A00586AFD /* ActivityRepository.swift in Sources */,
 				9271F7FB2C089E7C00586AFD /* HorrorThemeRepositoryType.swift in Sources */,
@@ -929,6 +936,7 @@
 				9271F7DB2C0857E500586AFD /* DeviceLockDTO.swift in Sources */,
 				9271F8012C08A0E100586AFD /* HintRepositoryType.swift in Sources */,
 				9271F7D52C04B32400586AFD /* ImportantFactorDTO.swift in Sources */,
+				9271F8192C08D19600586AFD /* ColorRepositoryType.swift in Sources */,
 				9271F7E32C08605A00586AFD /* GenreRepositoryType.swift in Sources */,
 				921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */,
 				9271F8032C08A10200586AFD /* HintUseCase.swift in Sources */,

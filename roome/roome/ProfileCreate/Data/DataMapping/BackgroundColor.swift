@@ -8,6 +8,32 @@
 import Foundation
 import UIKit
 
+enum BackgroundColorDTO: Int, CaseIterable {
+    case gradientRed = 1
+    case gradientPink
+    case gradientGreen
+    case gradientBlue
+    case gradientPurple
+    case solidBlack
+    
+    var definition: BackgroundColor {
+        switch self {
+        case .gradientRed:
+            BackgroundColor(mode: .gradient, shape: .linear, orientation: .tlBR, color: .red)
+        case .gradientPink:
+            BackgroundColor(mode: .gradient, shape: .linear, orientation: .tlBR, color: .pink)
+        case .gradientGreen:
+            BackgroundColor(mode: .gradient, shape: .linear, orientation: .tlBR, color: .green)
+        case .gradientBlue:
+            BackgroundColor(mode: .gradient, shape: .linear, orientation: .topBottom, color: .blue)
+        case .gradientPurple:
+            BackgroundColor(mode: .gradient, shape: .linear, orientation: .tlBR, color: .purple)
+        case .solidBlack:
+            BackgroundColor(mode: .solid, shape: .null, orientation: .null, color: .black)
+        }
+    }
+}
+
 struct BackgroundColor {
     let mode: Mode
     let shape: Shape
