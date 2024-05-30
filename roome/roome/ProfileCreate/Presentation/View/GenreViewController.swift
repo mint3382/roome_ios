@@ -153,7 +153,7 @@ class GenreViewController: UIViewController, ToastAlertable {
 
 extension GenreViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.genre.count
+        GenreDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -161,7 +161,7 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.genre[indexPath.item])
+        cell.changeTitle(GenreDTO(rawValue: indexPath.row + 1)!.title)
         
         return cell
     }
