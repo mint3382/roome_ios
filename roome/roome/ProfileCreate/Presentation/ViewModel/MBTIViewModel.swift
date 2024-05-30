@@ -17,7 +17,7 @@ class MBTIViewModel {
     
     struct Output {
         let handleCellSelect: AnyPublisher<(Bool, IndexPath), Never>
-        let handleNextButton: AnyPublisher<Void, Never>
+        let handleNextButton: AnyPublisher<Void, Error>
         let canGoNext: AnyPublisher<Bool, Never>
         let handleBackButton: AnyPublisher<Void, Never>
         let handleWillNotAddButton: AnyPublisher<Bool, Never>
@@ -25,9 +25,15 @@ class MBTIViewModel {
     
     var selectCell = PassthroughSubject<IndexPath, Never>()
     var deselectCell = PassthroughSubject<IndexPath, Never>()
-    private var goToNext = PassthroughSubject<Int,Never>()
+    private var canGoNext = PassthroughSubject<Int,Never>()
+    private var goToNext = PassthroughSubject<Void,Error>()
     private var withoutButtonState = false
     var list = Set<Int>()
+    private var useCase: MbtiUseCase
+    
+    init(useCase: MbtiUseCase) {
+        self.useCase = useCase
+    }
     
     func transform(_ input: Input) -> Output {
         let handleCellSelect = selectCell
@@ -42,7 +48,7 @@ class MBTIViewModel {
         let cellSelect = Publishers.Zip(handleCellSelect, deselectCell)
             .eraseToAnyPublisher()
         
-        let canGoNext = goToNext
+        let canGoNext = canGoNext
             .map { count in
                 count == 4
             }.eraseToAnyPublisher()
@@ -58,6 +64,15 @@ class MBTIViewModel {
             .eraseToAnyPublisher()
         
         let handleNextButton = input.tapNextButton
+            .map { [weak self] _ in
+                self?.handlePage()
+            }
+            .compactMap { [weak self] _ in
+                self
+            }
+            .flatMap{ owner in
+                owner.goToNext
+            }
             .eraseToAnyPublisher()
         
         let back = input.tapBackButton
@@ -68,10 +83,10 @@ class MBTIViewModel {
     
     func isWithoutButtonSelect() -> Bool {
         if withoutButtonState {
-            goToNext.send(4)
+            canGoNext.send(4)
             return true
         } else {
-            goToNext.send(0)
+            canGoNext.send(0)
             return false
         }
     }
@@ -79,20 +94,37 @@ class MBTIViewModel {
     func deselectItem(_ item: IndexPath) {
         if list.contains(item.item / 2) {
             list.remove(item.item / 2)
-            goToNext.send(list.count)
+            canGoNext.send(list.count)
         }
     }
     
     func canSelect(_ item: IndexPath) -> Bool {
         deselectCell.send(item)
-        print(ProfileModel.genre[item.item])
         //있는지 없는지 체크
         if list.contains(item.item / 2) {
             return false
         } else {
             list.insert(item.item / 2)
-            goToNext.send(list.count)
+            canGoNext.send(list.count)
             return true
+        }
+    }
+    
+    //다음 페이지로
+    func handlePage() {
+        Task {
+            do {
+                var mbtis: [String] = []
+                if !list.isEmpty {
+                    for item in list.sorted(by: <) {
+                        mbtis.append(MBTIDTO(rawValue: item)!.title)
+                    }
+                }
+                try await useCase.mbtiWithAPI(mbti: mbtis)
+                goToNext.send()
+            } catch {
+                goToNext.send(completion: .failure(error))
+            }
         }
     }
 }

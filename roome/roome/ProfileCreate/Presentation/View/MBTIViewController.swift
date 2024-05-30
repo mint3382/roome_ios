@@ -177,7 +177,7 @@ class MBTIViewController: UIViewController {
 
 extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.mbti.count
+        MBTIDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -185,8 +185,8 @@ extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelega
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.mbti[indexPath.item].type)
-        cell.addDescription(ProfileModel.mbti[indexPath.item].description)
+        cell.changeTitle(MBTIDTO(rawValue: indexPath.row)!.title)
+        cell.addDescription(MBTIDTO(rawValue: indexPath.row)!.description)
         
         return cell
     }

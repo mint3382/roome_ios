@@ -99,6 +99,10 @@
 		9271F7E12C08604800586AFD /* GenreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7E02C08604700586AFD /* GenreRepository.swift */; };
 		9271F7E32C08605A00586AFD /* GenreRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7E22C08605A00586AFD /* GenreRepositoryType.swift */; };
 		9271F7E52C08624800586AFD /* GenreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7E42C08624800586AFD /* GenreUseCase.swift */; };
+		9271F7E72C0865EB00586AFD /* MBTIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7E62C0865EB00586AFD /* MBTIDTO.swift */; };
+		9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7E82C086C4200586AFD /* MbtiRepositoryType.swift */; };
+		9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7EA2C086CA400586AFD /* MbtiRepository.swift */; };
+		9271F7ED2C086D0F00586AFD /* MbtiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7EC2C086D0F00586AFD /* MbtiUseCase.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -198,6 +202,10 @@
 		9271F7E02C08604700586AFD /* GenreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepository.swift; sourceTree = "<group>"; };
 		9271F7E22C08605A00586AFD /* GenreRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepositoryType.swift; sourceTree = "<group>"; };
 		9271F7E42C08624800586AFD /* GenreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreUseCase.swift; sourceTree = "<group>"; };
+		9271F7E62C0865EB00586AFD /* MBTIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIDTO.swift; sourceTree = "<group>"; };
+		9271F7E82C086C4200586AFD /* MbtiRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbtiRepositoryType.swift; sourceTree = "<group>"; };
+		9271F7EA2C086CA400586AFD /* MbtiRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbtiRepository.swift; sourceTree = "<group>"; };
+		9271F7EC2C086D0F00586AFD /* MbtiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbtiUseCase.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -570,6 +578,7 @@
 			children = (
 				921695912BFE15DB006DC44A /* RoomCountRepository.swift */,
 				9271F7E02C08604700586AFD /* GenreRepository.swift */,
+				9271F7EA2C086CA400586AFD /* MbtiRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -579,6 +588,7 @@
 			children = (
 				9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */,
 				9271F7E22C08605A00586AFD /* GenreRepositoryType.swift */,
+				9271F7E82C086C4200586AFD /* MbtiRepositoryType.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -588,6 +598,7 @@
 			children = (
 				9216958C2BFE10F7006DC44A /* RoomCountUseCase.swift */,
 				9271F7E42C08624800586AFD /* GenreUseCase.swift */,
+				9271F7EC2C086D0F00586AFD /* MbtiUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -605,6 +616,7 @@
 			children = (
 				921695972BFE4E18006DC44A /* ProfileModel.swift */,
 				9271F7D02C04742600586AFD /* GenreDTO.swift */,
+				9271F7E62C0865EB00586AFD /* MBTIDTO.swift */,
 				9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */,
 				9271F7D42C04B32400586AFD /* ImportantFactorDTO.swift */,
 				9271F7D62C04B40900586AFD /* HorrorThemePositionDTO.swift */,
@@ -768,6 +780,7 @@
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
+				9271F7ED2C086D0F00586AFD /* MbtiUseCase.swift in Sources */,
 				9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */,
 				921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */,
 				921695152BF35377006DC44A /* LoginRepository.swift in Sources */,
@@ -777,7 +790,9 @@
 				921695882BFE0958006DC44A /* NextButton.swift in Sources */,
 				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
 				9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */,
+				9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */,
 				9271F7DF2C08594800586AFD /* DislikeDTO.swift in Sources */,
+				9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
@@ -805,6 +820,7 @@
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
+				9271F7E72C0865EB00586AFD /* MBTIDTO.swift in Sources */,
 				921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */,
 				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
 				9271F7962C00863E00586AFD /* StrengthViewModel.swift in Sources */,
