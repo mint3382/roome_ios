@@ -81,11 +81,14 @@ class GenreViewController: UIViewController, ToastAlertable {
             }.store(in: &cancellables)
         
         output.handleNextButton
-            .sink { [weak self] _ in
+            .sink(receiveCompletion: { error in
+                //연결 실패 시?
+            }, receiveValue: { [weak self] _ in
                 let nextViewController = DIContainer.shared.resolve(MBTIViewController.self)
                 
                 self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            })
+            .store(in: &cancellables)
     }
     
     func configureUI() {

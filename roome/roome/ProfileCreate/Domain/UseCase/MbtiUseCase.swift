@@ -17,6 +17,7 @@ class MbtiUseCase {
     func mbtiWithAPI(mbti: [String]) async throws {
         var input: String
         if mbti.isEmpty {
+            //MBTI 선택 안 했을 때
             input = "none"
         } else {
             input = mbti.joined()

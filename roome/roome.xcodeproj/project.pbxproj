@@ -103,6 +103,9 @@
 		9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7E82C086C4200586AFD /* MbtiRepositoryType.swift */; };
 		9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7EA2C086CA400586AFD /* MbtiRepository.swift */; };
 		9271F7ED2C086D0F00586AFD /* MbtiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7EC2C086D0F00586AFD /* MbtiUseCase.swift */; };
+		9271F7EF2C08989C00586AFD /* StrengthRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7EE2C08989C00586AFD /* StrengthRepositoryType.swift */; };
+		9271F7F12C08990000586AFD /* StrengthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7F02C08990000586AFD /* StrengthUseCase.swift */; };
+		9271F7F32C08993600586AFD /* StrengthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7F22C08993600586AFD /* StrengthRepository.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -206,6 +209,9 @@
 		9271F7E82C086C4200586AFD /* MbtiRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbtiRepositoryType.swift; sourceTree = "<group>"; };
 		9271F7EA2C086CA400586AFD /* MbtiRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbtiRepository.swift; sourceTree = "<group>"; };
 		9271F7EC2C086D0F00586AFD /* MbtiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbtiUseCase.swift; sourceTree = "<group>"; };
+		9271F7EE2C08989C00586AFD /* StrengthRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthRepositoryType.swift; sourceTree = "<group>"; };
+		9271F7F02C08990000586AFD /* StrengthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthUseCase.swift; sourceTree = "<group>"; };
+		9271F7F22C08993600586AFD /* StrengthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthRepository.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -579,6 +585,7 @@
 				921695912BFE15DB006DC44A /* RoomCountRepository.swift */,
 				9271F7E02C08604700586AFD /* GenreRepository.swift */,
 				9271F7EA2C086CA400586AFD /* MbtiRepository.swift */,
+				9271F7F22C08993600586AFD /* StrengthRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -589,6 +596,7 @@
 				9216958E2BFE1121006DC44A /* RoomCountRepositoryType.swift */,
 				9271F7E22C08605A00586AFD /* GenreRepositoryType.swift */,
 				9271F7E82C086C4200586AFD /* MbtiRepositoryType.swift */,
+				9271F7EE2C08989C00586AFD /* StrengthRepositoryType.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -599,6 +607,7 @@
 				9216958C2BFE10F7006DC44A /* RoomCountUseCase.swift */,
 				9271F7E42C08624800586AFD /* GenreUseCase.swift */,
 				9271F7EC2C086D0F00586AFD /* MbtiUseCase.swift */,
+				9271F7F02C08990000586AFD /* StrengthUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -764,12 +773,14 @@
 			files = (
 				921695632BFC6362006DC44A /* TermsAgreeRepositoryType.swift in Sources */,
 				921695652BFC67D0006DC44A /* TermsAgreeRepository.swift in Sources */,
+				9271F7F32C08993600586AFD /* StrengthRepository.swift in Sources */,
 				9271F7D32C04B1CE00586AFD /* StrengthDTO.swift in Sources */,
 				921695132BF34995006DC44A /* LoginProvider.swift in Sources */,
 				921695382BF84604006DC44A /* NicknameUseCase.swift in Sources */,
 				921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */,
 				9271F7DD2C08588100586AFD /* ActivitiesDTO.swift in Sources */,
 				9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */,
+				9271F7EF2C08989C00586AFD /* StrengthRepositoryType.swift in Sources */,
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
@@ -800,6 +811,7 @@
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
+				9271F7F12C08990000586AFD /* StrengthUseCase.swift in Sources */,
 				9271F7CE2C00E71300586AFD /* WaitingViewController.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
