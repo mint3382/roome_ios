@@ -92,7 +92,7 @@ class ThemeSelectViewModel {
     func handlePage() {
         Task {
             do {
-                let ids = list.map { $0.row }
+                let ids = list.map { $0.row + 1 }
                 try await useCase.importantThemesWithAPI(ids: ids)
                 goToNext.send()
             } catch {

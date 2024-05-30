@@ -92,7 +92,7 @@ class StrengthViewModel {
     func handlePage() {
         Task {
             do {
-                let ids = list.map { $0.row }
+                let ids = list.map { $0.row + 1 }
                 try await useCase.strengthsWithAPI(ids: ids)
                 goToNext.send()
             } catch {

@@ -28,7 +28,8 @@ class MBTIViewModel {
     private var canGoNext = PassthroughSubject<Int,Never>()
     private var goToNext = PassthroughSubject<Void,Error>()
     private var withoutButtonState = false
-    var list = Set<Int>()
+    private var list: [Int: Int] = [0: -1, 1: -1, 2: -1, 3: -1]
+    private var count: Int = 0
     private var useCase: MbtiUseCase
     
     init(useCase: MbtiUseCase) {
@@ -56,7 +57,7 @@ class MBTIViewModel {
         let handleWithoutButton = input.tapWillNotAddButton
             .map { [weak self] _ in
                 self?.withoutButtonState.toggle()
-                self?.list = []
+                self?.list = [0: -1, 1: -1, 2: -1, 3: -1]
             }
             .compactMap { [weak self] _ in
                 self?.isWithoutButtonSelect()
@@ -92,20 +93,22 @@ class MBTIViewModel {
     }
     
     func deselectItem(_ item: IndexPath) {
-        if list.contains(item.item / 2) {
-            list.remove(item.item / 2)
-            canGoNext.send(list.count)
+        if list[item.item / 2] != -1 {
+            list[item.item / 2] = -1
+            count -= 1
+            canGoNext.send(count)
         }
     }
     
     func canSelect(_ item: IndexPath) -> Bool {
         deselectCell.send(item)
         //있는지 없는지 체크
-        if list.contains(item.item / 2) {
+        if list[item.item / 2] != -1 {
             return false
         } else {
-            list.insert(item.item / 2)
-            canGoNext.send(list.count)
+            list[item.item / 2] = item.row
+            count += 1
+            canGoNext.send(count)
             return true
         }
     }
@@ -115,10 +118,12 @@ class MBTIViewModel {
         Task {
             do {
                 var mbtis: [String] = []
-                if !list.isEmpty {
-                    for item in list.sorted(by: <) {
-                        mbtis.append(MBTIDTO(rawValue: item)!.title)
+                for item in (list.sorted{ $0.0 < $1.0})  {
+                    guard item.value != -1 else {
+                        mbtis = ["NONE"]
+                        break
                     }
+                    mbtis.append(MBTIDTO(rawValue: item.value)!.title)
                 }
                 try await useCase.mbtiWithAPI(mbti: mbtis)
                 goToNext.send()
