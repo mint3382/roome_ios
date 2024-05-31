@@ -81,11 +81,15 @@ class GenreViewController: UIViewController, ToastAlertable {
             }.store(in: &cancellables)
         
         output.handleNextButton
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(MBTIViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            .sink(receiveCompletion: { error in
+                //연결 실패 시?
+            }, receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(MBTIViewController.self)
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            })
+            .store(in: &cancellables)
     }
     
     func configureUI() {
@@ -153,7 +157,7 @@ class GenreViewController: UIViewController, ToastAlertable {
 
 extension GenreViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.genre.count
+        GenreDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -161,7 +165,7 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.genre[indexPath.item])
+        cell.changeTitle(GenreDTO(rawValue: indexPath.row + 1)!.title)
         
         return cell
     }

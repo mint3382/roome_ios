@@ -81,11 +81,16 @@ class StrengthViewController: UIViewController, ToastAlertable {
             }.store(in: &cancellables)
         
         output.handleNextButton
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(ThemeSelectViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            .sink(receiveCompletion: { error in
+                //API 연결 실패 시
+            }, receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(ThemeSelectViewController.self)
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            })
+            .store(in: &cancellables)
     }
     
     func configureUI() {
@@ -153,7 +158,7 @@ class StrengthViewController: UIViewController, ToastAlertable {
 
 extension StrengthViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.strength.count
+        StrengthDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -161,7 +166,7 @@ extension StrengthViewController: UICollectionViewDataSource, UICollectionViewDe
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.strength[indexPath.item])
+        cell.changeTitle(StrengthDTO(rawValue: indexPath.row + 1)!.title)
         
         return cell
     }

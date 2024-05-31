@@ -42,11 +42,14 @@ class HorrorPositionViewController: UIViewController {
         let output = viewModel.transform(HorrorPositionViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(HintViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            .sink(receiveCompletion: { error in
+                // 실패 시
+            }, receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(HintViewController.self)
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            }).store(in: &cancellables)
         
         output.handleBackButton
             .sink { [weak self] _ in
@@ -102,7 +105,7 @@ class HorrorPositionViewController: UIViewController {
 
 extension HorrorPositionViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.horrorPosition.count
+        HorrorThemePositionDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -110,8 +113,8 @@ extension HorrorPositionViewController: UICollectionViewDataSource, UICollection
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.horrorPosition[indexPath.item].type)
-        cell.addDescription(ProfileModel.horrorPosition[indexPath.item].description)
+        cell.changeTitle(HorrorThemePositionDTO(rawValue: indexPath.row + 1)!.title)
+        cell.addDescription(HorrorThemePositionDTO(rawValue: indexPath.row + 1)!.description)
         
         return cell
     }

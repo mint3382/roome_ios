@@ -42,11 +42,15 @@ class DeviceAndLockViewController: UIViewController {
         let output = viewModel.transform(DeviceAndLockViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(ActivityViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            .sink(receiveCompletion: { error in
+                //실패 시
+            }, receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(ActivityViewController.self)
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            }).store(in: &cancellables)
         
         output.handleBackButton
             .sink { [weak self] _ in
@@ -103,7 +107,7 @@ class DeviceAndLockViewController: UIViewController {
 
 extension DeviceAndLockViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.deviceAndLock.count
+        DeviceLockDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -111,7 +115,7 @@ extension DeviceAndLockViewController: UICollectionViewDataSource, UICollectionV
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.deviceAndLock[indexPath.item])
+        cell.changeTitle(DeviceLockDTO(rawValue: indexPath.row + 1)!.title)
         
         return cell
     }

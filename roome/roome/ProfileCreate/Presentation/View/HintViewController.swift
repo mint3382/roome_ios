@@ -42,11 +42,16 @@ class HintViewController: UIViewController {
         let output = viewModel.transform(HintViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(DeviceAndLockViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            .sink(receiveCompletion: { error in
+                //실패 시
+            }, receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(DeviceAndLockViewController.self)
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            })
+            .store(in: &cancellables)
         
         output.handleBackButton
             .sink { [weak self] _ in
@@ -105,7 +110,7 @@ class HintViewController: UIViewController {
 
 extension HintViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.hintPrefer.count
+        HintDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -113,8 +118,8 @@ extension HintViewController: UICollectionViewDataSource, UICollectionViewDelega
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.hintPrefer[indexPath.item].type)
-        cell.addDescription(ProfileModel.hintPrefer[indexPath.item].description)
+        cell.changeTitle(HintDTO(rawValue: indexPath.row + 1)!.title)
+        cell.addDescription(HintDTO(rawValue: indexPath.row + 1)!.description)
         
         return cell
     }

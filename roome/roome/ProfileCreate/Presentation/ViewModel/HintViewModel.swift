@@ -14,15 +14,29 @@ class HintViewModel {
     }
     
     struct Output {
-        let handleCellSelect: AnyPublisher<IndexPath, Never>
+        let handleCellSelect: AnyPublisher<Void, Error>
         let handleBackButton: AnyPublisher<Void, Never>
     }
     
     var selectCell = PassthroughSubject<IndexPath, Never>()
-    private var goToNext = PassthroughSubject<Int,Never>()
+    private var goToNext = PassthroughSubject<Void, Error>()
+    private var useCase: HintUseCase
+    
+    init(useCase: HintUseCase) {
+        self.useCase = useCase
+    }
     
     func transform(_ input: Input) -> Output {
         let cellSelect = selectCell
+            .map { [weak self] indexPath in
+                self?.handlePage(id: indexPath.row + 1)
+            }
+            .compactMap { [weak self] _ in
+                self
+            }
+            .flatMap{ owner in
+                owner.goToNext
+            }
             .eraseToAnyPublisher()
         
         let back = input.tapBackButton
@@ -30,6 +44,17 @@ class HintViewModel {
         
         return Output(handleCellSelect: cellSelect,
                       handleBackButton: back)
+    }
+    
+    func handlePage(id: Int) {
+        Task {
+            do {
+                try await useCase.hintWithAPI(id: id)
+                goToNext.send()
+            } catch {
+                goToNext.send(completion: .failure(error))
+            }
+        }
     }
 }
 

@@ -80,11 +80,16 @@ class ThemeSelectViewController: UIViewController, ToastAlertable {
             }.store(in: &cancellables)
         
         output.handleNextButton
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(HorrorPositionViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            .sink(receiveCompletion: { error in
+                //연결 실패 시
+            }, receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(HorrorPositionViewController.self)
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            })
+            .store(in: &cancellables)
     }
     
     func configureUI() {
@@ -152,7 +157,7 @@ class ThemeSelectViewController: UIViewController, ToastAlertable {
 
 extension ThemeSelectViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.themeSelect.count
+        ImportantFactorDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,7 +165,7 @@ extension ThemeSelectViewController: UICollectionViewDataSource, UICollectionVie
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.themeSelect[indexPath.item])
+        cell.changeTitle(ImportantFactorDTO(rawValue: indexPath.row + 1)!.title)
         
         return cell
     }

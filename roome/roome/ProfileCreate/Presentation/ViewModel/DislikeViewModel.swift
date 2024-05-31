@@ -16,15 +16,21 @@ class DislikeViewModel {
     
     struct Output {
         let handleCellSelect: AnyPublisher<(Bool, IndexPath), Never>
-        let handleNextButton: AnyPublisher<Void, Never>
+        let handleNextButton: AnyPublisher<Void, Error>
         let canGoNext: AnyPublisher<Bool, Never>
         let handleBackButton: AnyPublisher<Void, Never>
     }
     
     var selectCell = PassthroughSubject<IndexPath, Never>()
     var deselectCell = PassthroughSubject<IndexPath, Never>()
-    private var goToNext = PassthroughSubject<Int,Never>()
-    var list = Set<IndexPath>()
+    private var canGoNext = PassthroughSubject<Int,Never>()
+    private var goToNext = PassthroughSubject<Void, Error>()
+    private var list = Set<IndexPath>()
+    private var useCase: DislikeUseCase
+    
+    init(useCase: DislikeUseCase) {
+        self.useCase = useCase
+    }
     
     func transform(_ input: Input) -> Output {
         let handleCellSelect = selectCell
@@ -39,12 +45,21 @@ class DislikeViewModel {
         let cellSelect = Publishers.Zip(handleCellSelect, deselectCell)
             .eraseToAnyPublisher()
         
-        let canGoNext = goToNext
+        let canGoNext = canGoNext
             .map { count in
                 0 < count && count <= 2
             }.eraseToAnyPublisher()
         
         let handleNextButton = input.tapNextButton
+            .map { [weak self] _ in
+                self?.handlePage()
+            }
+            .compactMap { [weak self] _ in
+                self
+            }
+            .flatMap{ owner in
+                owner.goToNext
+            }
             .eraseToAnyPublisher()
         
         let back = input.tapBackButton
@@ -59,19 +74,30 @@ class DislikeViewModel {
     func deselectItem(_ item: IndexPath) {
         if list.contains(item) {
             list.remove(item)
-            goToNext.send(list.count)
+            canGoNext.send(list.count)
         }
     }
     
     func canSelectCount(_ item: IndexPath) -> Bool? {
         deselectCell.send(item)
-        print(ProfileModel.dislike[item.item])
         if list.count < 2 {
             list.insert(item)
-            goToNext.send(list.count)
+            canGoNext.send(list.count)
             return true
         } else {
             return false
+        }
+    }
+    
+    func handlePage() {
+        Task {
+            do {
+                let ids = list.map { $0.row + 1 }
+                try await useCase.dislikeWithAPI(ids: ids)
+                goToNext.send()
+            } catch {
+                goToNext.send(completion: .failure(error))
+            }
         }
     }
 }

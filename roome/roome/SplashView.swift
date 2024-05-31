@@ -38,7 +38,7 @@ class SplashView: UIViewController {
     }
     
     private func setIsLogin() {
-        if appDelegate?.isLogin  == true {
+        if appDelegate?.isLogin == true {
             goToMain()
         } else {
             goToLogin()
@@ -53,7 +53,19 @@ class SplashView: UIViewController {
     }
     
     func goToMain() {
-        let viewController = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
+        var viewController: UIViewController
+        let userState = UserContainer.shared.user?.data.state
+        
+        switch UserState(rawValue: userState!) {
+        case .termsAgreement:
+            viewController = DIContainer.shared.resolve(TermsAgreeViewController.self)
+        case .nickname:
+            viewController = DIContainer.shared.resolve(NicknameViewController.self)
+        case .registrationCompleted:
+            viewController = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
+        case .none:
+            viewController = DIContainer.shared.resolve(LoginViewController.self)
+        }
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
             .changeRootViewController(viewController, animated: true)
@@ -105,34 +117,64 @@ class SplashView: UIViewController {
         DIContainer.shared.register(RoomCountViewModel.self, dependency: roomCountViewModel)
         DIContainer.shared.register(RoomCountViewController.self, dependency: roomCountViewController)
         
-        let genreViewController = GenreViewController(viewModel: GenreViewModel())
+        let genreRepository = GenreRepository()
+        let genreUseCase = GenreUseCase(repository: genreRepository)
+        let genreViewModel = GenreViewModel(useCase: genreUseCase)
+        let genreViewController = GenreViewController(viewModel: genreViewModel)
         DIContainer.shared.register(GenreViewController.self, dependency: genreViewController)
         
-        let mbtiViewController = MBTIViewController(viewModel: MBTIViewModel())
+        let mbtiRepository = MbtiRepository()
+        let mbtiUseCase = MbtiUseCase(repository: mbtiRepository)
+        let mbtiViewModel = MBTIViewModel(useCase: mbtiUseCase)
+        let mbtiViewController = MBTIViewController(viewModel: mbtiViewModel)
         DIContainer.shared.register(MBTIViewController.self, dependency: mbtiViewController)
         
-        let strengthViewController = StrengthViewController(viewModel: StrengthViewModel())
+        let strengthRepository = StrengthRepository()
+        let strengthUseCase = StrengthUseCase(repository: strengthRepository)
+        let strengthViewModel = StrengthViewModel(useCase: strengthUseCase)
+        let strengthViewController = StrengthViewController(viewModel: strengthViewModel)
         DIContainer.shared.register(StrengthViewController.self, dependency: strengthViewController)
         
-        let themeSelectViewController = ThemeSelectViewController(viewModel: ThemeSelectViewModel())
+        let themeRepository = ThemeSelectRepository()
+        let themeUseCase = ThemeSelectUseCase(repository: themeRepository)
+        let themeViewModel = ThemeSelectViewModel(useCase: themeUseCase)
+        let themeSelectViewController = ThemeSelectViewController(viewModel: themeViewModel)
         DIContainer.shared.register(ThemeSelectViewController.self, dependency: themeSelectViewController)
         
-        let horrorPositionViewController = HorrorPositionViewController(viewModel: HorrorPositionViewModel())
+        let horrorRepository = HorrorThemeRepository()
+        let horrorUseCase = HorrorThemeUseCase(repository: horrorRepository)
+        let horrorViewModel = HorrorPositionViewModel(useCase: horrorUseCase)
+        let horrorPositionViewController = HorrorPositionViewController(viewModel: horrorViewModel)
         DIContainer.shared.register(HorrorPositionViewController.self, dependency: horrorPositionViewController)
         
-        let hintViewController = HintViewController(viewModel: HintViewModel())
+        let hintRepository = HintRepository()
+        let hintUseCase = HintUseCase(repository: hintRepository)
+        let hintViewModel = HintViewModel(useCase: hintUseCase)
+        let hintViewController = HintViewController(viewModel: hintViewModel)
         DIContainer.shared.register(HintViewController.self, dependency: hintViewController)
         
-        let deviceAndLockViewController = DeviceAndLockViewController(viewModel: DeviceAndLockViewModel())
+        let deviceLockRepository = DeviceLockRepository()
+        let deviceLockUseCase = DeviceLockUseCase(repository: deviceLockRepository)
+        let deviceLockViewModel = DeviceAndLockViewModel(useCase: deviceLockUseCase)
+        let deviceAndLockViewController = DeviceAndLockViewController(viewModel: deviceLockViewModel)
         DIContainer.shared.register(DeviceAndLockViewController.self, dependency: deviceAndLockViewController)
         
-        let activityViewController = ActivityViewController(viewModel: ActivityViewModel())
+        let activityRepository = ActivityRepository()
+        let activityUseCase = ActivityUseCase(repository: activityRepository)
+        let activityViewModel = ActivityViewModel(useCase: activityUseCase)
+        let activityViewController = ActivityViewController(viewModel: activityViewModel)
         DIContainer.shared.register(ActivityViewController.self, dependency: activityViewController)
         
-        let dislikeViewController = DislikeViewController(viewModel: DislikeViewModel())
+        let dislikeRepository = DislikeRepository()
+        let dislikeUseCase = DislikeUseCase(repository: dislikeRepository)
+        let dislikeViewModel = DislikeViewModel(useCase: dislikeUseCase)
+        let dislikeViewController = DislikeViewController(viewModel: dislikeViewModel)
         DIContainer.shared.register(DislikeViewController.self, dependency: dislikeViewController)
         
-        let colorSelectViewController = ColorSelectViewController(viewModel: ColorSelectViewModel())
+        let colorRepository = ColorRepository()
+        let colorUseCase = ColorUseCase(repository: colorRepository)
+        let colorViewModel = ColorSelectViewModel(useCase: colorUseCase)
+        let colorSelectViewController = ColorSelectViewController(viewModel: colorViewModel)
         DIContainer.shared.register(ColorSelectViewController.self, dependency: colorSelectViewController)
         
         let waitingViewController = WaitingViewController()

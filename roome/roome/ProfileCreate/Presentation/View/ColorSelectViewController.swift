@@ -42,11 +42,15 @@ class ColorSelectViewController: UIViewController {
         let output = viewModel.transform(ColorSelectViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(WaitingViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            .sink(receiveCompletion: { error in
+                //실패 시
+            }, receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(WaitingViewController.self)
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            }).store(in: &cancellables)
         
         output.handleBackButton
             .sink { [weak self] _ in
@@ -101,7 +105,7 @@ class ColorSelectViewController: UIViewController {
 
 extension ColorSelectViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.color.count
+        BackgroundColorDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,7 +113,7 @@ extension ColorSelectViewController: UICollectionViewDataSource, UICollectionVie
         else {
             return UICollectionViewCell()
         }
-        cell.changeColor(ProfileModel.color[indexPath.row])
+        cell.changeColor(BackgroundColorDTO(rawValue: indexPath.row + 1)!.definition)
         
         return cell
     }

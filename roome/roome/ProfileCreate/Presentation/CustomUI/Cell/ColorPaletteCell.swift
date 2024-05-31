@@ -29,9 +29,9 @@ class ColorPaletteCell: UICollectionViewCell {
     }
     
     func changeColor(_ type: BackgroundColor) {
-        self.gradientLayer.colors = type.color.uiColor
-        self.gradientLayer.startPoint = type.orientation.point.start
-        self.gradientLayer.endPoint = type.orientation.point.end
+        self.gradientLayer.colors = type.color
+        self.gradientLayer.startPoint = type.direction.point.start
+        self.gradientLayer.endPoint = type.direction.point.end
         self.gradientLayer.type = type.shape.type
         contentView.layer.addSublayer(self.gradientLayer)
     }

@@ -191,10 +191,10 @@ class TermsAgreeViewController: UIViewController {
         
         output.goToNext
             .sink { [weak self] _ in
-                Task { @MainActor in
-                    let nextPage = DIContainer.shared.resolve(LoginViewController.self)
-                    self?.navigationController?.pushViewController(nextPage, animated: true)
-                }
+//                Task { @MainActor in
+//                    let nextPage = DIContainer.shared.resolve(LoginViewController.self)
+//                    self?.navigationController?.pushViewController(nextPage, animated: true)
+//                }
             } receiveValue: { [weak self] _ in
                 Task { @MainActor in
                     let nextPage = DIContainer.shared.resolve(NicknameViewController.self)

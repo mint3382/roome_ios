@@ -100,8 +100,50 @@ class WelcomeSignUPViewController: UIViewController {
         let output = viewModel.transforms(WelcomeViewModel.Input(nextButton: input))
         
         output.handleNext
-            .sink { [weak self] _ in
-                let nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
+            .sink(receiveCompletion: { error in
+                //실패 시
+            }, receiveValue: { [weak self] state in
+                Task { @MainActor in
+                    if state {
+                        let popUpViewController = PopUpViewController(viewModel: self!.viewModel)
+                        popUpViewController.modalPresentationStyle = .overFullScreen
+                        self?.present(popUpViewController, animated: false)
+                    } else {
+                        let nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
+                        self?.navigationController?.pushViewController(nextPage, animated: true)
+                    }
+                }
+            }).store(in: &cancellables)
+        
+        output.nextState
+            .sink { [weak self] state in
+                var nextPage: UIViewController
+                switch state {
+                case .roomCount:
+                    nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
+                case .genres:
+                    nextPage = DIContainer.shared.resolve(GenreViewController.self)
+                case .mbti:
+                    nextPage = DIContainer.shared.resolve(MBTIViewController.self)
+                case .strengths:
+                    nextPage = DIContainer.shared.resolve(StrengthViewController.self)
+                case .themes:
+                    nextPage = DIContainer.shared.resolve(ThemeSelectViewController.self)
+                case .horrorPosition:
+                    nextPage = DIContainer.shared.resolve(HorrorPositionViewController.self)
+                case .hint:
+                    nextPage = DIContainer.shared.resolve(HintViewController.self)
+                case .device:
+                    nextPage = DIContainer.shared.resolve(DeviceAndLockViewController.self)
+                case .activity:
+                    nextPage = DIContainer.shared.resolve(ActivityViewController.self)
+                case .dislike:
+                    nextPage = DIContainer.shared.resolve(DislikeViewController.self)
+                case .color:
+                    nextPage = DIContainer.shared.resolve(ColorSelectViewController.self)
+                case .complete:
+                    nextPage = DIContainer.shared.resolve(WaitingViewController.self)
+                }
                 self?.navigationController?.pushViewController(nextPage, animated: true)
             }.store(in: &cancellables)
     }

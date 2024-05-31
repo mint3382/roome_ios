@@ -8,11 +8,41 @@
 import Foundation
 import UIKit
 
+enum BackgroundColorDTO: Int, CaseIterable {
+    case gradientRed = 1
+    case gradientPink
+    case gradientGreen
+    case gradientBlue
+    case gradientPurple
+    case solidBlack
+    
+    var definition: BackgroundColor {
+        switch self {
+        case .gradientRed:
+            BackgroundColor(mode: .gradient, shape: .linear, direction: .tlBR, startColor: Color.red.startCode, endColor: Color.red.endCode)
+        case .gradientPink:
+            BackgroundColor(mode: .gradient, shape: .linear, direction: .tlBR, startColor: Color.pink.startCode, endColor: Color.pink.endCode)
+        case .gradientGreen:
+            BackgroundColor(mode: .gradient, shape: .linear, direction: .tlBR, startColor: Color.green.startCode, endColor: Color.green.endCode)
+        case .gradientBlue:
+            BackgroundColor(mode: .gradient, shape: .linear, direction: .topBottom, startColor: Color.blue.startCode, endColor: Color.blue.endCode)
+        case .gradientPurple:
+            BackgroundColor(mode: .gradient, shape: .linear, direction: .tlBR, startColor: Color.purple.startCode, endColor: Color.purple.endCode)
+        case .solidBlack:
+            BackgroundColor(mode: .solid, shape: .none, direction: .none, startColor: Color.black.startCode, endColor: Color.black.endCode)
+        }
+    }
+}
+
 struct BackgroundColor {
     let mode: Mode
     let shape: Shape
-    let orientation: Orientations
-    let color: Color
+    let direction: Direction
+    let startColor: String
+    let endColor: String
+    var color: [CGColor] {
+        [UIColor(hexCode: startColor).cgColor, UIColor(hexCode: endColor).cgColor]
+    }
 }
 
 enum Mode: String {
@@ -24,7 +54,7 @@ enum Shape: String {
     case linear = "linear"
     case radial = "radial"
     case angular = "angular"
-    case null = "null"
+    case none = "none"
     
     var type: CAGradientLayerType {
         switch self {
@@ -34,22 +64,22 @@ enum Shape: String {
             CAGradientLayerType.radial
         case .angular:
             CAGradientLayerType.conic
-        case .null:
+        case .none:
             CAGradientLayerType.axial
         }
     }
 }
 
-enum Orientations: String {
-    case topBottom = "TOP_BOTTOM"
-    case trBL = "TR_BL"
+enum Direction: String {
+    case topBottom = "topToBottom"
+    case trBL = "topRightToBottomLeft"
     case rightLeft = "RIGHT_LEFT"
-    case brTL = "BR_TL"
-    case bottomTOP = "BOTTOM_TOP"
-    case blTR = "BL_TR"
+    case brTL = "bottomRightToTopLeft"
+    case bottomTOP = "bottomToTop"
+    case blTR = "bottomLeftToTopRight"
     case leftRight = "LEFT_RIGHT"
-    case tlBR = "TL_BR"
-    case null = "null"
+    case tlBR = "topLeftToBottomRight"
+    case none = "none"
     
     var point: (start: CGPoint, end: CGPoint) {
         switch self {
@@ -69,7 +99,7 @@ enum Orientations: String {
             (CGPoint(x: 0, y: 1), CGPoint(x: 1, y: 0))
         case .brTL:
             (CGPoint(x: 1, y: 1), CGPoint(x: 0, y: 0))
-        case .null:
+        case .none:
             (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 1))
         }
     }
@@ -83,37 +113,37 @@ enum Color {
     case purple
     case black
     
-    var hexCode: (start: String, end: String) {
+    var startCode: String {
         switch self {
         case .red:
-            ("#FF453C", "#FFACB3")
+            "#FF453C"
         case .pink:
-            ("#FF60BF", "#FFACB3")
+            "#FF60BF"
         case .green:
-            ("#ADF695", "#42AC5D")
+            "#ADF695"
         case .blue:
-            ("#81A2EB", "#4EC1E6")
+            "#81A2EB"
         case .purple:
-            ("#2E2E8D", "#73549D")
+            "#2E2E8D"
         case .black:
-            ("#000000", "#000000")
+            "#000000"
         }
     }
     
-    var uiColor: [CGColor] {
+    var endCode: String {
         switch self {
         case .red:
-            [UIColor(hexCode: self.hexCode.start).cgColor, UIColor(hexCode: self.hexCode.end).cgColor]
+            "#FFACB3"
         case .pink:
-            [UIColor(hexCode: self.hexCode.start).cgColor, UIColor(hexCode: self.hexCode.end).cgColor]
+            "#FFACB3"
         case .green:
-            [UIColor(hexCode: self.hexCode.start).cgColor, UIColor(hexCode: self.hexCode.end).cgColor]
+            "#42AC5D"
         case .blue:
-            [UIColor(hexCode: self.hexCode.start).cgColor, UIColor(hexCode: self.hexCode.end).cgColor]
+            "#4EC1E6"
         case .purple:
-            [UIColor(hexCode: self.hexCode.start).cgColor, UIColor(hexCode: self.hexCode.end).cgColor]
+            "#73549D"
         case .black:
-            [UIColor(hexCode: self.hexCode.start).cgColor, UIColor(hexCode: self.hexCode.end).cgColor]
+            "#000000"
         }
     }
 }

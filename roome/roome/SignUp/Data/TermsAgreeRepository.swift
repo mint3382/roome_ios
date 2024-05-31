@@ -14,7 +14,7 @@ class TermsAgreeRepository: TermsAgreeRepositoryType {
             throw TypeError.bindingFailure
         }
         
-        let body: [String: Any] = ["ageOverFourteen": states.allAgree,
+        let body: [String: Any] = ["ageOverFourteen": states.ageAgree,
                                    "serviceAgreement": states.service,
                                    "personalInfoAgreement": states.personal,
                                    "marketingAgreement": states.advertise]

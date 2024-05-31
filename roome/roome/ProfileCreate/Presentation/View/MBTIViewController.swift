@@ -85,11 +85,16 @@ class MBTIViewController: UIViewController {
             }.store(in: &cancellables)
         
         output.handleNextButton
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
-            }.store(in: &cancellables)
+            .sink(receiveCompletion: { error in
+                //연결 실패 시
+            }, receiveValue: { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            })
+            .store(in: &cancellables)
         
         output.handleWillNotAddButton
             .sink { [weak self] result in
@@ -177,7 +182,7 @@ class MBTIViewController: UIViewController {
 
 extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ProfileModel.mbti.count
+        MBTIDTO.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -185,8 +190,8 @@ extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelega
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ProfileModel.mbti[indexPath.item].type)
-        cell.addDescription(ProfileModel.mbti[indexPath.item].description)
+        cell.changeTitle(MBTIDTO(rawValue: indexPath.row)!.title)
+        cell.addDescription(MBTIDTO(rawValue: indexPath.row)!.description)
         
         return cell
     }
