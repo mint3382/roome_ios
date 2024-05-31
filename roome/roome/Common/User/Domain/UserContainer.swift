@@ -51,4 +51,24 @@ class UserContainer {
         
         profile = try await APIProvider().fetchDecodedData(type: ProfileDTO.self, from: request)
     }
+    
+    func deleteUserProfile() async throws {
+        let userURL = URLBuilder(host: APIConstants.roomeHost,
+                                 path: APIConstants.Profile.profiles.rawValue,
+                                 queries: nil)
+        guard let url = userURL.url else {
+            throw TypeError.bindingFailure
+        }
+        
+        let accessToken = KeyChain.read(key: .accessToken) ?? ""
+        let header = ["Content-Type": "application/json",
+                      "Authorization": "Bearer \(accessToken)"]
+        let requestBuilder = RequestBuilder(url: url, method: .delete, headers: header)
+        guard let request = requestBuilder.create() else {
+            throw TypeError.bindingFailure
+        }
+        
+        profile = nil
+        _ = try await APIProvider().fetchData(from: request)
+    }
 }

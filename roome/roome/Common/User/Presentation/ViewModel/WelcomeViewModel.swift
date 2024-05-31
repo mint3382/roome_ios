@@ -15,8 +15,20 @@ class WelcomeViewModel {
     
     struct Output {
         let handleNext: AnyPublisher<Bool, Error>
+        let nextState: AnyPublisher<StateDTO, Never>
     }
+    
+    struct PopUpInput {
+        let newButton: AnyPublisher<Void, Never>
+        let stillButton: AnyPublisher<Void, Never>
+    }
+    
+    struct PopUpOutput {
+        let handleNext: AnyPublisher<Void, Never>
+    }
+    
     private var goToNext = PassthroughSubject<Bool, Error>()
+    private var profileState = PassthroughSubject<StateDTO, Never>()
     
     func transforms(_ input: Input) -> Output {
         let next = input.nextButton
@@ -31,7 +43,30 @@ class WelcomeViewModel {
             }
             .eraseToAnyPublisher()
         
-        return Output(handleNext: next)
+        let state = profileState
+            .eraseToAnyPublisher()
+        
+        return Output(handleNext: next, nextState: state)
+    }
+    
+    func popUpTransforms(_ input: PopUpInput) -> PopUpOutput {
+        let new = input.newButton
+            .map { [weak self] _ in
+                self?.deleteProfile()
+            }
+            .compactMap { [weak self] _ in
+                self?.profileState.send(.roomCount)
+            }.eraseToAnyPublisher()
+        
+        let still = input.stillButton
+            .compactMap { [weak self] _ in
+                self?.profileState.send(StateDTO(rawValue: UserContainer.shared.profile!.data.state)!)
+            }.eraseToAnyPublisher()
+        
+        let next = Publishers.Merge(new, still)
+            .eraseToAnyPublisher()
+        
+        return PopUpOutput(handleNext: next)
     }
     
     func handlePage() {
@@ -45,6 +80,16 @@ class WelcomeViewModel {
                 }
             } catch {
                 goToNext.send(completion: .failure(error))
+            }
+        }
+    }
+    
+    func deleteProfile() {
+        Task {
+            do {
+                try await UserContainer.shared.deleteUserProfile()
+            } catch {
+                //실패 시? 알림?
             }
         }
     }

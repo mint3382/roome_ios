@@ -129,7 +129,6 @@
 		9271F81F2C08D5E400586AFD /* StateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81E2C08D5E400586AFD /* StateDTO.swift */; };
 		9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8202C08D7B000586AFD /* ProfileDTO.swift */; };
 		9271F8232C095C3800586AFD /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8222C095C3800586AFD /* PopUpViewController.swift */; };
-		9271F8272C099F7800586AFD /* PopUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8262C099F7800586AFD /* PopUpViewModel.swift */; };
 		9271F8292C09A39900586AFD /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8282C09A39900586AFD /* PopUpView.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
@@ -260,7 +259,6 @@
 		9271F81E2C08D5E400586AFD /* StateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDTO.swift; sourceTree = "<group>"; };
 		9271F8202C08D7B000586AFD /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
 		9271F8222C095C3800586AFD /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
-		9271F8262C099F7800586AFD /* PopUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewModel.swift; sourceTree = "<group>"; };
 		9271F8282C09A39900586AFD /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -739,7 +737,6 @@
 			isa = PBXGroup;
 			children = (
 				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
-				9271F8262C099F7800586AFD /* PopUpViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -910,7 +907,6 @@
 				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
 				9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */,
 				9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */,
-				9271F8272C099F7800586AFD /* PopUpViewModel.swift in Sources */,
 				9271F80B2C08A2EF00586AFD /* DeviceLockRepository.swift in Sources */,
 				9271F7DF2C08594800586AFD /* DislikeDTO.swift in Sources */,
 				9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */,
