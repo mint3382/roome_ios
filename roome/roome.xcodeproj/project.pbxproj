@@ -129,6 +129,8 @@
 		9271F81F2C08D5E400586AFD /* StateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81E2C08D5E400586AFD /* StateDTO.swift */; };
 		9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8202C08D7B000586AFD /* ProfileDTO.swift */; };
 		9271F8232C095C3800586AFD /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8222C095C3800586AFD /* PopUpViewController.swift */; };
+		9271F8272C099F7800586AFD /* PopUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8262C099F7800586AFD /* PopUpViewModel.swift */; };
+		9271F8292C09A39900586AFD /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8282C09A39900586AFD /* PopUpView.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -258,6 +260,8 @@
 		9271F81E2C08D5E400586AFD /* StateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDTO.swift; sourceTree = "<group>"; };
 		9271F8202C08D7B000586AFD /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
 		9271F8222C095C3800586AFD /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		9271F8262C099F7800586AFD /* PopUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewModel.swift; sourceTree = "<group>"; };
+		9271F8282C09A39900586AFD /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -619,9 +623,9 @@
 		9271F7BE2C00ADAD00586AFD /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
-				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
-				9271F8222C095C3800586AFD /* PopUpViewController.swift */,
+				9271F82A2C09A3B200586AFD /* Custom */,
+				9271F8242C099F5800586AFD /* View */,
+				9271F8252C099F6000586AFD /* ViewModel */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -720,6 +724,32 @@
 				9271F7BB2C00AD9400586AFD /* User */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		9271F8242C099F5800586AFD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
+				9271F8222C095C3800586AFD /* PopUpViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9271F8252C099F6000586AFD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
+				9271F8262C099F7800586AFD /* PopUpViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9271F82A2C09A3B200586AFD /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				9271F8282C09A39900586AFD /* PopUpView.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
@@ -862,6 +892,7 @@
 				9271F7F92C089D0200586AFD /* ThemeSelectRepository.swift in Sources */,
 				9271F8092C08A2BE00586AFD /* DeviceLockUseCase.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
+				9271F8292C09A39900586AFD /* PopUpView.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
 				9271F7ED2C086D0F00586AFD /* MbtiUseCase.swift in Sources */,
@@ -879,6 +910,7 @@
 				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
 				9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */,
 				9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */,
+				9271F8272C099F7800586AFD /* PopUpViewModel.swift in Sources */,
 				9271F80B2C08A2EF00586AFD /* DeviceLockRepository.swift in Sources */,
 				9271F7DF2C08594800586AFD /* DislikeDTO.swift in Sources */,
 				9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */,
