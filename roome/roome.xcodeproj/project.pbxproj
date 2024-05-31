@@ -126,6 +126,9 @@
 		9271F8192C08D19600586AFD /* ColorRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8182C08D19600586AFD /* ColorRepositoryType.swift */; };
 		9271F81B2C08D1BE00586AFD /* ColorUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81A2C08D1BE00586AFD /* ColorUseCase.swift */; };
 		9271F81D2C08D21400586AFD /* ColorRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81C2C08D21400586AFD /* ColorRepository.swift */; };
+		9271F81F2C08D5E400586AFD /* StateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81E2C08D5E400586AFD /* StateDTO.swift */; };
+		9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8202C08D7B000586AFD /* ProfileDTO.swift */; };
+		9271F8232C095C3800586AFD /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8222C095C3800586AFD /* PopUpViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -252,6 +255,9 @@
 		9271F8182C08D19600586AFD /* ColorRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRepositoryType.swift; sourceTree = "<group>"; };
 		9271F81A2C08D1BE00586AFD /* ColorUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUseCase.swift; sourceTree = "<group>"; };
 		9271F81C2C08D21400586AFD /* ColorRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRepository.swift; sourceTree = "<group>"; };
+		9271F81E2C08D5E400586AFD /* StateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDTO.swift; sourceTree = "<group>"; };
+		9271F8202C08D7B000586AFD /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
+		9271F8222C095C3800586AFD /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -288,7 +294,6 @@
 		921694F52BF21E5C006DC44A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
-				9271F7CF2C038C5A00586AFD /* Common */,
 				921695442BF9B64E006DC44A /* CustomUI */,
 				9271F7C22C00AF6800586AFD /* KeyChain */,
 				921694FF2BF22096006DC44A /* Error */,
@@ -598,6 +603,7 @@
 			isa = PBXGroup;
 			children = (
 				921695522BFB2A3D006DC44A /* UserDTO.swift */,
+				9271F8202C08D7B000586AFD /* ProfileDTO.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -615,6 +621,7 @@
 			children = (
 				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
 				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
+				9271F8222C095C3800586AFD /* PopUpViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -684,6 +691,7 @@
 		9271F7C32C00AF9600586AFD /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				9271F81E2C08D5E400586AFD /* StateDTO.swift */,
 				9271F7D02C04742600586AFD /* GenreDTO.swift */,
 				9271F7E62C0865EB00586AFD /* MBTIDTO.swift */,
 				9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */,
@@ -742,6 +750,7 @@
 				9271F7A92C00ABAC00586AFD /* Login */,
 				9271F7AD2C00AC5600586AFD /* SignUp */,
 				9271F7B52C00AD3F00586AFD /* ProfileCreate */,
+				9271F7CF2C038C5A00586AFD /* Common */,
 				921694F52BF21E5C006DC44A /* Infrastructure */,
 				9216952A2BF712A0006DC44A /* Resources */,
 				92DBDA0B2BCFCF5B00E299E2 /* Assets.xcassets */,
@@ -842,6 +851,7 @@
 				9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */,
 				9271F7EF2C08989C00586AFD /* StrengthRepositoryType.swift in Sources */,
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
+				9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */,
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				9271F8132C08A53400586AFD /* DislikeRepositoryType.swift in Sources */,
@@ -855,6 +865,7 @@
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
 				9271F7ED2C086D0F00586AFD /* MbtiUseCase.swift in Sources */,
+				9271F81F2C08D5E400586AFD /* StateDTO.swift in Sources */,
 				9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */,
 				921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */,
 				921695152BF35377006DC44A /* LoginRepository.swift in Sources */,
@@ -873,6 +884,7 @@
 				9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
+				9271F8232C095C3800586AFD /* PopUpViewController.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
 				921695592BFB8D38006DC44A /* UserContainer.swift in Sources */,
 				9271F7FF2C089ECF00586AFD /* HorrorThemeRepository.swift in Sources */,
