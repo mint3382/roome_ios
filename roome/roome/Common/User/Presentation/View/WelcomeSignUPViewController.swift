@@ -105,7 +105,7 @@ class WelcomeSignUPViewController: UIViewController {
             }, receiveValue: { [weak self] state in
                 Task { @MainActor in
                     if state {
-                        let popUpViewController = PopUpViewController()
+                        let popUpViewController = PopUpViewController(viewModel: PopUpViewModel())
                         popUpViewController.modalPresentationStyle = .overFullScreen
                         self?.present(popUpViewController, animated: false)
                     } else {
