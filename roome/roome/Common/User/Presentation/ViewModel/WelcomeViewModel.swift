@@ -90,6 +90,7 @@ class WelcomeViewModel {
                 try await UserContainer.shared.deleteUserProfile()
             } catch {
                 //실패 시? 알림?
+                print(error)
             }
         }
     }

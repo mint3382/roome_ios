@@ -19,12 +19,12 @@ struct ProfileDTO: Codable {
         let mbti: String
         let userStrengths: [Detail]
         let themeImportantFactors: [Detail]
-        let horrorThemePosition: Detail
-        let hintUsagePreference: Detail
-        let deviceLockPreference: Detail
-        let activity: Detail
+        let horrorThemePosition: Detail?
+        let hintUsagePreference: Detail?
+        let deviceLockPreference: Detail?
+        let activity: Detail?
         let themeDislikedFactors: [Detail]
-        let color: ColorDTO
+        let color: ColorDTO?
         
         struct Detail: Codable {
             let id: Int
