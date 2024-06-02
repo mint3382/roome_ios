@@ -16,10 +16,12 @@ class ColorSelectViewModel {
     struct Output {
         let handleCellSelect: AnyPublisher<Void, Error>
         let handleBackButton: AnyPublisher<Void, Never>
+        let handleNextPage: AnyPublisher<Void, Never>
     }
     
     var selectCell = PassthroughSubject<IndexPath, Never>()
-    private var goToNext = PassthroughSubject<Void, Error>()
+    private var loading = PassthroughSubject<Void, Error>()
+    private var goToNext = PassthroughSubject<Void, Never>()
     private var useCase: ColorUseCase
     
     init(useCase: ColorUseCase) {
@@ -35,24 +37,30 @@ class ColorSelectViewModel {
                 self
             }
             .flatMap{ owner in
-                owner.goToNext
+                owner.loading
             }
             .eraseToAnyPublisher()
         
         let back = input.tapBackButton
             .eraseToAnyPublisher()
         
+        let next = goToNext
+            .eraseToAnyPublisher()
+        
         return Output(handleCellSelect: cellSelect,
-                      handleBackButton: back)
+                      handleBackButton: back,
+                      handleNextPage: next)
     }
     
     func handlePage(id: Int) {
         Task {
             do {
                 try await useCase.colorWithAPI(id: id)
-                goToNext.send()
+                loading.send()
+                try await UserContainer.shared.updateUserProfile()
+//                goToNext.send()
             } catch {
-                goToNext.send(completion: .failure(error))
+                loading.send(completion: .failure(error))
             }
         }
     }

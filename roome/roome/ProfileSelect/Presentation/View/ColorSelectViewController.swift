@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class ColorSelectViewController: UIViewController {
+class ColorSelectViewController: UIViewController, LoadingProtocol {
     private let titleLabel = TitleLabel(text: "프로필 배경으로 쓰일\n색상을 골라주세요")
     lazy var profileCount = ProfileStateLineView(pageNumber: 11, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
@@ -46,15 +46,22 @@ class ColorSelectViewController: UIViewController {
                 //실패 시
             }, receiveValue: { [weak self] _ in
                 Task { @MainActor in
-                    let nextViewController = DIContainer.shared.resolve(WaitingViewController.self)
-                    
-                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                    self?.show()
                 }
             }).store(in: &cancellables)
         
         output.handleBackButton
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
+            }.store(in: &cancellables)
+        
+        output.handleNextPage
+            .sink { [weak self] _ in
+                Task { @MainActor in
+                    let nextViewController = DIContainer.shared.resolve(WaitingViewController.self)
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
+                }
             }.store(in: &cancellables)
         
     }
