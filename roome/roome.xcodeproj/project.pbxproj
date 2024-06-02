@@ -130,6 +130,9 @@
 		9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8202C08D7B000586AFD /* ProfileDTO.swift */; };
 		9271F8232C095C3800586AFD /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8222C095C3800586AFD /* PopUpViewController.swift */; };
 		9271F8292C09A39900586AFD /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8282C09A39900586AFD /* PopUpView.swift */; };
+		928474702C0AE4EA002C3B4C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9284746F2C0AE4EA002C3B4C /* Lottie */; };
+		928474722C0CE4AA002C3B4C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474712C0CE4AA002C3B4C /* LoadingView.swift */; };
+		928474742C0CE52D002C3B4C /* LoadingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474732C0CE52D002C3B4C /* LoadingProtocol.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -260,6 +263,8 @@
 		9271F8202C08D7B000586AFD /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
 		9271F8222C095C3800586AFD /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		9271F8282C09A39900586AFD /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
+		928474712C0CE4AA002C3B4C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		928474732C0CE52D002C3B4C /* LoadingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingProtocol.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +282,7 @@
 				921695212BF4D600006DC44A /* KakaoSDKCommon in Frameworks */,
 				921695232BF4D60E006DC44A /* KakaoSDKAuth in Frameworks */,
 				921695252BF4D613006DC44A /* KakaoSDKUser in Frameworks */,
+				928474702C0AE4EA002C3B4C /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +375,7 @@
 			children = (
 				9271F7992C009A3E00586AFD /* ToastAlertable.swift */,
 				9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */,
+				928474752C0CE53F002C3B4C /* Loading */,
 				921695022BF22DB4006DC44A /* Extension */,
 				9216959F2BFE72F7006DC44A /* Label */,
 				9216959E2BFE72E2006DC44A /* Button */,
@@ -749,6 +756,15 @@
 			path = Custom;
 			sourceTree = "<group>";
 		};
+		928474752C0CE53F002C3B4C /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				928474712C0CE4AA002C3B4C /* LoadingView.swift */,
+				928474732C0CE52D002C3B4C /* LoadingProtocol.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -806,6 +822,7 @@
 				921695202BF4D600006DC44A /* KakaoSDKCommon */,
 				921695222BF4D60E006DC44A /* KakaoSDKAuth */,
 				921695242BF4D613006DC44A /* KakaoSDKUser */,
+				9284746F2C0AE4EA002C3B4C /* Lottie */,
 			);
 			productName = roome;
 			productReference = 92DBD9FF2BCFCF5900E299E2 /* roome.app */;
@@ -837,6 +854,7 @@
 			mainGroup = 92DBD9F62BCFCF5900E299E2;
 			packageReferences = (
 				9216951D2BF4C0E7006DC44A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				9284746E2C0AE4EA002C3B4C /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 92DBDA002BCFCF5900E299E2 /* Products */;
 			projectDirPath = "";
@@ -879,6 +897,7 @@
 				9271F7EF2C08989C00586AFD /* StrengthRepositoryType.swift in Sources */,
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */,
+				928474742C0CE52D002C3B4C /* LoadingProtocol.swift in Sources */,
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				9271F8132C08A53400586AFD /* DislikeRepositoryType.swift in Sources */,
@@ -975,6 +994,7 @@
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
 				9271F7DB2C0857E500586AFD /* DeviceLockDTO.swift in Sources */,
 				9271F8012C08A0E100586AFD /* HintRepositoryType.swift in Sources */,
+				928474722C0CE4AA002C3B4C /* LoadingView.swift in Sources */,
 				9271F7D52C04B32400586AFD /* ImportantFactorDTO.swift in Sources */,
 				9271F8192C08D19600586AFD /* ColorRepositoryType.swift in Sources */,
 				9271F7E32C08605A00586AFD /* GenreRepositoryType.swift in Sources */,
@@ -1213,6 +1233,14 @@
 				kind = branch;
 			};
 		};
+		9284746E2C0AE4EA002C3B4C /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1230,6 +1258,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9216951D2BF4C0E7006DC44A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		9284746F2C0AE4EA002C3B4C /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9284746E2C0AE4EA002C3B4C /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
