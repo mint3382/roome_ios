@@ -23,6 +23,12 @@ class ProfileViewController: UIViewController {
     private let rectangleButton = SizeButton(title: SizeDTO.rectangle.title, isSelected: false)
     private let saveButton = NextButton(title: "저장하기", backgroundColor: .roomeMain, tintColor: .white)
     private let pageButton = NextButton(title: "프로필 페이지로 이동", backgroundColor: .clear, tintColor: .lightGray)
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    private lazy var popUpView = PopUpView(frame: window!.frame,
+                                   title: "저장 완료",
+                                   description: "내 사진에 저장되었어요",
+                                   colorButtonTitle: "확인",
+                                   isWhiteButton: false)
     private var viewModel: ProfileViewModel
     private var cancellable = Set<AnyCancellable>()
     
@@ -53,20 +59,27 @@ class ProfileViewController: UIViewController {
             .eraseToAnyPublisher()
         let next = pageButton.publisher(for: .touchUpInside)
             .eraseToAnyPublisher()
+        let okay = popUpView.colorButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
         let input = ProfileViewModel.Input(tapBackButton: back,
                                            tapSquareButton: square,
                                            tapRectangleButton: rectangle,
                                            tapSaveButton: save,
-                                           tapNextButton: next)
+                                           tapNextButton: next,
+                                           tapOkayButton: okay)
         let output = viewModel.transform(input)
         
         output.handleSaveButton
             .sink { [weak self] _ in
                 let image = self?.profileView.asImage() ?? UIImage(resource: .sample)
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                self?.window?.addSubview(self!.popUpView)
             }.store(in: &cancellable)
         
-//        output.
+        output.handleOkayButton
+            .sink { [weak self] _ in
+                self?.popUpView.removeFromSuperview()
+            }.store(in: &cancellable)
     }
     
     func configureUI() {

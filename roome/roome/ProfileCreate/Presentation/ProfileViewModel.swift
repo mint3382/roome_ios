@@ -15,6 +15,7 @@ class ProfileViewModel {
         let tapRectangleButton: AnyPublisher<Void, Never>
         let tapSaveButton: AnyPublisher<Void, Never>
         let tapNextButton: AnyPublisher<Void, Never>
+        let tapOkayButton: AnyPublisher<Void, Never>
     }
     
     struct Output {
@@ -23,6 +24,7 @@ class ProfileViewModel {
         let handleSaveButton: AnyPublisher<Void, Never>
         let handleNextButton: AnyPublisher<Void, Never>
         let handleBackButton: AnyPublisher<Void, Never>
+        let handleOkayButton: AnyPublisher<Void, Never>
     }
     
     func transform(_ input: Input) -> Output {
@@ -41,12 +43,16 @@ class ProfileViewModel {
         let next = input.tapNextButton
             .eraseToAnyPublisher()
         
+        let okay = input.tapOkayButton
+            .eraseToAnyPublisher()
+        
         
         return Output(handleSquareButton: square,
                       handleRectangleButton: rectangle,
                       handleSaveButton: save,
                       handleNextButton: next,
-                      handleBackButton: back)
+                      handleBackButton: back,
+                      handleOkayButton: okay)
     }
 }
 
