@@ -133,6 +133,9 @@
 		928474722C0CE4AA002C3B4C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474712C0CE4AA002C3B4C /* LoadingView.swift */; };
 		928474742C0CE52D002C3B4C /* LoadingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474732C0CE52D002C3B4C /* LoadingProtocol.swift */; };
 		9284747B2C0CE6BE002C3B4C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747A2C0CE6BE002C3B4C /* ProfileViewController.swift */; };
+		9284747D2C0D6721002C3B4C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747C2C0D6721002C3B4C /* ProfileView.swift */; };
+		9284747F2C0D9EE3002C3B4C /* ProfileLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */; };
+		928474812C0D9F0F002C3B4C /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474802C0D9F0F002C3B4C /* UIStackView+.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -265,6 +268,9 @@
 		928474712C0CE4AA002C3B4C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		928474732C0CE52D002C3B4C /* LoadingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingProtocol.swift; sourceTree = "<group>"; };
 		9284747A2C0CE6BE002C3B4C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9284747C2C0D6721002C3B4C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLabel.swift; sourceTree = "<group>"; };
+		928474802C0D9F0F002C3B4C /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -339,6 +345,7 @@
 				921695032BF22DCD006DC44A /* UIImage+.swift */,
 				9216954B2BFA65EE006DC44A /* UIControl+.swift */,
 				9271F7C72C00B6D200586AFD /* UIColor+.swift */,
+				928474802C0D9F0F002C3B4C /* UIStackView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -405,6 +412,7 @@
 		9216959F2BFE72F7006DC44A /* Label */ = {
 			isa = PBXGroup;
 			children = (
+				9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */,
 				921695452BF9B661006DC44A /* PaddingLabel.swift */,
 				921695832BFE03AE006DC44A /* TitleLabel.swift */,
 				921695852BFE08C9006DC44A /* DescriptionLabel.swift */,
@@ -778,6 +786,7 @@
 			isa = PBXGroup;
 			children = (
 				9284747A2C0CE6BE002C3B4C /* ProfileViewController.swift */,
+				9284747C2C0D6721002C3B4C /* ProfileView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -930,6 +939,7 @@
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */,
 				928474742C0CE52D002C3B4C /* LoadingProtocol.swift in Sources */,
+				9284747D2C0D6721002C3B4C /* ProfileView.swift in Sources */,
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				9271F8132C08A53400586AFD /* DislikeRepositoryType.swift in Sources */,
@@ -941,6 +951,7 @@
 				9271F8092C08A2BE00586AFD /* DeviceLockUseCase.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9271F8292C09A39900586AFD /* PopUpView.swift in Sources */,
+				928474812C0D9F0F002C3B4C /* UIStackView+.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
 				9271F7ED2C086D0F00586AFD /* MbtiUseCase.swift in Sources */,
@@ -1022,6 +1033,7 @@
 				9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */,
 				9216956E2BFC9381006DC44A /* WelcomeSignUPViewController.swift in Sources */,
 				921695672BFC68A7006DC44A /* TypeError.swift in Sources */,
+				9284747F2C0D9EE3002C3B4C /* ProfileLabel.swift in Sources */,
 				921695512BFB1A71006DC44A /* SplashView.swift in Sources */,
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
 				9271F7DB2C0857E500586AFD /* DeviceLockDTO.swift in Sources */,
