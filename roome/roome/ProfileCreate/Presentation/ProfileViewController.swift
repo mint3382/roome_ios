@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ProfileViewController: UIViewController {
     private let backButton = BackButton()
@@ -18,17 +19,54 @@ class ProfileViewController: UIViewController {
         return label
     }()
     lazy var profileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width))
-    
     private let squareButton = SizeButton(title: SizeDTO.square.title, isSelected: true)
     private let rectangleButton = SizeButton(title: SizeDTO.rectangle.title, isSelected: false)
-    
     private let saveButton = NextButton(title: "저장하기", backgroundColor: .roomeMain, tintColor: .white)
     private let pageButton = NextButton(title: "프로필 페이지로 이동", backgroundColor: .clear, tintColor: .lightGray)
-
+    private var viewModel: ProfileViewModel
+    private var cancellable = Set<AnyCancellable>()
+    
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureUI()
+        bind()
+    }
+    
+    func bind() {
+        let back = backButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+        let square = squareButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+        let rectangle = rectangleButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+        let save = saveButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+        let next = pageButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+        let input = ProfileViewModel.Input(tapBackButton: back,
+                                           tapSquareButton: square,
+                                           tapRectangleButton: rectangle,
+                                           tapSaveButton: save,
+                                           tapNextButton: next)
+        let output = viewModel.transform(input)
+        
+        output.handleSaveButton
+            .sink { [weak self] _ in
+                let image = self?.profileView.asImage() ?? UIImage(resource: .sample)
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }.store(in: &cancellable)
+        
+//        output.
     }
     
     func configureUI() {

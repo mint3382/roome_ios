@@ -205,3 +205,12 @@ class ProfileView: UIView {
         lineStackView6.addArrangedSubview(textLabel)
     }
 }
+
+extension ProfileView {
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: frame.size)
+        return renderer.image { context in
+            layer.render(in: context.cgContext)
+        }
+    }
+}
