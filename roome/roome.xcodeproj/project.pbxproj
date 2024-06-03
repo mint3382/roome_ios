@@ -137,6 +137,7 @@
 		9284747F2C0D9EE3002C3B4C /* ProfileLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */; };
 		928474812C0D9F0F002C3B4C /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474802C0D9F0F002C3B4C /* UIStackView+.swift */; };
 		928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474822C0DA12B002C3B4C /* SizeDTO.swift */; };
+		928474852C0DB4F9002C3B4C /* SizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474842C0DB4F9002C3B4C /* SizeButton.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -273,6 +274,7 @@
 		9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLabel.swift; sourceTree = "<group>"; };
 		928474802C0D9F0F002C3B4C /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		928474822C0DA12B002C3B4C /* SizeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeDTO.swift; sourceTree = "<group>"; };
+		928474842C0DB4F9002C3B4C /* SizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeButton.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 				921695472BF9FC5B006DC44A /* LabelButton.swift */,
 				921695812BFE021B006DC44A /* BackButton.swift */,
 				921695872BFE0958006DC44A /* NextButton.swift */,
+				928474842C0DB4F9002C3B4C /* SizeButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -975,6 +978,7 @@
 				9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */,
 				9271F80B2C08A2EF00586AFD /* DeviceLockRepository.swift in Sources */,
 				9271F7DF2C08594800586AFD /* DislikeDTO.swift in Sources */,
+				928474852C0DB4F9002C3B4C /* SizeButton.swift in Sources */,
 				9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,

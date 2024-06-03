@@ -17,25 +17,25 @@ class ProfileViewController: UIViewController {
         
         return label
     }()
-    lazy var profileView = ProfileView(frame: view.frame)
-    private lazy var flowLayout = self.createFlowLayout()
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+    lazy var profileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width))
+    
+    private let squareButton = SizeButton(title: SizeDTO.square.title, isSelected: true)
+    private let rectangleButton = SizeButton(title: SizeDTO.rectangle.title, isSelected: false)
+    
     private let saveButton = NextButton(title: "저장하기", backgroundColor: .roomeMain, tintColor: .white)
     private let pageButton = NextButton(title: "프로필 페이지로 이동", backgroundColor: .clear, tintColor: .lightGray)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "cell")
+        view.backgroundColor = .systemBackground
         configureUI()
     }
     
     func configureUI() {
         configureNavigation()
         configureProfileView()
-        setUpCollectionView()
         configureNextButton()
+        configureSizeButtons()
     }
     
     func configureNavigation() {
@@ -63,19 +63,23 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    func setUpCollectionView() {
-        collectionView.alwaysBounceVertical = true
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.allowsMultipleSelection = true
-        view.addSubview(collectionView)
+    func configureSizeButtons() {
+        view.addSubview(squareButton)
+        view.addSubview(rectangleButton)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: profileView.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            squareButton.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 24),
+            squareButton.heightAnchor.constraint(equalToConstant: 50),
+            squareButton.leadingAnchor.constraint(equalTo: saveButton.leadingAnchor),
+            squareButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.44)
         ])
         
+        NSLayoutConstraint.activate([
+            rectangleButton.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 24),
+            rectangleButton.heightAnchor.constraint(equalToConstant: 50),
+            rectangleButton.trailingAnchor.constraint(equalTo: saveButton.trailingAnchor),
+            rectangleButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.44)
+        ])
     }
     
     private func configureNextButton() {
@@ -96,38 +100,4 @@ class ProfileViewController: UIViewController {
             pageButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         ])
     }
-
-    func createFlowLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: view.frame.width * 0.42, height: 50)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 24, bottom: 50, right: 24)
-        
-        return layout
-    }
-}
-
-extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        SizeDTO.allCases.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ButtonCell
-        else {
-            return UICollectionViewCell()
-        }
-        cell.changeTitle(SizeDTO(rawValue: indexPath.row)!.title)
-        
-        return cell
-    }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        viewModel.selectCell.send(indexPath)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        viewModel.deselectItem(indexPath)
-//    }
 }
