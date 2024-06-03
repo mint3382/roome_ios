@@ -66,6 +66,14 @@ class WelcomeSignUPViewController: UIViewController {
         return button
     }()
     
+    let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    lazy var popUpView = PopUpView(frame: window!.frame,
+                                   title: "제작 중인 프로필이 있어요",
+                                   description: "이어서 만드시겠어요?",
+                                   whiteButtonTitle: "처음부터 하기",
+                                   colorButtonTitle: "이어서 하기",
+                                   isWhiteButton: true)
+    
     private let viewModel: WelcomeViewModel
     private var cancellables = Set<AnyCancellable>()
     
@@ -95,9 +103,12 @@ class WelcomeSignUPViewController: UIViewController {
     }
     
     func bind() {
-        let input = makeProfileButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let next = makeProfileButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let start = popUpView.whiteButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        let still = popUpView.colorButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         
-        let output = viewModel.transforms(WelcomeViewModel.Input(nextButton: input))
+        let output = viewModel.transforms(WelcomeViewModel.Input(nextButton: next))
+        let popUpOutput = viewModel.popUpTransforms(WelcomeViewModel.PopUpInput(newButton: start, stillButton: still))
         
         output.handleNext
             .sink(receiveCompletion: { error in
@@ -105,9 +116,7 @@ class WelcomeSignUPViewController: UIViewController {
             }, receiveValue: { [weak self] state in
                 Task { @MainActor in
                     if state {
-                        let popUpViewController = PopUpViewController(viewModel: self!.viewModel)
-                        popUpViewController.modalPresentationStyle = .overFullScreen
-                        self?.present(popUpViewController, animated: false)
+                        self?.window?.addSubview(self!.popUpView)
                     } else {
                         let nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
                         self?.navigationController?.pushViewController(nextPage, animated: true)
@@ -145,6 +154,11 @@ class WelcomeSignUPViewController: UIViewController {
                     nextPage = DIContainer.shared.resolve(ProfileViewController.self)
                 }
                 self?.navigationController?.pushViewController(nextPage, animated: true)
+            }.store(in: &cancellables)
+        
+        popUpOutput.handleNext
+            .sink { [weak self] _ in
+                self?.popUpView.removeFromSuperview()
             }.store(in: &cancellables)
     }
     
