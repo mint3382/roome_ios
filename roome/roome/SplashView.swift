@@ -47,6 +47,7 @@ class SplashView: UIViewController {
     
     func goToLogin() {
         let viewController = DIContainer.shared.resolve(LoginViewController.self)
+        let viewController2 = ProfileViewController()
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
             .changeRootViewController(viewController, animated: true)
@@ -177,7 +178,7 @@ class SplashView: UIViewController {
         let colorSelectViewController = ColorSelectViewController(viewModel: colorViewModel)
         DIContainer.shared.register(ColorSelectViewController.self, dependency: colorSelectViewController)
         
-        let waitingViewController = WaitingViewController()
-        DIContainer.shared.register(WaitingViewController.self, dependency: waitingViewController)
+        let profileViewController = ProfileViewController()
+        DIContainer.shared.register(ProfileViewController.self, dependency: profileViewController)
     }
 }

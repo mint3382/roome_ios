@@ -86,7 +86,6 @@
 		9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C72C00B6D200586AFD /* UIColor+.swift */; };
 		9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C92C00B70200586AFD /* BackgroundColor.swift */; };
 		9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */; };
-		9271F7CE2C00E71300586AFD /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7CD2C00E71300586AFD /* WaitingViewController.swift */; };
 		9271F7D12C04742600586AFD /* GenreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D02C04742600586AFD /* GenreDTO.swift */; };
 		9271F7D32C04B1CE00586AFD /* StrengthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */; };
 		9271F7D52C04B32400586AFD /* ImportantFactorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D42C04B32400586AFD /* ImportantFactorDTO.swift */; };
@@ -220,7 +219,6 @@
 		9271F7C72C00B6D200586AFD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		9271F7C92C00B70200586AFD /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
 		9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewModel.swift; sourceTree = "<group>"; };
-		9271F7CD2C00E71300586AFD /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		9271F7D02C04742600586AFD /* GenreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreDTO.swift; sourceTree = "<group>"; };
 		9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthDTO.swift; sourceTree = "<group>"; };
 		9271F7D42C04B32400586AFD /* ImportantFactorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantFactorDTO.swift; sourceTree = "<group>"; };
@@ -595,7 +593,6 @@
 				9271F78B2BFF049F00586AFD /* ActivityViewController.swift */,
 				921695A42BFE786B006DC44A /* DislikeViewController.swift */,
 				9271F7A72C00A8E100586AFD /* ColorSelectViewController.swift */,
-				9271F7CD2C00E71300586AFD /* WaitingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -977,7 +974,6 @@
 				9271F8152C08A55700586AFD /* DislikeUseCase.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
 				9271F7F12C08990000586AFD /* StrengthUseCase.swift in Sources */,
-				9271F7CE2C00E71300586AFD /* WaitingViewController.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,

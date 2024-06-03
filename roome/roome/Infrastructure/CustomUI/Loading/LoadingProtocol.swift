@@ -10,17 +10,19 @@ import UIKit
 protocol LoadingProtocol where Self: UIViewController { }
 
 extension LoadingProtocol {
-    func show() {
+    func show() -> LoadingView {
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         let window = windowScene?.windows.first
         
-        let lottieView = LoadingView(frame: window!.frame)
+        let loadingView = LoadingView(frame: window!.frame)
         
-        window?.addSubview(lottieView)
+        window?.addSubview(loadingView)
+        
+        return loadingView
     }
     
-    func hide() {
-        self.removeFromParent()
+    func hide(loadingView: LoadingView) {
+        loadingView.removeFromSuperview()
     }
 }

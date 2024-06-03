@@ -58,11 +58,11 @@ class ColorSelectViewModel {
                 try await useCase.colorWithAPI(id: id)
                 loading.send()
                 try await UserContainer.shared.updateUserProfile()
-//                goToNext.send()
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+                goToNext.send()
             } catch {
                 loading.send(completion: .failure(error))
             }
         }
     }
 }
-
