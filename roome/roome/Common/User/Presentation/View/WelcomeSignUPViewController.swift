@@ -142,7 +142,7 @@ class WelcomeSignUPViewController: UIViewController {
                 case .color:
                     nextPage = DIContainer.shared.resolve(ColorSelectViewController.self)
                 case .complete:
-                    nextPage = DIContainer.shared.resolve(WaitingViewController.self)
+                    nextPage = DIContainer.shared.resolve(ProfileViewController.self)
                 }
                 self?.navigationController?.pushViewController(nextPage, animated: true)
             }.store(in: &cancellables)

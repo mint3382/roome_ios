@@ -136,6 +136,7 @@
 		9284747D2C0D6721002C3B4C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747C2C0D6721002C3B4C /* ProfileView.swift */; };
 		9284747F2C0D9EE3002C3B4C /* ProfileLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */; };
 		928474812C0D9F0F002C3B4C /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474802C0D9F0F002C3B4C /* UIStackView+.swift */; };
+		928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474822C0DA12B002C3B4C /* SizeDTO.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -271,6 +272,7 @@
 		9284747C2C0D6721002C3B4C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLabel.swift; sourceTree = "<group>"; };
 		928474802C0D9F0F002C3B4C /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		928474822C0DA12B002C3B4C /* SizeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeDTO.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -801,6 +803,7 @@
 		928474792C0CE688002C3B4C /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				928474822C0DA12B002C3B4C /* SizeDTO.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
 				9271F7F12C08990000586AFD /* StrengthUseCase.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
+				928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
 				9216958D2BFE10F7006DC44A /* RoomCountUseCase.swift in Sources */,
