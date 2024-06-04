@@ -25,6 +25,7 @@ class NextButton: UIButton {
         self.isEnabled = true
         self.backgroundColor = backgroundColor
         self.tintColor = tintColor
+        self.setTitleColor(tintColor, for: .normal)
     }
 
     required init?(coder: NSCoder) {

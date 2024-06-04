@@ -24,6 +24,10 @@ class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func updateGradient() {
+        gradientLayer.frame = self.bounds
+    }
+    
     private func configureBackgroundColor() {
         gradientLayer.frame = self.bounds
         
@@ -66,9 +70,8 @@ class ProfileView: UIView {
     private let lineStackView6 = UIStackView(number: 6)
     
     private func configureIntroduceStackView() {
-        let nicknameLabel = UILabel()
-        nicknameLabel.text = UserContainer.shared.user?.data.nickname
-        nicknameLabel.font = UIFont().pretendardBold(size: .title2)
+        let nickname = UserContainer.shared.user?.data.nickname
+        let nicknameLabel = UILabel(description: nickname, font: UIFont().pretendardBold(size: .title2))
         
         let roomCount = ProfileLabel(text: profile?.data.count, isIntroduceLine: true)
         
@@ -101,12 +104,8 @@ class ProfileView: UIView {
     }
     
     func configureSignature() {
-        let label = UILabel()
-        label.text = "©Roome"
-        label.font = UIFont().pretendardRegular(size: .caption)
-        label.textColor = .white
+        let label = UILabel(description: "©Roome", font: UIFont().pretendardRegular(size: .caption))
         label.textAlignment = .right
-        label.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(label)
         
@@ -143,22 +142,16 @@ class ProfileView: UIView {
     
     private func configureLineStackView1() {
         let labels = profile?.data.preferredGenres.compactMap { ProfileLabel(text: $0.title) }
-        let textLabel = UILabel()
-        textLabel.text = "좋아해요"
-        textLabel.font = UIFont().pretendardRegular(size: .body1)
+        let textLabel = UILabel(description: "좋아해요")
         
         labels?.forEach { lineStackView1.addArrangedSubview($0) }
         lineStackView1.addArrangedSubview(textLabel)
     }
     
     private func configureLineStackView2() {
-        let textLabel1 = UILabel()
+        let textLabel1 = UILabel(description: "강점은")
         let labels = profile?.data.userStrengths.compactMap { ProfileLabel(text: $0.title) }
-        let textLabel2 = UILabel()
-        textLabel1.text = "강점은"
-        textLabel1.font = UIFont().pretendardRegular(size: .body1)
-        textLabel2.text = "입니다"
-        textLabel2.font = UIFont().pretendardRegular(size: .body1)
+        let textLabel2 = UILabel(description: "입니다")
         
         lineStackView2.addArrangedSubview(textLabel1)
         labels?.forEach { lineStackView2.addArrangedSubview($0) }
@@ -167,9 +160,7 @@ class ProfileView: UIView {
     
     private func configureLineStackView3() {
         let labels = profile?.data.themeImportantFactors.compactMap { ProfileLabel(text: $0.title) }
-        let textLabel = UILabel()
-        textLabel.text = "중요해요"
-        textLabel.font = UIFont().pretendardRegular(size: .body1)
+        let textLabel = UILabel(description: "중요해요")
         
         labels?.forEach { lineStackView3.addArrangedSubview($0) }
         lineStackView3.addArrangedSubview(textLabel)
@@ -197,20 +188,37 @@ class ProfileView: UIView {
     
     private func configureLineStackView6() {
         let labels = profile?.data.themeDislikedFactors.compactMap { ProfileLabel(text: $0.title) }
-        let textLabel = UILabel()
-        textLabel.text = "싫어요"
-        textLabel.font = UIFont().pretendardRegular(size: .body1)
+        let textLabel = UILabel(description: "싫어요")
         
         labels?.forEach { lineStackView6.addArrangedSubview($0) }
         lineStackView6.addArrangedSubview(textLabel)
     }
 }
 
+extension UILabel {
+    convenience init (description: String?, textColor: UIColor = .white, font: UIFont = UIFont().pretendardRegular(size: .body1)) {
+        self.init(frame: .zero)
+        self.text = description
+        self.textColor = textColor
+        self.font = font
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
 extension ProfileView {
-    func asImage() -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: frame.size)
-        return renderer.image { context in
-            layer.render(in: context.cgContext)
-        }
+    func asImage() -> UIImage? {
+//        let renderer = UIGraphicsImageRenderer(size: frame.size)
+//        return renderer.image { context in
+//            layer.render(in: context.cgContext)
+//        }
+        
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        context.saveGState()
+        layer.render(in: context)
+        context.restoreGState()
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+        UIGraphicsEndImageContext()
+        return image
     }
 }

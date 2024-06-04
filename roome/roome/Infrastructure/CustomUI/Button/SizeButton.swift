@@ -11,6 +11,7 @@ class SizeButton: UIButton {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         self.tintColor = .label
+        self.setTitleColor(.label, for: .normal)
         self.layer.cornerRadius = 10
         self.titleLabel?.font = UIFont().pretendardBold(size: .title2)
         self.translatesAutoresizingMaskIntoConstraints = false

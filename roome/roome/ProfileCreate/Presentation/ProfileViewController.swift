@@ -18,6 +18,13 @@ class ProfileViewController: UIViewController {
         
         return label
     }()
+//    private let profileBackView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = .lightGray
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//
+//        return view
+//    }()
     lazy var profileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width))
     private let squareButton = SizeButton(title: SizeDTO.square.title, isSelected: true)
     private let rectangleButton = SizeButton(title: SizeDTO.rectangle.title, isSelected: false)
@@ -25,12 +32,14 @@ class ProfileViewController: UIViewController {
     private let pageButton = NextButton(title: "프로필 페이지로 이동", backgroundColor: .clear, tintColor: .lightGray)
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
     private lazy var popUpView = PopUpView(frame: window!.frame,
-                                   title: "저장 완료",
-                                   description: "내 사진에 저장되었어요",
-                                   colorButtonTitle: "확인",
-                                   isWhiteButton: false)
+                                           title: "저장 완료",
+                                           description: "내 사진에 저장되었어요",
+                                           colorButtonTitle: "확인",
+                                           isWhiteButton: false)
+    private var height: NSLayoutConstraint?
     private var viewModel: ProfileViewModel
     private var cancellable = Set<AnyCancellable>()
+    private var profileImage: UIImage?
     
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
@@ -76,9 +85,40 @@ class ProfileViewController: UIViewController {
                 self?.window?.addSubview(self!.popUpView)
             }.store(in: &cancellable)
         
+        output.handleRectangleButton
+            .sink { [weak self] _ in
+                self?.squareButton.isSelected = false
+                self?.rectangleButton.isSelected = true
+                self?.profileView.frame = CGRect(x: 0, y: 0, width: self!.view.frame.width, height: self!.view.frame.width * 1.25)
+                self?.height?.isActive = false
+                self?.height = self?.profileView.heightAnchor.constraint(equalToConstant: self!.profileView.frame.height)
+                self?.height?.isActive = true
+                self?.profileView.updateGradient()
+                self?.profileImage = self?.profileView.asImage()
+//                self?.profileView.setNeedsLayout()
+            }.store(in: &cancellable)
+        
+        output.handleSquareButton
+            .sink { [weak self] _ in
+                self?.squareButton.isSelected = true
+                self?.rectangleButton.isSelected = false
+            }.store(in: &cancellable)
+        
         output.handleOkayButton
             .sink { [weak self] _ in
                 self?.popUpView.removeFromSuperview()
+            }.store(in: &cancellable)
+        
+        output.handleBackButton
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }.store(in: &cancellable)
+        
+        output.handleNextButton
+            .sink { [weak self] _ in
+                let nextViewController = SignOutViewController()
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
             }.store(in: &cancellable)
     }
     
@@ -104,14 +144,21 @@ class ProfileViewController: UIViewController {
     
     func configureProfileView() {
         view.addSubview(profileView)
+//        profileBackView.addSubview(profileView)
         profileView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             profileView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 8),
             profileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            profileView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            profileView.heightAnchor.constraint(equalTo: profileView.widthAnchor)
+            profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            profileView.heightAnchor.constraint(equalTo: view.widthAnchor),
+            
+//            profileView.centerXAnchor.constraint(equalTo: profileBackView.centerXAnchor),
+//            profileView.topAnchor.constraint(equalTo: profileBackView.topAnchor)
         ])
+        
+        height = profileView.heightAnchor.constraint(equalToConstant: view.frame.width)
+        height?.isActive = true
     }
     
     func configureSizeButtons() {
