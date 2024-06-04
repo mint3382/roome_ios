@@ -67,6 +67,8 @@
 		921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */; };
 		921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */; };
 		921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A42BFE786B006DC44A /* DislikeViewController.swift */; };
+		9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9256E5572C0ED6DB00A50515 /* Lottie */; };
+		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
 		9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7852BFEF9A700586AFD /* MBTIViewController.swift */; };
 		9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */; };
 		9271F78A2BFF043D00586AFD /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7892BFF043D00586AFD /* HintViewController.swift */; };
@@ -128,7 +130,6 @@
 		9271F81F2C08D5E400586AFD /* StateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81E2C08D5E400586AFD /* StateDTO.swift */; };
 		9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8202C08D7B000586AFD /* ProfileDTO.swift */; };
 		9271F8292C09A39900586AFD /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8282C09A39900586AFD /* PopUpView.swift */; };
-		928474702C0AE4EA002C3B4C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9284746F2C0AE4EA002C3B4C /* Lottie */; };
 		928474722C0CE4AA002C3B4C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474712C0CE4AA002C3B4C /* LoadingView.swift */; };
 		928474742C0CE52D002C3B4C /* LoadingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474732C0CE52D002C3B4C /* LoadingProtocol.swift */; };
 		9284747B2C0CE6BE002C3B4C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747A2C0CE6BE002C3B4C /* ProfileViewController.swift */; };
@@ -205,6 +206,7 @@
 		921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
 		921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
+		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		9271F7852BFEF9A700586AFD /* MBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewController.swift; sourceTree = "<group>"; };
 		9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewController.swift; sourceTree = "<group>"; };
 		9271F7892BFF043D00586AFD /* HintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
@@ -292,7 +294,7 @@
 				921695212BF4D600006DC44A /* KakaoSDKCommon in Frameworks */,
 				921695232BF4D60E006DC44A /* KakaoSDKAuth in Frameworks */,
 				921695252BF4D613006DC44A /* KakaoSDKUser in Frameworks */,
-				928474702C0AE4EA002C3B4C /* Lottie in Frameworks */,
+				9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +352,7 @@
 				9216954B2BFA65EE006DC44A /* UIControl+.swift */,
 				9271F7C72C00B6D200586AFD /* UIColor+.swift */,
 				928474802C0D9F0F002C3B4C /* UIStackView+.swift */,
+				9256E5592C0EFC0D00A50515 /* UILabel+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -861,7 +864,7 @@
 				921695202BF4D600006DC44A /* KakaoSDKCommon */,
 				921695222BF4D60E006DC44A /* KakaoSDKAuth */,
 				921695242BF4D613006DC44A /* KakaoSDKUser */,
-				9284746F2C0AE4EA002C3B4C /* Lottie */,
+				9256E5572C0ED6DB00A50515 /* Lottie */,
 			);
 			productName = roome;
 			productReference = 92DBD9FF2BCFCF5900E299E2 /* roome.app */;
@@ -893,7 +896,7 @@
 			mainGroup = 92DBD9F62BCFCF5900E299E2;
 			packageReferences = (
 				9216951D2BF4C0E7006DC44A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
-				9284746E2C0AE4EA002C3B4C /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				9256E5562C0ED6DB00A50515 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 92DBDA002BCFCF5900E299E2 /* Products */;
 			projectDirPath = "";
@@ -942,6 +945,7 @@
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				9271F8132C08A53400586AFD /* DislikeRepositoryType.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
+				9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */,
 				9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */,
 				921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */,
 				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
@@ -1277,7 +1281,7 @@
 				kind = branch;
 			};
 		};
-		9284746E2C0AE4EA002C3B4C /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+		9256E5562C0ED6DB00A50515 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
 			requirement = {
@@ -1303,9 +1307,9 @@
 			package = 9216951D2BF4C0E7006DC44A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
 		};
-		9284746F2C0AE4EA002C3B4C /* Lottie */ = {
+		9256E5572C0ED6DB00A50515 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9284746E2C0AE4EA002C3B4C /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			package = 9256E5562C0ED6DB00A50515 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */

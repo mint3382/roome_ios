@@ -7,6 +7,7 @@
 
 import UIKit
 
+//profile view 구현시 사용하는 stackView
 extension UIStackView {
     convenience init(number: Int) {
         self.init()

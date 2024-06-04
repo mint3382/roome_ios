@@ -10,14 +10,29 @@ import UIKit
 class ProfileView: UIView {
     private let gradientLayer = CAGradientLayer()
     private let profile = UserContainer.shared.profile
+    private var nicknameFont = UIFont().pretendardBold(size: .title2)
+    private var selectsFont = UIFont().pretendardBold(size: .body1)
+    private var descriptionFont = UIFont().pretendardRegular(size: .body1)
+    private var signFont = UIFont().pretendardRegular(size: .caption)
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    convenience init(frame: CGRect, isRectangle: Bool) {
+        self.init(frame: frame)
+        if isRectangle {
+            self.nicknameFont = UIFont().pretendardBold(size: .body2)
+            self.selectsFont = UIFont().pretendardBold(size: .body3)
+            self.descriptionFont = UIFont().pretendardRegular(size: .body3)
+            self.signFont = UIFont().pretendardRegular(size: .custom(8))
+        }
         configureBackgroundColor()
         configureStackView()
         configureIntroduceStackView()
         configureMBTILable()
         configureSignature()
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
@@ -71,7 +86,7 @@ class ProfileView: UIView {
     
     private func configureIntroduceStackView() {
         let nickname = UserContainer.shared.user?.data.nickname
-        let nicknameLabel = UILabel(description: nickname, font: UIFont().pretendardBold(size: .title2))
+        let nicknameLabel = UILabel(description: nickname, font: nicknameFont)
         
         let roomCount = ProfileLabel(text: profile?.data.count, isIntroduceLine: true)
         
@@ -92,7 +107,7 @@ class ProfileView: UIView {
             return
         }
         
-        let mbtiLabel = ProfileLabel(text: profile?.data.mbti, isIntroduceLine: true)
+        let mbtiLabel = ProfileLabel(text: profile?.data.mbti, isIntroduceLine: true, font: selectsFont)
         mbtiLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(mbtiLabel)
@@ -104,7 +119,7 @@ class ProfileView: UIView {
     }
     
     func configureSignature() {
-        let label = UILabel(description: "©Roome", font: UIFont().pretendardRegular(size: .caption))
+        let label = UILabel(description: "©Roome", font: signFont)
         label.textAlignment = .right
         
         self.addSubview(label)
@@ -135,23 +150,23 @@ class ProfileView: UIView {
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
+            stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
             stackView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7)
         ])
     }
     
     private func configureLineStackView1() {
-        let labels = profile?.data.preferredGenres.compactMap { ProfileLabel(text: $0.title) }
-        let textLabel = UILabel(description: "좋아해요")
+        let labels = profile?.data.preferredGenres.compactMap { ProfileLabel(text: $0.title, font: selectsFont) }
+        let textLabel = UILabel(description: "좋아해요", font: descriptionFont)
         
         labels?.forEach { lineStackView1.addArrangedSubview($0) }
         lineStackView1.addArrangedSubview(textLabel)
     }
     
     private func configureLineStackView2() {
-        let textLabel1 = UILabel(description: "강점은")
-        let labels = profile?.data.userStrengths.compactMap { ProfileLabel(text: $0.title) }
-        let textLabel2 = UILabel(description: "입니다")
+        let textLabel1 = UILabel(description: "강점은", font: descriptionFont)
+        let labels = profile?.data.userStrengths.compactMap { ProfileLabel(text: $0.title, font: selectsFont) }
+        let textLabel2 = UILabel(description: "입니다", font: descriptionFont)
         
         lineStackView2.addArrangedSubview(textLabel1)
         labels?.forEach { lineStackView2.addArrangedSubview($0) }
@@ -159,8 +174,8 @@ class ProfileView: UIView {
     }
     
     private func configureLineStackView3() {
-        let labels = profile?.data.themeImportantFactors.compactMap { ProfileLabel(text: $0.title) }
-        let textLabel = UILabel(description: "중요해요")
+        let labels = profile?.data.themeImportantFactors.compactMap { ProfileLabel(text: $0.title, font: selectsFont) }
+        let textLabel = UILabel(description: "중요해요", font: descriptionFont)
         
         labels?.forEach { lineStackView3.addArrangedSubview($0) }
         lineStackView3.addArrangedSubview(textLabel)
@@ -168,9 +183,9 @@ class ProfileView: UIView {
     
     private func configureLineStackView4() {
         let positionLabel = (profile?.data.horrorThemePosition
-            .map { ProfileLabel(text: $0.title) }!)!
+            .map { ProfileLabel(text: $0.title, font: selectsFont) }!)!
         let hintLabel = (profile?.data.hintUsagePreference
-            .map { ProfileLabel(text: $0.title) }!)!
+            .map { ProfileLabel(text: $0.title, font: selectsFont) }!)!
         
         lineStackView4.addArrangedSubview(positionLabel)
         lineStackView4.addArrangedSubview(hintLabel)
@@ -178,47 +193,28 @@ class ProfileView: UIView {
     
     private func configureLineStackView5() {
         let lockLabel = (profile?.data.deviceLockPreference
-            .map { ProfileLabel(text: $0.title) }!)!
+            .map { ProfileLabel(text: $0.title, font: selectsFont) }!)!
         let activityLabel = (profile?.data.activity
-            .map { ProfileLabel(text: $0.title) }!)!
+            .map { ProfileLabel(text: $0.title, font: selectsFont) }!)!
         
         lineStackView5.addArrangedSubview(lockLabel)
         lineStackView5.addArrangedSubview(activityLabel)
     }
     
     private func configureLineStackView6() {
-        let labels = profile?.data.themeDislikedFactors.compactMap { ProfileLabel(text: $0.title) }
-        let textLabel = UILabel(description: "싫어요")
+        let labels = profile?.data.themeDislikedFactors.compactMap { ProfileLabel(text: $0.title, font: selectsFont) }
+        let textLabel = UILabel(description: "싫어요", font: descriptionFont)
         
         labels?.forEach { lineStackView6.addArrangedSubview($0) }
         lineStackView6.addArrangedSubview(textLabel)
     }
 }
 
-extension UILabel {
-    convenience init (description: String?, textColor: UIColor = .white, font: UIFont = UIFont().pretendardRegular(size: .body1)) {
-        self.init(frame: .zero)
-        self.text = description
-        self.textColor = textColor
-        self.font = font
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-}
-
 extension ProfileView {
     func asImage() -> UIImage? {
-//        let renderer = UIGraphicsImageRenderer(size: frame.size)
-//        return renderer.image { context in
-//            layer.render(in: context.cgContext)
-//        }
-        
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        context.saveGState()
-        layer.render(in: context)
-        context.restoreGState()
-        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return image
+        let renderer = UIGraphicsImageRenderer(size: frame.size)
+        return renderer.image { context in
+            layer.render(in: context.cgContext)
+        }
     }
 }
