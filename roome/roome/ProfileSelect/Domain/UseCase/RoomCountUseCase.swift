@@ -20,11 +20,11 @@ class RoomCountUseCase {
         return predicate.evaluate(with: text)
     }
     
-    func roomCountWithAPI(_ count: String?, isPlusEnabled: Bool) async throws {
+    func roomCountWithAPI(_ count: String?) async throws {
         guard let count = Int(count ?? "") else {
             throw TypeError.bindingFailure
         }
         
-        try await repository.registerCount(count, isPlusEnabled: isPlusEnabled)
+        try await repository.registerCount(count)
     }
 }

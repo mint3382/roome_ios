@@ -180,5 +180,9 @@ class SplashView: UIViewController {
         
         let profileViewController = ProfileViewController(viewModel: ProfileViewModel())
         DIContainer.shared.register(ProfileViewController.self, dependency: profileViewController)
+        
+        let signOutViewModel = SignOutViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
+        let signOutViewController = SignOutViewController(viewModel: signOutViewModel)
+        DIContainer.shared.register(SignOutViewController.self, dependency: signOutViewController)
     }
 }

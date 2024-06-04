@@ -69,6 +69,8 @@
 		921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A42BFE786B006DC44A /* DislikeViewController.swift */; };
 		9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9256E5572C0ED6DB00A50515 /* Lottie */; };
 		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
+		9256E5602C0EFEAD00A50515 /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */; };
+		9256E5622C0EFFBB00A50515 /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */; };
 		9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7852BFEF9A700586AFD /* MBTIViewController.swift */; };
 		9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */; };
 		9271F78A2BFF043D00586AFD /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7892BFF043D00586AFD /* HintViewController.swift */; };
@@ -207,6 +209,8 @@
 		921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
 		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
+		9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
 		9271F7852BFEF9A700586AFD /* MBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewController.swift; sourceTree = "<group>"; };
 		9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewController.swift; sourceTree = "<group>"; };
 		9271F7892BFF043D00586AFD /* HintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
@@ -427,6 +431,39 @@
 				921695852BFE08C9006DC44A /* DescriptionLabel.swift */,
 			);
 			path = Label;
+			sourceTree = "<group>";
+		};
+		9256E55B2C0EFE5A00A50515 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9256E55E2C0EFE8C00A50515 /* Presentation */,
+				9256E55D2C0EFE8700A50515 /* Domain */,
+				9256E55C2C0EFE8000A50515 /* Data */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		9256E55C2C0EFE8000A50515 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9256E55D2C0EFE8700A50515 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9256E55E2C0EFE8C00A50515 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */,
+				9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		9271F7A92C00ABAC00586AFD /* Login */ = {
@@ -835,6 +872,7 @@
 				9271F7AD2C00AC5600586AFD /* SignUp */,
 				9271F7B52C00AD3F00586AFD /* ProfileSelect */,
 				928474762C0CE669002C3B4C /* ProfileCreate */,
+				9256E55B2C0EFE5A00A50515 /* Main */,
 				9271F7CF2C038C5A00586AFD /* Common */,
 				921694F52BF21E5C006DC44A /* Infrastructure */,
 				9216952A2BF712A0006DC44A /* Resources */,
@@ -940,6 +978,8 @@
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */,
 				928474742C0CE52D002C3B4C /* LoadingProtocol.swift in Sources */,
+				9256E5602C0EFEAD00A50515 /* SignOutViewController.swift in Sources */,
+				9256E5622C0EFFBB00A50515 /* SignOutViewModel.swift in Sources */,
 				9284747D2C0D6721002C3B4C /* ProfileView.swift in Sources */,
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
