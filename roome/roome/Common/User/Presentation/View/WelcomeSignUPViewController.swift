@@ -160,6 +160,10 @@ class WelcomeSignUPViewController: UIViewController {
             .sink { [weak self] _ in
                 self?.popUpView.removeFromSuperview()
             }.store(in: &cancellables)
+        
+        output.tapNext
+            .sink { }
+            .store(in: &cancellables)
     }
     
     func configureStackView() {

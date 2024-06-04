@@ -19,6 +19,7 @@ class GenreViewModel {
         let handleNextButton: AnyPublisher<Void, Error>
         let canGoNext: AnyPublisher<Bool, Never>
         let handleBackButton: AnyPublisher<Void, Never>
+        let tapNext: AnyPublisher<Void, Never>
     }
     
     var selectCell = PassthroughSubject<IndexPath, Never>()
@@ -50,22 +51,19 @@ class GenreViewModel {
                 0 < count && count <= 2
             }.eraseToAnyPublisher()
         
-        let handleNextButton = input.tapNextButton
-            .map { [weak self] _ in
+        let tapNext = input.tapNextButton
+            .compactMap { [weak self] _ in
                 self?.handlePage()
             }
-            .compactMap { [weak self] _ in
-                self
-            }
-            .flatMap{ owner in
-                owner.goToNext
-            }
+            .eraseToAnyPublisher()
+        
+        let handleNextButton = goToNext
             .eraseToAnyPublisher()
         
         let back = input.tapBackButton
             .eraseToAnyPublisher()
         
-        return Output(handleCellSelect: cellSelect, handleNextButton: handleNextButton, canGoNext: canGoNext, handleBackButton: back)
+        return Output(handleCellSelect: cellSelect, handleNextButton: handleNextButton, canGoNext: canGoNext, handleBackButton: back, tapNext: tapNext)
     }
     
     func deselectItem(_ item: IndexPath) {

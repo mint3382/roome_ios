@@ -90,6 +90,10 @@ class ThemeSelectViewController: UIViewController, ToastAlertable {
                 }
             })
             .store(in: &cancellables)
+        
+        output.tapNext
+            .sink {}
+            .store(in: &cancellables)
     }
     
     func configureUI() {

@@ -55,7 +55,7 @@ class RoomCountViewModel {
     func handlePage(_ count: String?) {
         Task {
             do {
-                try await usecase.roomCountWithAPI(count, isPlusEnabled: false)
+                try await usecase.roomCountWithAPI(count)
                 goToNext.send()
             } catch {
                 goToNext.send(completion: .failure(error))

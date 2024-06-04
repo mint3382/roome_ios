@@ -19,6 +19,7 @@ class ThemeSelectViewModel {
         let handleNextButton: AnyPublisher<Void, Error>
         let canGoNext: AnyPublisher<Bool, Never>
         let handleBackButton: AnyPublisher<Void, Never>
+        let tapNext: AnyPublisher<Void, Never>
     }
     
     var selectCell = PassthroughSubject<IndexPath, Never>()
@@ -50,25 +51,23 @@ class ThemeSelectViewModel {
                 0 < count && count <= 2
             }.eraseToAnyPublisher()
         
-        let handleNextButton = input.tapNextButton
-            .map { [weak self] _ in
-                self?.handlePage()
-            }
+        let handleNextButton = goToNext
+            .eraseToAnyPublisher()
+        
+        let tapNext = input.tapNextButton
             .compactMap { [weak self] _ in
-                self
-            }
-            .flatMap{ owner in
-                owner.goToNext
+                self?.handlePage()
             }
             .eraseToAnyPublisher()
         
         let back = input.tapBackButton
             .eraseToAnyPublisher()
         
-        return Output(handleCellSelect: cellSelect, 
+        return Output(handleCellSelect: cellSelect,
                       handleNextButton: handleNextButton,
                       canGoNext: canGoNext,
-                      handleBackButton: back)
+                      handleBackButton: back,
+                      tapNext: tapNext)
     }
     
     func deselectItem(_ item: IndexPath) {

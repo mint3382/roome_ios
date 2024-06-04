@@ -52,8 +52,24 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        configureUI()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if profileBackView.subviews != [] {
+            profileView.removeFromSuperview()
+        }
+        profileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width), isRectangle: false)
+        rectangleProfileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.75, height: view.frame.width), isRectangle: true)
+        
+        configureUI()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        profileView.removeFromSuperview()
+        rectangleProfileView.removeFromSuperview()
     }
     
     func bind() {
@@ -102,14 +118,7 @@ class ProfileViewController: UIViewController {
                 self.squareButton.isSelected = false
                 self.rectangleButton.isSelected = true
                 self.profileView.removeFromSuperview()
-                self.profileBackView.addSubview(self.rectangleProfileView)
-                
-                NSLayoutConstraint.activate([
-                    self.rectangleProfileView.topAnchor.constraint(equalTo: (self.profileBackView.topAnchor)),
-                    self.rectangleProfileView.bottomAnchor.constraint(equalTo: self.profileBackView.bottomAnchor),
-                    self.rectangleProfileView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
-                    self.rectangleProfileView.widthAnchor.constraint(equalTo: self.profileBackView.widthAnchor, multiplier: 0.75)
-                ])
+                self.configureRectangleView()
             }.store(in: &cancellable)
         
         output.handleSquareButton
@@ -120,14 +129,7 @@ class ProfileViewController: UIViewController {
                 self.squareButton.isSelected = true
                 self.rectangleButton.isSelected = false
                 self.rectangleProfileView.removeFromSuperview()
-                self.profileBackView.addSubview(self.profileView)
-                
-                NSLayoutConstraint.activate([
-                    self.profileView.topAnchor.constraint(equalTo: (self.profileBackView.topAnchor)),
-                    self.profileView.bottomAnchor.constraint(equalTo: self.profileBackView.bottomAnchor),
-                    self.profileView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
-                    self.profileView.widthAnchor.constraint(equalTo: self.profileBackView.widthAnchor)
-                ])
+                self.configureSquareView()
             }.store(in: &cancellable)
         
         output.handleOkayButton
@@ -140,22 +142,45 @@ class ProfileViewController: UIViewController {
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellable)
         
-//        output.handleNextButton
-//            .sink { [weak self] _ in
-//                let nextViewController = SignOutViewController()
-//                
-//                self?.navigationController?.pushViewController(nextViewController, animated: true)
-//            }.store(in: &cancellable)
+        output.handleNextButton
+            .sink { [weak self] _ in
+                let nextViewController = DIContainer.shared.resolve(SignOutViewController.self)
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
+            }.store(in: &cancellable)
     }
     
-    func configureUI() {
+    private func configureUI() {
         configureNavigation()
         configureProfileView()
+        configureSquareView()
         configureNextButton()
         configureSizeButtons()
     }
     
-    func configureNavigation() {
+    private func configureSquareView() {
+        profileBackView.addSubview(profileView)
+        
+        NSLayoutConstraint.activate([
+            profileView.topAnchor.constraint(equalTo: profileBackView.topAnchor),
+            profileView.bottomAnchor.constraint(equalTo: profileBackView.bottomAnchor),
+            profileView.leadingAnchor.constraint(equalTo: profileBackView.leadingAnchor),
+            profileView.trailingAnchor.constraint(equalTo: profileBackView.trailingAnchor)
+        ])
+    }
+    
+    private func configureRectangleView() {
+        profileBackView.addSubview(rectangleProfileView)
+        
+        NSLayoutConstraint.activate([
+            rectangleProfileView.topAnchor.constraint(equalTo: (profileBackView.topAnchor)),
+            rectangleProfileView.bottomAnchor.constraint(equalTo: profileBackView.bottomAnchor),
+            rectangleProfileView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            rectangleProfileView.widthAnchor.constraint(equalTo: profileBackView.widthAnchor, multiplier: 0.75)
+        ])
+    }
+    
+    private func configureNavigation() {
         view.addSubview(backButton)
         view.addSubview(navigationLabel)
         
@@ -168,24 +193,18 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    func configureProfileView() {
+    private func configureProfileView() {
         view.addSubview(profileBackView)
-        profileBackView.addSubview(profileView)
         
         NSLayoutConstraint.activate([
             profileBackView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 8),
             profileBackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileBackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            profileBackView.heightAnchor.constraint(equalToConstant: view.frame.width),
-            
-            profileView.topAnchor.constraint(equalTo: profileBackView.topAnchor),
-            profileView.bottomAnchor.constraint(equalTo: profileBackView.bottomAnchor),
-            profileView.leadingAnchor.constraint(equalTo: profileBackView.leadingAnchor),
-            profileView.trailingAnchor.constraint(equalTo: profileBackView.trailingAnchor)
+            profileBackView.heightAnchor.constraint(equalToConstant: view.frame.width)
         ])
     }
     
-    func configureSizeButtons() {
+    private func configureSizeButtons() {
         view.addSubview(squareButton)
         view.addSubview(rectangleButton)
         

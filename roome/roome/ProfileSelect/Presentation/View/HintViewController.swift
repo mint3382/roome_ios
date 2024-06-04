@@ -58,6 +58,9 @@ class HintViewController: UIViewController {
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
         
+        output.tapNext
+            .sink {}
+            .store(in: &cancellables)
     }
     
     

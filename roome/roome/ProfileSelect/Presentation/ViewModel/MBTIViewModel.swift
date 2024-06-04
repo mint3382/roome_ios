@@ -18,6 +18,7 @@ class MBTIViewModel {
     struct Output {
         let handleCellSelect: AnyPublisher<(Bool, IndexPath), Never>
         let handleNextButton: AnyPublisher<Void, Error>
+        let tapNext: AnyPublisher<Void, Never>
         let canGoNext: AnyPublisher<Bool, Never>
         let handleBackButton: AnyPublisher<Void, Never>
         let handleWillNotAddButton: AnyPublisher<Bool, Never>
@@ -58,28 +59,26 @@ class MBTIViewModel {
             .map { [weak self] _ in
                 self?.withoutButtonState.toggle()
                 self?.list = [0: -1, 1: -1, 2: -1, 3: -1]
+                self?.count = 0
             }
             .compactMap { [weak self] _ in
                 self?.isWithoutButtonSelect()
             }
             .eraseToAnyPublisher()
         
-        let handleNextButton = input.tapNextButton
-            .map { [weak self] _ in
+        let tapNext = input.tapNextButton
+            .compactMap { [weak self] _ in
                 self?.handlePage()
             }
-            .compactMap { [weak self] _ in
-                self
-            }
-            .flatMap{ owner in
-                owner.goToNext
-            }
+            .eraseToAnyPublisher()
+        
+        let handleNextButton = goToNext
             .eraseToAnyPublisher()
         
         let back = input.tapBackButton
             .eraseToAnyPublisher()
         
-        return Output(handleCellSelect: cellSelect, handleNextButton: handleNextButton, canGoNext: canGoNext, handleBackButton: back, handleWillNotAddButton: handleWithoutButton)
+        return Output(handleCellSelect: cellSelect, handleNextButton: handleNextButton, tapNext: tapNext, canGoNext: canGoNext, handleBackButton: back, handleWillNotAddButton: handleWithoutButton)
     }
     
     func isWithoutButtonSelect() -> Bool {

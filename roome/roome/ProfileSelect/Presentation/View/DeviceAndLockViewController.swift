@@ -57,6 +57,9 @@ class DeviceAndLockViewController: UIViewController {
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
         
+        output.tapNext
+            .sink {}
+            .store(in: &cancellables)
     }
     
     func configureUI() {
@@ -116,6 +119,7 @@ extension DeviceAndLockViewController: UICollectionViewDataSource, UICollectionV
             return UICollectionViewCell()
         }
         cell.changeTitle(DeviceLockDTO(rawValue: indexPath.row + 1)!.title)
+//        cell.addDescription(DeviceLockDTO(rawValue: indexPath.row + 1)!.description)
         
         return cell
     }

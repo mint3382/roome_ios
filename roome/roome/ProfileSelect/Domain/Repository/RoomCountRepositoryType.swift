@@ -8,5 +8,5 @@
 import Foundation
 
 protocol RoomCountRepositoryType {
-    func registerCount(_ count: Int, isPlusEnabled: Bool) async throws
+    func registerCount(_ count: Int) async throws
 }

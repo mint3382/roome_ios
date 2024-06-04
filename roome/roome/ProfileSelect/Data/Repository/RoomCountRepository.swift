@@ -8,7 +8,7 @@
 import Foundation
 
 class RoomCountRepository: RoomCountRepositoryType {
-    func registerCount(_ count: Int, isPlusEnabled: Bool) async throws {
+    func registerCount(_ count: Int) async throws {
         let nicknameURL = URLBuilder(host: APIConstants.roomeHost,
                                      path: APIConstants.Profile.roomCount.rawValue,
                                      queries: nil)
@@ -17,8 +17,7 @@ class RoomCountRepository: RoomCountRepositoryType {
         }
         
         
-        let body: [String: Any] = ["count": count,
-                                   "isPlusEnabled": isPlusEnabled]
+        let body: [String: Any] = ["count": count]
         let accessToken = KeyChain.read(key: .accessToken) ?? ""
         let header = ["Content-Type": "application/json",
                       "Authorization": "Bearer \(accessToken)"]

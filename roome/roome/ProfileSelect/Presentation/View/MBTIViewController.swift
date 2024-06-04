@@ -103,10 +103,13 @@ class MBTIViewController: UIViewController {
                     self?.collectionView.allowsSelection = false
                 } else {
                     self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.lightGray).resize(newWidth: 24)
-                    self?.collectionView.allowsSelection = true
                     self?.collectionView.allowsMultipleSelection = true
                 }
             }.store(in: &cancellables)
+        
+        output.tapNext
+            .sink {}
+            .store(in: &cancellables)
     }
     
     func configureUI() {

@@ -17,6 +17,7 @@ class ColorSelectViewModel {
         let handleCellSelect: AnyPublisher<Void, Error>
         let handleBackButton: AnyPublisher<Void, Never>
         let handleNextPage: AnyPublisher<Void, Never>
+        let tapNext: AnyPublisher<Void, Never>
     }
     
     var selectCell = PassthroughSubject<IndexPath, Never>()
@@ -29,16 +30,13 @@ class ColorSelectViewModel {
     }
     
     func transform(_ input: Input) -> Output {
-        let cellSelect = selectCell
-            .map { [weak self] indexPath in
+        let tapNext = selectCell
+            .compactMap { [weak self] indexPath in
                 self?.handlePage(id: indexPath.row + 1)
             }
-            .compactMap { [weak self] _ in
-                self
-            }
-            .flatMap{ owner in
-                owner.loading
-            }
+            .eraseToAnyPublisher()
+        
+        let cellSelect = loading
             .eraseToAnyPublisher()
         
         let back = input.tapBackButton
@@ -49,7 +47,8 @@ class ColorSelectViewModel {
         
         return Output(handleCellSelect: cellSelect,
                       handleBackButton: back,
-                      handleNextPage: next)
+                      handleNextPage: next,
+                      tapNext: tapNext)
     }
     
     func handlePage(id: Int) {

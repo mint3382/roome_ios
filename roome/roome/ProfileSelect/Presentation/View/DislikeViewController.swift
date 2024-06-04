@@ -89,6 +89,10 @@ class DislikeViewController: UIViewController, ToastAlertable {
                     self?.navigationController?.pushViewController(nextViewController, animated: true)
                 }
             }).store(in: &cancellables)
+        
+        output.tapNext
+            .sink {}
+            .store(in: &cancellables)
     }
     
     func configureUI() {

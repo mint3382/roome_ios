@@ -66,6 +66,9 @@ class ColorSelectViewController: UIViewController, LoadingProtocol {
                 }
             }.store(in: &cancellables)
         
+        output.tapNext
+            .sink {}
+            .store(in: &cancellables)
     }
     
     func configureUI() {
