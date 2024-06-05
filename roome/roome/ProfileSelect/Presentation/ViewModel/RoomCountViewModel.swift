@@ -13,16 +13,21 @@ class RoomCountViewModel {
         var count: AnyPublisher<String, Never>
         var nextButton: AnyPublisher<Void, Never>
         var backButton: AnyPublisher<Void, Never>
+        var rangeButton: AnyPublisher<Void, Never>
+        var textButton: AnyPublisher<Void, Never>
     }
     
     struct Output {
         var handleNextButton: AnyPublisher<Bool, Never>
         var handleNextPage: AnyPublisher<Void, Error>
         var handleBackButton: AnyPublisher<Void, Never>
+        var handleRangeOrText: AnyPublisher<Bool, Never>
+        var tapNext: AnyPublisher<Void, Never>
     }
     
     private let usecase: RoomCountUseCase
     private let goToNext = PassthroughSubject<Void, Error>()
+    private let canGoNext = PassthroughSubject<Bool, Never>()
     @Published var textInput = "0"
     
     init(usecase: RoomCountUseCase) {
@@ -35,10 +40,17 @@ class RoomCountViewModel {
                 self?.usecase.canGoNext(count)
             }.eraseToAnyPublisher()
         
-        let handleNextPage = input.nextButton
-            .map { [weak self] _ in
+        let goNext = Publishers.Merge(handleNextButton, canGoNext)
+            .eraseToAnyPublisher()
+        
+        let tapNext = input.nextButton
+            .compactMap { [weak self] _ in
                 self?.handlePage(self?.textInput)
-            }.compactMap { [weak self] _ in
+            }
+            .eraseToAnyPublisher()
+        
+        let handleNextPage = input.nextButton
+            .compactMap { [weak self] _ in
                 self
             }
             .flatMap{ owner in
@@ -49,7 +61,32 @@ class RoomCountViewModel {
         let handleBackButton = input.backButton
             .eraseToAnyPublisher()
         
-        return Output(handleNextButton: handleNextButton, handleNextPage: handleNextPage, handleBackButton: handleBackButton)
+        let range = input.rangeButton
+            .map { [weak self] _ in
+                self?.canGoNext.send(false)
+            }
+            .map {
+                true
+            }
+            .eraseToAnyPublisher()
+        
+        let textButton = input.textButton
+            .map { [weak self] _ in
+                self?.canGoNext.send(true)
+            }
+            .map {
+                false
+            }
+            .eraseToAnyPublisher()
+        
+        let handleRangeOrText = Publishers.Merge(range, textButton)
+            .eraseToAnyPublisher()
+        
+        return Output(handleNextButton: goNext,
+                      handleNextPage: handleNextPage,
+                      handleBackButton: handleBackButton,
+                      handleRangeOrText: handleRangeOrText,
+                      tapNext: tapNext)
     }
     
     func handlePage(_ count: String?) {

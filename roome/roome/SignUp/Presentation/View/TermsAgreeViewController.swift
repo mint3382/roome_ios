@@ -190,11 +190,13 @@ class TermsAgreeViewController: UIViewController {
             }.store(in: &cancellable)
         
         output.goToNext
-            .sink { [weak self] _ in
-//                Task { @MainActor in
-//                    let nextPage = DIContainer.shared.resolve(LoginViewController.self)
-//                    self?.navigationController?.pushViewController(nextPage, animated: true)
-//                }
+            .sink { _ in
+                let next = DIContainer.shared.resolve(LoginViewController.self)
+                Task { @MainActor in
+                    (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                        .changeRootViewController(next, animated: true)
+                }
             } receiveValue: { [weak self] _ in
                 Task { @MainActor in
                     let nextPage = DIContainer.shared.resolve(NicknameViewController.self)
