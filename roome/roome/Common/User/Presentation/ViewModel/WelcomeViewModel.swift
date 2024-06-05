@@ -16,6 +16,7 @@ class WelcomeViewModel {
     struct Output {
         let handleNext: AnyPublisher<Bool, Error>
         let nextState: AnyPublisher<StateDTO, Never>
+        let tapNext: AnyPublisher<Void, Never>
     }
     
     struct PopUpInput {
@@ -31,22 +32,19 @@ class WelcomeViewModel {
     private var profileState = PassthroughSubject<StateDTO, Never>()
     
     func transforms(_ input: Input) -> Output {
-        let next = input.nextButton
-            .map { [weak self] _ in
+        let tapNext = input.nextButton
+            .compactMap { [weak self] _ in
                 self?.handlePage()
             }
-            .compactMap { [weak self] _ in
-                self
-            }
-            .flatMap{ owner in
-                owner.goToNext
-            }
+            .eraseToAnyPublisher()
+        
+        let next = goToNext
             .eraseToAnyPublisher()
         
         let state = profileState
             .eraseToAnyPublisher()
         
-        return Output(handleNext: next, nextState: state)
+        return Output(handleNext: next, nextState: state, tapNext: tapNext)
     }
     
     func popUpTransforms(_ input: PopUpInput) -> PopUpOutput {
@@ -73,7 +71,7 @@ class WelcomeViewModel {
         Task {
             do {
                 try await UserContainer.shared.updateUserProfile()
-                if UserContainer.shared.profile == nil {
+                if UserContainer.shared.profile == nil || UserContainer.shared.profile?.data.state == StateDTO.roomCount.rawValue {
                     goToNext.send(false)
                 } else {
                     goToNext.send(true)

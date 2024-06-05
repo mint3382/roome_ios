@@ -13,8 +13,7 @@ struct ProfileDTO: Codable {
     struct Profile: Codable {
         let id: Int
         let state: String
-        let count: Int
-        let isPlusEnabled: Bool
+        let count: String
         let preferredGenres: [Detail]
         let mbti: String
         let userStrengths: [Detail]

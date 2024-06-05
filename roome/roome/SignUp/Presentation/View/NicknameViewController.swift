@@ -130,7 +130,11 @@ class NicknameViewController: UIViewController {
         }.store(in: &cancellables)
         
         output.canGoNext
-            .sink  (receiveCompletion: {[ weak self] completion in
+            .sink { }
+            .store(in: &cancellables)
+        
+        output.goToNext
+            .sink(receiveCompletion: {[weak self] completion in
                 switch completion {
                 case .finished:
                     print("Nickname finish")

@@ -10,12 +10,12 @@ import UIKit
 class ProfileStateLineView: UIView {
     let colorCount: CGFloat
     let grayCount: CGFloat
-    lazy var bar = (frame.width / 11) * 0.79
+    lazy var bar = (frame.width / 11) * 0.8
     lazy var space = (frame.width / 11) * 0.2
     
     init(pageNumber: CGFloat, frame: CGRect) {
         self.colorCount = pageNumber
-        self.grayCount = 12 - pageNumber
+        self.grayCount = 11 - pageNumber
         super.init(frame: frame)
         self.backgroundColor = .systemBackground
     }
@@ -25,8 +25,8 @@ class ProfileStateLineView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        drawColorLine()
         drawGrayLine()
+        drawColorLine()
     }
     
     func drawColorLine() {
@@ -55,7 +55,7 @@ class ProfileStateLineView: UIView {
         let pattern: [CGFloat] = [bar, space]
         UIColor.lightGray.set()
         path.move(to: CGPoint(x: start + space, y: 10))
-        path.addLine(to: CGPoint(x: frame.width - 2, y: 10))
+        path.addLine(to: CGPoint(x: frame.width - 4, y: 10))
         path.lineWidth = 2
         path.lineCapStyle = .round
         path.setLineDash(pattern, count: pattern.count, phase: 0)

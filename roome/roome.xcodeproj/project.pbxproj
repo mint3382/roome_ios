@@ -67,6 +67,10 @@
 		921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */; };
 		921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */; };
 		921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A42BFE786B006DC44A /* DislikeViewController.swift */; };
+		9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9256E5572C0ED6DB00A50515 /* Lottie */; };
+		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
+		9256E5602C0EFEAD00A50515 /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */; };
+		9256E5622C0EFFBB00A50515 /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */; };
 		9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7852BFEF9A700586AFD /* MBTIViewController.swift */; };
 		9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */; };
 		9271F78A2BFF043D00586AFD /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7892BFF043D00586AFD /* HintViewController.swift */; };
@@ -86,7 +90,6 @@
 		9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C72C00B6D200586AFD /* UIColor+.swift */; };
 		9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C92C00B70200586AFD /* BackgroundColor.swift */; };
 		9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */; };
-		9271F7CE2C00E71300586AFD /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7CD2C00E71300586AFD /* WaitingViewController.swift */; };
 		9271F7D12C04742600586AFD /* GenreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D02C04742600586AFD /* GenreDTO.swift */; };
 		9271F7D32C04B1CE00586AFD /* StrengthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */; };
 		9271F7D52C04B32400586AFD /* ImportantFactorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D42C04B32400586AFD /* ImportantFactorDTO.swift */; };
@@ -128,8 +131,15 @@
 		9271F81D2C08D21400586AFD /* ColorRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81C2C08D21400586AFD /* ColorRepository.swift */; };
 		9271F81F2C08D5E400586AFD /* StateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F81E2C08D5E400586AFD /* StateDTO.swift */; };
 		9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8202C08D7B000586AFD /* ProfileDTO.swift */; };
-		9271F8232C095C3800586AFD /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8222C095C3800586AFD /* PopUpViewController.swift */; };
 		9271F8292C09A39900586AFD /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F8282C09A39900586AFD /* PopUpView.swift */; };
+		928474722C0CE4AA002C3B4C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474712C0CE4AA002C3B4C /* LoadingView.swift */; };
+		9284747B2C0CE6BE002C3B4C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747A2C0CE6BE002C3B4C /* ProfileViewController.swift */; };
+		9284747D2C0D6721002C3B4C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747C2C0D6721002C3B4C /* ProfileView.swift */; };
+		9284747F2C0D9EE3002C3B4C /* ProfileLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */; };
+		928474812C0D9F0F002C3B4C /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474802C0D9F0F002C3B4C /* UIStackView+.swift */; };
+		928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474822C0DA12B002C3B4C /* SizeDTO.swift */; };
+		928474852C0DB4F9002C3B4C /* SizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474842C0DB4F9002C3B4C /* SizeButton.swift */; };
+		928474872C0DBDEB002C3B4C /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474862C0DBDEB002C3B4C /* ProfileViewModel.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -197,6 +207,9 @@
 		921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
 		921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
+		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
+		9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
 		9271F7852BFEF9A700586AFD /* MBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewController.swift; sourceTree = "<group>"; };
 		9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewController.swift; sourceTree = "<group>"; };
 		9271F7892BFF043D00586AFD /* HintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
@@ -216,7 +229,6 @@
 		9271F7C72C00B6D200586AFD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		9271F7C92C00B70200586AFD /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
 		9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewModel.swift; sourceTree = "<group>"; };
-		9271F7CD2C00E71300586AFD /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		9271F7D02C04742600586AFD /* GenreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreDTO.swift; sourceTree = "<group>"; };
 		9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthDTO.swift; sourceTree = "<group>"; };
 		9271F7D42C04B32400586AFD /* ImportantFactorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantFactorDTO.swift; sourceTree = "<group>"; };
@@ -258,8 +270,15 @@
 		9271F81C2C08D21400586AFD /* ColorRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRepository.swift; sourceTree = "<group>"; };
 		9271F81E2C08D5E400586AFD /* StateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateDTO.swift; sourceTree = "<group>"; };
 		9271F8202C08D7B000586AFD /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
-		9271F8222C095C3800586AFD /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		9271F8282C09A39900586AFD /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
+		928474712C0CE4AA002C3B4C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		9284747A2C0CE6BE002C3B4C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9284747C2C0D6721002C3B4C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLabel.swift; sourceTree = "<group>"; };
+		928474802C0D9F0F002C3B4C /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		928474822C0DA12B002C3B4C /* SizeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeDTO.swift; sourceTree = "<group>"; };
+		928474842C0DB4F9002C3B4C /* SizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeButton.swift; sourceTree = "<group>"; };
+		928474862C0DBDEB002C3B4C /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +296,7 @@
 				921695212BF4D600006DC44A /* KakaoSDKCommon in Frameworks */,
 				921695232BF4D60E006DC44A /* KakaoSDKAuth in Frameworks */,
 				921695252BF4D613006DC44A /* KakaoSDKUser in Frameworks */,
+				9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +353,8 @@
 				921695032BF22DCD006DC44A /* UIImage+.swift */,
 				9216954B2BFA65EE006DC44A /* UIControl+.swift */,
 				9271F7C72C00B6D200586AFD /* UIColor+.swift */,
+				928474802C0D9F0F002C3B4C /* UIStackView+.swift */,
+				9256E5592C0EFC0D00A50515 /* UILabel+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -367,8 +389,10 @@
 		921695442BF9B64E006DC44A /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				9271F8282C09A39900586AFD /* PopUpView.swift */,
 				9271F7992C009A3E00586AFD /* ToastAlertable.swift */,
 				9216957F2BFDCC88006DC44A /* ProfileStateLineView.swift */,
+				928474752C0CE53F002C3B4C /* Loading */,
 				921695022BF22DB4006DC44A /* Extension */,
 				9216959F2BFE72F7006DC44A /* Label */,
 				9216959E2BFE72E2006DC44A /* Button */,
@@ -391,6 +415,7 @@
 				921695472BF9FC5B006DC44A /* LabelButton.swift */,
 				921695812BFE021B006DC44A /* BackButton.swift */,
 				921695872BFE0958006DC44A /* NextButton.swift */,
+				928474842C0DB4F9002C3B4C /* SizeButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -398,11 +423,45 @@
 		9216959F2BFE72F7006DC44A /* Label */ = {
 			isa = PBXGroup;
 			children = (
+				9284747E2C0D9EE3002C3B4C /* ProfileLabel.swift */,
 				921695452BF9B661006DC44A /* PaddingLabel.swift */,
 				921695832BFE03AE006DC44A /* TitleLabel.swift */,
 				921695852BFE08C9006DC44A /* DescriptionLabel.swift */,
 			);
 			path = Label;
+			sourceTree = "<group>";
+		};
+		9256E55B2C0EFE5A00A50515 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9256E55E2C0EFE8C00A50515 /* Presentation */,
+				9256E55D2C0EFE8700A50515 /* Domain */,
+				9256E55C2C0EFE8000A50515 /* Data */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		9256E55C2C0EFE8000A50515 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9256E55D2C0EFE8700A50515 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9256E55E2C0EFE8C00A50515 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */,
+				9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		9271F7A92C00ABAC00586AFD /* Login */ = {
@@ -516,14 +575,14 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
-		9271F7B52C00AD3F00586AFD /* ProfileCreate */ = {
+		9271F7B52C00AD3F00586AFD /* ProfileSelect */ = {
 			isa = PBXGroup;
 			children = (
 				9271F7B82C00AD7100586AFD /* Presentation */,
 				9271F7B72C00AD6B00586AFD /* Domain */,
 				9271F7B62C00AD6500586AFD /* Data */,
 			);
-			path = ProfileCreate;
+			path = ProfileSelect;
 			sourceTree = "<group>";
 		};
 		9271F7B62C00AD6500586AFD /* Data */ = {
@@ -586,7 +645,6 @@
 				9271F78B2BFF049F00586AFD /* ActivityViewController.swift */,
 				921695A42BFE786B006DC44A /* DislikeViewController.swift */,
 				9271F7A72C00A8E100586AFD /* ColorSelectViewController.swift */,
-				9271F7CD2C00E71300586AFD /* WaitingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -621,7 +679,6 @@
 		9271F7BE2C00ADAD00586AFD /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				9271F82A2C09A3B200586AFD /* Custom */,
 				9271F8242C099F5800586AFD /* View */,
 				9271F8252C099F6000586AFD /* ViewModel */,
 			);
@@ -728,7 +785,6 @@
 			isa = PBXGroup;
 			children = (
 				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
-				9271F8222C095C3800586AFD /* PopUpViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -741,12 +797,47 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		9271F82A2C09A3B200586AFD /* Custom */ = {
+		928474752C0CE53F002C3B4C /* Loading */ = {
 			isa = PBXGroup;
 			children = (
-				9271F8282C09A39900586AFD /* PopUpView.swift */,
+				928474712C0CE4AA002C3B4C /* LoadingView.swift */,
 			);
-			path = Custom;
+			path = Loading;
+			sourceTree = "<group>";
+		};
+		928474762C0CE669002C3B4C /* ProfileCreate */ = {
+			isa = PBXGroup;
+			children = (
+				928474772C0CE67C002C3B4C /* Presentation */,
+				928474782C0CE683002C3B4C /* Domain */,
+				928474792C0CE688002C3B4C /* Data */,
+			);
+			path = ProfileCreate;
+			sourceTree = "<group>";
+		};
+		928474772C0CE67C002C3B4C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9284747A2C0CE6BE002C3B4C /* ProfileViewController.swift */,
+				9284747C2C0D6721002C3B4C /* ProfileView.swift */,
+				928474862C0DBDEB002C3B4C /* ProfileViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		928474782C0CE683002C3B4C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		928474792C0CE688002C3B4C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				928474822C0DA12B002C3B4C /* SizeDTO.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
@@ -776,7 +867,9 @@
 				921694EA2BF1BA7C006DC44A /* Application */,
 				9271F7A92C00ABAC00586AFD /* Login */,
 				9271F7AD2C00AC5600586AFD /* SignUp */,
-				9271F7B52C00AD3F00586AFD /* ProfileCreate */,
+				9271F7B52C00AD3F00586AFD /* ProfileSelect */,
+				928474762C0CE669002C3B4C /* ProfileCreate */,
+				9256E55B2C0EFE5A00A50515 /* Main */,
 				9271F7CF2C038C5A00586AFD /* Common */,
 				921694F52BF21E5C006DC44A /* Infrastructure */,
 				9216952A2BF712A0006DC44A /* Resources */,
@@ -806,6 +899,7 @@
 				921695202BF4D600006DC44A /* KakaoSDKCommon */,
 				921695222BF4D60E006DC44A /* KakaoSDKAuth */,
 				921695242BF4D613006DC44A /* KakaoSDKUser */,
+				9256E5572C0ED6DB00A50515 /* Lottie */,
 			);
 			productName = roome;
 			productReference = 92DBD9FF2BCFCF5900E299E2 /* roome.app */;
@@ -837,6 +931,7 @@
 			mainGroup = 92DBD9F62BCFCF5900E299E2;
 			packageReferences = (
 				9216951D2BF4C0E7006DC44A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				9256E5562C0ED6DB00A50515 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 92DBDA002BCFCF5900E299E2 /* Products */;
 			projectDirPath = "";
@@ -879,10 +974,14 @@
 				9271F7EF2C08989C00586AFD /* StrengthRepositoryType.swift in Sources */,
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */,
+				9256E5602C0EFEAD00A50515 /* SignOutViewController.swift in Sources */,
+				9256E5622C0EFFBB00A50515 /* SignOutViewModel.swift in Sources */,
+				9284747D2C0D6721002C3B4C /* ProfileView.swift in Sources */,
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				9271F8132C08A53400586AFD /* DislikeRepositoryType.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
+				9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */,
 				9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */,
 				921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */,
 				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
@@ -890,6 +989,7 @@
 				9271F8092C08A2BE00586AFD /* DeviceLockUseCase.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9271F8292C09A39900586AFD /* PopUpView.swift in Sources */,
+				928474812C0D9F0F002C3B4C /* UIStackView+.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
 				9271F7ED2C086D0F00586AFD /* MbtiUseCase.swift in Sources */,
@@ -902,6 +1002,7 @@
 				921695302BF71659006DC44A /* FontSize.swift in Sources */,
 				9271F80D2C08A3FA00586AFD /* ActivityRepositoryType.swift in Sources */,
 				9271F7F52C089CA400586AFD /* ThemeSelectRepositoryType.swift in Sources */,
+				9284747B2C0CE6BE002C3B4C /* ProfileViewController.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
 				921695882BFE0958006DC44A /* NextButton.swift in Sources */,
 				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
@@ -909,10 +1010,10 @@
 				9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */,
 				9271F80B2C08A2EF00586AFD /* DeviceLockRepository.swift in Sources */,
 				9271F7DF2C08594800586AFD /* DislikeDTO.swift in Sources */,
+				928474852C0DB4F9002C3B4C /* SizeButton.swift in Sources */,
 				9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
-				9271F8232C095C3800586AFD /* PopUpViewController.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
 				921695592BFB8D38006DC44A /* UserContainer.swift in Sources */,
 				9271F7FF2C089ECF00586AFD /* HorrorThemeRepository.swift in Sources */,
@@ -922,8 +1023,8 @@
 				9271F8152C08A55700586AFD /* DislikeUseCase.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
 				9271F7F12C08990000586AFD /* StrengthUseCase.swift in Sources */,
-				9271F7CE2C00E71300586AFD /* WaitingViewController.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
+				928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
 				9216958D2BFE10F7006DC44A /* RoomCountUseCase.swift in Sources */,
@@ -940,6 +1041,7 @@
 				9271F7A82C00A8E100586AFD /* ColorSelectViewController.swift in Sources */,
 				9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */,
 				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
+				928474872C0DBDEB002C3B4C /* ProfileViewModel.swift in Sources */,
 				9271F7D92C08573B00586AFD /* HintDTO.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				9271F81D2C08D21400586AFD /* ColorRepository.swift in Sources */,
@@ -971,10 +1073,12 @@
 				9216954F2BFAFC8D006DC44A /* KeyChain.swift in Sources */,
 				9216956E2BFC9381006DC44A /* WelcomeSignUPViewController.swift in Sources */,
 				921695672BFC68A7006DC44A /* TypeError.swift in Sources */,
+				9284747F2C0D9EE3002C3B4C /* ProfileLabel.swift in Sources */,
 				921695512BFB1A71006DC44A /* SplashView.swift in Sources */,
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
 				9271F7DB2C0857E500586AFD /* DeviceLockDTO.swift in Sources */,
 				9271F8012C08A0E100586AFD /* HintRepositoryType.swift in Sources */,
+				928474722C0CE4AA002C3B4C /* LoadingView.swift in Sources */,
 				9271F7D52C04B32400586AFD /* ImportantFactorDTO.swift in Sources */,
 				9271F8192C08D19600586AFD /* ColorRepositoryType.swift in Sources */,
 				9271F7E32C08605A00586AFD /* GenreRepositoryType.swift in Sources */,
@@ -1213,6 +1317,14 @@
 				kind = branch;
 			};
 		};
+		9256E5562C0ED6DB00A50515 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1230,6 +1342,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9216951D2BF4C0E7006DC44A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		9256E5572C0ED6DB00A50515 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9256E5562C0ED6DB00A50515 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

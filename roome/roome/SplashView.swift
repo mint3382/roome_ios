@@ -21,6 +21,7 @@ class SplashView: UIViewController {
             Task { @MainActor in
                 registerLoginDependency()
                 registerSignUPDependency()
+                registerExtraDependency()
                 registerProfileDependency()
                 do {
                     try await UserContainer.shared.updateUserInformation()
@@ -32,6 +33,7 @@ class SplashView: UIViewController {
         } else {
             registerLoginDependency()
             registerSignUPDependency()
+            registerExtraDependency()
             registerProfileDependency()
             setIsLogin()
         }
@@ -47,6 +49,7 @@ class SplashView: UIViewController {
     
     func goToLogin() {
         let viewController = DIContainer.shared.resolve(LoginViewController.self)
+        let viewController2 = ProfileViewController(viewModel: ProfileViewModel())
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
             .changeRootViewController(viewController, animated: true)
@@ -177,7 +180,20 @@ class SplashView: UIViewController {
         let colorSelectViewController = ColorSelectViewController(viewModel: colorViewModel)
         DIContainer.shared.register(ColorSelectViewController.self, dependency: colorSelectViewController)
         
-        let waitingViewController = WaitingViewController()
-        DIContainer.shared.register(WaitingViewController.self, dependency: waitingViewController)
+        let profileViewController = ProfileViewController(viewModel: ProfileViewModel())
+        DIContainer.shared.register(ProfileViewController.self, dependency: profileViewController)
+        
+        let signOutViewModel = SignOutViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
+        let signOutViewController = SignOutViewController(viewModel: signOutViewModel)
+        DIContainer.shared.register(SignOutViewController.self, dependency: signOutViewController)
+    }
+    
+    func registerExtraDependency() {
+        guard let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else {
+            return
+        }
+        
+        let loadingView = LoadingView(frame: window.frame)
+        DIContainer.shared.register(LoadingView.self, dependency: loadingView)
     }
 }

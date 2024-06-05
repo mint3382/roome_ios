@@ -17,7 +17,8 @@ class NicknameViewModel {
 
     struct NicknameViewModelOutput {
         let isButtonEnable: AnyPublisher<Bool, Never>
-        let canGoNext: AnyPublisher<Void, NicknameError>
+        let canGoNext: AnyPublisher<Void, Never>
+        let goToNext: AnyPublisher<Void, NicknameError>
         let handleBackButton: AnyPublisher<Void, Never>
     }
     
@@ -38,15 +39,12 @@ class NicknameViewModel {
             }.eraseToAnyPublisher()
         
         let canGoNext = input.nextButton
-            .map { [weak self] _ in
+            .compactMap { [weak self] _ in
                 self?.pushedNextButton(self?.textInput)
             }
-            .compactMap { [weak self] _ in
-                self
-            }
-            .flatMap{ owner in
-                owner.goToNext
-            }
+            .eraseToAnyPublisher()
+        
+        let next = goToNext
             .mapError { error -> NicknameError in
                 guard let error = error as? NetworkError else {
                     return NicknameError.network
@@ -63,7 +61,7 @@ class NicknameViewModel {
         let back = input.back
             .eraseToAnyPublisher()
         
-        return NicknameViewModelOutput(isButtonEnable: isButtonEnable, canGoNext: canGoNext, handleBackButton: back)
+        return NicknameViewModelOutput(isButtonEnable: isButtonEnable, canGoNext: canGoNext,goToNext: next, handleBackButton: back)
     }
     
     func canFillTextField(_ text: String) -> Bool {
