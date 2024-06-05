@@ -61,7 +61,8 @@ class ColorSelectViewController: UIViewController{
         output.handleNextPage
             .sink { [weak self] _ in
                 Task { @MainActor in
-                    let nextViewController = DIContainer.shared.resolve(ProfileViewController.self)
+//                    let nextViewController = DIContainer.shared.resolve(ProfileViewController.self)
+                    let nextViewController = ProfileViewController(viewModel: ProfileViewModel())
                     
                     self?.navigationController?.pushViewController(nextViewController, animated: true)
                 }

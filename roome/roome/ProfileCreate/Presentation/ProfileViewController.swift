@@ -18,6 +18,8 @@ class ProfileViewController: UIViewController {
         
         return label
     }()
+    
+    //Profile View
     private let profileBackView: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
@@ -25,18 +27,38 @@ class ProfileViewController: UIViewController {
 
         return view
     }()
-    lazy var profileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width), isRectangle: false)
-    lazy var rectangleProfileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.75, height: view.frame.width), isRectangle: true)
+    private lazy var profileImageView: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.image = squareImage
+        view.contentMode = .scaleAspectFit
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    lazy var squareProfileView = ProfileView(frame: .zero)
+    lazy var rectangleProfileView = ProfileView(frame: .zero)
+    
+    //Profile Image
+    var squareImage = UIImage(resource: .sample)
+    var rectangleImage = UIImage(resource: .sample)
+    
+    //Button
     private let squareButton = SizeButton(title: SizeDTO.square.title, isSelected: true)
     private let rectangleButton = SizeButton(title: SizeDTO.rectangle.title, isSelected: false)
     private let saveButton = NextButton(title: "저장하기", backgroundColor: .roomeMain, tintColor: .white)
     private let pageButton = NextButton(title: "프로필 페이지로 이동", backgroundColor: .clear, tintColor: .lightGray)
+    
+    //Window
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    
+    //PopUpView
     private lazy var popUpView = PopUpView(frame: window!.frame,
                                            title: "저장 완료",
                                            description: "내 사진에 저장되었어요",
                                            colorButtonTitle: "확인",
                                            isWhiteButton: false)
+    
+    //ViewModel
     private var viewModel: ProfileViewModel
     private var cancellable = Set<AnyCancellable>()
     
@@ -52,25 +74,25 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        configureUI()
+        configureSquareView()
+        configureRectangleView()
         bind()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if profileBackView.subviews != [] {
-            profileView.removeFromSuperview()
-        }
-        profileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width), isRectangle: false)
-        rectangleProfileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.75, height: view.frame.width), isRectangle: true)
-        
-        configureUI()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        squareImage = squareProfileView.asImage()
+        rectangleImage = rectangleProfileView.asImage()
         DIContainer.shared.resolve(LoadingView.self).removeFromSuperview()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        profileView.removeFromSuperview()
+        squareProfileView.removeFromSuperview()
         rectangleProfileView.removeFromSuperview()
+        
+        if viewModel.isSquareSize {
+            profileImageView.image = squareImage
+        } else {
+            profileImageView.image = rectangleImage
+        }
     }
     
     func bind() {
@@ -99,12 +121,11 @@ class ProfileViewController: UIViewController {
                 guard let self = self else {
                     return
                 }
-                var image = UIImage()
-                
+                var image: UIImage
                 if isSquareSize {
-                    image = self.profileView.asImage() ?? UIImage(resource: .sample)
+                    image = squareImage
                 } else {
-                    image = self.rectangleProfileView.asImage() ?? UIImage(resource: .sample)
+                    image = rectangleImage
                 }
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 self.window?.addSubview(self.popUpView)
@@ -118,8 +139,8 @@ class ProfileViewController: UIViewController {
                 
                 self.squareButton.isSelected = false
                 self.rectangleButton.isSelected = true
-                self.profileView.removeFromSuperview()
-                self.configureRectangleView()
+                
+                self.profileImageView.image = self.rectangleImage
             }.store(in: &cancellable)
         
         output.handleSquareButton
@@ -129,8 +150,8 @@ class ProfileViewController: UIViewController {
                 }
                 self.squareButton.isSelected = true
                 self.rectangleButton.isSelected = false
-                self.rectangleProfileView.removeFromSuperview()
-                self.configureSquareView()
+
+                profileImageView.image = squareImage
             }.store(in: &cancellable)
         
         output.handleOkayButton
@@ -154,30 +175,29 @@ class ProfileViewController: UIViewController {
     private func configureUI() {
         configureNavigation()
         configureProfileView()
-        configureSquareView()
         configureNextButton()
         configureSizeButtons()
     }
     
     private func configureSquareView() {
-        profileBackView.addSubview(profileView)
+        view.insertSubview(squareProfileView, at: 0)
         
         NSLayoutConstraint.activate([
-            profileView.topAnchor.constraint(equalTo: profileBackView.topAnchor),
-            profileView.bottomAnchor.constraint(equalTo: profileBackView.bottomAnchor),
-            profileView.leadingAnchor.constraint(equalTo: profileBackView.leadingAnchor),
-            profileView.trailingAnchor.constraint(equalTo: profileBackView.trailingAnchor)
+            squareProfileView.topAnchor.constraint(equalTo: profileBackView.topAnchor),
+            squareProfileView.bottomAnchor.constraint(equalTo: profileBackView.bottomAnchor),
+            squareProfileView.leadingAnchor.constraint(equalTo: profileBackView.leadingAnchor),
+            squareProfileView.trailingAnchor.constraint(equalTo: profileBackView.trailingAnchor)
         ])
     }
     
     private func configureRectangleView() {
-        profileBackView.addSubview(rectangleProfileView)
+        view.insertSubview(rectangleProfileView, at: 0)
         
         NSLayoutConstraint.activate([
-            rectangleProfileView.topAnchor.constraint(equalTo: (profileBackView.topAnchor)),
-            rectangleProfileView.bottomAnchor.constraint(equalTo: profileBackView.bottomAnchor),
             rectangleProfileView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            rectangleProfileView.widthAnchor.constraint(equalTo: profileBackView.widthAnchor, multiplier: 0.75)
+            rectangleProfileView.widthAnchor.constraint(equalTo: profileBackView.widthAnchor),
+            rectangleProfileView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.25),
+            rectangleProfileView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
     }
     
@@ -196,12 +216,19 @@ class ProfileViewController: UIViewController {
     
     private func configureProfileView() {
         view.addSubview(profileBackView)
+        profileBackView.addSubview(profileImageView)
         
         NSLayoutConstraint.activate([
             profileBackView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 8),
             profileBackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileBackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            profileBackView.heightAnchor.constraint(equalToConstant: view.frame.width)
+            profileBackView.heightAnchor.constraint(equalToConstant: view.frame.width),
+            
+            profileImageView.topAnchor.constraint(equalTo: profileBackView.topAnchor),
+            profileImageView.bottomAnchor.constraint(equalTo: profileBackView.bottomAnchor),
+            profileImageView.leadingAnchor.constraint(equalTo: profileBackView.leadingAnchor),
+            profileImageView.trailingAnchor.constraint(equalTo: profileBackView.trailingAnchor)
+            
         ])
     }
     
