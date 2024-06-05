@@ -17,15 +17,10 @@ class ColorPaletteCell: UICollectionViewCell {
         contentView.layer.borderWidth = 0
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
-//        contentView.layer.addSublayer(self.gradientLayer)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func prepareForReuse() {
-        self.isHighlighted = false
     }
     
     func changeColor(_ type: BackgroundColor) {

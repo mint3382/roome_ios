@@ -809,7 +809,6 @@
 			isa = PBXGroup;
 			children = (
 				928474772C0CE67C002C3B4C /* Presentation */,
-				928474782C0CE683002C3B4C /* Domain */,
 				928474792C0CE688002C3B4C /* Data */,
 			);
 			path = ProfileCreate;
@@ -823,13 +822,6 @@
 				928474862C0DBDEB002C3B4C /* ProfileViewModel.swift */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		928474782C0CE683002C3B4C /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Domain;
 			sourceTree = "<group>";
 		};
 		928474792C0CE688002C3B4C /* Data */ = {
