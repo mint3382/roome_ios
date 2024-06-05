@@ -64,6 +64,7 @@ class ProfileViewController: UIViewController {
         rectangleProfileView = ProfileView(frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.75, height: view.frame.width), isRectangle: true)
         
         configureUI()
+        DIContainer.shared.resolve(LoadingView.self).removeFromSuperview()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

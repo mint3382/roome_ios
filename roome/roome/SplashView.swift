@@ -21,6 +21,7 @@ class SplashView: UIViewController {
             Task { @MainActor in
                 registerLoginDependency()
                 registerSignUPDependency()
+                registerExtraDependency()
                 registerProfileDependency()
                 do {
                     try await UserContainer.shared.updateUserInformation()
@@ -32,6 +33,7 @@ class SplashView: UIViewController {
         } else {
             registerLoginDependency()
             registerSignUPDependency()
+            registerExtraDependency()
             registerProfileDependency()
             setIsLogin()
         }
@@ -184,5 +186,14 @@ class SplashView: UIViewController {
         let signOutViewModel = SignOutViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
         let signOutViewController = SignOutViewController(viewModel: signOutViewModel)
         DIContainer.shared.register(SignOutViewController.self, dependency: signOutViewController)
+    }
+    
+    func registerExtraDependency() {
+        guard let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else {
+            return
+        }
+        
+        let loadingView = LoadingView(frame: window.frame)
+        DIContainer.shared.register(LoadingView.self, dependency: loadingView)
     }
 }
