@@ -15,6 +15,7 @@ class RoomCountViewModel {
         var backButton: AnyPublisher<Void, Never>
         var rangeButton: AnyPublisher<Void, Never>
         var textButton: AnyPublisher<Void, Never>
+        var selectButton: AnyPublisher<Void, Never>
     }
     
     struct Output {
@@ -23,6 +24,7 @@ class RoomCountViewModel {
         var handleBackButton: AnyPublisher<Void, Never>
         var handleRangeOrText: AnyPublisher<Bool, Never>
         var tapNext: AnyPublisher<Void, Never>
+        var handleSelectButton: AnyPublisher<Void, Never>
     }
     
     private let usecase: RoomCountUseCase
@@ -82,11 +84,15 @@ class RoomCountViewModel {
         let handleRangeOrText = Publishers.Merge(range, textButton)
             .eraseToAnyPublisher()
         
+        let handleSelect = input.selectButton
+            .eraseToAnyPublisher()
+        
         return Output(handleNextButton: goNext,
                       handleNextPage: handleNextPage,
                       handleBackButton: handleBackButton,
                       handleRangeOrText: handleRangeOrText,
-                      tapNext: tapNext)
+                      tapNext: tapNext,
+                      handleSelectButton: handleSelect)
     }
     
     func handlePage(_ count: String?) {

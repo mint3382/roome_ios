@@ -45,6 +45,20 @@ class RoomCountViewController: UIViewController {
         
         return button
     }()
+    let tableView: UITableView = {
+        let view = UITableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 10
+        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 5)
+        view.layer.shadowRadius = 10
+        view.layer.shadowOpacity = 0.5
+        view.layer.masksToBounds = false
+        view.separatorStyle = .none
+        
+        return view
+    }()
     
     //직접 입력 UI들
     private let textFieldBackgroundView: UIView = {
@@ -118,6 +132,9 @@ class RoomCountViewController: UIViewController {
         configureNextButton()
         bind()
         registerKeyboardListener()
+        tableView.register(DropDownCell.self, forCellReuseIdentifier: "tableViewCell")
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -136,7 +153,7 @@ class RoomCountViewController: UIViewController {
         count.receive(on: RunLoop.main)
             .assign(to: &viewModel.$textInput)
         
-        let output = viewModel.transform(RoomCountViewModel.Input(count: count, nextButton: next, backButton: back, rangeButton: range, textButton: textFieldInput))
+        let output = viewModel.transform(RoomCountViewModel.Input(count: count, nextButton: next, backButton: back, rangeButton: range, textButton: textFieldInput, selectButton: select))
         
         output.handleNextButton
             .sink(receiveValue: { [weak self] isNextButtonOn in
@@ -187,12 +204,18 @@ class RoomCountViewController: UIViewController {
                     self?.textFieldButton.isSelected.toggle()
                 } else {
                     self?.selectButton.removeFromSuperview()
+                    self?.tableView.removeFromSuperview()
                     
                     self?.configureNumberTextField()
                     self?.rangeButton.isSelected.toggle()
                     self?.textFieldButton.isSelected.toggle()
                     self?.selectButton.layoutIfNeeded()
                 }
+            }.store(in: &cancellables)
+        
+        output.handleSelectButton
+            .sink { [weak self] _ in
+                self?.configureTableView()
             }.store(in: &cancellables)
     }
     
@@ -241,6 +264,17 @@ class RoomCountViewController: UIViewController {
             selectButton.leadingAnchor.constraint(equalTo: rangeButton.leadingAnchor),
             selectButton.trailingAnchor.constraint(equalTo: textFieldButton.trailingAnchor),
             selectButton.heightAnchor.constraint(equalTo: rangeButton.heightAnchor)
+        ])
+    }
+    
+    private func configureTableView() {
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: selectButton.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: selectButton.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: selectButton.trailingAnchor),
+            tableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.37)
         ])
     }
     
@@ -335,8 +369,93 @@ extension RoomCountViewController {
     }
 }
 
+extension RoomCountViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        RoomCountDTO.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? DropDownCell else {
+            return UITableViewCell()
+        }
+        
+        cell.changeTitle(text: RoomCountDTO(rawValue: indexPath.row + 1)?.title ?? "")
+        
+        return cell
+    }
+    
+    
+}
+
 #Preview {
     let vc = RoomCountViewController(viewModel: RoomCountViewModel(usecase: RoomCountUseCase(repository: RoomCountRepository())))
     
     return vc
+}
+
+class DropDownCell: UITableViewCell {
+    let label: UILabel = {
+        let label = PaddingLabel()
+        label.font = UIFont().pretendardRegular(size: .label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 10
+        self.layer.borderColor = UIColor.clear.cgColor
+        configureLabel()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    func configureLabel() {
+        self.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
+            label.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            label.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+            label.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    func changeTitle(text: String) {
+        label.text = text
+    }
+}
+
+enum RoomCountDTO: Int, CaseIterable {
+    case zero = 1
+    case thirtyOne
+    case sixtyOne
+    case oneHundred
+    case oneHundredFiftyOne
+    case twoHundredOne
+    case overThreeHundredOne
+    
+    var title: String {
+        switch self {
+        case .zero:
+            "0~30번"
+        case .thirtyOne:
+            "31~60번"
+        case .sixtyOne:
+            "61~99번"
+        case .oneHundred:
+            "100~150번"
+        case .oneHundredFiftyOne:
+            "151~200번"
+        case .twoHundredOne:
+            "201~300번"
+        case .overThreeHundredOne:
+            "301번 이상"
+        }
+    }
 }
