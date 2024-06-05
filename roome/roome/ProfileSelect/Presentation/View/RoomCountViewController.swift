@@ -31,7 +31,7 @@ class RoomCountViewController: UIViewController {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "arrowtriangle.down.fill")?.changeImageColor(.lightGray).resize(newWidth: 12)
-        configuration.imagePadding = view.frame.width * 0.7
+        configuration.imageReservation = 20
         configuration.imagePlacement = .trailing
         configuration.title = "선택"
         configuration.cornerStyle = .large
@@ -384,78 +384,20 @@ extension RoomCountViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    
-}
-
-#Preview {
-    let vc = RoomCountViewController(viewModel: RoomCountViewModel(usecase: RoomCountUseCase(repository: RoomCountRepository())))
-    
-    return vc
-}
-
-class DropDownCell: UITableViewCell {
-    let label: UILabel = {
-        let label = PaddingLabel()
-        label.font = UIFont().pretendardRegular(size: .label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 10
-        self.layer.borderColor = UIColor.clear.cgColor
-        configureLabel()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    func configureLabel() {
-        self.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
-            label.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            label.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
-            label.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)
-        ])
-    }
-    
-    func changeTitle(text: String) {
-        label.text = text
-    }
-}
-
-enum RoomCountDTO: Int, CaseIterable {
-    case zero = 1
-    case thirtyOne
-    case sixtyOne
-    case oneHundred
-    case oneHundredFiftyOne
-    case twoHundredOne
-    case overThreeHundredOne
-    
-    var title: String {
-        switch self {
-        case .zero:
-            "0~30번"
-        case .thirtyOne:
-            "31~60번"
-        case .sixtyOne:
-            "61~99번"
-        case .oneHundred:
-            "100~150번"
-        case .oneHundredFiftyOne:
-            "151~200번"
-        case .twoHundredOne:
-            "201~300번"
-        case .overThreeHundredOne:
-            "301번 이상"
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let range = RoomCountDTO(rawValue: indexPath.row + 1) else {
+            return
         }
+        
+        viewModel.canGoNext.send(true)
+        viewModel.isSelected = (range.minCount, range.maxCount)
+        selectButton.setTitle(range.title, for: .normal)
+        self.tableView.removeFromSuperview()
     }
 }
+
+//#Preview {
+//    let vc = RoomCountViewController(viewModel: RoomCountViewModel(usecase: RoomCountUseCase(repository: RoomCountRepository())))
+//    
+//    return vc
+//}

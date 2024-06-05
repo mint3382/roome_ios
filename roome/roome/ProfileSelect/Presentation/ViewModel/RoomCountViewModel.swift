@@ -29,25 +29,29 @@ class RoomCountViewModel {
     
     private let usecase: RoomCountUseCase
     private let goToNext = PassthroughSubject<Void, Error>()
-    private let canGoNext = PassthroughSubject<Bool, Never>()
     @Published var textInput = "0"
+    private var isRangeState: Bool = true
+    var isSelected: (min: Int, max: Int) = (0,0)
+    let canGoNext = PassthroughSubject<Bool, Never>()
     
     init(usecase: RoomCountUseCase) {
         self.usecase = usecase
     }
     
     func transform(_ input: Input) -> Output {
-        let handleNextButton = input.count
-            .compactMap { [weak self] count in
-                self?.usecase.canGoNext(count)
-            }.eraseToAnyPublisher()
-        
-        let goNext = Publishers.Merge(handleNextButton, canGoNext)
+        let goNext = canGoNext
             .eraseToAnyPublisher()
         
         let tapNext = input.nextButton
             .compactMap { [weak self] _ in
-                self?.handlePage(self?.textInput)
+                self
+            }
+            .compactMap { owner in
+                if owner.isRangeState {
+                    owner.handlePage(range: owner.isSelected)
+                } else {
+                    owner.handlePage(count: owner.textInput)
+                }
             }
             .eraseToAnyPublisher()
         
@@ -65,7 +69,20 @@ class RoomCountViewModel {
         
         let range = input.rangeButton
             .map { [weak self] _ in
-                self?.canGoNext.send(false)
+                self?.isRangeState = true
+            }
+            .compactMap { [weak self] _ in
+                self
+            }
+            .map { owner in
+                owner.isSelected
+            }
+            .map { [weak self] (min, max) in
+                if max == 0 {
+                    self?.canGoNext.send(false)
+                } else {
+                    self?.canGoNext.send(true)
+                }
             }
             .map {
                 true
@@ -73,6 +90,9 @@ class RoomCountViewModel {
             .eraseToAnyPublisher()
         
         let textButton = input.textButton
+            .map { [weak self] _ in
+                self?.isRangeState = false
+            }
             .map { [weak self] _ in
                 self?.canGoNext.send(true)
             }
@@ -95,10 +115,21 @@ class RoomCountViewModel {
                       handleSelectButton: handleSelect)
     }
     
-    func handlePage(_ count: String?) {
+    func handlePage(count: String?) {
         Task {
             do {
                 try await usecase.roomCountWithAPI(count)
+                goToNext.send()
+            } catch {
+                goToNext.send(completion: .failure(error))
+            }
+        }
+    }
+    
+    func handlePage(range: (min: Int, max: Int)) {
+        Task {
+            do {
+                try await usecase.roomRangeWithAPI(range)
                 goToNext.send()
             } catch {
                 goToNext.send(completion: .failure(error))

@@ -52,6 +52,7 @@ struct APIConstants {
         case profiles = "/profiles"
         case defaults = "/profiles/defaults"
         case roomCount = "/profiles/room-count"
+        case roomRange = "/profiles/room-count-range"
         case genre = "/profiles/preferred-genres"
         case mbti = "/profiles/mbti"
         case horror = "/profiles/horror-theme-position"

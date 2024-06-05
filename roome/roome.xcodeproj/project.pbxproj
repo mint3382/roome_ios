@@ -71,6 +71,8 @@
 		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
 		9256E5602C0EFEAD00A50515 /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */; };
 		9256E5622C0EFFBB00A50515 /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */; };
+		9256E5672C10C9F700A50515 /* RoomCountDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5662C10C9F700A50515 /* RoomCountDTO.swift */; };
+		9256E5692C10CA1F00A50515 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5682C10CA1F00A50515 /* DropDownCell.swift */; };
 		9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7852BFEF9A700586AFD /* MBTIViewController.swift */; };
 		9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */; };
 		9271F78A2BFF043D00586AFD /* HintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7892BFF043D00586AFD /* HintViewController.swift */; };
@@ -210,6 +212,8 @@
 		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
 		9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
+		9256E5662C10C9F700A50515 /* RoomCountDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountDTO.swift; sourceTree = "<group>"; };
+		9256E5682C10CA1F00A50515 /* DropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		9271F7852BFEF9A700586AFD /* MBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewController.swift; sourceTree = "<group>"; };
 		9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewController.swift; sourceTree = "<group>"; };
 		9271F7892BFF043D00586AFD /* HintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewController.swift; sourceTree = "<group>"; };
@@ -405,6 +409,7 @@
 			children = (
 				9216959A2BFE65AC006DC44A /* ButtonCell.swift */,
 				9271F7C52C00B50600586AFD /* ColorPaletteCell.swift */,
+				9256E5682C10CA1F00A50515 /* DropDownCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -751,6 +756,7 @@
 			isa = PBXGroup;
 			children = (
 				9271F81E2C08D5E400586AFD /* StateDTO.swift */,
+				9256E5662C10C9F700A50515 /* RoomCountDTO.swift */,
 				9271F7D02C04742600586AFD /* GenreDTO.swift */,
 				9271F7E62C0865EB00586AFD /* MBTIDTO.swift */,
 				9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */,
@@ -1011,9 +1017,11 @@
 				9271F7FF2C089ECF00586AFD /* HorrorThemeRepository.swift in Sources */,
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				9271F7F72C089CC300586AFD /* ThemeSelectUseCase.swift in Sources */,
+				9256E5692C10CA1F00A50515 /* DropDownCell.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				9271F8152C08A55700586AFD /* DislikeUseCase.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
+				9256E5672C10C9F700A50515 /* RoomCountDTO.swift in Sources */,
 				9271F7F12C08990000586AFD /* StrengthUseCase.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */,
