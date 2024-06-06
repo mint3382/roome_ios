@@ -10,7 +10,7 @@ import Foundation
 struct RequestBuilder {
     private let url: URL
     private let method: HTTPMethod
-    private let bodyJSON: [String: Any]?
+    private let bodyJSON: [String: Any?]?
     private let headers: [String: String]
 
     init(url: URL,

@@ -61,8 +61,8 @@ class SignOutViewModel: NSObject {
             } else {
                 print("unlink() success")
                 
-                let bodyJSON: [String: Any] = ["provider": LoginProvider.kakao.name,
-                                               "code": "null"]
+                let bodyJSON: [String: Any?] = ["provider": LoginProvider.kakao.name,
+                                               "code": nil]
                 
                 //탈퇴 시켜줘
                 Task {
