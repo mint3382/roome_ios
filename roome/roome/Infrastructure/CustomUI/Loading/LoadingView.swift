@@ -13,7 +13,7 @@ class LoadingView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "선택하신 정보에 따라\n프로필을 생성 중이에요"
-        label.textColor = .black
+        label.textColor = .label
         label.font = UIFont().pretendardBold(size: .headline3)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -24,7 +24,7 @@ class LoadingView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
         configureAnimationView()
         configureTitleLabel()
         animationView.play()

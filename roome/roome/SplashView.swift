@@ -9,10 +9,22 @@ import UIKit
 
 class SplashView: UIViewController {
     private let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    private let logoView = UIImageView(image: UIImage(resource: .logo))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .roomeMain
+        configureLogo()
+    }
+    
+    func configureLogo() {
+        view.addSubview(logoView)
+        logoView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            logoView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            logoView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
     }
 
     override func viewDidAppear(_ animated: Bool) {
