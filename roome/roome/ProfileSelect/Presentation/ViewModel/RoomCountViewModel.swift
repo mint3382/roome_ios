@@ -93,8 +93,18 @@ class RoomCountViewModel {
             .map { [weak self] _ in
                 self?.isRangeState = false
             }
-            .map { [weak self] _ in
-                self?.canGoNext.send(true)
+            .compactMap { [weak self] _ in
+                self
+            }
+            .map { owner in
+                owner.textInput.count
+            }
+            .map { [weak self] count in
+                if count == 0 {
+                    self?.canGoNext.send(false)
+                } else {
+                    self?.canGoNext.send(true)
+                }
             }
             .map {
                 false

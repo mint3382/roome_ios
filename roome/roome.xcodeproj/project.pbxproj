@@ -322,7 +322,6 @@
 		921694F52BF21E5C006DC44A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
-				921695442BF9B64E006DC44A /* CustomUI */,
 				9271F7C22C00AF6800586AFD /* KeyChain */,
 				921694FF2BF22096006DC44A /* Error */,
 				921694F62BF21E66006DC44A /* Network */,
@@ -841,6 +840,15 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		9293DC6E2C12178900545B57 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				921695442BF9B64E006DC44A /* CustomUI */,
+				9216952A2BF712A0006DC44A /* Resources */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -873,7 +881,7 @@
 				9256E55B2C0EFE5A00A50515 /* Main */,
 				9271F7CF2C038C5A00586AFD /* Common */,
 				921694F52BF21E5C006DC44A /* Infrastructure */,
-				9216952A2BF712A0006DC44A /* Resources */,
+				9293DC6E2C12178900545B57 /* DesignSystem */,
 				92DBDA0B2BCFCF5B00E299E2 /* Assets.xcassets */,
 				92DBDA102BCFCF5B00E299E2 /* Info.plist */,
 			);
