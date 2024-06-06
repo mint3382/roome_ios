@@ -13,7 +13,7 @@ class SizeButton: UIButton {
         self.tintColor = .label
         self.setTitleColor(.label, for: .normal)
         self.layer.cornerRadius = 10
-        self.titleLabel?.font = UIFont().pretendardBold(size: .title2)
+        self.titleLabel?.font = .boldTitle3
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .clear
         self.layer.borderWidth = 2

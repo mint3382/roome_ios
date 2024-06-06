@@ -35,7 +35,7 @@ class PopUpView: UIView {
         let label = UILabel()
         label.text = "제작 중인 프로필이 있어요"
         label.textColor = .black
-        label.font = UIFont().pretendardBold(size: .title1)
+        label.font = .boldTitle1
         
         return label
     }()
@@ -44,7 +44,7 @@ class PopUpView: UIView {
         let label = UILabel()
         label.text = "이어서 만드시겠어요?"
         label.textColor = .black
-        label.font = UIFont().pretendardRegular(size: .label)
+        label.font = .regularBody2
         
         return label
     }()
@@ -104,7 +104,7 @@ class PopUpView: UIView {
         titleLabel.text = title
         descriptionLabel.text = description
         var titleContainer = AttributeContainer()
-        titleContainer.font = UIFont().pretendardBold(size: .label)
+        titleContainer.font = .boldLabel
         
         if isWhiteButton {
             buttonStackView.addArrangedSubview(whiteButton)

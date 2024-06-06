@@ -14,7 +14,7 @@ class DescriptionLabel: UILabel {
         self.init()
         self.text = text
         self.numberOfLines = 2
-        self.font = UIFont().pretendardRegular(size: .body1)
+        self.font = .regularBody1
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 

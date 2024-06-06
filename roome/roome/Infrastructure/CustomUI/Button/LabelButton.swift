@@ -12,7 +12,7 @@ class LabelButton: UIView {
     private let mainButton: UIButton = {
         let button = UIButton()
         button.contentHorizontalAlignment = .leading
-        button.titleLabel?.font = UIFont().pretendardMedium(size: .label)
+        button.titleLabel?.font = .regularBody2
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -55,7 +55,7 @@ class LabelButton: UIView {
     
     func setMain(config: UIButton.Configuration) {
         mainButton.configuration = config
-        mainButton.titleLabel?.font = UIFont().pretendardMedium(size: .label)
+        mainButton.titleLabel?.font = .regularBody2
     }
     
     func updateImageColor(_ color: UIColor) {

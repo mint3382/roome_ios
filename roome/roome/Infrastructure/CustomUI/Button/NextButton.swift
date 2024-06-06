@@ -13,7 +13,7 @@ class NextButton: UIButton {
         self.tintColor = .white
         self.layer.cornerRadius = 10
         self.setTitle("다음", for: .normal)
-        self.titleLabel?.font = UIFont().pretendardBold(size: .title2)
+        self.titleLabel?.font = .boldTitle3
         self.isEnabled = false
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .gray

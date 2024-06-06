@@ -9,7 +9,7 @@ import UIKit
 
 //profile View 구현시 사용하는 Label
 extension UILabel {
-    convenience init (description: String?, textColor: UIColor = .white, font: UIFont = UIFont().pretendardRegular(size: .body1)) {
+    convenience init (description: String?, textColor: UIColor = .white, font: UIFont = .regularBody1) {
         self.init(frame: .zero)
         self.text = description
         self.textColor = textColor

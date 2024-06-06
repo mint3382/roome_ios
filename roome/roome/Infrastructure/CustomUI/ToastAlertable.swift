@@ -23,7 +23,7 @@ extension ToastAlertable {
         toastLabel.text = "최대 \(count)개까지 선택할 수 있어요."
         toastLabel.backgroundColor = UIColor.gray
         toastLabel.textColor = UIColor.white
-        toastLabel.font = UIFont().pretendardMedium(size: .body2)
+        toastLabel.font = .regularBody2
         toastLabel.textAlignment = .left
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 10

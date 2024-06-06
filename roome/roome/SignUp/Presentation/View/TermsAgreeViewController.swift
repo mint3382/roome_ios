@@ -27,7 +27,7 @@ class TermsAgreeViewController: UIViewController {
         label.sizeToFit()
         label.textAlignment = .left
         label.textColor = .label
-        label.font = UIFont().pretendardBold(size: .headline2)
+        label.font = .boldHeadline2
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -42,7 +42,7 @@ class TermsAgreeViewController: UIViewController {
         configuration.title = "모두 동의(선택 정보 포함)"
         
         let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = UIFont().pretendardMedium(size: .label)
+        button.titleLabel?.font = .regularBody2
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button

@@ -8,32 +8,76 @@
 import UIKit
 
 extension UIFont {
-    enum FontType {
-        case regular
-        case bold
-        case medium
-        
-        var name: String {
-            switch self {
-            case .regular:
-                return "Pretendard-Regular"
-            case .bold:
-                return "Pretendard-Bold"
-            case .medium:
-                return "Pretendard-Medium"
-            }
+    static func pretandard(name: Font.Name, size: Font.Size) -> UIFont {
+        guard let font = UIFont(name: name.file, size: size.rawValue) else {
+            return .systemFont(ofSize: size.rawValue)
         }
+        return font
+    }
+}
+
+extension UIFont {
+    static var boldSpecial: UIFont {
+        return .pretandard(name: .pretendardBold, size: ._50)
     }
     
-    func pretendardRegular(size: FontSize) -> UIFont {
-        return UIFont(name: FontType.regular.name, size: size.number)!
+    static var regularHeadline1: UIFont {
+        return .pretandard(name: .pretendardRegular, size: ._32)
     }
     
-    func pretendardBold(size: FontSize) -> UIFont {
-        return UIFont(name: FontType.bold.name, size: size.number)!
+    static var boldHeadline1: UIFont {
+        return .pretandard(name: .pretendardBold, size: ._32)
     }
     
-    func pretendardMedium(size: FontSize) -> UIFont {
-        return UIFont(name: FontType.medium.name, size: size.number)!
+    static var regularHeadline2: UIFont {
+        return .pretandard(name: .pretendardRegular, size: ._28)
+    }
+    
+    static var boldHeadline2: UIFont {
+        return .pretandard(name: .pretendardBold, size: ._28)
+    }
+    
+    static var regularHeadline3: UIFont {
+        return .pretandard(name: .pretendardRegular, size: ._24)
+    }
+    
+    static var boldHeadline3: UIFont {
+        return .pretandard(name: .pretendardBold, size: ._24)
+    }
+    
+    static var boldTitle1: UIFont {
+        return .pretandard(name: .pretendardBold, size: ._22)
+    }
+    
+    static var boldTitle2: UIFont {
+        return .pretandard(name: .pretendardBold, size: ._20)
+    }
+    
+    static var boldTitle3: UIFont {
+        return .pretandard(name: .pretendardBold, size: ._16)
+    }
+    
+    static var boldTitle4: UIFont {
+        return .pretandard(name: .pretendardBold, size: ._14)
+    }
+    
+    static var regularBody1: UIFont {
+        return .pretandard(name: .pretendardRegular, size: ._16)
+    }
+    
+    static var regularBody2: UIFont {
+        return .pretandard(name: .pretendardRegular, size: ._14)
+    }
+    
+    static var regularBody3: UIFont {
+        return .pretandard(name: .pretendardRegular, size: ._12)
+    }
+    
+    static var boldLabel: UIFont {
+        return .pretandard(name: .pretendardBold, size: ._14)
+    }
+    
+    static var mediumCaption: UIFont {
+        return .pretandard(name: .pretendardMedium, size: ._11)
     }
 }

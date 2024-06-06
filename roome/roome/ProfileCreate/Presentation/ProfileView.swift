@@ -71,7 +71,7 @@ class ProfileView: UIView {
     
     private func configureIntroduceStackView() {
         let nickname = UserContainer.shared.user?.data.nickname
-        let nicknameLabel = UILabel(description: nickname, font: UIFont().pretendardBold(size: .title2))
+        let nicknameLabel = UILabel(description: nickname, font: .boldTitle2)
         
         let roomCount = ProfileLabel(text: profile?.data.count, isIntroduceLine: true)
         
@@ -104,7 +104,7 @@ class ProfileView: UIView {
     }
     
     func configureSignature() {
-        let label = UILabel(description: "©Roome", font: UIFont().pretendardRegular(size: .caption))
+        let label = UILabel(description: "©Roome", font: .mediumCaption)
         label.textAlignment = .right
         
         self.addSubview(label)

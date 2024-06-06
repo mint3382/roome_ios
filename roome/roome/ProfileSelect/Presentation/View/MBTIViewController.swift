@@ -25,7 +25,7 @@ class MBTIViewController: UIViewController {
         configuration.title = "프로필에 추가하지 않을래요"
         
         let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = UIFont().pretendardMedium(size: .label)
+        button.titleLabel?.font = .regularBody2
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentHorizontalAlignment = .leading
         

@@ -27,7 +27,7 @@ class WelcomeSignUPViewController: UIViewController {
                     """
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.font = UIFont().pretendardBold(size: .headline3)
+        label.font = .boldHeadline3
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -41,7 +41,7 @@ class WelcomeSignUPViewController: UIViewController {
                     """
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.font = UIFont().pretendardRegular(size: .body1)
+        label.font = .regularBody1
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -54,17 +54,7 @@ class WelcomeSignUPViewController: UIViewController {
         return imageView
     }()
     
-    private let makeProfileButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.tintColor = .white
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .roomeMain
-        button.setTitle("프로필 만들기", for: .normal)
-        button.titleLabel?.font = UIFont().pretendardBold(size: .title2)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
+    private let makeProfileButton = NextButton(title: "프로필 만들기", backgroundColor: .roomeMain, tintColor: .white)
     
     let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
     lazy var popUpView = PopUpView(frame: window!.frame,

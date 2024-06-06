@@ -14,7 +14,7 @@ class TitleLabel: UILabel {
         self.init()
         self.text = text
         self.numberOfLines = 3
-        self.font = UIFont().pretendardBold(size: .headline2)
+        self.font = .boldHeadline2
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 

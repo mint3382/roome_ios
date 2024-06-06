@@ -14,7 +14,7 @@ class LoadingView: UIView {
         let label = UILabel()
         label.text = "선택하신 정보에 따라\n프로필을 생성 중이에요"
         label.textColor = .label
-        label.font = UIFont().pretendardBold(size: .headline3)
+        label.font = .boldHeadline3
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false

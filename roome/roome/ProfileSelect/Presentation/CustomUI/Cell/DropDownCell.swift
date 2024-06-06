@@ -10,7 +10,7 @@ import UIKit
 class DropDownCell: UITableViewCell {
     let label: UILabel = {
         let label = PaddingLabel()
-        label.font = UIFont().pretendardRegular(size: .label)
+        label.font = .regularBody2
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label

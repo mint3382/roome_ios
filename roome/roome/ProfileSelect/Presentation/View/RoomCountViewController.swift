@@ -39,7 +39,7 @@ class RoomCountViewController: UIViewController {
         configuration.background.strokeWidth = 2
         
         let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = UIFont().pretendardBold(size: .label)
+        button.titleLabel?.font = .boldLabel
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentHorizontalAlignment = .leading
         
@@ -88,7 +88,7 @@ class RoomCountViewController: UIViewController {
         textField.textAlignment = .right
         textField.text = "0"
         textField.keyboardType = .numberPad
-        textField.font = UIFont().pretendardBold(size: .custom(50))
+        textField.font = .boldSpecial
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
@@ -97,7 +97,7 @@ class RoomCountViewController: UIViewController {
         let label = UILabel()
         label.text = "번"
         label.textAlignment = .left
-        label.font = UIFont().pretendardBold(size: .custom(50))
+        label.font = .boldSpecial
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label

@@ -25,7 +25,7 @@ class NicknameViewController: UIViewController {
         label.numberOfLines = 2
         label.sizeToFit()
         label.textAlignment = .left
-        label.font = UIFont().pretendardBold(size: .headline2)
+        label.font = .boldHeadline2
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -40,7 +40,7 @@ class NicknameViewController: UIViewController {
         label.numberOfLines = 2
         label.sizeToFit()
         label.textAlignment = .left
-        label.font = UIFont().pretendardRegular(size: .label)
+        label.font = .regularBody2
         label.textColor = .systemGray
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
@@ -50,7 +50,7 @@ class NicknameViewController: UIViewController {
     private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임"
-        label.font = UIFont().pretendardBold(size: .label)
+        label.font = .boldLabel
         
         return label
     }()
@@ -70,7 +70,7 @@ class NicknameViewController: UIViewController {
     private let formLabel: UILabel = {
         let label = UILabel()
         label.text = "2-8자리 한글, 영문, 숫자"
-        label.font = UIFont().pretendardMedium(size: .caption)
+        label.font = .mediumCaption
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
