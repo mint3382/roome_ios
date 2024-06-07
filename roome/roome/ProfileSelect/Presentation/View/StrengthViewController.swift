@@ -9,16 +9,7 @@ import UIKit
 import Combine
 
 class StrengthViewController: UIViewController, ToastAlertable {
-    private lazy var stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.alignment = .leading
-        stack.distribution = .fillProportionally
-        stack.spacing = 4
-        
-        return stack
-    }()
+    private let stackView = UIStackView(axis: .vertical, alignment: .leading)
     
     private let titleLabel = TitleLabel(text: "방탈출 할 때,\n본인의 강점이 무엇이라고\n생각하시나요?")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
@@ -76,19 +67,19 @@ class StrengthViewController: UIViewController, ToastAlertable {
             }.store(in: &cancellables)
         
         output.handleBackButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
         
         output.handleNextButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink(receiveCompletion: { error in
                 //API 연결 실패 시
             }, receiveValue: { [weak self] _ in
-                Task { @MainActor in
-                    let nextViewController = DIContainer.shared.resolve(ThemeSelectViewController.self)
+                let nextViewController = DIContainer.shared.resolve(ThemeSelectViewController.self)
                     
-                    self?.navigationController?.pushViewController(nextViewController, animated: true)
-                }
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
             })
             .store(in: &cancellables)
         

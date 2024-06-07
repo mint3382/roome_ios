@@ -9,11 +9,12 @@ import UIKit
 
 //profile view 구현시 사용하는 stackView
 extension UIStackView {
-    convenience init(number: Int) {
+    convenience init(axis: NSLayoutConstraint.Axis, alignment: UIStackView.Alignment) {
         self.init()
-        self.axis = .horizontal
+        self.axis = axis
         self.distribution = .fillProportionally
-        self.alignment = .center
+        self.alignment = alignment
         self.spacing = 4
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
 }

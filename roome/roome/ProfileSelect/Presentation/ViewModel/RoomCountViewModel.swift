@@ -12,19 +12,15 @@ class RoomCountViewModel {
     struct Input {
         var count: AnyPublisher<String, Never>
         var nextButton: AnyPublisher<Void, Never>
-        var backButton: AnyPublisher<Void, Never>
         var rangeButton: AnyPublisher<Void, Never>
         var textButton: AnyPublisher<Void, Never>
-        var selectButton: AnyPublisher<Void, Never>
     }
     
     struct Output {
         var handleNextButton: AnyPublisher<Bool, Never>
         var handleNextPage: AnyPublisher<Void, Error>
-        var handleBackButton: AnyPublisher<Void, Never>
         var handleRangeOrText: AnyPublisher<Bool, Never>
         var tapNext: AnyPublisher<Void, Never>
-        var handleSelectButton: AnyPublisher<Void, Never>
     }
     
     private let usecase: RoomCountUseCase
@@ -62,9 +58,6 @@ class RoomCountViewModel {
             .flatMap{ owner in
                 owner.goToNext
             }
-            .eraseToAnyPublisher()
-        
-        let handleBackButton = input.backButton
             .eraseToAnyPublisher()
         
         let range = input.rangeButton
@@ -114,15 +107,10 @@ class RoomCountViewModel {
         let handleRangeOrText = Publishers.Merge(range, textButton)
             .eraseToAnyPublisher()
         
-        let handleSelect = input.selectButton
-            .eraseToAnyPublisher()
-        
         return Output(handleNextButton: goNext,
                       handleNextPage: handleNextPage,
-                      handleBackButton: handleBackButton,
                       handleRangeOrText: handleRangeOrText,
-                      tapNext: tapNext,
-                      handleSelectButton: handleSelect)
+                      tapNext: tapNext)
     }
     
     func handlePage(count: String?) {

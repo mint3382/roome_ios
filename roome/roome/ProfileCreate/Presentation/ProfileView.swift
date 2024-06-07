@@ -49,7 +49,7 @@ class ProfileView: UIView {
         self.layer.addSublayer(gradientLayer)
     }
     
-    private let introduceStackView = UIStackView(number: 0)
+    private let introduceStackView = UIStackView(axis: .horizontal, alignment: .center)
     
     private let stackView: UIStackView = {
         let stack = UIStackView()
@@ -62,12 +62,12 @@ class ProfileView: UIView {
         return stack
     }()
     
-    private let lineStackView1 = UIStackView(number: 1)
-    private let lineStackView2 = UIStackView(number: 2)
-    private let lineStackView3 = UIStackView(number: 3)
-    private let lineStackView4 = UIStackView(number: 4)
-    private let lineStackView5 = UIStackView(number: 5)
-    private let lineStackView6 = UIStackView(number: 6)
+    private let lineStackView1 = UIStackView(axis: .horizontal, alignment: .center)
+    private let lineStackView2 = UIStackView(axis: .horizontal, alignment: .center)
+    private let lineStackView3 = UIStackView(axis: .horizontal, alignment: .center)
+    private let lineStackView4 = UIStackView(axis: .horizontal, alignment: .center)
+    private let lineStackView5 = UIStackView(axis: .horizontal, alignment: .center)
+    private let lineStackView6 = UIStackView(axis: .horizontal, alignment: .center)
     
     private func configureIntroduceStackView() {
         let nickname = UserContainer.shared.user?.data.nickname

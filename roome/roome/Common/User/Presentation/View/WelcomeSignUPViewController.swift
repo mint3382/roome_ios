@@ -101,20 +101,20 @@ class WelcomeSignUPViewController: UIViewController {
         let popUpOutput = viewModel.popUpTransforms(WelcomeViewModel.PopUpInput(newButton: start, stillButton: still))
         
         output.handleNext
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink(receiveCompletion: { error in
                 //실패 시
             }, receiveValue: { [weak self] state in
-                Task { @MainActor in
-                    if state {
-                        self?.window?.addSubview(self!.popUpView)
-                    } else {
-                        let nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
-                        self?.navigationController?.pushViewController(nextPage, animated: true)
-                    }
+                if state {
+                    self?.window?.addSubview(self!.popUpView)
+                } else {
+                    let nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
+                    self?.navigationController?.pushViewController(nextPage, animated: true)
                 }
             }).store(in: &cancellables)
         
         output.nextState
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] state in
                 var nextPage: UIViewController
                 switch state {

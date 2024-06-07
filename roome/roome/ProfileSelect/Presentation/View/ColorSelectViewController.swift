@@ -42,6 +42,7 @@ class ColorSelectViewController: UIViewController{
         let output = viewModel.transform(ColorSelectViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
+            .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
             .sink(receiveCompletion: { error in
                 //실패 시
             }, receiveValue: { _ in
@@ -54,18 +55,18 @@ class ColorSelectViewController: UIViewController{
             }).store(in: &cancellables)
         
         output.handleBackButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
         
         output.handleNextPage
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
-                Task { @MainActor in
 //                    let nextViewController = DIContainer.shared.resolve(ProfileViewController.self)
-                    let nextViewController = ProfileViewController(viewModel: ProfileViewModel())
-                    
-                    self?.navigationController?.pushViewController(nextViewController, animated: true)
-                }
+                let nextViewController = ProfileViewController(viewModel: ProfileViewModel())
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
             }.store(in: &cancellables)
         
         output.tapNext

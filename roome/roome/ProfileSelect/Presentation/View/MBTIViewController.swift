@@ -80,19 +80,19 @@ class MBTIViewController: UIViewController {
             }.store(in: &cancellables)
         
         output.handleBackButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
         
         output.handleNextButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink(receiveCompletion: { error in
                 //연결 실패 시
             }, receiveValue: { [weak self] _ in
-                Task { @MainActor in
-                    let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
-                    
-                    self?.navigationController?.pushViewController(nextViewController, animated: true)
-                }
+                let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
             })
             .store(in: &cancellables)
         

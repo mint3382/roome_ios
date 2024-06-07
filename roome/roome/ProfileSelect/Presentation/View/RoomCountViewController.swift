@@ -9,16 +9,7 @@ import UIKit
 import Combine
 
 class RoomCountViewController: UIViewController {
-    private let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.alignment = .leading
-        stack.distribution = .fillProportionally
-        stack.spacing = 4
-        
-        return stack
-    }()
+    private let stackView = UIStackView(axis: .vertical, alignment: .leading)
     
     private let titleLabel = TitleLabel(text: "현재까지 경험한 방 수를\n알려주세요")
     private let descriptionLabel = DescriptionLabel(text: "프로필 생성 후 마이페이지에서 수정할 수 있어요")
@@ -144,16 +135,13 @@ class RoomCountViewController: UIViewController {
     func bind() {
         let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         let count = numberTextField.publisher
-        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         let range = rangeButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         let textFieldInput = textFieldButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let select =
-        selectButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         
         count.receive(on: RunLoop.main)
             .assign(to: &viewModel.$textInput)
         
-        let output = viewModel.transform(RoomCountViewModel.Input(count: count, nextButton: next, backButton: back, rangeButton: range, textButton: textFieldInput, selectButton: select))
+        let output = viewModel.transform(RoomCountViewModel.Input(count: count, nextButton: next, rangeButton: range, textButton: textFieldInput))
         
         output.handleNextButton
             .sink(receiveValue: { [weak self] isNextButtonOn in
@@ -171,27 +159,19 @@ class RoomCountViewController: UIViewController {
             .store(in: &cancellables)
         
         output.handleNextPage
+            .debounce(for: 1, scheduler: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     print("roomcount finish")
                 case .failure(_):
-                    Task { @MainActor in
-                        self.navigationController?.popToRootViewController(animated: true)
-                    }
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }, receiveValue: { _ in
                 let nextPage = DIContainer.shared.resolve(GenreViewController.self)
-                Task { @MainActor in
-                    self.navigationController?.pushViewController(nextPage, animated: true)
-                }
+                self.navigationController?.pushViewController(nextPage, animated: true)
             })
             .store(in: &cancellables)
-        
-        output.handleBackButton
-            .sink { [weak self]  in
-                self?.navigationController?.popViewController(animated: true)
-            }.store(in: &cancellables)
         
         output.handleRangeOrText
             .sink { [weak self] isRange in
@@ -213,9 +193,16 @@ class RoomCountViewController: UIViewController {
                 }
             }.store(in: &cancellables)
         
-        output.handleSelectButton
+        selectButton.publisher(for: .touchUpInside)
+            .debounce(for: 1, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 self?.configureTableView()
+            }.store(in: &cancellables)
+        
+        backButton.publisher(for: .touchUpInside)
+            .throttle(for: 0.05, scheduler: RunLoop.main, latest: true)
+            .sink { [weak self]  in
+                self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
     }
     
