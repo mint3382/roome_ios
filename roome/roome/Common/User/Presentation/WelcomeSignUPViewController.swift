@@ -9,15 +9,7 @@ import UIKit
 import Combine
 
 class WelcomeSignUPViewController: UIViewController {
-    private let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.distribution = .fillProportionally
-        stack.spacing = 20
-        
-        return stack
-    }()
+    private let stackView = UIStackView(axis: .vertical, alignment: .center, spacing: 20)
     
     private lazy var welcomeLabel: UILabel = {
         let label = PaddingLabel(padding: UIEdgeInsets(top: 20, left: 4, bottom: 0, right: 4))

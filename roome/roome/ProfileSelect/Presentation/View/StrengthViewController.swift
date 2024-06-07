@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class StrengthViewController: UIViewController, ToastAlertable {
-    private let stackView = UIStackView(axis: .vertical, alignment: .leading)
+    private let stackView = UIStackView(axis: .vertical)
     
     private let titleLabel = TitleLabel(text: "방탈출 할 때,\n본인의 강점이 무엇이라고\n생각하시나요?")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")

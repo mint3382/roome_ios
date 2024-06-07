@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class RoomCountViewController: UIViewController {
-    private let stackView = UIStackView(axis: .vertical, alignment: .leading)
+    private let stackView = UIStackView(axis: .vertical)
     
     private let titleLabel = TitleLabel(text: "현재까지 경험한 방 수를\n알려주세요")
     private let descriptionLabel = DescriptionLabel(text: "프로필 생성 후 마이페이지에서 수정할 수 있어요")
@@ -94,7 +94,7 @@ class RoomCountViewController: UIViewController {
         return label
     }()
     
-    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 50, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private let nextButton = NextButton()
     private var nextButtonWidthConstraint: NSLayoutConstraint?

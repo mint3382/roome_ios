@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class GenreViewController: UIViewController, ToastAlertable {
-    private let stackView = UIStackView(axis: .vertical, alignment: .leading)
+    private let stackView = UIStackView(axis: .vertical)
     
     private let titleLabel = TitleLabel(text: "선호하는 방탈출 장르를\n알려주세요")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")

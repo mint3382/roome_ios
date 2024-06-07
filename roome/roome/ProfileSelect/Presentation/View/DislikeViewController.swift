@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class DislikeViewController: UIViewController, ToastAlertable {
-    private let stackView = UIStackView(axis: .vertical, alignment: .leading)
+    private let stackView = UIStackView(axis: .vertical)
     
     private let titleLabel = TitleLabel(text: "방탈출 할 때,\n어떤 요소를\n싫어하시나요?")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")

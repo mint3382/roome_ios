@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class ThemeSelectViewController: UIViewController, ToastAlertable {
-    private let stackView = UIStackView(axis: .vertical, alignment: .leading)
+    private let stackView = UIStackView(axis: .vertical)
     
     private let titleLabel = TitleLabel(text: "테마 선택 시,\n어떤 요소를 중요하게\n생각하시나요?")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
