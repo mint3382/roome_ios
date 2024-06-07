@@ -686,8 +686,8 @@
 		9271F7BE2C00ADAD00586AFD /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				9271F8242C099F5800586AFD /* View */,
-				9271F8252C099F6000586AFD /* ViewModel */,
+				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
+				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -787,22 +787,6 @@
 				9271F7BB2C00AD9400586AFD /* User */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		9271F8242C099F5800586AFD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				9216956D2BFC9381006DC44A /* WelcomeSignUPViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		9271F8252C099F6000586AFD /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				921695772BFCE1F7006DC44A /* WelcomeViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		928474752C0CE53F002C3B4C /* Loading */ = {
