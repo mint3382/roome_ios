@@ -194,7 +194,7 @@ class RoomCountViewController: UIViewController {
             }.store(in: &cancellables)
         
         selectButton.publisher(for: .touchUpInside)
-            .debounce(for: 1, scheduler: RunLoop.main)
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
                 self?.configureTableView()
             }.store(in: &cancellables)
