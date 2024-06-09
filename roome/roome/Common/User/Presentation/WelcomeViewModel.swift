@@ -53,7 +53,7 @@ class WelcomeViewModel {
                 self?.deleteProfile()
             }
             .compactMap { [weak self] _ in
-                self?.profileState.send(.roomCount)
+                self?.profileState.send(.roomCountRanges)
             }.eraseToAnyPublisher()
         
         let still = input.stillButton
@@ -71,7 +71,8 @@ class WelcomeViewModel {
         Task {
             do {
                 try await UserContainer.shared.updateUserProfile()
-                if UserContainer.shared.profile == nil || UserContainer.shared.profile?.data.state == StateDTO.roomCount.rawValue {
+                try await UserContainer.shared.updateDefaultProfile()
+                if UserContainer.shared.profile == nil || UserContainer.shared.profile?.data.state == StateDTO.roomCountRanges.rawValue {
                     goToNext.send(false)
                 } else {
                     goToNext.send(true)

@@ -151,7 +151,7 @@ class DislikeViewController: UIViewController, ToastAlertable {
 
 extension DislikeViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        DislikeDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.dislikedFactors.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -159,7 +159,12 @@ extension DislikeViewController: UICollectionViewDataSource, UICollectionViewDel
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(DislikeDTO(rawValue: indexPath.row + 1)!.title)
+        
+        guard let dislike = UserContainer.shared.defaultProfile?.data.dislikedFactors[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.changeTitle(dislike.title)
         
         return cell
     }

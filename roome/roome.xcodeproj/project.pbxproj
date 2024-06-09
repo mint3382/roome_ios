@@ -64,14 +64,13 @@
 		921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695932BFE1B8C006DC44A /* GenreViewController.swift */; };
 		9216959B2BFE65AC006DC44A /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959A2BFE65AC006DC44A /* ButtonCell.swift */; };
 		9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216959C2BFE72D1006DC44A /* StrengthViewController.swift */; };
-		921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */; };
+		921695A12BFE743D006DC44A /* ImportantFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A02BFE743D006DC44A /* ImportantFactorViewController.swift */; };
 		921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */; };
 		921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A42BFE786B006DC44A /* DislikeViewController.swift */; };
 		9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9256E5572C0ED6DB00A50515 /* Lottie */; };
 		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
 		9256E5602C0EFEAD00A50515 /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */; };
 		9256E5622C0EFFBB00A50515 /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */; };
-		9256E5672C10C9F700A50515 /* RoomCountDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5662C10C9F700A50515 /* RoomCountDTO.swift */; };
 		9256E5692C10CA1F00A50515 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5682C10CA1F00A50515 /* DropDownCell.swift */; };
 		9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7852BFEF9A700586AFD /* MBTIViewController.swift */; };
 		9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */; };
@@ -81,7 +80,7 @@
 		9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */; };
 		9271F7962C00863E00586AFD /* StrengthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7952C00863E00586AFD /* StrengthViewModel.swift */; };
 		9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7992C009A3E00586AFD /* ToastAlertable.swift */; };
-		9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */; };
+		9271F79C2C009E9F00586AFD /* ImportantFactorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79B2C009E9F00586AFD /* ImportantFactorViewModel.swift */; };
 		9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */; };
 		9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F79F2C00A53100586AFD /* HintViewModel.swift */; };
 		9271F7A22C00A64500586AFD /* DeviceAndLockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */; };
@@ -92,14 +91,6 @@
 		9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C72C00B6D200586AFD /* UIColor+.swift */; };
 		9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7C92C00B70200586AFD /* BackgroundColor.swift */; };
 		9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */; };
-		9271F7D12C04742600586AFD /* GenreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D02C04742600586AFD /* GenreDTO.swift */; };
-		9271F7D32C04B1CE00586AFD /* StrengthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */; };
-		9271F7D52C04B32400586AFD /* ImportantFactorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D42C04B32400586AFD /* ImportantFactorDTO.swift */; };
-		9271F7D72C04B40900586AFD /* HorrorThemePositionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D62C04B40900586AFD /* HorrorThemePositionDTO.swift */; };
-		9271F7D92C08573B00586AFD /* HintDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7D82C08573B00586AFD /* HintDTO.swift */; };
-		9271F7DB2C0857E500586AFD /* DeviceLockDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7DA2C0857E500586AFD /* DeviceLockDTO.swift */; };
-		9271F7DD2C08588100586AFD /* ActivitiesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7DC2C08588100586AFD /* ActivitiesDTO.swift */; };
-		9271F7DF2C08594800586AFD /* DislikeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7DE2C08594800586AFD /* DislikeDTO.swift */; };
 		9271F7E12C08604800586AFD /* GenreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7E02C08604700586AFD /* GenreRepository.swift */; };
 		9271F7E32C08605A00586AFD /* GenreRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7E22C08605A00586AFD /* GenreRepositoryType.swift */; };
 		9271F7E52C08624800586AFD /* GenreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7E42C08624800586AFD /* GenreUseCase.swift */; };
@@ -207,13 +198,12 @@
 		921695932BFE1B8C006DC44A /* GenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewController.swift; sourceTree = "<group>"; };
 		9216959A2BFE65AC006DC44A /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		9216959C2BFE72D1006DC44A /* StrengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthViewController.swift; sourceTree = "<group>"; };
-		921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
+		921695A02BFE743D006DC44A /* ImportantFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantFactorViewController.swift; sourceTree = "<group>"; };
 		921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
 		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
 		9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
-		9256E5662C10C9F700A50515 /* RoomCountDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCountDTO.swift; sourceTree = "<group>"; };
 		9256E5682C10CA1F00A50515 /* DropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		9271F7852BFEF9A700586AFD /* MBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewController.swift; sourceTree = "<group>"; };
 		9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewController.swift; sourceTree = "<group>"; };
@@ -223,7 +213,7 @@
 		9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewModel.swift; sourceTree = "<group>"; };
 		9271F7952C00863E00586AFD /* StrengthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthViewModel.swift; sourceTree = "<group>"; };
 		9271F7992C009A3E00586AFD /* ToastAlertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAlertable.swift; sourceTree = "<group>"; };
-		9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewModel.swift; sourceTree = "<group>"; };
+		9271F79B2C009E9F00586AFD /* ImportantFactorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantFactorViewModel.swift; sourceTree = "<group>"; };
 		9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewModel.swift; sourceTree = "<group>"; };
 		9271F79F2C00A53100586AFD /* HintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintViewModel.swift; sourceTree = "<group>"; };
 		9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewModel.swift; sourceTree = "<group>"; };
@@ -234,14 +224,6 @@
 		9271F7C72C00B6D200586AFD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		9271F7C92C00B70200586AFD /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
 		9271F7CB2C00E65800586AFD /* ColorSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewModel.swift; sourceTree = "<group>"; };
-		9271F7D02C04742600586AFD /* GenreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreDTO.swift; sourceTree = "<group>"; };
-		9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthDTO.swift; sourceTree = "<group>"; };
-		9271F7D42C04B32400586AFD /* ImportantFactorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantFactorDTO.swift; sourceTree = "<group>"; };
-		9271F7D62C04B40900586AFD /* HorrorThemePositionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorThemePositionDTO.swift; sourceTree = "<group>"; };
-		9271F7D82C08573B00586AFD /* HintDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintDTO.swift; sourceTree = "<group>"; };
-		9271F7DA2C0857E500586AFD /* DeviceLockDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLockDTO.swift; sourceTree = "<group>"; };
-		9271F7DC2C08588100586AFD /* ActivitiesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesDTO.swift; sourceTree = "<group>"; };
-		9271F7DE2C08594800586AFD /* DislikeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeDTO.swift; sourceTree = "<group>"; };
 		9271F7E02C08604700586AFD /* GenreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepository.swift; sourceTree = "<group>"; };
 		9271F7E22C08605A00586AFD /* GenreRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepositoryType.swift; sourceTree = "<group>"; };
 		9271F7E42C08624800586AFD /* GenreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreUseCase.swift; sourceTree = "<group>"; };
@@ -627,7 +609,7 @@
 				9271F78D2BFF509100586AFD /* GenreViewModel.swift */,
 				9271F78F2BFF8FA800586AFD /* MBTIViewModel.swift */,
 				9271F7952C00863E00586AFD /* StrengthViewModel.swift */,
-				9271F79B2C009E9F00586AFD /* ThemeSelectViewModel.swift */,
+				9271F79B2C009E9F00586AFD /* ImportantFactorViewModel.swift */,
 				9271F79D2C00A1B400586AFD /* HorrorPositionViewModel.swift */,
 				9271F79F2C00A53100586AFD /* HintViewModel.swift */,
 				9271F7A12C00A64500586AFD /* DeviceAndLockViewModel.swift */,
@@ -645,7 +627,7 @@
 				921695932BFE1B8C006DC44A /* GenreViewController.swift */,
 				9271F7852BFEF9A700586AFD /* MBTIViewController.swift */,
 				9216959C2BFE72D1006DC44A /* StrengthViewController.swift */,
-				921695A02BFE743D006DC44A /* ThemeSelectViewController.swift */,
+				921695A02BFE743D006DC44A /* ImportantFactorViewController.swift */,
 				9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */,
 				9271F7892BFF043D00586AFD /* HintViewController.swift */,
 				921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */,
@@ -758,16 +740,7 @@
 			isa = PBXGroup;
 			children = (
 				9271F81E2C08D5E400586AFD /* StateDTO.swift */,
-				9256E5662C10C9F700A50515 /* RoomCountDTO.swift */,
-				9271F7D02C04742600586AFD /* GenreDTO.swift */,
 				9271F7E62C0865EB00586AFD /* MBTIDTO.swift */,
-				9271F7D22C04B1CE00586AFD /* StrengthDTO.swift */,
-				9271F7D42C04B32400586AFD /* ImportantFactorDTO.swift */,
-				9271F7D62C04B40900586AFD /* HorrorThemePositionDTO.swift */,
-				9271F7D82C08573B00586AFD /* HintDTO.swift */,
-				9271F7DA2C0857E500586AFD /* DeviceLockDTO.swift */,
-				9271F7DC2C08588100586AFD /* ActivitiesDTO.swift */,
-				9271F7DE2C08594800586AFD /* DislikeDTO.swift */,
 				9271F7C92C00B70200586AFD /* BackgroundColor.swift */,
 			);
 			path = DataMapping;
@@ -958,12 +931,10 @@
 				921695632BFC6362006DC44A /* TermsAgreeRepositoryType.swift in Sources */,
 				921695652BFC67D0006DC44A /* TermsAgreeRepository.swift in Sources */,
 				9271F7F32C08993600586AFD /* StrengthRepository.swift in Sources */,
-				9271F7D32C04B1CE00586AFD /* StrengthDTO.swift in Sources */,
 				921695132BF34995006DC44A /* LoginProvider.swift in Sources */,
 				921695382BF84604006DC44A /* NicknameUseCase.swift in Sources */,
 				921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */,
-				9271F7DD2C08588100586AFD /* ActivitiesDTO.swift in Sources */,
-				9271F79C2C009E9F00586AFD /* ThemeSelectViewModel.swift in Sources */,
+				9271F79C2C009E9F00586AFD /* ImportantFactorViewModel.swift in Sources */,
 				9271F7EF2C08989C00586AFD /* StrengthRepositoryType.swift in Sources */,
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */,
@@ -1003,7 +974,6 @@
 				9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */,
 				9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */,
 				9271F80B2C08A2EF00586AFD /* DeviceLockRepository.swift in Sources */,
-				9271F7DF2C08594800586AFD /* DislikeDTO.swift in Sources */,
 				928474852C0DB4F9002C3B4C /* SizeButton.swift in Sources */,
 				9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
@@ -1017,7 +987,6 @@
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				9271F8152C08A55700586AFD /* DislikeUseCase.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
-				9256E5672C10C9F700A50515 /* RoomCountDTO.swift in Sources */,
 				9271F7F12C08990000586AFD /* StrengthUseCase.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
 				928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */,
@@ -1038,7 +1007,6 @@
 				9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */,
 				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
 				928474872C0DBDEB002C3B4C /* ProfileViewModel.swift in Sources */,
-				9271F7D92C08573B00586AFD /* HintDTO.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				9271F81D2C08D21400586AFD /* ColorRepository.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
@@ -1047,18 +1015,16 @@
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
 				9271F7E72C0865EB00586AFD /* MBTIDTO.swift in Sources */,
 				9271F7FD2C089E9D00586AFD /* HorrorThemeUseCase.swift in Sources */,
-				921695A12BFE743D006DC44A /* ThemeSelectViewController.swift in Sources */,
+				921695A12BFE743D006DC44A /* ImportantFactorViewController.swift in Sources */,
 				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
 				9271F7962C00863E00586AFD /* StrengthViewModel.swift in Sources */,
 				9216954A2BFA1A9D006DC44A /* TermsAgreeViewModel.swift in Sources */,
 				9271F7A62C00A83600586AFD /* DislikeViewModel.swift in Sources */,
 				921695782BFCE1F7006DC44A /* WelcomeViewModel.swift in Sources */,
-				9271F7D12C04742600586AFD /* GenreDTO.swift in Sources */,
 				921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */,
 				921695862BFE08C9006DC44A /* DescriptionLabel.swift in Sources */,
 				921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */,
 				9271F8052C08A12900586AFD /* HintRepository.swift in Sources */,
-				9271F7D72C04B40900586AFD /* HorrorThemePositionDTO.swift in Sources */,
 				9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */,
 				9271F7E12C08604800586AFD /* GenreRepository.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
@@ -1072,10 +1038,8 @@
 				9284747F2C0D9EE3002C3B4C /* ProfileLabel.swift in Sources */,
 				921695512BFB1A71006DC44A /* SplashView.swift in Sources */,
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
-				9271F7DB2C0857E500586AFD /* DeviceLockDTO.swift in Sources */,
 				9271F8012C08A0E100586AFD /* HintRepositoryType.swift in Sources */,
 				928474722C0CE4AA002C3B4C /* LoadingView.swift in Sources */,
-				9271F7D52C04B32400586AFD /* ImportantFactorDTO.swift in Sources */,
 				9271F8192C08D19600586AFD /* ColorRepositoryType.swift in Sources */,
 				9271F7E32C08605A00586AFD /* GenreRepositoryType.swift in Sources */,
 				921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */,

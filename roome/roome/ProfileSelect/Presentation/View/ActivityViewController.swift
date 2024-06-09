@@ -109,7 +109,7 @@ class ActivityViewController: UIViewController {
 
 extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ActivitiesDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.activities.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -117,14 +117,22 @@ extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDe
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ActivitiesDTO(rawValue: indexPath.row + 1)!.title)
-        cell.addDescription(ActivitiesDTO(rawValue: indexPath.row + 1)!.description)
+        
+        guard let activity = UserContainer.shared.defaultProfile?.data.activities[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.changeTitle(activity.title)
+        cell.addDescription(activity.description)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectCell.send(indexPath)
+        guard let activity = UserContainer.shared.defaultProfile?.data.activities[indexPath.row] else {
+            return
+        }
+        viewModel.selectCell.send(activity.id)
     }
 }
 

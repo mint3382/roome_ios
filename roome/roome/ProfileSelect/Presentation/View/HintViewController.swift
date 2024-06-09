@@ -113,7 +113,7 @@ class HintViewController: UIViewController {
 
 extension HintViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        HintDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.hintUsagePreferences.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -121,14 +121,20 @@ extension HintViewController: UICollectionViewDataSource, UICollectionViewDelega
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(HintDTO(rawValue: indexPath.row + 1)!.title)
-        cell.addDescription(HintDTO(rawValue: indexPath.row + 1)!.description)
+        guard let hint = UserContainer.shared.defaultProfile?.data.hintUsagePreferences[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        cell.changeTitle(hint.title)
+        cell.addDescription(hint.description)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectCell.send(indexPath)
+        guard let hint = UserContainer.shared.defaultProfile?.data.hintUsagePreferences[indexPath.row] else {
+            return
+        }
+        viewModel.selectCell.send(hint.id)
     }
 }
 

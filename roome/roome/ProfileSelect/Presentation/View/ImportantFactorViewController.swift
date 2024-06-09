@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class ThemeSelectViewController: UIViewController, ToastAlertable {
+class ImportantFactorViewController: UIViewController, ToastAlertable {
     private let stackView = UIStackView(axis: .vertical)
     
     private let titleLabel = TitleLabel(text: "테마 선택 시,\n어떤 요소를 중요하게\n생각하시나요?")
@@ -18,10 +18,10 @@ class ThemeSelectViewController: UIViewController, ToastAlertable {
     var nextButton = NextButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
-    var viewModel: ThemeSelectViewModel
+    var viewModel: ImportantFactorViewModel
     var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: ThemeSelectViewModel) {
+    init(viewModel: ImportantFactorViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,7 +44,7 @@ class ThemeSelectViewController: UIViewController, ToastAlertable {
         let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
         
-        let output = viewModel.transform(ThemeSelectViewModel.Input(tapNextButton: next, tapBackButton: back))
+        let output = viewModel.transform(ImportantFactorViewModel.Input(tapNextButton: next, tapBackButton: back))
         
         output.handleCellSelect
             .sink { [weak self] (result, item) in
@@ -150,9 +150,9 @@ class ThemeSelectViewController: UIViewController, ToastAlertable {
 
 }
 
-extension ThemeSelectViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
+extension ImportantFactorViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ImportantFactorDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.importantFactors.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,7 +160,12 @@ extension ThemeSelectViewController: UICollectionViewDataSource, UICollectionVie
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ImportantFactorDTO(rawValue: indexPath.row + 1)!.title)
+        
+        guard let importantFactor = UserContainer.shared.defaultProfile?.data.importantFactors[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.changeTitle(importantFactor.title)
         
         return cell
     }

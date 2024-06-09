@@ -19,7 +19,7 @@ class DeviceAndLockViewModel {
         let tapNext: AnyPublisher<Void, Never>
     }
     
-    var selectCell = PassthroughSubject<IndexPath, Never>()
+    var selectCell = PassthroughSubject<Int, Never>()
     private var goToNext = PassthroughSubject<Void, Error>()
     private var useCase: DeviceLockUseCase
     
@@ -29,8 +29,8 @@ class DeviceAndLockViewModel {
     
     func transform(_ input: Input) -> Output {
         let tapNext = selectCell
-            .compactMap { [weak self] indexPath in
-                self?.handlePage(id: indexPath.row + 1)
+            .compactMap { [weak self] id in
+                self?.handlePage(id: id)
             }
             .eraseToAnyPublisher()
         

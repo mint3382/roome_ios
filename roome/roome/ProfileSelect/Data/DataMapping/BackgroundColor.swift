@@ -8,32 +8,6 @@
 import Foundation
 import UIKit
 
-enum BackgroundColorDTO: Int, CaseIterable {
-    case gradientRed = 1
-    case gradientPink
-    case gradientGreen
-    case gradientBlue
-    case gradientPurple
-    case solidBlack
-    
-    var definition: BackgroundColor {
-        switch self {
-        case .gradientRed:
-            BackgroundColor(mode: .gradient, shape: .linear, direction: .tlBR, startColor: Color.red.startCode, endColor: Color.red.endCode)
-        case .gradientPink:
-            BackgroundColor(mode: .gradient, shape: .linear, direction: .tlBR, startColor: Color.pink.startCode, endColor: Color.pink.endCode)
-        case .gradientGreen:
-            BackgroundColor(mode: .gradient, shape: .linear, direction: .tlBR, startColor: Color.green.startCode, endColor: Color.green.endCode)
-        case .gradientBlue:
-            BackgroundColor(mode: .gradient, shape: .linear, direction: .topBottom, startColor: Color.blue.startCode, endColor: Color.blue.endCode)
-        case .gradientPurple:
-            BackgroundColor(mode: .gradient, shape: .linear, direction: .tlBR, startColor: Color.purple.startCode, endColor: Color.purple.endCode)
-        case .solidBlack:
-            BackgroundColor(mode: .solid, shape: .none, direction: .none, startColor: Color.black.startCode, endColor: Color.black.endCode)
-        }
-    }
-}
-
 struct BackgroundColor {
     let mode: Mode
     let shape: Shape
@@ -105,13 +79,13 @@ enum Direction: String {
     }
 }
 
-enum Color {
-    case red
-    case pink
-    case green
-    case blue
-    case purple
-    case black
+enum Color: String {
+    case red = "Gradient Red"
+    case pink = "Gradient Pink"
+    case green = "Gradient Green"
+    case blue = "Gradient Blue"
+    case purple = "Gradient Purple"
+    case black = "Solid Black"
     
     var startCode: String {
         switch self {

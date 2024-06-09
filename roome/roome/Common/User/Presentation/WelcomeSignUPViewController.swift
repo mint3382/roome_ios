@@ -110,7 +110,7 @@ class WelcomeSignUPViewController: UIViewController {
             .sink { [weak self] state in
                 var nextPage: UIViewController
                 switch state {
-                case .roomCount:
+                case .roomCountRanges:
                     nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
                 case .genres:
                     nextPage = DIContainer.shared.resolve(GenreViewController.self)
@@ -119,7 +119,7 @@ class WelcomeSignUPViewController: UIViewController {
                 case .strengths:
                     nextPage = DIContainer.shared.resolve(StrengthViewController.self)
                 case .themes:
-                    nextPage = DIContainer.shared.resolve(ThemeSelectViewController.self)
+                    nextPage = DIContainer.shared.resolve(ImportantFactorViewController.self)
                 case .horrorPosition:
                     nextPage = DIContainer.shared.resolve(HorrorPositionViewController.self)
                 case .hint:

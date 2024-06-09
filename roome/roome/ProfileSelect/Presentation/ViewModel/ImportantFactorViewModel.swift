@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class ThemeSelectViewModel {
+class ImportantFactorViewModel {
     struct Input {
         let tapNextButton: AnyPublisher<Void, Never>
         let tapBackButton: AnyPublisher<Void, Never>
@@ -91,7 +91,7 @@ class ThemeSelectViewModel {
     func handlePage() {
         Task {
             do {
-                let ids = list.map { $0.row + 1 }
+                let ids = self.list.compactMap { UserContainer.shared.defaultProfile?.data.importantFactors[$0.row].id }
                 try await useCase.importantThemesWithAPI(ids: ids)
                 goToNext.send()
             } catch {

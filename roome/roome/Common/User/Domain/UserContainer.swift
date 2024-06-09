@@ -11,6 +11,7 @@ class UserContainer {
     static let shared = UserContainer()
     var user: UserDTO?
     var profile: ProfileDTO?
+    var defaultProfile: ProfileDefaultDTO?
     
     private init() {}
     
@@ -70,5 +71,24 @@ class UserContainer {
         
         profile = nil
         _ = try await APIProvider().fetchData(from: request)
+    }
+    
+    func updateDefaultProfile() async throws {
+        let userURL = URLBuilder(host: APIConstants.roomeHost,
+                                 path: APIConstants.Profile.defaults.rawValue,
+                                 queries: nil)
+        guard let url = userURL.url else {
+            throw TypeError.bindingFailure
+        }
+        
+        let accessToken = KeyChain.read(key: .accessToken) ?? ""
+        let header = ["Content-Type": "application/json",
+                      "Authorization": "Bearer \(accessToken)"]
+        let requestBuilder = RequestBuilder(url: url, method: .get, headers: header)
+        guard let request = requestBuilder.create() else {
+            throw TypeError.bindingFailure
+        }
+        
+        defaultProfile = try await APIProvider().fetchDecodedData(type: ProfileDefaultDTO.self, from: request)
     }
 }

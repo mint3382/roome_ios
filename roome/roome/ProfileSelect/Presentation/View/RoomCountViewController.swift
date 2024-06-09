@@ -159,7 +159,7 @@ class RoomCountViewController: UIViewController {
             .store(in: &cancellables)
         
         output.handleNextPage
-            .debounce(for: 1, scheduler: RunLoop.main)
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -358,7 +358,7 @@ extension RoomCountViewController {
 
 extension RoomCountViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        RoomCountDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.roomCountRanges.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -366,13 +366,17 @@ extension RoomCountViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.changeTitle(text: RoomCountDTO(rawValue: indexPath.row + 1)?.title ?? "")
+        guard let count = UserContainer.shared.defaultProfile?.data.roomCountRanges[indexPath.row] else {
+            return UITableViewCell()
+        }
+        
+        cell.changeTitle(text: count.title)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let range = RoomCountDTO(rawValue: indexPath.row + 1) else {
+        guard let range = UserContainer.shared.defaultProfile?.data.roomCountRanges[indexPath.row] else {
             return
         }
         

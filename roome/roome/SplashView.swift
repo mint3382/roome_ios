@@ -151,9 +151,9 @@ class SplashView: UIViewController {
         
         let themeRepository = ThemeSelectRepository()
         let themeUseCase = ThemeSelectUseCase(repository: themeRepository)
-        let themeViewModel = ThemeSelectViewModel(useCase: themeUseCase)
-        let themeSelectViewController = ThemeSelectViewController(viewModel: themeViewModel)
-        DIContainer.shared.register(ThemeSelectViewController.self, dependency: themeSelectViewController)
+        let themeViewModel = ImportantFactorViewModel(useCase: themeUseCase)
+        let themeSelectViewController = ImportantFactorViewController(viewModel: themeViewModel)
+        DIContainer.shared.register(ImportantFactorViewController.self, dependency: themeSelectViewController)
         
         let horrorRepository = HorrorThemeRepository()
         let horrorUseCase = HorrorThemeUseCase(repository: horrorRepository)

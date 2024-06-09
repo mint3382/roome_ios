@@ -91,7 +91,7 @@ class DislikeViewModel {
     func handlePage() {
         Task {
             do {
-                let ids = list.map { $0.row + 1 }
+                let ids = self.list.compactMap { UserContainer.shared.defaultProfile?.data.dislikedFactors[$0.row].id }
                 try await useCase.dislikeWithAPI(ids: ids)
                 goToNext.send()
             } catch {

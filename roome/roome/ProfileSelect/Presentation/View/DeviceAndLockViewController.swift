@@ -110,7 +110,7 @@ class DeviceAndLockViewController: UIViewController {
 
 extension DeviceAndLockViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        DeviceLockDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.deviceLockPreferences.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -118,14 +118,22 @@ extension DeviceAndLockViewController: UICollectionViewDataSource, UICollectionV
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(DeviceLockDTO(rawValue: indexPath.row + 1)!.title)
+        
+        guard let device = UserContainer.shared.defaultProfile?.data.deviceLockPreferences[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.changeTitle(device.title)
 //        cell.addDescription(DeviceLockDTO(rawValue: indexPath.row + 1)!.description)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectCell.send(indexPath)
+        guard let device = UserContainer.shared.defaultProfile?.data.deviceLockPreferences[indexPath.row] else {
+            return
+        }
+        viewModel.selectCell.send(device.id)
     }
 }
 
