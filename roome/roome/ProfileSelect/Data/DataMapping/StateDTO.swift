@@ -8,7 +8,7 @@
 import Foundation
 
 enum StateDTO: String {
-    case roomCountRanges = "roomCountRanges"
+    case roomCountRanges = "roomCount"
     case genres = "preferredGenres"
     case mbti = "mbti"
     case strengths = "userStrengths"
