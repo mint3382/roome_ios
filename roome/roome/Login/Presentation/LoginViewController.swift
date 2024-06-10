@@ -81,6 +81,7 @@ class LoginViewController: UIViewController {
         let output = viewModel.transform(LoginViewModel.LoginInput(apple: apple, kakao: kakao))
         
         output.state
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { error in
                 print(error)
             } receiveValue: { state in
@@ -90,7 +91,6 @@ class LoginViewController: UIViewController {
     }
     
     private func goToNextPage(_ state: UserState) {
-        Task { @MainActor in
             var nextPage = UIViewController()
             switch state {
             case .registrationCompleted:
@@ -104,6 +104,5 @@ class LoginViewController: UIViewController {
                 print("nickname")
             }
             navigationController?.pushViewController(nextPage, animated: true)
-        }
     }
 }

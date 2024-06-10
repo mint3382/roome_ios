@@ -134,6 +134,7 @@ class NicknameViewController: UIViewController {
             .store(in: &cancellables)
         
         output.goToNext
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink(receiveCompletion: {[weak self] completion in
                 switch completion {
                 case .finished:
@@ -156,25 +157,25 @@ class NicknameViewController: UIViewController {
     func handleError(_ error: NicknameError) {
         switch error {
         case .form(let data):
-            Task { @MainActor in
+//            Task { @MainActor in
                 formLabel.text = data.message
                 formLabel.textColor = .roomeMain
                 nicknameLabel.textColor = .roomeMain
-            }
+//            }
         case .network:
-            Task { @MainActor in
+//            Task { @MainActor in
                 let loginPage = DIContainer.shared.resolve(LoginViewController.self)
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
                     .changeRootViewController(loginPage, animated: true)
-            }
+//            }
         }
     }
     
     func handleNextPage() {
         let nextPage = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
-        Task { @MainActor in
+//        Task { @MainActor in
             self.navigationController?.pushViewController(nextPage, animated: true)
-        }
+//        }
     }
     
     private func configureUI() {

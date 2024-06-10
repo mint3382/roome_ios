@@ -35,21 +35,19 @@ class SignOutViewController: UIViewController {
         let output = viewModel.transform(SignOutViewModel.Input(tapSignOutButton: signOut))
         
         output.next
-            .sink { _ in
-                let next = DIContainer.shared.resolve(LoginViewController.self)
-                Task { @MainActor in
-                    (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                        .changeRootViewController(next, animated: true)
-                }
-            } receiveValue: { error in
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { error in
                 print("탈퇴 실패!")
                 let next = DIContainer.shared.resolve(LoginViewController.self)
-                Task { @MainActor in
                     (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
                         .changeRootViewController(next, animated: true)
-                }
+            } receiveValue: { _ in
+                    DIContainer.shared.resolveAll()
+                    let next = DIContainer.shared.resolve(SplashView.self)
+                    (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                        .changeRootViewController(next, animated: true)
             }
             .store(in: &cancellables)
         
