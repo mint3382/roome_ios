@@ -28,4 +28,9 @@ class DIContainer {
         
         return value
     }
+    
+    func resolveAll() {
+        dependencies = [:]
+        self.register(SplashView.self, dependency: SplashView())
+    }
 }

@@ -42,16 +42,16 @@ class HorrorPositionViewController: UIViewController {
         let output = viewModel.transform(HorrorPositionViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink(receiveCompletion: { error in
                 // 실패 시
             }, receiveValue: { [weak self] _ in
-                Task { @MainActor in
-                    let nextViewController = DIContainer.shared.resolve(HintViewController.self)
-                    self?.navigationController?.pushViewController(nextViewController, animated: true)
-                }
+                let nextViewController = DIContainer.shared.resolve(HintViewController.self)
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
             }).store(in: &cancellables)
         
         output.handleBackButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
@@ -108,7 +108,7 @@ class HorrorPositionViewController: UIViewController {
 
 extension HorrorPositionViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        HorrorThemePositionDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.horrorThemePositions.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -116,13 +116,21 @@ extension HorrorPositionViewController: UICollectionViewDataSource, UICollection
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(HorrorThemePositionDTO(rawValue: indexPath.row + 1)!.title)
-        cell.addDescription(HorrorThemePositionDTO(rawValue: indexPath.row + 1)!.description)
+        
+        guard let horrorPosition = UserContainer.shared.defaultProfile?.data.horrorThemePositions[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.changeTitle(horrorPosition.title)
+        cell.addDescription(horrorPosition.description)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectCell.send(indexPath)
+        guard let horrorPosition = UserContainer.shared.defaultProfile?.data.horrorThemePositions[indexPath.row] else {
+            return
+        }
+        viewModel.selectCell.send(horrorPosition.id)
     }
 }

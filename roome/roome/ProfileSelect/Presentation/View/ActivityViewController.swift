@@ -42,17 +42,17 @@ class ActivityViewController: UIViewController {
         let output = viewModel.transform(ActivityViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink(receiveCompletion: { error in
                 //실패 시
             }, receiveValue: { [weak self] _ in
-                Task { @MainActor in
-                    let nextViewController = DIContainer.shared.resolve(DislikeViewController.self)
-                    
-                    self?.navigationController?.pushViewController(nextViewController, animated: true)
-                }
+                let nextViewController = DIContainer.shared.resolve(DislikeViewController.self)
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
             }).store(in: &cancellables)
         
         output.handleBackButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
@@ -109,7 +109,7 @@ class ActivityViewController: UIViewController {
 
 extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ActivitiesDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.activities.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -117,14 +117,22 @@ extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDe
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(ActivitiesDTO(rawValue: indexPath.row + 1)!.title)
-        cell.addDescription(ActivitiesDTO(rawValue: indexPath.row + 1)!.description)
+        
+        guard let activity = UserContainer.shared.defaultProfile?.data.activities[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.changeTitle(activity.title)
+        cell.addDescription(activity.description)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectCell.send(indexPath)
+        guard let activity = UserContainer.shared.defaultProfile?.data.activities[indexPath.row] else {
+            return
+        }
+        viewModel.selectCell.send(activity.id)
     }
 }
 

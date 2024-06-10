@@ -26,7 +26,7 @@ class LoginUseCase {
         try await UserContainer.shared.updateUserInformation()
     }
     
-    func signOutWithAPI(body json: [String: Any]) async throws {
+    func signOutWithAPI(body json: [String: Any?]) async throws {
         try await loginRepository.requestSignOut(body: json)
     }
 }

@@ -58,12 +58,12 @@ class ButtonCell: UICollectionViewCell {
     
     func changeTitle(_ text: String) {
         titleLabel.text = text
-        titleLabel.font = UIFont().pretendardBold(size: .title2)
+        titleLabel.font = .boldTitle3
     }
     
     func addDescription(_ text: String) {
         descriptionLabel.text = text
         descriptionLabel.textColor = .gray
-        descriptionLabel.font = UIFont().pretendardRegular(size: .label)
+        descriptionLabel.font = .regularBody2
     }
 }

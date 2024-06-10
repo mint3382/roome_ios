@@ -31,21 +31,24 @@ class LoginRepository: LoginRepositoryType {
         return nil
     }
     
-    func requestSignOut(body json: [String: Any]) async throws {
-            let withdrawalURL = URLBuilder(host: APIConstants.roomeHost, path: APIConstants.Auth.withdrawal.name, queries: nil)
-            guard let url = withdrawalURL.url else {
-                return
-            }
-            
-            let requestBuilder = RequestBuilder(url: url,
-                                                method: .post,
-                                                bodyJSON: json,
-                                                headers: ["Content-Type": "application/json",
-                                                          "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "AccessToken") ?? "")"])
-            guard let request = requestBuilder.create() else {
-                return
-            }
-            
+    func requestSignOut(body json: [String: Any?]) async throws {
+        let withdrawalURL = URLBuilder(host: APIConstants.roomeHost, path: APIConstants.Auth.withdrawal.name, queries: nil)
+        guard let url = withdrawalURL.url else {
+            return
+        }
+        
+        let accessToken = KeyChain.read(key: .accessToken) ?? ""
+        let header = ["Content-Type": "application/json",
+                      "Authorization": "Bearer \(accessToken)"]
+        
+        let requestBuilder = RequestBuilder(url: url,
+                                            method: .post,
+                                            bodyJSON: json,
+                                            headers: header)
+        guard let request = requestBuilder.create() else {
+            return
+        }
+        
         _ = try await APIProvider().fetchData(from: request)
     }
 }

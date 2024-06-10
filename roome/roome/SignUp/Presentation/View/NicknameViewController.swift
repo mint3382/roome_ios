@@ -25,7 +25,7 @@ class NicknameViewController: UIViewController {
         label.numberOfLines = 2
         label.sizeToFit()
         label.textAlignment = .left
-        label.font = UIFont().pretendardBold(size: .headline2)
+        label.font = .boldHeadline2
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -40,7 +40,7 @@ class NicknameViewController: UIViewController {
         label.numberOfLines = 2
         label.sizeToFit()
         label.textAlignment = .left
-        label.font = UIFont().pretendardRegular(size: .label)
+        label.font = .regularBody2
         label.textColor = .systemGray
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
@@ -50,7 +50,7 @@ class NicknameViewController: UIViewController {
     private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임"
-        label.font = UIFont().pretendardBold(size: .label)
+        label.font = .boldLabel
         
         return label
     }()
@@ -70,7 +70,7 @@ class NicknameViewController: UIViewController {
     private let formLabel: UILabel = {
         let label = UILabel()
         label.text = "2-8자리 한글, 영문, 숫자"
-        label.font = UIFont().pretendardMedium(size: .caption)
+        label.font = .mediumCaption
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -134,6 +134,7 @@ class NicknameViewController: UIViewController {
             .store(in: &cancellables)
         
         output.goToNext
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink(receiveCompletion: {[weak self] completion in
                 switch completion {
                 case .finished:
@@ -156,25 +157,25 @@ class NicknameViewController: UIViewController {
     func handleError(_ error: NicknameError) {
         switch error {
         case .form(let data):
-            Task { @MainActor in
+//            Task { @MainActor in
                 formLabel.text = data.message
                 formLabel.textColor = .roomeMain
                 nicknameLabel.textColor = .roomeMain
-            }
+//            }
         case .network:
-            Task { @MainActor in
+//            Task { @MainActor in
                 let loginPage = DIContainer.shared.resolve(LoginViewController.self)
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
                     .changeRootViewController(loginPage, animated: true)
-            }
+//            }
         }
     }
     
     func handleNextPage() {
         let nextPage = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
-        Task { @MainActor in
+//        Task { @MainActor in
             self.navigationController?.pushViewController(nextPage, animated: true)
-        }
+//        }
     }
     
     private func configureUI() {

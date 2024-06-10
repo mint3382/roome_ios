@@ -9,10 +9,22 @@ import UIKit
 
 class SplashView: UIViewController {
     private let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    private let logoView = UIImageView(image: UIImage(resource: .logo))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .roomeMain
+        configureLogo()
+    }
+    
+    func configureLogo() {
+        view.addSubview(logoView)
+        logoView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            logoView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            logoView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -49,7 +61,6 @@ class SplashView: UIViewController {
     
     func goToLogin() {
         let viewController = DIContainer.shared.resolve(LoginViewController.self)
-        let viewController2 = ProfileViewController(viewModel: ProfileViewModel())
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
             .changeRootViewController(viewController, animated: true)
@@ -140,9 +151,9 @@ class SplashView: UIViewController {
         
         let themeRepository = ThemeSelectRepository()
         let themeUseCase = ThemeSelectUseCase(repository: themeRepository)
-        let themeViewModel = ThemeSelectViewModel(useCase: themeUseCase)
-        let themeSelectViewController = ThemeSelectViewController(viewModel: themeViewModel)
-        DIContainer.shared.register(ThemeSelectViewController.self, dependency: themeSelectViewController)
+        let themeViewModel = ImportantFactorViewModel(useCase: themeUseCase)
+        let themeSelectViewController = ImportantFactorViewController(viewModel: themeViewModel)
+        DIContainer.shared.register(ImportantFactorViewController.self, dependency: themeSelectViewController)
         
         let horrorRepository = HorrorThemeRepository()
         let horrorUseCase = HorrorThemeUseCase(repository: horrorRepository)

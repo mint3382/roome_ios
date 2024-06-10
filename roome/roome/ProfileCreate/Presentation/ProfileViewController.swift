@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
     private let navigationLabel: UILabel = {
         let label = UILabel()
         label.text = "프로필 이미지"
-        label.font = UIFont().pretendardBold(size: .title2)
+        label.font = .boldTitle2
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label

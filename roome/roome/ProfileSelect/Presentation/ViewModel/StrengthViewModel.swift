@@ -91,7 +91,7 @@ class StrengthViewModel {
     func handlePage() {
         Task {
             do {
-                let ids = list.map { $0.row + 1 }
+                let ids = self.list.compactMap { UserContainer.shared.defaultProfile?.data.strengths[$0.row].id }
                 try await useCase.strengthsWithAPI(ids: ids)
                 goToNext.send()
             } catch {

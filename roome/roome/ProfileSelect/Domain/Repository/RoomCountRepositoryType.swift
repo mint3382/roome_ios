@@ -9,4 +9,5 @@ import Foundation
 
 protocol RoomCountRepositoryType {
     func registerCount(_ count: Int) async throws
+    func registerRange(_ range: (min: Int, max: Int)) async throws
 }

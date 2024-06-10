@@ -42,6 +42,7 @@ class ColorSelectViewController: UIViewController{
         let output = viewModel.transform(ColorSelectViewModel.Input(tapBackButton: back))
         
         output.handleCellSelect
+            .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
             .sink(receiveCompletion: { error in
                 //실패 시
             }, receiveValue: { _ in
@@ -54,18 +55,18 @@ class ColorSelectViewController: UIViewController{
             }).store(in: &cancellables)
         
         output.handleBackButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
         
         output.handleNextPage
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
-                Task { @MainActor in
 //                    let nextViewController = DIContainer.shared.resolve(ProfileViewController.self)
-                    let nextViewController = ProfileViewController(viewModel: ProfileViewModel())
-                    
-                    self?.navigationController?.pushViewController(nextViewController, animated: true)
-                }
+                let nextViewController = ProfileViewController(viewModel: ProfileViewModel())
+                
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
             }.store(in: &cancellables)
         
         output.tapNext
@@ -119,7 +120,7 @@ class ColorSelectViewController: UIViewController{
 
 extension ColorSelectViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        BackgroundColorDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.colors.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -127,12 +128,25 @@ extension ColorSelectViewController: UICollectionViewDataSource, UICollectionVie
         else {
             return UICollectionViewCell()
         }
-        cell.changeColor(BackgroundColorDTO(rawValue: indexPath.row + 1)!.definition)
+        guard let colorDTO = UserContainer.shared.defaultProfile?.data.colors[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        let color = BackgroundColor(
+            mode: Mode(rawValue: colorDTO.mode) ?? .gradient,
+            shape: Shape(rawValue: colorDTO.shape) ?? .linear,
+            direction: Direction(rawValue: colorDTO.direction) ?? .tlBR,
+            startColor: colorDTO.startColor,
+            endColor: colorDTO.endColor)
+        
+        cell.changeColor(color)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectCell.send(indexPath)
+        guard let colorDTO = UserContainer.shared.defaultProfile?.data.colors[indexPath.row] else {
+            return
+        }
+        viewModel.selectCell.send(colorDTO.id)
     }
 }

@@ -9,16 +9,7 @@ import UIKit
 import Combine
 
 class GenreViewController: UIViewController, ToastAlertable {
-    private lazy var stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.alignment = .leading
-        stack.distribution = .fillProportionally
-        stack.spacing = 4
-        
-        return stack
-    }()
+    private let stackView = UIStackView(axis: .vertical)
     
     private let titleLabel = TitleLabel(text: "선호하는 방탈출 장르를\n알려주세요")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
@@ -76,18 +67,18 @@ class GenreViewController: UIViewController, ToastAlertable {
             }.store(in: &cancellables)
         
         output.handleBackButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
         
         output.handleNextButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink(receiveCompletion: { error in
                 //연결 실패 시?
             }, receiveValue: { [weak self] _ in
-                Task { @MainActor in
-                    let nextViewController = DIContainer.shared.resolve(MBTIViewController.self)
-                    self?.navigationController?.pushViewController(nextViewController, animated: true)
-                }
+                let nextViewController = DIContainer.shared.resolve(MBTIViewController.self)
+                self?.navigationController?.pushViewController(nextViewController, animated: true)
             })
             .store(in: &cancellables)
         
@@ -161,7 +152,7 @@ class GenreViewController: UIViewController, ToastAlertable {
 
 extension GenreViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        GenreDTO.allCases.count
+        UserContainer.shared.defaultProfile?.data.genres.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -169,7 +160,11 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(GenreDTO(rawValue: indexPath.row + 1)!.title)
+        
+        guard let genre = UserContainer.shared.defaultProfile?.data.genres[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        cell.changeTitle(genre.title)
         
         return cell
     }
