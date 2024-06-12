@@ -24,7 +24,7 @@ class ButtonCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.layer.borderColor = UIColor.gray.cgColor
+        contentView.layer.borderColor = UIColor.disableTint.cgColor
         contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
@@ -50,8 +50,10 @@ class ButtonCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 contentView.layer.borderColor = UIColor.roomeMain.cgColor
+                contentView.layer.borderWidth = 2
             } else {
-                contentView.layer.borderColor = UIColor.lightGray.cgColor
+                contentView.layer.borderColor = UIColor.disableTint.cgColor
+                contentView.layer.borderWidth = 1
             }
         }
     }

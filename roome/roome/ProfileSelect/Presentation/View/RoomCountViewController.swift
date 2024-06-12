@@ -23,8 +23,8 @@ class RoomCountViewController: UIViewController {
         configuration.baseForegroundColor = .label
         configuration.title = "선택"
         configuration.cornerStyle = .large
-        configuration.background.strokeColor = .systemGray4
-        configuration.background.strokeWidth = 2
+        configuration.background.strokeColor = .disableTint
+        configuration.background.strokeWidth = 1
         
         let button = UIButton(configuration: configuration)
         button.titleLabel?.font = .boldLabel

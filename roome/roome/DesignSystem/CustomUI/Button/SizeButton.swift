@@ -29,8 +29,10 @@ class SizeButton: UIButton {
         didSet {
             if isSelected {
                 self.layer.borderColor = UIColor.roomeMain.cgColor
+                self.layer.borderWidth = 2
             } else {
-                self.layer.borderColor = UIColor.gray.cgColor
+                self.layer.borderColor = UIColor.disableTint.cgColor
+                self.layer.borderWidth = 1
             }
         }
     }
