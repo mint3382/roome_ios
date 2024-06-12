@@ -116,7 +116,6 @@ class RoomCountViewController: UIViewController {
         nextButton.isEnabled = false
         nextButton.backgroundColor = .gray
         numberTextField.delegate = self
-        numberTextField.becomeFirstResponder()
         configureUI()
         configureSizeButtons()
         configureSelectButton()
@@ -190,6 +189,7 @@ class RoomCountViewController: UIViewController {
                     self?.rangeButton.isSelected.toggle()
                     self?.textFieldButton.isSelected.toggle()
                     self?.selectButton.layoutIfNeeded()
+                    self?.numberTextField.becomeFirstResponder()
                 }
             }.store(in: &cancellables)
         
