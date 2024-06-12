@@ -58,10 +58,8 @@ class ImportantFactorViewController: UIViewController, ToastAlertable {
             .sink { [weak self] result in
                 if result {
                     self?.nextButton.isEnabled = true
-                    self?.nextButton.backgroundColor = .roomeMain
                 } else {
                     self?.nextButton.isEnabled = false
-                    self?.nextButton.backgroundColor = .gray
                 }
             }.store(in: &cancellables)
         

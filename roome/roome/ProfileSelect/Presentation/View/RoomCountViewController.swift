@@ -119,8 +119,6 @@ class RoomCountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        nextButton.isEnabled = false
-        nextButton.backgroundColor = .gray
         numberTextField.delegate = self
         configureUI()
         configureSizeButtons()
@@ -152,10 +150,8 @@ class RoomCountViewController: UIViewController {
             .sink(receiveValue: { [weak self] isNextButtonOn in
                 if isNextButtonOn {
                     self?.nextButton.isEnabled = true
-                    self?.nextButton.backgroundColor = .roomeMain
                 } else {
                     self?.nextButton.isEnabled = false
-                    self?.nextButton.backgroundColor = .gray
                 }
             }).store(in: &cancellables)
         
