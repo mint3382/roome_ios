@@ -21,9 +21,6 @@ class RoomCountViewController: UIViewController {
     private lazy var selectButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "arrowtriangle.down.fill")?.changeImageColor(.lightGray).resize(newWidth: 12)
-        configuration.imageReservation = 20
-        configuration.imagePlacement = .trailing
         configuration.title = "선택"
         configuration.cornerStyle = .large
         configuration.background.strokeColor = .systemGray4
@@ -35,6 +32,15 @@ class RoomCountViewController: UIViewController {
         button.contentHorizontalAlignment = .leading
         
         return button
+    }()
+    let dropdownImage: UIImageView = {
+        let image = UIImage(systemName: "arrowtriangle.down.fill")?.changeImageColor(.lightGray).resize(newWidth: 10)
+        let view = UIImageView(image: image)
+        view.contentMode = .scaleAspectFit
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        return view
     }()
     let tableView: UITableView = {
         let view = UITableView()
@@ -245,12 +251,17 @@ class RoomCountViewController: UIViewController {
     
     private func configureSelectButton() {
         view.addSubview(selectButton)
+        view.addSubview(dropdownImage)
         
         NSLayoutConstraint.activate([
             selectButton.topAnchor.constraint(equalTo: rangeButton.bottomAnchor, constant: 16),
             selectButton.leadingAnchor.constraint(equalTo: rangeButton.leadingAnchor),
             selectButton.trailingAnchor.constraint(equalTo: textFieldButton.trailingAnchor),
-            selectButton.heightAnchor.constraint(equalTo: rangeButton.heightAnchor)
+            selectButton.heightAnchor.constraint(equalTo: rangeButton.heightAnchor),
+            
+            dropdownImage.trailingAnchor.constraint(equalTo: selectButton.trailingAnchor, constant: -16),
+            dropdownImage.topAnchor.constraint(equalTo: selectButton.topAnchor),
+            dropdownImage.bottomAnchor.constraint(equalTo: selectButton.bottomAnchor)
         ])
     }
     
