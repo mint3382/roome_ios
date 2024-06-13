@@ -134,8 +134,8 @@ class ProfileView: UIView {
         
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 12),
-            stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
             stackView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7)
         ])
     }
