@@ -12,8 +12,7 @@ class DeviceAndLockViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "장치와 자물쇠 중\n어떤 것을 더 선호하시나요?")
     lazy var profileCount = ProfileStateLineView(pageNumber: 8, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
-    private lazy var flowLayout = self.createFlowLayout()
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var viewModel: DeviceAndLockViewModel
     var cancellables = Set<AnyCancellable>()
     
@@ -73,7 +72,7 @@ class DeviceAndLockViewController: UIViewController {
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
@@ -95,20 +94,9 @@ class DeviceAndLockViewController: UIViewController {
             titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
-    
-    func createFlowLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: view.frame.width * 0.9, height: 50)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 24, bottom: 50, right: 24)
-        
-        return layout
-    }
-
 }
 
-extension DeviceAndLockViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
+extension DeviceAndLockViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         UserContainer.shared.defaultProfile?.data.deviceLockPreferences.count ?? 0
     }
@@ -124,7 +112,7 @@ extension DeviceAndLockViewController: UICollectionViewDataSource, UICollectionV
         }
         
         cell.changeTitle(device.title)
-//        cell.addDescription(DeviceLockDTO(rawValue: indexPath.row + 1)!.description)
+        cell.addDescription(device.description)
         
         return cell
     }
@@ -137,4 +125,31 @@ extension DeviceAndLockViewController: UICollectionViewDataSource, UICollectionV
     }
 }
 
+extension DeviceAndLockViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        guard let device = UserContainer.shared.defaultProfile?.data.deviceLockPreferences[indexPath.row] else {
+            return .zero
+        }
+        
+        var height: CGFloat = 50
+        
+        if device.description != "" {
+            height = 80
+        }
+        
+        let width = view.frame.width * 0.9
+        
+        
+        return CGSize(width: width, height: height)
+    }
+}
 

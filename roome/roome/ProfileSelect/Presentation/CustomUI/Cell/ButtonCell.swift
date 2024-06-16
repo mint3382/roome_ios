@@ -78,6 +78,7 @@ class ButtonCell: UICollectionViewCell {
         descriptionLabel.text = text
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textColor = .gray
+        descriptionLabel.textAlignment = .center
         descriptionLabel.font = .regularBody2
     }
     
