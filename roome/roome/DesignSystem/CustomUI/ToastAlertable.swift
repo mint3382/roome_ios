@@ -15,7 +15,7 @@ extension ToastAlertable {
     func showToast(count: Int) {
         let toastLabel = PaddingLabel(frame: CGRect(
             x: self.nextButton.frame.minX,
-            y: self.nextButton.frame.minY - 25,
+            y: self.nextButton.frame.minY - 60,
             width: self.nextButton.frame.width,
             height: self.nextButton.frame.height
         ))
