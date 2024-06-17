@@ -53,9 +53,9 @@ class ProfileStateLineView: UIView {
         let start = (frame.width / CGFloat(11)) * colorCount
         
         let pattern: [CGFloat] = [bar, space]
-        UIColor.lightGray.set()
+        UIColor.disableTint.set()
         path.move(to: CGPoint(x: start + space, y: 10))
-        path.addLine(to: CGPoint(x: frame.width - 4, y: 10))
+        path.addLine(to: CGPoint(x: frame.width - 2, y: 10))
         path.lineWidth = 2
         path.lineCapStyle = .round
         path.setLineDash(pattern, count: pattern.count, phase: 0)

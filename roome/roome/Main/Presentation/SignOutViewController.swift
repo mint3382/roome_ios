@@ -44,7 +44,8 @@ class SignOutViewController: UIViewController {
                         .changeRootViewController(next, animated: true)
             } receiveValue: { _ in
                     DIContainer.shared.resolveAll()
-                    let next = DIContainer.shared.resolve(SplashView.self)
+                    DIManager.shared.registerAll()
+                    let next = DIContainer.shared.resolve(LoginViewController.self)
                     (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
                         .changeRootViewController(next, animated: true)

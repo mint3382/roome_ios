@@ -19,7 +19,7 @@ class MBTIViewController: UIViewController {
     private let willNotAddButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.lightGray).resize(newWidth: 24)
+        configuration.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
         configuration.imagePadding = 8
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 24, bottom: 10, trailing: 20)
         configuration.title = "프로필에 추가하지 않을래요"
@@ -72,10 +72,8 @@ class MBTIViewController: UIViewController {
             .sink { [weak self] result in
                 if result {
                     self?.nextButton.isEnabled = true
-                    self?.nextButton.backgroundColor = .roomeMain
                 } else {
                     self?.nextButton.isEnabled = false
-                    self?.nextButton.backgroundColor = .gray
                 }
             }.store(in: &cancellables)
         
@@ -100,10 +98,16 @@ class MBTIViewController: UIViewController {
             .sink { [weak self] result in
                 if result {
                     self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.roomeMain).resize(newWidth: 24)
-                    self?.collectionView.allowsSelection = false
+                    _ = self?.collectionView.visibleCells.map { $0.isSelected = false }
+                    _ = self?.collectionView.visibleCells
+                        .compactMap { $0 as? ButtonCell }
+                        .map { $0.isChecked = true }
+                    self?.collectionView.reloadData()
                 } else {
-                    self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.lightGray).resize(newWidth: 24)
-                    self?.collectionView.allowsMultipleSelection = true
+                    self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
+                    _ = self?.collectionView.visibleCells
+                        .compactMap { $0 as? ButtonCell }
+                        .map { $0.isChecked = false }
                 }
             }.store(in: &cancellables)
         
@@ -201,6 +205,10 @@ extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.selectCell.send(indexPath)
+        _ = collectionView.visibleCells
+            .compactMap { $0 as? ButtonCell }
+            .map { $0.isChecked = false }
+        self.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

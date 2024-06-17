@@ -21,13 +21,10 @@ class RoomCountViewController: UIViewController {
     private lazy var selectButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "arrowtriangle.down.fill")?.changeImageColor(.lightGray).resize(newWidth: 12)
-        configuration.imageReservation = 20
-        configuration.imagePlacement = .trailing
         configuration.title = "선택"
         configuration.cornerStyle = .large
-        configuration.background.strokeColor = .systemGray4
-        configuration.background.strokeWidth = 2
+        configuration.background.strokeColor = .disableTint
+        configuration.background.strokeWidth = 1
         
         let button = UIButton(configuration: configuration)
         button.titleLabel?.font = .boldLabel
@@ -35,6 +32,15 @@ class RoomCountViewController: UIViewController {
         button.contentHorizontalAlignment = .leading
         
         return button
+    }()
+    let dropdownImage: UIImageView = {
+        let image = UIImage(systemName: "arrowtriangle.down.fill")?.changeImageColor(.lightGray).resize(newWidth: 10)
+        let view = UIImageView(image: image)
+        view.contentMode = .scaleAspectFit
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        return view
     }()
     let tableView: UITableView = {
         let view = UITableView()
@@ -113,10 +119,7 @@ class RoomCountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        nextButton.isEnabled = false
-        nextButton.backgroundColor = .gray
         numberTextField.delegate = self
-        numberTextField.becomeFirstResponder()
         configureUI()
         configureSizeButtons()
         configureSelectButton()
@@ -147,10 +150,8 @@ class RoomCountViewController: UIViewController {
             .sink(receiveValue: { [weak self] isNextButtonOn in
                 if isNextButtonOn {
                     self?.nextButton.isEnabled = true
-                    self?.nextButton.backgroundColor = .roomeMain
                 } else {
                     self?.nextButton.isEnabled = false
-                    self?.nextButton.backgroundColor = .gray
                 }
             }).store(in: &cancellables)
         
@@ -190,6 +191,7 @@ class RoomCountViewController: UIViewController {
                     self?.rangeButton.isSelected.toggle()
                     self?.textFieldButton.isSelected.toggle()
                     self?.selectButton.layoutIfNeeded()
+                    self?.numberTextField.becomeFirstResponder()
                 }
             }.store(in: &cancellables)
         
@@ -245,12 +247,17 @@ class RoomCountViewController: UIViewController {
     
     private func configureSelectButton() {
         view.addSubview(selectButton)
+        view.addSubview(dropdownImage)
         
         NSLayoutConstraint.activate([
             selectButton.topAnchor.constraint(equalTo: rangeButton.bottomAnchor, constant: 16),
             selectButton.leadingAnchor.constraint(equalTo: rangeButton.leadingAnchor),
             selectButton.trailingAnchor.constraint(equalTo: textFieldButton.trailingAnchor),
-            selectButton.heightAnchor.constraint(equalTo: rangeButton.heightAnchor)
+            selectButton.heightAnchor.constraint(equalTo: rangeButton.heightAnchor),
+            
+            dropdownImage.trailingAnchor.constraint(equalTo: selectButton.trailingAnchor, constant: -16),
+            dropdownImage.topAnchor.constraint(equalTo: selectButton.topAnchor),
+            dropdownImage.bottomAnchor.constraint(equalTo: selectButton.bottomAnchor)
         ])
     }
     

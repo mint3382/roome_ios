@@ -8,6 +8,16 @@
 import UIKit
 
 class ButtonCell: UICollectionViewCell {
+    var isChecked: Bool {
+        didSet {
+            if isChecked {
+                changeLabelColor(title: .disable, description: .disable)
+            } else {
+                changeLabelColor(title: .label, description: .gray)
+            }
+        }
+    }
+    
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -22,9 +32,10 @@ class ButtonCell: UICollectionViewCell {
     let descriptionLabel = UILabel()
     
     override init(frame: CGRect) {
+        self.isChecked = false
         super.init(frame: frame)
         
-        contentView.layer.borderColor = UIColor.gray.cgColor
+        contentView.layer.borderColor = UIColor.disableTint.cgColor
         contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
@@ -50,8 +61,10 @@ class ButtonCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 contentView.layer.borderColor = UIColor.roomeMain.cgColor
+                contentView.layer.borderWidth = 2
             } else {
-                contentView.layer.borderColor = UIColor.lightGray.cgColor
+                contentView.layer.borderColor = UIColor.disableTint.cgColor
+                contentView.layer.borderWidth = 1
             }
         }
     }
@@ -63,7 +76,14 @@ class ButtonCell: UICollectionViewCell {
     
     func addDescription(_ text: String) {
         descriptionLabel.text = text
+        descriptionLabel.numberOfLines = 0
         descriptionLabel.textColor = .gray
+        descriptionLabel.textAlignment = .center
         descriptionLabel.font = .regularBody2
+    }
+    
+    func changeLabelColor(title: UIColor, description: UIColor) {
+        titleLabel.textColor = title
+        descriptionLabel.textColor = description
     }
 }

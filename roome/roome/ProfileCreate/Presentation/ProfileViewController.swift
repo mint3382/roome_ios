@@ -45,7 +45,7 @@ class ProfileViewController: UIViewController {
     //Button
     private let squareButton = SizeButton(title: SizeDTO.square.title, isSelected: true)
     private let rectangleButton = SizeButton(title: SizeDTO.rectangle.title, isSelected: false)
-    private let saveButton = NextButton(title: "저장하기", backgroundColor: .roomeMain, tintColor: .white)
+    private let saveButton = NextButton(title: "이미지로 저장하기", backgroundColor: .roomeMain, tintColor: .white)
     private let pageButton = NextButton(title: "프로필 페이지로 이동", backgroundColor: .clear, tintColor: .lightGray)
     
     //Window
