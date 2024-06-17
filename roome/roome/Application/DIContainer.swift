@@ -19,9 +19,21 @@ class DIContainer {
         dependencies[key] = dependency
     }
     
+    func registerDetail(key: String, dependency: Any) {
+        dependencies[key] = dependency
+    }
+    
     func resolve<T>(_ type: T.Type) -> T {
         let key = String(describing: type)
         
+        guard let value = dependencies[key] as? T else {
+            fatalError()
+        }
+        
+        return value
+    }
+    
+    func resolveDetail<T>(_ type: T.Type, key: String) -> T {
         guard let value = dependencies[key] as? T else {
             fatalError()
         }
