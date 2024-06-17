@@ -39,6 +39,8 @@ class TermsAgreeViewModel {
         let goToNext: AnyPublisher<Void, Error>
         let handleBackButton: AnyPublisher<Void, Never>
     }
+
+    let handleDetail = PassthroughSubject<TermsDetailStates, Never>()
     
     init(termsUseCase: TermsAgreeUseCase?) {
         self.termsUseCase = termsUseCase
@@ -69,22 +71,61 @@ class TermsAgreeViewModel {
             })
             .share()
         
-        let service = input.service
+        let mainService = input.service
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.buttonStates.service.toggle()
             })
             .share()
         
-        let personal = input.personal
+        let detailService = handleDetail
+            .map { state in
+                state == .service
+            }
+            .compactMap { [weak self] state in
+                if state {
+                    self?.buttonStates.service = true
+                }
+            }
+            .eraseToAnyPublisher()
+        
+        let service = Publishers.Merge(mainService, detailService)
+        
+        let mainPersonal = input.personal
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.buttonStates.personal.toggle()
             })
             .share()
+        
+        let detailPersonal = handleDetail
+            .map { state in
+                state == .personal
+            }
+            .compactMap { [weak self] state in
+                if state {
+                    self?.buttonStates.personal = true
+                }
+            }
+            .eraseToAnyPublisher()
+        
+        let personal = Publishers.Merge(mainPersonal, detailPersonal)
     
-        let advertise = input.advertise
+        let mainAdvertise = input.advertise
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.buttonStates.advertise.toggle()
             }).share()
+        
+        let detailAdvertise = handleDetail
+            .map { state in
+                state == .advertise
+            }
+            .compactMap { [weak self] state in
+                if state {
+                    self?.buttonStates.advertise = true
+                }
+            }
+            .eraseToAnyPublisher()
+        
+        let advertise = Publishers.Merge(mainAdvertise, detailAdvertise)
         
         let state = Publishers.Merge5(all, age, service, personal, advertise)
             .compactMap { [weak self] _ in

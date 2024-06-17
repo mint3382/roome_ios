@@ -7,11 +7,14 @@
 
 import UIKit
 import WebKit
+import Combine
 
 class TermsDetailViewController: UIViewController {
-    private let titleLabel: UILabel = {
+    private var termsState: TermsDetailStates
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .boldTitle3
+        label.text = termsState.title
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -35,10 +38,13 @@ class TermsDetailViewController: UIViewController {
         return view
     }()
     
-    let nextButton = NextButton(title: "동의", backgroundColor: .roomeMain, tintColor: .white)
+    let agreeButton = NextButton(title: "동의", backgroundColor: .roomeMain, tintColor: .white)
+    let viewModel: TermsAgreeViewModel
+    var cancellable = Set<AnyCancellable>()
     
-    init(text: String) {
-        titleLabel.text = text
+    init(terms: TermsDetailStates, viewModel: TermsAgreeViewModel) {
+        self.termsState = terms
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,11 +54,33 @@ class TermsDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         configureTitleLabel()
         configureCloseButton()
         configureNextButton()
         configureWebView()
         loadWebView()
+        bind()
+    }
+    
+    func bind() {
+        closeButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+            .sink { [weak self] _ in
+                self?.dismiss(animated: true)
+            }
+            .store(in: &cancellable)
+        
+        agreeButton.publisher(for: .touchUpInside)
+            .eraseToAnyPublisher()
+            .sink { [weak self] _ in
+                self?.viewModel.handleDetail.send(self?.termsState ?? .personal)
+                self?.dismiss(animated: true)
+            }
+            .store(in: &cancellable)
+    }
+    
+    func agreeButtonPublisher() -> AnyPublisher<Void, Never> {
+        agreeButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
     
     private func configureTitleLabel() {
@@ -78,13 +106,13 @@ class TermsDetailViewController: UIViewController {
     }
     
     private func configureNextButton() {
-        view.addSubview(nextButton)
+        view.addSubview(agreeButton)
         
         NSLayoutConstraint.activate([
-            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            agreeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            agreeButton.heightAnchor.constraint(equalToConstant: 50),
+            agreeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            agreeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
@@ -95,13 +123,13 @@ class TermsDetailViewController: UIViewController {
             webView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             webView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            webView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -8)
+            webView.bottomAnchor.constraint(equalTo: agreeButton.topAnchor, constant: -8)
         ])
     }
     
     private func loadWebView() {
         //웹 링크 띄우기
-        guard let url = URL(string: "https://www.notion.so/ROOME-ef60fcf881da4745b4858357fa48b6be") else {
+        guard let url = URL(string: termsState.link) else {
             return
         }
         let request = URLRequest(url: url)
@@ -114,8 +142,8 @@ class TermsDetailViewController: UIViewController {
     }
 }
 
-#Preview {
-    let vc = TermsDetailViewController(text: "개인 정보 처리 방침")
-    
-    return vc
-}
+//#Preview {
+//    let vc = TermsDetailViewController(terms: .service)
+//    
+//    return vc
+//}

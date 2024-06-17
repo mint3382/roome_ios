@@ -129,6 +129,7 @@ class TermsAgreeViewController: UIViewController {
         configureStackView()
         configureNextButton()
         bind()
+        bindDetailView()
     }
     
     func bind() {
@@ -173,10 +174,8 @@ class TermsAgreeViewController: UIViewController {
             .sink { [weak self] isEnable in
                 if isEnable {
                     self?.nextButton.isEnabled = true
-                    self?.nextButton.backgroundColor = .roomeMain
                 } else {
                     self?.nextButton.isEnabled = false
-                    self?.nextButton.backgroundColor = .gray
                 }
             }.store(in: &cancellable)
         
@@ -210,6 +209,29 @@ class TermsAgreeViewController: UIViewController {
                 self?.navigationController?.popViewController(animated: true)
             }
             .store(in: &cancellable)
+    }
+    
+    func bindDetailView() {
+        serviceAgreeButton.tappedDetailButtonPublisher()
+            .sink { [weak self] _ in
+                let detailView = DIContainer.shared.resolveDetail(TermsDetailViewController.self, key: "termsServiceDetailViewController")
+                detailView.modalPresentationStyle = .fullScreen
+                self?.view.window?.rootViewController?.present(detailView, animated: true)
+            }.store(in: &cancellable)
+        
+        personalInformationAgreeButton.tappedDetailButtonPublisher()
+            .sink { [weak self] _ in
+                let detailView = DIContainer.shared.resolveDetail(TermsDetailViewController.self, key: "termsPersonalDetailViewController")
+                detailView.modalPresentationStyle = .fullScreen
+                self?.view.window?.rootViewController?.present(detailView, animated: true)
+            }.store(in: &cancellable)
+        
+        advertiseAgreeButton.tappedDetailButtonPublisher()
+            .sink { [weak self] _ in
+                let detailView = DIContainer.shared.resolveDetail(TermsDetailViewController.self, key: "termsAdvertiseDetailViewController")
+                detailView.modalPresentationStyle = .fullScreen
+                self?.view.window?.rootViewController?.present(detailView, animated: true)
+            }.store(in: &cancellable)
     }
     
     private func configureStackView() {
