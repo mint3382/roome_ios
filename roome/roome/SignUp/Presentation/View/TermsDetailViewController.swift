@@ -10,11 +10,9 @@ import WebKit
 import Combine
 
 class TermsDetailViewController: UIViewController {
-    private var termsState: TermsDetailStates
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .boldTitle3
-        label.text = termsState.title
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -42,8 +40,7 @@ class TermsDetailViewController: UIViewController {
     let viewModel: TermsAgreeViewModel
     var cancellable = Set<AnyCancellable>()
     
-    init(terms: TermsDetailStates, viewModel: TermsAgreeViewModel) {
-        self.termsState = terms
+    init(viewModel: TermsAgreeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,8 +56,13 @@ class TermsDetailViewController: UIViewController {
         configureCloseButton()
         configureNextButton()
         configureWebView()
-        loadWebView()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        titleLabel.text = viewModel.detailState?.title
+        loadWebView()
     }
     
     func bind() {
@@ -73,7 +75,7 @@ class TermsDetailViewController: UIViewController {
         agreeButton.publisher(for: .touchUpInside)
             .eraseToAnyPublisher()
             .sink { [weak self] _ in
-                self?.viewModel.handleDetail.send(self?.termsState ?? .personal)
+                self?.viewModel.handleDetail.send()
                 self?.dismiss(animated: true)
             }
             .store(in: &cancellable)
@@ -129,16 +131,13 @@ class TermsDetailViewController: UIViewController {
     
     private func loadWebView() {
         //웹 링크 띄우기
-        guard let url = URL(string: termsState.link) else {
+        guard let link = viewModel.detailState?.link,
+              let url = URL(string: link) else {
             return
         }
         let request = URLRequest(url: url)
         
         webView.load(request)
-        
-        //html 띄우기
-//        let myURL = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "website")!
-//        webView.loadFileURL(myURL, allowingReadAccessTo: myURL)
     }
 }
 

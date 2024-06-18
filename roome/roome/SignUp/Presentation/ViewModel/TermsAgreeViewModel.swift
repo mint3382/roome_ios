@@ -39,8 +39,21 @@ class TermsAgreeViewModel {
         let goToNext: AnyPublisher<Void, Error>
         let handleBackButton: AnyPublisher<Void, Never>
     }
+    
+    struct DetailInput {
+        let service: AnyPublisher<Void, Never>
+        let personal: AnyPublisher<Void, Never>
+        let advertise: AnyPublisher<Void, Never>
+    }
+    
+    struct DetailOutput {
+        let handleService: AnyPublisher<Void, Never>
+        let handlePersonal: AnyPublisher<Void, Never>
+        let handleAdvertise: AnyPublisher<Void, Never>
+    }
 
-    let handleDetail = PassthroughSubject<TermsDetailStates, Never>()
+    var detailState: TermsDetailStates?
+    let handleDetail = PassthroughSubject<Void, Never>()
     
     init(termsUseCase: TermsAgreeUseCase?) {
         self.termsUseCase = termsUseCase
@@ -78,8 +91,8 @@ class TermsAgreeViewModel {
             .share()
         
         let detailService = handleDetail
-            .map { state in
-                state == .service
+            .map { [weak self] _ in
+                self?.detailState == .service
             }
             .compactMap { [weak self] state in
                 if state {
@@ -97,8 +110,8 @@ class TermsAgreeViewModel {
             .share()
         
         let detailPersonal = handleDetail
-            .map { state in
-                state == .personal
+            .map { [weak self] in
+                self?.detailState == .personal
             }
             .compactMap { [weak self] state in
                 if state {
@@ -115,8 +128,8 @@ class TermsAgreeViewModel {
             }).share()
         
         let detailAdvertise = handleDetail
-            .map { state in
-                state == .advertise
+            .map { [weak self] _ in
+                self?.detailState == .advertise
             }
             .compactMap { [weak self] state in
                 if state {
@@ -167,6 +180,25 @@ class TermsAgreeViewModel {
             .eraseToAnyPublisher()
         
         return TermsAgreeOutput(isAllAgreeOn: isAllAgreeOn, isNextButtonOn: nextButton, states: state, goToNext: goNext, handleBackButton: back)
+    }
+    
+    func transformDetail(_ input: DetailInput) -> DetailOutput {
+        let service = input.service
+            .compactMap { [weak self] _ in
+                self?.detailState = .service
+            }.eraseToAnyPublisher()
+        
+        let personal = input.personal
+            .compactMap { [weak self] _ in
+                self?.detailState = .personal
+            }.eraseToAnyPublisher()
+        
+        let advertise = input.advertise
+            .compactMap { [weak self] _ in
+                self?.detailState = .advertise
+            }.eraseToAnyPublisher()
+        
+        return DetailOutput(handleService: service, handlePersonal: personal, handleAdvertise: advertise)
     }
 }
 

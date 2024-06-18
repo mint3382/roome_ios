@@ -212,23 +212,29 @@ class TermsAgreeViewController: UIViewController {
     }
     
     func bindDetailView() {
-        serviceAgreeButton.tappedDetailButtonPublisher()
+        let service = serviceAgreeButton.tappedDetailButtonPublisher()
+        let personal = personalInformationAgreeButton.tappedDetailButtonPublisher()
+        let advertise = advertiseAgreeButton.tappedDetailButtonPublisher()
+        
+        let output = viewModel.transformDetail(TermsAgreeViewModel.DetailInput(service: service, personal: personal, advertise: advertise))
+        
+        output.handleService
             .sink { [weak self] _ in
-                let detailView = DIContainer.shared.resolveDetail(TermsDetailViewController.self, key: "termsServiceDetailViewController")
+                let detailView = DIContainer.shared.resolve(TermsDetailViewController.self)
                 detailView.modalPresentationStyle = .fullScreen
                 self?.view.window?.rootViewController?.present(detailView, animated: true)
             }.store(in: &cancellable)
         
-        personalInformationAgreeButton.tappedDetailButtonPublisher()
+        output.handlePersonal
             .sink { [weak self] _ in
-                let detailView = DIContainer.shared.resolveDetail(TermsDetailViewController.self, key: "termsPersonalDetailViewController")
+                let detailView = DIContainer.shared.resolve(TermsDetailViewController.self)
                 detailView.modalPresentationStyle = .fullScreen
                 self?.view.window?.rootViewController?.present(detailView, animated: true)
             }.store(in: &cancellable)
         
-        advertiseAgreeButton.tappedDetailButtonPublisher()
+        output.handleAdvertise
             .sink { [weak self] _ in
-                let detailView = DIContainer.shared.resolveDetail(TermsDetailViewController.self, key: "termsAdvertiseDetailViewController")
+                let detailView = DIContainer.shared.resolve(TermsDetailViewController.self)
                 detailView.modalPresentationStyle = .fullScreen
                 self?.view.window?.rootViewController?.present(detailView, animated: true)
             }.store(in: &cancellable)

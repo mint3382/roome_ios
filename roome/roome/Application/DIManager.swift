@@ -36,15 +36,11 @@ class DIManager {
         let termsAgreeViewModel = TermsAgreeViewModel(termsUseCase: termsAgreeUseCase)
         let termsAgreeViewController = TermsAgreeViewController(viewModel: termsAgreeViewModel)
         
-        let termsServiceDetailViewController = TermsDetailViewController(terms: .service, viewModel: termsAgreeViewModel)
-        let termsPersonalDetailViewController = TermsDetailViewController(terms: .personal, viewModel: termsAgreeViewModel)
-        let termsAdvertiseDetailViewController = TermsDetailViewController(terms: .advertise, viewModel: termsAgreeViewModel)
+        let termsDetailViewController = TermsDetailViewController(viewModel: termsAgreeViewModel)
 
         DIContainer.shared.register(TermsAgreeViewModel.self, dependency: termsAgreeViewModel)
         DIContainer.shared.register(TermsAgreeViewController.self, dependency: termsAgreeViewController)
-        DIContainer.shared.registerDetail(key: "termsServiceDetailViewController", dependency: termsServiceDetailViewController)
-        DIContainer.shared.registerDetail(key: "termsPersonalDetailViewController", dependency: termsPersonalDetailViewController)
-        DIContainer.shared.registerDetail(key: "termsAdvertiseDetailViewController", dependency: termsAdvertiseDetailViewController)
+        DIContainer.shared.register(TermsDetailViewController.self, dependency: termsDetailViewController)
 
         let nicknameRepository = NicknameRepository()
         let nicknameUseCase = NicknameUseCase(nicknameRepository: nicknameRepository)
