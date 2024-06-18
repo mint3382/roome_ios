@@ -49,61 +49,37 @@ class TermsAgreeViewController: UIViewController {
     }()
     
     private let ageAgreeButton: LabelButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
-        configuration.imagePadding = 12
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
-        configuration.title = "만 14세 이상입니다.(필수)"
+        let image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
         
         let button = LabelButton(frame: .zero, isDetailButton: false)
-        button.setMain(config: configuration)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.updateMainButton(title: "만 14세 이상입니다.(필수)", image: image)
         
         return button
     }()
     
     private let serviceAgreeButton: LabelButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
-        configuration.imagePadding = 12
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
-        configuration.title = "서비스 이용약관에 동의 (필수)"
+        let image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
         
         let button = LabelButton(frame: .zero, isDetailButton: true)
-        button.setMain(config: configuration)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.updateMainButton(title: "서비스 이용약관에 동의 (필수)", image: image)
         
         return button
     }()
     
     private let personalInformationAgreeButton: LabelButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
-        configuration.imagePadding = 12
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
-        configuration.title = "개인정보 수집 및 이용약관에 동의 (필수)"
+        let image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
         
         let button = LabelButton(frame: .zero, isDetailButton: true)
-        button.setMain(config: configuration)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.updateMainButton(title: "개인정보 수집 및 이용약관에 동의 (필수)", image: image)
         
         return button
     }()
     
     private let advertiseAgreeButton: LabelButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
-        configuration.imagePadding = 12
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
-        configuration.title = "광고 및 마케팅 수신에 동의 (선택)"
+        let image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
         
         let button = LabelButton(frame: .zero, isDetailButton: true)
-        button.setMain(config: configuration)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.updateMainButton(title: "광고 및 마케팅 수신에 동의 (선택)", image: image)
         
         return button
     }()
