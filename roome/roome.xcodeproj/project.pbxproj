@@ -137,6 +137,8 @@
 		9293DC702C1F3EA300545B57 /* DIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC6F2C1F3EA300545B57 /* DIManager.swift */; };
 		9293DC722C200A8D00545B57 /* TermsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC712C200A8D00545B57 /* TermsDetailViewController.swift */; };
 		9293DC782C209C4800545B57 /* TermsDetailStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC772C209C4800545B57 /* TermsDetailStates.swift */; };
+		9293DC7D2C216EAD00545B57 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC7C2C216EAD00545B57 /* UserCell.swift */; };
+		9293DC7F2C216EDC00545B57 /* MyProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC7E2C216EDC00545B57 /* MyProfileCell.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -273,6 +275,8 @@
 		9293DC6F2C1F3EA300545B57 /* DIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIManager.swift; sourceTree = "<group>"; };
 		9293DC712C200A8D00545B57 /* TermsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsDetailViewController.swift; sourceTree = "<group>"; };
 		9293DC772C209C4800545B57 /* TermsDetailStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsDetailStates.swift; sourceTree = "<group>"; };
+		9293DC7C2C216EAD00545B57 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		9293DC7E2C216EDC00545B57 /* MyProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileCell.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -454,6 +458,7 @@
 		9256E55E2C0EFE8C00A50515 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9293DC7B2C216E8900545B57 /* Cell */,
 				9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */,
 				9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */,
 			);
@@ -815,6 +820,15 @@
 			path = DesignSystem;
 			sourceTree = "<group>";
 		};
+		9293DC7B2C216E8900545B57 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9293DC7C2C216EAD00545B57 /* UserCell.swift */,
+				9293DC7E2C216EDC00545B57 /* MyProfileCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -945,6 +959,7 @@
 				921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */,
 				9271F79C2C009E9F00586AFD /* ImportantFactorViewModel.swift in Sources */,
 				9271F7EF2C08989C00586AFD /* StrengthRepositoryType.swift in Sources */,
+				9293DC7D2C216EAD00545B57 /* UserCell.swift in Sources */,
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */,
 				9256E5602C0EFEAD00A50515 /* SignOutViewController.swift in Sources */,
@@ -960,6 +975,7 @@
 				9293DC6D2C12167F00545B57 /* UIFontMetrics+.swift in Sources */,
 				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
 				9293DC702C1F3EA300545B57 /* DIManager.swift in Sources */,
+				9293DC7F2C216EDC00545B57 /* MyProfileCell.swift in Sources */,
 				9271F7F92C089D0200586AFD /* ThemeSelectRepository.swift in Sources */,
 				9271F8092C08A2BE00586AFD /* DeviceLockUseCase.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
