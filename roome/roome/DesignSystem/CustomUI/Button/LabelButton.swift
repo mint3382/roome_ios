@@ -49,8 +49,11 @@ class LabelButton: UIView {
     }
     
     func tappedMainButtonPublisher() -> AnyPublisher<Void, Never> {
-        mainButton.publisher(for: .touchUpInside)
-            .eraseToAnyPublisher()
+        mainButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+    }
+    
+    func tappedDetailButtonPublisher() -> AnyPublisher<Void, Never> {
+        detailButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
     
     func setMain(config: UIButton.Configuration) {

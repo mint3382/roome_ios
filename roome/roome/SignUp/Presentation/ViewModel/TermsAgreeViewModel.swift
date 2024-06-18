@@ -40,6 +40,21 @@ class TermsAgreeViewModel {
         let handleBackButton: AnyPublisher<Void, Never>
     }
     
+    struct DetailInput {
+        let service: AnyPublisher<Void, Never>
+        let personal: AnyPublisher<Void, Never>
+        let advertise: AnyPublisher<Void, Never>
+    }
+    
+    struct DetailOutput {
+        let handleService: AnyPublisher<Void, Never>
+        let handlePersonal: AnyPublisher<Void, Never>
+        let handleAdvertise: AnyPublisher<Void, Never>
+    }
+
+    var detailState: TermsDetailStates?
+    let handleDetail = PassthroughSubject<Void, Never>()
+    
     init(termsUseCase: TermsAgreeUseCase?) {
         self.termsUseCase = termsUseCase
     }
@@ -69,22 +84,61 @@ class TermsAgreeViewModel {
             })
             .share()
         
-        let service = input.service
+        let mainService = input.service
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.buttonStates.service.toggle()
             })
             .share()
         
-        let personal = input.personal
+        let detailService = handleDetail
+            .map { [weak self] _ in
+                self?.detailState == .service
+            }
+            .compactMap { [weak self] state in
+                if state {
+                    self?.buttonStates.service = true
+                }
+            }
+            .eraseToAnyPublisher()
+        
+        let service = Publishers.Merge(mainService, detailService)
+        
+        let mainPersonal = input.personal
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.buttonStates.personal.toggle()
             })
             .share()
+        
+        let detailPersonal = handleDetail
+            .map { [weak self] in
+                self?.detailState == .personal
+            }
+            .compactMap { [weak self] state in
+                if state {
+                    self?.buttonStates.personal = true
+                }
+            }
+            .eraseToAnyPublisher()
+        
+        let personal = Publishers.Merge(mainPersonal, detailPersonal)
     
-        let advertise = input.advertise
+        let mainAdvertise = input.advertise
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.buttonStates.advertise.toggle()
             }).share()
+        
+        let detailAdvertise = handleDetail
+            .map { [weak self] _ in
+                self?.detailState == .advertise
+            }
+            .compactMap { [weak self] state in
+                if state {
+                    self?.buttonStates.advertise = true
+                }
+            }
+            .eraseToAnyPublisher()
+        
+        let advertise = Publishers.Merge(mainAdvertise, detailAdvertise)
         
         let state = Publishers.Merge5(all, age, service, personal, advertise)
             .compactMap { [weak self] _ in
@@ -126,6 +180,25 @@ class TermsAgreeViewModel {
             .eraseToAnyPublisher()
         
         return TermsAgreeOutput(isAllAgreeOn: isAllAgreeOn, isNextButtonOn: nextButton, states: state, goToNext: goNext, handleBackButton: back)
+    }
+    
+    func transformDetail(_ input: DetailInput) -> DetailOutput {
+        let service = input.service
+            .compactMap { [weak self] _ in
+                self?.detailState = .service
+            }.eraseToAnyPublisher()
+        
+        let personal = input.personal
+            .compactMap { [weak self] _ in
+                self?.detailState = .personal
+            }.eraseToAnyPublisher()
+        
+        let advertise = input.advertise
+            .compactMap { [weak self] _ in
+                self?.detailState = .advertise
+            }.eraseToAnyPublisher()
+        
+        return DetailOutput(handleService: service, handlePersonal: personal, handleAdvertise: advertise)
     }
 }
 
