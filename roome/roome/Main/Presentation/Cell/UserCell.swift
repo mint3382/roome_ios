@@ -55,16 +55,9 @@ class UserCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.5
-        layer.shadowRadius = 5
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        contentView.layer.borderColor = UIColor.disableTint.cgColor
-        contentView.layer.borderWidth = 1
-        contentView.layer.cornerRadius = 10
-        contentView.layer.masksToBounds = true
-        contentView.backgroundColor = .roomeMain
         
+        configureShadow()
+        configureContentView()
         configureUserButton()
         configureButton()
         configureLine()
@@ -77,6 +70,19 @@ class UserCell: UICollectionViewCell {
     override func layoutSubviews() {
         shareButton.titleLabel?.font = .boldTitle4
         cardButton.titleLabel?.font = .boldTitle4
+    }
+    
+    private func configureShadow() {
+        layer.shadowColor = UIColor.label.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowRadius = 5
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+    }
+    
+    private func configureContentView() {
+        contentView.layer.cornerRadius = 10
+        contentView.layer.masksToBounds = true
+        contentView.backgroundColor = .roomeMain
     }
     
     private func configureUserButton() {
