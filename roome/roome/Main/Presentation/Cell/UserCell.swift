@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class UserCell: UICollectionViewCell {
     private let userButton: LabelButton = {
@@ -70,6 +71,15 @@ class UserCell: UICollectionViewCell {
     override func layoutSubviews() {
         shareButton.titleLabel?.font = .boldTitle4
         cardButton.titleLabel?.font = .boldTitle4
+        userButton.setNeedsLayout()
+    }
+    
+    func cardButtonPublisher() -> AnyPublisher<Void, Never> {
+        cardButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+    }
+    
+    func shareButtonPublisher() -> AnyPublisher<Void, Never> {
+        shareButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
     
     private func configureShadow() {

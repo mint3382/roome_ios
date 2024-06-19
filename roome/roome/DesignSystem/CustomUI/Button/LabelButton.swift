@@ -57,10 +57,10 @@ class LabelButton: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+    override func setNeedsLayout() {
         mainButton.titleLabel?.font = mainButtonFont
     }
-    
+
     func tappedMainButtonPublisher() -> AnyPublisher<Void, Never> {
         mainButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
