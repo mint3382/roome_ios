@@ -177,7 +177,7 @@ class ProfileViewController: UIViewController {
         
         output.handleNextButton
             .sink {  _ in
-                let next = MyProfileViewController()
+                let next = TabBarController()
                 (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
                     .changeRootViewController(next, animated: true)

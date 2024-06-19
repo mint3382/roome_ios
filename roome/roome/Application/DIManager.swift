@@ -17,6 +17,7 @@ class DIManager {
         registerSignUPDependency()
         registerExtraDependency()
         registerProfileDependency()
+        registerMainPageDependency()
     }
     
     private func registerLoginDependency() {
@@ -127,10 +128,18 @@ class DIManager {
         
         let profileViewController = ProfileViewController(viewModel: ProfileViewModel())
         DIContainer.shared.register(ProfileViewController.self, dependency: profileViewController)
+    }
+    
+    private func registerMainPageDependency() {
+        let myProfileViewController = MyProfileViewController()
+        DIContainer.shared.register(MyProfileViewController.self, dependency: myProfileViewController)
         
         let signOutViewModel = SignOutViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
-        let signOutViewController = SignOutViewController(viewModel: signOutViewModel)
-        DIContainer.shared.register(SignOutViewController.self, dependency: signOutViewController)
+        let settingViewController = SettingViewController(viewModel: signOutViewModel)
+        DIContainer.shared.register(SettingViewController.self, dependency: settingViewController)
+        
+        let tabBarController = TabBarController()
+        DIContainer.shared.register(TabBarController.self, dependency: tabBarController)
     }
     
     private func registerExtraDependency() {

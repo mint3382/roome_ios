@@ -1,5 +1,5 @@
 //
-//  SignOutViewController.swift
+//  SettingViewController.swift
 //  roome
 //
 //  Created by minsong kim on 6/4/24.
@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class SignOutViewController: UIViewController {
+class SettingViewController: UIViewController {
     private let signOutButton = NextButton(title: "탈퇴하기", backgroundColor: .roomeMain, tintColor: .white)
     private var viewModel: SignOutViewModel
     private var cancellables = Set<AnyCancellable>()
