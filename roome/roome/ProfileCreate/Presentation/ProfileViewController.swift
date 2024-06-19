@@ -9,6 +9,7 @@ import UIKit
 import Combine
 
 class ProfileViewController: UIViewController {
+    private var isModal: Bool = false
     private let backButton = BackButton()
     private let navigationLabel: UILabel = {
         let label = UILabel()
@@ -161,14 +162,19 @@ class ProfileViewController: UIViewController {
         
         output.handleBackButton
             .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
+                if let self, self.isModal {
+                    self.dismiss(animated: true)
+                } else {
+                    self?.navigationController?.popViewController(animated: true)
+                }
             }.store(in: &cancellable)
         
         output.handleNextButton
-            .sink { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(SignOutViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
+            .sink {  _ in
+                let next = MyProfileViewController()
+                (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .changeRootViewController(next, animated: true)
             }.store(in: &cancellable)
     }
     
@@ -211,6 +217,44 @@ class ProfileViewController: UIViewController {
             
             navigationLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
             navigationLabel.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 8),
+        ])
+    }
+    
+    func updateUI() {
+        view.subviews.forEach { $0.removeFromSuperview() }
+        isModal = true
+        
+        updateNavigation()
+        configureProfileView()
+        updateNextButton()
+        configureSizeButtons()
+    }
+    
+    private func updateNavigation() {
+        backButton.updateButton(image: UIImage(systemName: "xmark")?.changeImageColor(.label).resize(newWidth: 16))
+        navigationLabel.font = .boldTitle3
+        
+        view.addSubview(backButton)
+        view.addSubview(navigationLabel)
+        
+        NSLayoutConstraint.activate([
+            navigationLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            navigationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navigationLabel.heightAnchor.constraint(equalToConstant: 60),
+            
+            backButton.centerYAnchor.constraint(equalTo: navigationLabel.centerYAnchor),
+            backButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+        ])
+    }
+    
+    private func updateNextButton() {
+        view.addSubview(saveButton)
+        
+        NSLayoutConstraint.activate([
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            saveButton.heightAnchor.constraint(equalToConstant: 50),
+            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            saveButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         ])
     }
     

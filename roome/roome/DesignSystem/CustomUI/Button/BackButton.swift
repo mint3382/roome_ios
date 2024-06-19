@@ -24,4 +24,8 @@ class BackButton: UIButton {
         self.configuration = buttonConfiguration
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    func updateButton(image: UIImage?) {
+        self.configuration?.image = image
+    }
 }
