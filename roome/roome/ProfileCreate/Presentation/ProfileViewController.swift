@@ -40,8 +40,8 @@ class ProfileViewController: UIViewController {
     lazy var rectangleProfileView = ProfileView(frame: .zero)
     
     //Profile Image
-    var squareImage = UIImage(resource: .sample)
-    var rectangleImage = UIImage(resource: .sample)
+    var squareImage: UIImage?
+    var rectangleImage: UIImage?
     
     //Button
     private let squareButton = SizeButton(title: SizeDTO.square.title, isSelected: true)
@@ -122,12 +122,18 @@ class ProfileViewController: UIViewController {
                 guard let self = self else {
                     return
                 }
-                var image: UIImage
+                
+                var image: UIImage?
                 if isSquareSize {
                     image = squareImage
                 } else {
                     image = rectangleImage
                 }
+                
+                guard let image else {
+                    return
+                }
+                
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 self.window?.addSubview(self.popUpView)
             }.store(in: &cancellable)
@@ -228,6 +234,11 @@ class ProfileViewController: UIViewController {
         configureProfileView()
         updateNextButton()
         configureSizeButtons()
+        
+        if squareImage == nil {
+            configureSquareView()
+            configureRectangleView()
+        }
     }
     
     private func updateNavigation() {
