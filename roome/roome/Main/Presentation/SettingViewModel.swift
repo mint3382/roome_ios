@@ -10,7 +10,7 @@ import Combine
 import AuthenticationServices
 import KakaoSDKUser
 
-class SignOutViewModel: NSObject {
+class SettingViewModel: NSObject {
     struct Input {
         let tapSignOutButton: AnyPublisher<Void, Never>
     }
@@ -80,7 +80,7 @@ class SignOutViewModel: NSObject {
     }
 }
 
-extension SignOutViewModel: ASAuthorizationControllerDelegate {
+extension SettingViewModel: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
             return

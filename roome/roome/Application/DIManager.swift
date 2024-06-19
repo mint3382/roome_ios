@@ -134,7 +134,7 @@ class DIManager {
         let myProfileViewController = MyProfileViewController()
         DIContainer.shared.register(MyProfileViewController.self, dependency: myProfileViewController)
         
-        let signOutViewModel = SignOutViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
+        let signOutViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
         let settingViewController = SettingViewController(viewModel: signOutViewModel)
         DIContainer.shared.register(SettingViewController.self, dependency: settingViewController)
         

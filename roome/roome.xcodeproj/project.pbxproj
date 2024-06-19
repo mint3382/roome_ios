@@ -70,7 +70,7 @@
 		9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9256E5572C0ED6DB00A50515 /* Lottie */; };
 		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
 		9256E5602C0EFEAD00A50515 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */; };
-		9256E5622C0EFFBB00A50515 /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */; };
+		9256E5622C0EFFBB00A50515 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */; };
 		9256E5692C10CA1F00A50515 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5682C10CA1F00A50515 /* DropDownCell.swift */; };
 		9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7852BFEF9A700586AFD /* MBTIViewController.swift */; };
 		9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */; };
@@ -211,7 +211,7 @@
 		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
 		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
+		9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		9256E5682C10CA1F00A50515 /* DropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		9271F7852BFEF9A700586AFD /* MBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIViewController.swift; sourceTree = "<group>"; };
 		9271F7872BFF027000586AFD /* HorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorPositionViewController.swift; sourceTree = "<group>"; };
@@ -464,11 +464,11 @@
 		9256E55E2C0EFE8C00A50515 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9293DC802C22E70700545B57 /* TabBarController.swift */,
 				9293DC7B2C216E8900545B57 /* Cell */,
 				9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */,
-				9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */,
+				9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */,
 				9293DC792C216CC000545B57 /* MyProfileViewController.swift */,
-				9293DC802C22E70700545B57 /* TabBarController.swift */,
 				9293DC822C22F3F400545B57 /* GradientView.swift */,
 			);
 			path = Presentation;
@@ -972,7 +972,7 @@
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
 				9271F8212C08D7B000586AFD /* ProfileDTO.swift in Sources */,
 				9256E5602C0EFEAD00A50515 /* SettingViewController.swift in Sources */,
-				9256E5622C0EFFBB00A50515 /* SignOutViewModel.swift in Sources */,
+				9256E5622C0EFFBB00A50515 /* SettingViewModel.swift in Sources */,
 				9284747D2C0D6721002C3B4C /* ProfileView.swift in Sources */,
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
