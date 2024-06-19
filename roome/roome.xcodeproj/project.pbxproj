@@ -137,6 +137,7 @@
 		9293DC702C1F3EA300545B57 /* DIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC6F2C1F3EA300545B57 /* DIManager.swift */; };
 		9293DC722C200A8D00545B57 /* TermsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC712C200A8D00545B57 /* TermsDetailViewController.swift */; };
 		9293DC782C209C4800545B57 /* TermsDetailStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC772C209C4800545B57 /* TermsDetailStates.swift */; };
+		9293DC7A2C216CC000545B57 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC792C216CC000545B57 /* MyProfileViewController.swift */; };
 		9293DC7D2C216EAD00545B57 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC7C2C216EAD00545B57 /* UserCell.swift */; };
 		9293DC7F2C216EDC00545B57 /* MyProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC7E2C216EDC00545B57 /* MyProfileCell.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
@@ -275,6 +276,7 @@
 		9293DC6F2C1F3EA300545B57 /* DIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIManager.swift; sourceTree = "<group>"; };
 		9293DC712C200A8D00545B57 /* TermsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsDetailViewController.swift; sourceTree = "<group>"; };
 		9293DC772C209C4800545B57 /* TermsDetailStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsDetailStates.swift; sourceTree = "<group>"; };
+		9293DC792C216CC000545B57 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		9293DC7C2C216EAD00545B57 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		9293DC7E2C216EDC00545B57 /* MyProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileCell.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -461,6 +463,7 @@
 				9293DC7B2C216E8900545B57 /* Cell */,
 				9256E55F2C0EFEAD00A50515 /* SignOutViewController.swift */,
 				9256E5612C0EFFBB00A50515 /* SignOutViewModel.swift */,
+				9293DC792C216CC000545B57 /* MyProfileViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1035,6 +1038,7 @@
 				9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */,
 				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
 				928474872C0DBDEB002C3B4C /* ProfileViewModel.swift in Sources */,
+				9293DC7A2C216CC000545B57 /* MyProfileViewController.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				9271F81D2C08D21400586AFD /* ColorRepository.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
