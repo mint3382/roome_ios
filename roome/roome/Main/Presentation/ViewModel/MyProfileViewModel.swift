@@ -12,24 +12,6 @@ import KakaoSDKCommon
 import UIKit
 
 class MyProfileViewModel {
-    struct Input {
-        let tappedShareButton: AnyPublisher<Void, Never>
-    }
-    
-    struct Output {
-        let handleShareButton: AnyPublisher<Void, Never>
-    }
-    
-//    func transform(_ input: Input) -> Output {
-//        let share = input.tappedShareButton
-//            .compactMap { [weak self] _ in
-//                self?.updateImageToKakaoServer()
-//            }
-//            .eraseToAnyPublisher()
-//        
-//        return Output(handleShareButton: share)
-//    }
-    
     func updateImageToKakaoServer() {
         let image = ImageManager.loadImageFromDirectory(identifier: .profile)
         
