@@ -43,13 +43,13 @@ class MyProfileCell: UICollectionViewCell {
         if isBig {
             let label = UILabel()
             label.font = .boldTitle1
-            label.text = selects[0]
+            label.text = selects[0] != "NONE" ? selects[0] : "-"
             stackView.addArrangedSubview(label)
         } else {
             selects.forEach { select in
                 let label = UILabel()
                 label.font = .boldLabel
-                label.text = select
+                label.text = select ?? "-"
                 stackView.addArrangedSubview(label)
             }
         }

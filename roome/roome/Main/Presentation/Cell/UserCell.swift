@@ -31,7 +31,6 @@ class UserCell: UICollectionViewCell {
     private let cardButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .white
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
         configuration.title = "프로필 카드"
         configuration.titleAlignment = .center
         
@@ -44,7 +43,6 @@ class UserCell: UICollectionViewCell {
     private let shareButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .white
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
         configuration.title = "카카오로 공유"
         configuration.titleAlignment = .center
         
@@ -123,14 +121,13 @@ class UserCell: UICollectionViewCell {
         contentView.addSubview(shareButton)
         
         NSLayoutConstraint.activate([
-            cardButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
             cardButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
             cardButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            cardButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -(contentView.frame.width * 0.25)),
             
-            shareButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
             shareButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
             shareButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            shareButton.leadingAnchor.constraint(equalTo: cardButton.trailingAnchor)
+            shareButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: (contentView.frame.width * 0.25)),
         ])
     }
 }
