@@ -55,6 +55,24 @@ class MyProfileCell: UICollectionViewCell {
         }
     }
     
+    func updateColorSet(_ select: BackgroundColor) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = select.color
+        gradientLayer.startPoint = select.direction.point.start
+        gradientLayer.endPoint = select.direction.point.end
+        gradientLayer.type = select.shape.type
+        
+        let circleView = GradientView(gradientLayer: gradientLayer)
+        
+        NSLayoutConstraint.activate([
+            circleView.widthAnchor.constraint(equalToConstant: 20),
+            circleView.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        circleView.layer.addSublayer(gradientLayer)
+        stackView.addArrangedSubview(circleView)
+    }
+    
     private func configureShadow() {
         layer.shadowColor = UIColor.label.cgColor
         layer.shadowOpacity = 0.2

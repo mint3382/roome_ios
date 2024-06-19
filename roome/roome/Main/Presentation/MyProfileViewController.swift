@@ -54,13 +54,14 @@ extension MyProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        section == 0 ? 1 : MyProfileDTO.category.count - 1
+        section == 0 ? 1 : MyProfileDTO.category.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as? UserCell, 
                 let myProfileCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyProfileCell", for: indexPath) as? MyProfileCell,
-                let profile = UserContainer.shared.profile else {
+              let profile = UserContainer.shared.profile,
+              let colorDTO = profile.data.color else {
             return UICollectionViewCell()
         }
         
@@ -88,6 +89,14 @@ extension MyProfileViewController: UICollectionViewDataSource {
             
             if indexPath.row == 0 || indexPath.row == 1 {
                 myProfileCell.updateSelects(profile.bundle[indexPath.row], isBig: true)
+            } else if indexPath.row == 10 {
+                let color = BackgroundColor(
+                    mode: Mode(rawValue: colorDTO.mode) ?? .gradient,
+                    shape: Shape(rawValue: colorDTO.shape) ?? .linear,
+                    direction: Direction(rawValue: colorDTO.direction) ?? .tlBR,
+                    startColor: colorDTO.startColor,
+                    endColor: colorDTO.endColor)
+                myProfileCell.updateColorSet(color)
             } else {
                 myProfileCell.updateSelects(profile.bundle[indexPath.row], isBig: false)
             }
