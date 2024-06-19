@@ -94,6 +94,8 @@ class ProfileViewController: UIViewController {
         } else {
             profileImageView.image = rectangleImage
         }
+        
+        ImageManager.saveImageToDirectory(identifier: .profile, image: squareImage)
     }
     
     func bind() {

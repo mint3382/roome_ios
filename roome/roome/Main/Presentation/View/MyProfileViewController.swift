@@ -11,8 +11,18 @@ import Combine
 class MyProfileViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "프로필")
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    var viewModel: MyProfileViewModel
     private var cancellables = Set<AnyCancellable>()
-
+    
+    init(viewModel: MyProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -58,8 +68,8 @@ extension MyProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as? UserCell, 
-                let myProfileCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyProfileCell", for: indexPath) as? MyProfileCell,
+        guard let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as? UserCell,
+              let myProfileCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyProfileCell", for: indexPath) as? MyProfileCell,
               let profile = UserContainer.shared.profile,
               let colorDTO = profile.data.color else {
             return UICollectionViewCell()
@@ -78,8 +88,9 @@ extension MyProfileViewController: UICollectionViewDataSource {
                 .store(in: &cancellables)
             
             userCell.shareButtonPublisher()
-                .sink { _ in
+                .sink { [weak self] _ in
                     //카카오 공유하기 뷰모델로 input 연결
+                    self?.viewModel.updateImageToKakaoServer()
                 }
                 .store(in: &cancellables)
             
@@ -105,7 +116,7 @@ extension MyProfileViewController: UICollectionViewDataSource {
         }
     }
 }
-
+    
 extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         10

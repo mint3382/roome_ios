@@ -131,7 +131,8 @@ class DIManager {
     }
     
     private func registerMainPageDependency() {
-        let myProfileViewController = MyProfileViewController()
+        let myProfileViewModel = MyProfileViewModel()
+        let myProfileViewController = MyProfileViewController(viewModel: myProfileViewModel)
         DIContainer.shared.register(MyProfileViewController.self, dependency: myProfileViewController)
         
         let signOutViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
