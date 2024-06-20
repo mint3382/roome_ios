@@ -1,5 +1,5 @@
 //
-//  SignOutViewController.swift
+//  SettingViewController.swift
 //  roome
 //
 //  Created by minsong kim on 6/4/24.
@@ -8,12 +8,12 @@
 import UIKit
 import Combine
 
-class SignOutViewController: UIViewController {
+class SettingViewController: UIViewController {
     private let signOutButton = NextButton(title: "탈퇴하기", backgroundColor: .roomeMain, tintColor: .white)
-    private var viewModel: SignOutViewModel
+    private var viewModel: SettingViewModel
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: SignOutViewModel) {
+    init(viewModel: SettingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,7 +32,7 @@ class SignOutViewController: UIViewController {
     func bind() {
         let signOut = signOutButton.publisher(for: .touchUpInside)
             .eraseToAnyPublisher()
-        let output = viewModel.transform(SignOutViewModel.Input(tapSignOutButton: signOut))
+        let output = viewModel.transform(SettingViewModel.Input(tapSignOutButton: signOut))
         
         output.next
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)

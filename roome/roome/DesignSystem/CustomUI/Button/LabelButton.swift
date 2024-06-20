@@ -9,15 +9,21 @@ import UIKit
 import Combine
 
 class LabelButton: UIView {
+    private var mainButtonFont: UIFont
+    
     private let mainButton: UIButton = {
-        let button = UIButton()
+        var configuration = UIButton.Configuration.plain()
+        configuration.imagePadding = 12
+        configuration.imagePlacement = .leading
+        configuration.baseForegroundColor = .label
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
+        
+        let button = UIButton(configuration: configuration)
         button.contentHorizontalAlignment = .leading
-        button.titleLabel?.font = .regularBody2
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
-    
     
     private let detailButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
@@ -33,14 +39,17 @@ class LabelButton: UIView {
     
     private var isDetailButton: Bool
     
-    init(frame: CGRect, isDetailButton: Bool) {
+    init(frame: CGRect, isDetailButton: Bool, font: UIFont = .regularBody2) {
         self.isDetailButton = isDetailButton
+        self.mainButtonFont = font
         super.init(frame: .zero)
         
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
         if isDetailButton {
-            setDetail()
+            configureDetail()
         } else {
-            setMain()
+            configureMain()
         }
     }
     
@@ -48,6 +57,10 @@ class LabelButton: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func setNeedsLayout() {
+        mainButton.titleLabel?.font = mainButtonFont
+    }
+
     func tappedMainButtonPublisher() -> AnyPublisher<Void, Never> {
         mainButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
@@ -56,16 +69,22 @@ class LabelButton: UIView {
         detailButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
     
-    func setMain(config: UIButton.Configuration) {
-        mainButton.configuration = config
-        mainButton.titleLabel?.font = .regularBody2
+    func updateMainButton(title: String, image: UIImage?, color: UIColor = .label, padding: CGFloat = 12) {
+        mainButton.configuration?.title = title
+        mainButton.configuration?.image = image
+        mainButton.configuration?.baseForegroundColor = color
+        mainButton.configuration?.imagePadding = padding
+    }
+    
+    func updateDetailImage(_ image: UIImage?) {
+        detailButton.configuration?.image = image
     }
     
     func updateImageColor(_ color: UIColor) {
         mainButton.configuration?.image = UIImage(systemName: "checkmark")?.resize(newWidth: 16).changeImageColor(color)
     }
     
-    func setDetail() {
+    private func configureDetail() {
         self.addSubview(mainButton)
         self.addSubview(detailButton)
         
@@ -82,7 +101,7 @@ class LabelButton: UIView {
         mainButton.setContentHuggingPriority(.init(100), for: .horizontal)
     }
     
-    func setMain() {
+    private func configureMain() {
         self.addSubview(mainButton)
         
         NSLayoutConstraint.activate([

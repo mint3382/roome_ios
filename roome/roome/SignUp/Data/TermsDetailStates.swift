@@ -26,9 +26,9 @@ enum TermsDetailStates {
     var link: String  {
         switch self {
         case .service:
-            "https://marchens.notion.site/9210c54b3ec34a799a6d605f0f605698?pvs=4"
+            "https://roome7.notion.site/ROOME-ef60fcf881da4745b4858357fa48b6be"
         case .personal:
-            "https://marchens.notion.site/cb968cba569a404dadc50d5a3e6c79e7?pvs=4"
+            "https://roome7.notion.site/ROOME-a06cfe5bf53f4d238c44a6f039616908?pvs=4"
         case .advertise:
             "https://marchens.notion.site/00aaa66a3df4490f8d1cc519f357077b?pvs=4"
         }

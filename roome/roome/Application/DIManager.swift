@@ -17,6 +17,7 @@ class DIManager {
         registerSignUPDependency()
         registerExtraDependency()
         registerProfileDependency()
+        registerMainPageDependency()
     }
     
     private func registerLoginDependency() {
@@ -125,12 +126,25 @@ class DIManager {
         let colorSelectViewController = ColorSelectViewController(viewModel: colorViewModel)
         DIContainer.shared.register(ColorSelectViewController.self, dependency: colorSelectViewController)
         
-        let profileViewController = ProfileViewController(viewModel: ProfileViewModel())
-        DIContainer.shared.register(ProfileViewController.self, dependency: profileViewController)
+        let profileCardViewModel = ProfileCardViewModel()
+        let profileCardViewController = ProfileCardViewController(viewModel: profileCardViewModel)
+        let myProfileCardViewController = MyProfileCardViewController(viewModel: profileCardViewModel)
         
-        let signOutViewModel = SignOutViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
-        let signOutViewController = SignOutViewController(viewModel: signOutViewModel)
-        DIContainer.shared.register(SignOutViewController.self, dependency: signOutViewController)
+        DIContainer.shared.register(ProfileCardViewController.self, dependency: profileCardViewController)
+        DIContainer.shared.register(MyProfileCardViewController.self, dependency: myProfileCardViewController)
+    }
+    
+    private func registerMainPageDependency() {
+        let myProfileViewModel = MyProfileViewModel()
+        let myProfileViewController = MyProfileViewController(viewModel: myProfileViewModel)
+        DIContainer.shared.register(MyProfileViewController.self, dependency: myProfileViewController)
+        
+        let signOutViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
+        let settingViewController = SettingViewController(viewModel: signOutViewModel)
+        DIContainer.shared.register(SettingViewController.self, dependency: settingViewController)
+        
+        let tabBarController = TabBarController()
+        DIContainer.shared.register(TabBarController.self, dependency: tabBarController)
     }
     
     private func registerExtraDependency() {

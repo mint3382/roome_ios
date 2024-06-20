@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileView: UIView {
+class ProfileCardView: UIView {
     private let gradientLayer = CAGradientLayer()
     private let profile = UserContainer.shared.profile
     
@@ -195,7 +195,7 @@ class ProfileView: UIView {
     }
 }
 
-extension ProfileView {
+extension ProfileCardView {
     func asImage() -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: frame.size)
         return renderer.image { context in
