@@ -64,7 +64,7 @@ class ColorSelectViewController: UIViewController{
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
 //                    let nextViewController = DIContainer.shared.resolve(ProfileViewController.self)
-                let nextViewController = ProfileViewController(viewModel: ProfileViewModel())
+                let nextViewController = ProfileCardViewController(viewModel: ProfileCardViewModel())
                 
                 self?.navigationController?.pushViewController(nextViewController, animated: true)
             }.store(in: &cancellables)

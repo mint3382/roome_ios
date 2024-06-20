@@ -132,7 +132,7 @@
 		928474812C0D9F0F002C3B4C /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474802C0D9F0F002C3B4C /* UIStackView+.swift */; };
 		928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474822C0DA12B002C3B4C /* SizeDTO.swift */; };
 		928474852C0DB4F9002C3B4C /* SizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474842C0DB4F9002C3B4C /* SizeButton.swift */; };
-		928474872C0DBDEB002C3B4C /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474862C0DBDEB002C3B4C /* ProfileViewModel.swift */; };
+		928474872C0DBDEB002C3B4C /* ProfileCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928474862C0DBDEB002C3B4C /* ProfileCardViewModel.swift */; };
 		9293DC6D2C12167F00545B57 /* UIFontMetrics+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC6C2C12167F00545B57 /* UIFontMetrics+.swift */; };
 		9293DC702C1F3EA300545B57 /* DIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC6F2C1F3EA300545B57 /* DIManager.swift */; };
 		9293DC722C200A8D00545B57 /* TermsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC712C200A8D00545B57 /* TermsDetailViewController.swift */; };
@@ -277,7 +277,7 @@
 		928474802C0D9F0F002C3B4C /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		928474822C0DA12B002C3B4C /* SizeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeDTO.swift; sourceTree = "<group>"; };
 		928474842C0DB4F9002C3B4C /* SizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeButton.swift; sourceTree = "<group>"; };
-		928474862C0DBDEB002C3B4C /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		928474862C0DBDEB002C3B4C /* ProfileCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardViewModel.swift; sourceTree = "<group>"; };
 		9293DC6C2C12167F00545B57 /* UIFontMetrics+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFontMetrics+.swift"; sourceTree = "<group>"; };
 		9293DC6F2C1F3EA300545B57 /* DIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIManager.swift; sourceTree = "<group>"; };
 		9293DC712C200A8D00545B57 /* TermsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsDetailViewController.swift; sourceTree = "<group>"; };
@@ -814,7 +814,7 @@
 			children = (
 				9284747A2C0CE6BE002C3B4C /* ProfileViewController.swift */,
 				9284747C2C0D6721002C3B4C /* ProfileView.swift */,
-				928474862C0DBDEB002C3B4C /* ProfileViewModel.swift */,
+				928474862C0DBDEB002C3B4C /* ProfileCardViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1083,7 +1083,7 @@
 				9271F7A82C00A8E100586AFD /* ColorSelectViewController.swift in Sources */,
 				9271F7902BFF8FA800586AFD /* MBTIViewModel.swift in Sources */,
 				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
-				928474872C0DBDEB002C3B4C /* ProfileViewModel.swift in Sources */,
+				928474872C0DBDEB002C3B4C /* ProfileCardViewModel.swift in Sources */,
 				9293DC7A2C216CC000545B57 /* MyProfileViewController.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				9271F81D2C08D21400586AFD /* ColorRepository.swift in Sources */,
