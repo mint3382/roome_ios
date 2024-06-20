@@ -128,7 +128,10 @@ class DIManager {
         
         let profileCardViewModel = ProfileCardViewModel()
         let profileCardViewController = ProfileCardViewController(viewModel: profileCardViewModel)
+        let myProfileCardViewController = MyProfileCardViewController(viewModel: profileCardViewModel)
+        
         DIContainer.shared.register(ProfileCardViewController.self, dependency: profileCardViewController)
+        DIContainer.shared.register(MyProfileCardViewController.self, dependency: myProfileCardViewController)
     }
     
     private func registerMainPageDependency() {

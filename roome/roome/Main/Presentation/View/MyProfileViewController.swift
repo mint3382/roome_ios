@@ -79,8 +79,7 @@ extension MyProfileViewController: UICollectionViewDataSource {
             userCell.cardButtonPublisher()
                 .sink { [weak self] _ in
                     print("card Button Tapped")
-                    let popUpView = DIContainer.shared.resolve(ProfileViewController.self)
-                    popUpView.updateUI()
+                    let popUpView = DIContainer.shared.resolve(MyProfileCardViewController.self)
                     popUpView.modalPresentationStyle = .fullScreen
                     
                     self?.present(popUpView, animated: true)
