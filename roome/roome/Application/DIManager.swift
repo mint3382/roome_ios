@@ -126,8 +126,9 @@ class DIManager {
         let colorSelectViewController = ColorSelectViewController(viewModel: colorViewModel)
         DIContainer.shared.register(ColorSelectViewController.self, dependency: colorSelectViewController)
         
-        let profileViewController = ProfileViewController(viewModel: ProfileViewModel())
-        DIContainer.shared.register(ProfileViewController.self, dependency: profileViewController)
+        let profileCardViewModel = ProfileCardViewModel()
+        let profileCardViewController = ProfileCardViewController(viewModel: profileCardViewModel)
+        DIContainer.shared.register(ProfileCardViewController.self, dependency: profileCardViewController)
     }
     
     private func registerMainPageDependency() {

@@ -8,8 +8,7 @@
 import UIKit
 import Combine
 
-class ProfileViewController: UIViewController {
-    private var isModal: Bool = false
+class ProfileCardViewController: UIViewController {
     private let backButton = BackButton()
     private let navigationLabel: UILabel = {
         let label = UILabel()
@@ -36,8 +35,8 @@ class ProfileViewController: UIViewController {
         
         return view
     }()
-    lazy var squareProfileView = ProfileView(frame: .zero)
-    lazy var rectangleProfileView = ProfileView(frame: .zero)
+    lazy var squareProfileView = ProfileCardView(frame: .zero)
+    lazy var rectangleProfileView = ProfileCardView(frame: .zero)
     
     //Profile Image
     var squareImage: UIImage?
@@ -53,17 +52,23 @@ class ProfileViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
     
     //PopUpView
-    private lazy var popUpView = PopUpView(frame: window!.frame,
-                                           title: "저장 완료",
-                                           description: "내 사진에 저장되었어요",
-                                           colorButtonTitle: "확인",
-                                           isWhiteButton: false)
+    private lazy var saveSuccessPopUp = PopUpView(frame: window!.frame,
+                                                  title: "저장 완료",
+                                                  description: "내 사진에 저장되었어요",
+                                                  colorButtonTitle: "확인",
+                                                  isWhiteButton: false)
+    
+    private lazy var saveFailPopUp = PopUpView(frame: window!.frame,
+                                               title: "저장 실패",
+                                               description: "설정을 확인해주세요",
+                                               colorButtonTitle: "확인",
+                                               isWhiteButton: false)
     
     //ViewModel
-    private var viewModel: ProfileViewModel
+    private var viewModel: ProfileCardViewModel
     private var cancellable = Set<AnyCancellable>()
     
-    init(viewModel: ProfileViewModel) {
+    init(viewModel: ProfileCardViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -83,107 +88,80 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        if squareImage == nil {
+            loadCardImages()
+        }
+    }
+    
+    private func loadCardImages() {
         squareImage = squareProfileView.asImage()
         rectangleImage = rectangleProfileView.asImage()
         DIContainer.shared.resolve(LoadingView.self).removeFromSuperview()
         squareProfileView.removeFromSuperview()
         rectangleProfileView.removeFromSuperview()
+        profileImageView.image = squareImage
         
-        if viewModel.isSquareSize {
-            profileImageView.image = squareImage
-        } else {
-            profileImageView.image = rectangleImage
-        }
-        
-        ImageManager.saveImageToDirectory(identifier: .profile, image: squareImage)
+        ImageManager.saveImageToDirectory(identifier: .squareCard, image: squareImage)
+        ImageManager.saveImageToDirectory(identifier: .rectangleCard, image: rectangleImage)
     }
     
     func bind() {
-        let back = backButton.publisher(for: .touchUpInside)
-            .eraseToAnyPublisher()
-        let square = squareButton.publisher(for: .touchUpInside)
-            .eraseToAnyPublisher()
-        let rectangle = rectangleButton.publisher(for: .touchUpInside)
-            .eraseToAnyPublisher()
-        let save = saveButton.publisher(for: .touchUpInside)
-            .eraseToAnyPublisher()
-        let next = pageButton.publisher(for: .touchUpInside)
-            .eraseToAnyPublisher()
-        let okay = popUpView.colorButton.publisher(for: .touchUpInside)
-            .eraseToAnyPublisher()
-        let input = ProfileViewModel.Input(tapBackButton: back,
-                                           tapSquareButton: square,
-                                           tapRectangleButton: rectangle,
-                                           tapSaveButton: save,
-                                           tapNextButton: next,
-                                           tapOkayButton: okay)
-        let output = viewModel.transform(input)
+        backButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &cancellable)
         
-        output.handleSaveButton
-            .sink { [weak self] isSquareSize in
-                guard let self = self else {
-                    return
-                }
-                
-                var image: UIImage?
-                if isSquareSize {
-                    image = squareImage
-                } else {
-                    image = rectangleImage
-                }
-                
-                guard let image else {
-                    return
-                }
-                
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                self.window?.addSubview(self.popUpView)
-            }.store(in: &cancellable)
+        squareButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapSquareButton.send()
+            }
+            .store(in: &cancellable)
         
-        output.handleRectangleButton
+        rectangleButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapRectangleButton.send()
+            }
+            .store(in: &cancellable)
+        
+        saveButton.publisher(for: .touchUpInside)
             .sink { [weak self] _ in
-                guard let self = self else {
-                    return
-                }
-                
-                self.squareButton.isSelected = false
-                self.rectangleButton.isSelected = true
-                
-                self.profileImageView.image = self.rectangleImage
-            }.store(in: &cancellable)
+                self?.viewModel.input.tapSaveButton.send()
+            }
+            .store(in: &cancellable)
         
-        output.handleSquareButton
-            .sink { [weak self] _ in
-                guard let self = self else {
-                    return
-                }
-                self.squareButton.isSelected = true
-                self.rectangleButton.isSelected = false
-
-                profileImageView.image = squareImage
-            }.store(in: &cancellable)
+        viewModel.output.handleSaveButton
+            .sink { [weak self] image in
+                self?.saveImage(image)
+            }
+            .store(in: &cancellable)
         
-        output.handleOkayButton
-            .sink { [weak self] _ in
-                self?.popUpView.removeFromSuperview()
-            }.store(in: &cancellable)
-        
-        output.handleBackButton
-            .sink { [weak self] _ in
-                if let self, self.isModal {
-                    self.dismiss(animated: true)
-                } else {
-                    self?.navigationController?.popViewController(animated: true)
-                }
-            }.store(in: &cancellable)
-        
-        output.handleNextButton
+        pageButton.publisher(for: .touchUpInside)
             .sink {  _ in
                 let next = TabBarController()
                 (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
                     .changeRootViewController(next, animated: true)
-            }.store(in: &cancellable)
+            }
+            .store(in: &cancellable)
+        
+        viewModel.output.handleSquareButton
+            .sink { [weak self] isSquareSize in
+                if isSquareSize {
+                    self?.squareButton.isSelected = true
+                    self?.rectangleButton.isSelected = false
+
+                    self?.profileImageView.image = self?.squareImage
+                    self?.profileImageView.layoutIfNeeded()
+                } else {
+                    self?.squareButton.isSelected = false
+                    self?.rectangleButton.isSelected = true
+                    
+                    self?.profileImageView.image = self?.rectangleImage
+                    self?.profileImageView.layoutIfNeeded()
+                }
+            }
+            .store(in: &cancellable)
     }
     
     private func configureUI() {
@@ -230,7 +208,6 @@ class ProfileViewController: UIViewController {
     
     func updateUI() {
         view.subviews.forEach { $0.removeFromSuperview() }
-        isModal = true
         
         updateNavigation()
         configureProfileView()
@@ -325,5 +302,24 @@ class ProfileViewController: UIViewController {
             pageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pageButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         ])
+    }
+}
+
+extension ProfileCardViewController {
+    func saveImage(_ image: UIImage?) {
+        guard let image else {
+            return
+        }
+        
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(savedImage(image:  didFinishSavingWithError: contextInfo: )), nil)
+    }
+    
+    @objc func savedImage(image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error {
+            print(error)
+            self.window?.addSubview(self.saveFailPopUp)
+        } else {
+            self.window?.addSubview(self.saveSuccessPopUp)
+        }
     }
 }
