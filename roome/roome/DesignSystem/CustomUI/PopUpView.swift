@@ -114,7 +114,18 @@ class PopUpView: UIView {
         } else {
             buttonStackView.addArrangedSubview(colorButton)
             colorButton.configuration?.attributedTitle = AttributedString(colorButtonTitle, attributes: titleContainer)
+            bind()
         }
+    }
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    private func bind() {
+        colorButton.publisher(for: .touchUpInside)
+            .sink { [weak self] _ in
+                self?.removeFromSuperview()
+            }
+            .store(in: &cancellables)
     }
     
     func configureStackView() {
