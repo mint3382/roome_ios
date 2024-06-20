@@ -12,7 +12,28 @@ import KakaoSDKCommon
 import UIKit
 
 class MyProfileViewModel {
-    func updateImageToKakaoServer() {
+    struct Input {
+        let tappedShareButton = PassthroughSubject<Void, Never>()
+    }
+    
+    let input: Input
+    
+    var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        self.input = Input()
+        settingBind()
+    }
+    
+    private func settingBind() {
+        input.tappedShareButton
+            .sink { [weak self] in
+                self?.updateImageToKakaoServer()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func updateImageToKakaoServer() {
         let image = ImageManager.loadImageFromDirectory(identifier: .profile)
         
         if let profileImage = image {
@@ -32,10 +53,14 @@ class MyProfileViewModel {
     
     private func configureShare(imageURL: URL?) {
         if ShareApi.isKakaoTalkSharingAvailable() {
+            guard let name = UserContainer.shared.user?.data.nickname else {
+                return
+            }
+            
             let appLink = Link(iosExecutionParams: ["key1":"value1"])
             let button = Button(title: "나도 하러 가기", link: appLink)
             
-            let content = Content(title: "나만의 방탈출 프로필", imageUrl: imageURL, link: appLink)
+            let content = Content(title: "\(name)님의 방탈출 프로필이 도착했습니다", imageUrl: imageURL, link: appLink)
             
             let template = FeedTemplate(content: content, buttons: [button])
             
@@ -55,6 +80,8 @@ class MyProfileViewModel {
                     }
                 }
             }
+        } else {
+            //TODO: - 카카오톡 미설치, 알림창 띄우기
         }
     }
 }

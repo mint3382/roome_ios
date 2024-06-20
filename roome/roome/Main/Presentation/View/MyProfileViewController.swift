@@ -89,8 +89,7 @@ extension MyProfileViewController: UICollectionViewDataSource {
             
             userCell.shareButtonPublisher()
                 .sink { [weak self] _ in
-                    //카카오 공유하기 뷰모델로 input 연결
-                    self?.viewModel.updateImageToKakaoServer()
+                    self?.viewModel.input.tappedShareButton.send()
                 }
                 .store(in: &cancellables)
             
