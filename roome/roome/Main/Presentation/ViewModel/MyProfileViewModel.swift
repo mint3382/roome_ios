@@ -34,7 +34,7 @@ class MyProfileViewModel {
     }
     
     private func updateImageToKakaoServer() {
-        let image = ImageManager.loadImageFromDirectory(identifier: .profile)
+        let image = ImageManager.loadImageFromDirectory(identifier: .squareCard)
         
         if let profileImage = image {
             ShareApi.shared.imageUpload(image: profileImage) { (imageUploadResult, error ) in

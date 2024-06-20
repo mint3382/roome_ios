@@ -9,7 +9,8 @@ import UIKit
 
 class ImageManager {
     enum Identifiers: String {
-        case profile = "profile"
+        case squareCard = "squareCard"
+        case rectangleCard = "rectangleCard"
     }
     
     class func saveImageToDirectory(identifier: Identifiers, image: UIImage?) {
