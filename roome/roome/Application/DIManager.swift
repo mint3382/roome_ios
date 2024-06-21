@@ -139,8 +139,8 @@ class DIManager {
         let myProfileViewController = MyProfileViewController(viewModel: myProfileViewModel)
         DIContainer.shared.register(MyProfileViewController.self, dependency: myProfileViewController)
         
-        let signOutViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
-        let settingViewController = SettingViewController(viewModel: signOutViewModel)
+        let settingViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
+        let settingViewController = SettingViewController(viewModel: settingViewModel)
         DIContainer.shared.register(SettingViewController.self, dependency: settingViewController)
         
         let tabBarController = TabBarController()
