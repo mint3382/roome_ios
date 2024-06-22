@@ -136,8 +136,6 @@ class ProfileCardViewController: UIViewController {
         
         pageButton.publisher(for: .touchUpInside)
             .sink {  _ in
-                DIContainer.shared.removeAll()
-                DIManager.shared.registerAll()
                 let next = TabBarController()
                 (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
