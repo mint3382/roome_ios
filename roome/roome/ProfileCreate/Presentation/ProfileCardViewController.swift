@@ -145,6 +145,18 @@ class ProfileCardViewController: UIViewController {
             }
             .store(in: &cancellable)
         
+        saveSuccessPopUp.publisherColorButton()
+            .sink { [weak self] _ in
+                self?.saveSuccessPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellable)
+        
+        saveFailPopUp.publisherColorButton()
+            .sink { [weak self] _ in
+                self?.saveFailPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellable)
+        
         viewModel.output.handleSquareButton
             .sink { [weak self] isSquareSize in
                 if isSquareSize {

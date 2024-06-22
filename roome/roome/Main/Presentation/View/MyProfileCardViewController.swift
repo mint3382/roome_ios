@@ -54,14 +54,12 @@ class MyProfileCardViewController: UIViewController {
     private lazy var saveSuccessPopUp = PopUpView(frame: window!.frame,
                                                   title: "저장 완료",
                                                   description: "내 사진에 저장되었어요",
-                                                  colorButtonTitle: "확인",
-                                                  isWhiteButton: false)
+                                                  colorButtonTitle: "확인")
     
     private lazy var saveFailPopUp = PopUpView(frame: window!.frame,
                                                title: "저장 실패",
                                                description: "설정을 확인해주세요",
-                                               colorButtonTitle: "확인",
-                                               isWhiteButton: false)
+                                               colorButtonTitle: "확인")
     
     //ViewModel
     private var viewModel: ProfileCardViewModel
@@ -127,6 +125,18 @@ class MyProfileCardViewController: UIViewController {
         saveButton.publisher(for: .touchUpInside)
             .sink { [weak self] _ in
                 self?.viewModel.input.tapSaveButton.send()
+            }
+            .store(in: &cancellable)
+        
+        saveSuccessPopUp.publisherColorButton()
+            .sink { [weak self] _ in
+                self?.saveSuccessPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellable)
+        
+        saveFailPopUp.publisherColorButton()
+            .sink { [weak self] _ in
+                self?.saveFailPopUp.removeFromSuperview()
             }
             .store(in: &cancellable)
     }
@@ -263,9 +273,9 @@ extension MyProfileCardViewController {
     @objc func savedImage(image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error {
             print(error)
-            self.window?.addSubview(self.saveFailPopUp)
+            self.window?.addSubview(saveFailPopUp)
         } else {
-            self.window?.addSubview(self.saveSuccessPopUp)
+            self.window?.addSubview(saveSuccessPopUp)
         }
     }
 }
