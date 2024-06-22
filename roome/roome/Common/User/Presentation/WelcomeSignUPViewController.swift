@@ -85,27 +85,44 @@ class WelcomeSignUPViewController: UIViewController {
     }
     
     func bind() {
-        let next = makeProfileButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let start = popUpView.whiteButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let still = popUpView.colorButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        
-        let output = viewModel.transforms(WelcomeViewModel.Input(nextButton: next))
-        let popUpOutput = viewModel.popUpTransforms(WelcomeViewModel.PopUpInput(newButton: start, stillButton: still))
-        
-        output.handleNext
+        makeProfileButton.publisher(for: .touchUpInside)
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink(receiveCompletion: { error in
-                //실패 시
-            }, receiveValue: { [weak self] state in
+            .sink { [weak self] in
+                self?.viewModel.input.nextButton.send()
+            }
+            .store(in: &cancellables)
+        
+        popUpView.publisherWhiteButton()
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] in
+                self?.viewModel.input.newButton.send()
+                self?.popUpView.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        popUpView.publisherColorButton()
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] in
+                self?.viewModel.input.stillButton.send()
+                self?.popUpView.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.willBeContinue
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { error in
+                //fail
+            } receiveValue: { [weak self] state in
                 if state {
                     self?.window?.addSubview(self!.popUpView)
                 } else {
                     let nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
                     self?.navigationController?.pushViewController(nextPage, animated: true)
                 }
-            }).store(in: &cancellables)
+            }
+            .store(in: &cancellables)
         
-        output.nextState
+        viewModel.output.handleNext
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] state in
                 var nextPage: UIViewController
@@ -137,15 +154,6 @@ class WelcomeSignUPViewController: UIViewController {
                 }
                 self?.navigationController?.pushViewController(nextPage, animated: true)
             }.store(in: &cancellables)
-        
-        popUpOutput.handleNext
-            .sink { [weak self] _ in
-                self?.popUpView.removeFromSuperview()
-            }.store(in: &cancellables)
-        
-        output.tapNext
-            .sink { }
-            .store(in: &cancellables)
     }
     
     func configureStackView() {
