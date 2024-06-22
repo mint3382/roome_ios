@@ -55,14 +55,12 @@ class ProfileCardViewController: UIViewController {
     private lazy var saveSuccessPopUp = PopUpView(frame: window!.frame,
                                                   title: "저장 완료",
                                                   description: "내 사진에 저장되었어요",
-                                                  colorButtonTitle: "확인",
-                                                  isWhiteButton: false)
+                                                  colorButtonTitle: "확인")
     
     private lazy var saveFailPopUp = PopUpView(frame: window!.frame,
                                                title: "저장 실패",
                                                description: "설정을 확인해주세요",
-                                               colorButtonTitle: "확인",
-                                               isWhiteButton: false)
+                                               colorButtonTitle: "확인")
     
     //ViewModel
     private var viewModel: ProfileCardViewModel
@@ -138,6 +136,8 @@ class ProfileCardViewController: UIViewController {
         
         pageButton.publisher(for: .touchUpInside)
             .sink {  _ in
+                DIContainer.shared.removeAll()
+                DIManager.shared.registerAll()
                 let next = TabBarController()
                 (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?

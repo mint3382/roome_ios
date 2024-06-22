@@ -272,7 +272,7 @@ extension MyProfileCardViewController {
     
     @objc func savedImage(image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error {
-            print(error)
+            print("‼️\(error)")
             self.window?.addSubview(saveFailPopUp)
         } else {
             self.window?.addSubview(saveSuccessPopUp)

@@ -53,8 +53,7 @@ class WelcomeSignUPViewController: UIViewController {
                                    title: "제작 중인 프로필이 있어요",
                                    description: "이어서 만드시겠어요?",
                                    whiteButtonTitle: "처음부터 하기",
-                                   colorButtonTitle: "이어서 하기",
-                                   isWhiteButton: true)
+                                   colorButtonTitle: "이어서 하기")
     
     private let viewModel: WelcomeViewModel
     private var cancellables = Set<AnyCancellable>()
