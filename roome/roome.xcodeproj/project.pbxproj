@@ -148,6 +148,8 @@
 		9293DC8E2C233D8B00545B57 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC8D2C233D8B00545B57 /* ImageManager.swift */; };
 		9293DC902C24F42C00545B57 /* MyProfileCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC8F2C24F42C00545B57 /* MyProfileCardViewController.swift */; };
 		9293DC922C25192A00545B57 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC912C25192A00545B57 /* SettingCell.swift */; };
+		9293DC982C280F2C00545B57 /* SettingWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC972C280F2C00545B57 /* SettingWebViewController.swift */; };
+		9293DC9A2C28170300545B57 /* SettingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC992C28170300545B57 /* SettingDTO.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -293,6 +295,8 @@
 		9293DC8D2C233D8B00545B57 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9293DC8F2C24F42C00545B57 /* MyProfileCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileCardViewController.swift; sourceTree = "<group>"; };
 		9293DC912C25192A00545B57 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		9293DC972C280F2C00545B57 /* SettingWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWebViewController.swift; sourceTree = "<group>"; };
+		9293DC992C28170300545B57 /* SettingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDTO.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -462,6 +466,7 @@
 		9256E55C2C0EFE8000A50515 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				9293DC992C28170300545B57 /* SettingDTO.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -476,9 +481,9 @@
 		9256E55E2C0EFE8C00A50515 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9293DC962C27DCBE00545B57 /* MyProfile */,
+				9293DC952C27DCB300545B57 /* Setting */,
 				9293DC802C22E70700545B57 /* TabBarController.swift */,
-				9293DC882C230B2D00545B57 /* View */,
-				9293DC872C230B2300545B57 /* ViewModel */,
 				9293DC862C230B1000545B57 /* CustomUI */,
 			);
 			path = Presentation;
@@ -859,23 +864,24 @@
 			path = CustomUI;
 			sourceTree = "<group>";
 		};
-		9293DC872C230B2300545B57 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */,
-				9293DC842C230B0900545B57 /* MyProfileViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		9293DC882C230B2D00545B57 /* View */ = {
+		9293DC952C27DCB300545B57 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
 				9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */,
+				9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */,
+				9293DC972C280F2C00545B57 /* SettingWebViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		9293DC962C27DCBE00545B57 /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
 				9293DC792C216CC000545B57 /* MyProfileViewController.swift */,
 				9293DC8F2C24F42C00545B57 /* MyProfileCardViewController.swift */,
+				9293DC842C230B0900545B57 /* MyProfileViewModel.swift */,
 			);
-			path = View;
+			path = MyProfile;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
@@ -1099,6 +1105,7 @@
 				9271F8112C08A45A00586AFD /* ActivityRepository.swift in Sources */,
 				9271F7FB2C089E7C00586AFD /* HorrorThemeRepositoryType.swift in Sources */,
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
+				9293DC9A2C28170300545B57 /* SettingDTO.swift in Sources */,
 				9271F7E72C0865EB00586AFD /* MBTIDTO.swift in Sources */,
 				9271F7FD2C089E9D00586AFD /* HorrorThemeUseCase.swift in Sources */,
 				921695A12BFE743D006DC44A /* ImportantFactorViewController.swift in Sources */,
@@ -1113,6 +1120,7 @@
 				9271F8052C08A12900586AFD /* HintRepository.swift in Sources */,
 				9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */,
 				9271F7E12C08604800586AFD /* GenreRepository.swift in Sources */,
+				9293DC982C280F2C00545B57 /* SettingWebViewController.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				9271F7E52C08624800586AFD /* GenreUseCase.swift in Sources */,
 				9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */,
