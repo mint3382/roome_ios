@@ -44,7 +44,9 @@ class PopUpView: UIView {
         let label = UILabel()
         label.text = "이어서 만드시겠어요?"
         label.textColor = .black
+        label.textAlignment = .center
         label.font = .regularBody2
+        label.numberOfLines = 0
         
         return label
     }()
@@ -75,15 +77,12 @@ class PopUpView: UIView {
     }()
     
     private let colorButton: UIButton = {
-        var configuration = UIButton.Configuration.borderedTinted()
+        var configuration = UIButton.Configuration.filled()
+        configuration.cornerStyle = .medium
         configuration.baseBackgroundColor = .roomeMain
         configuration.baseForegroundColor = .white
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 30, bottom: 30, trailing: 30)
         let button = UIButton(configuration: configuration)
-        button.backgroundColor = .roomeMain
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.roomeMain.cgColor
         
         return button
     }()
@@ -104,11 +103,10 @@ class PopUpView: UIView {
         titleLabel.text = title
         descriptionLabel.text = description
         var titleContainer = AttributeContainer()
-        titleContainer.font = .boldLabel
+        titleContainer.font = .boldTitle3
         
         if let whiteButtonTitle {
-            buttonStackView.addArrangedSubview(whiteButton)
-            buttonStackView.addArrangedSubview(colorButton)
+            configureWhiteButton()
             whiteButton.configuration?.attributedTitle = AttributedString(whiteButtonTitle, attributes: titleContainer)
             colorButton.configuration?.attributedTitle = AttributedString(colorButtonTitle, attributes: titleContainer)
         } else {
@@ -146,7 +144,19 @@ class PopUpView: UIView {
     private func configureButton() {
         NSLayoutConstraint.activate([
             buttonStackView.heightAnchor.constraint(equalToConstant: 45),
-            buttonStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7)
+            buttonStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8)
+        ])
+    }
+    
+    private func configureWhiteButton() {
+        buttonStackView.addArrangedSubview(whiteButton)
+        buttonStackView.addArrangedSubview(colorButton)
+        
+        NSLayoutConstraint.activate([
+            whiteButton.heightAnchor.constraint(equalToConstant: 45),
+            whiteButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.38),
+            colorButton.heightAnchor.constraint(equalToConstant: 45),
+            colorButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.38)
         ])
     }
 }
