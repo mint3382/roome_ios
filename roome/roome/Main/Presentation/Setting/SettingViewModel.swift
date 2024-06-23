@@ -12,37 +12,72 @@ import KakaoSDKUser
 
 class SettingViewModel: NSObject {
     struct Input {
-        let tapSignOutButton: AnyPublisher<Void, Never>
+        let selectCell = PassthroughSubject<Statable?, Never>()
     }
     
     struct Output {
-        let next: AnyPublisher<Void, Error>
-        let handleSignOut: AnyPublisher<Void, Never>
+        let handleTermsDetail = PassthroughSubject<Void, Never>()
+//        let handleTermsPersonal = PassthroughSubject<Void, Never>()
+        let handleLogout = PassthroughSubject<Void, Never>()
+        let handleWithdrawel = PassthroughSubject<Void, Never>()
+    }
+    
+    let input: Input
+    let output: Output
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(loginUseCase: LoginUseCase) {
+        self.loginUseCase = loginUseCase
+        self.input = Input()
+        self.output = Output()
+        super.init()
+        settingBind()
     }
     
     let loginUseCase: LoginUseCase?
     var goToNext = PassthroughSubject<Void, Error>()
-
-    init(loginUseCase: LoginUseCase) {
-        self.loginUseCase = loginUseCase
+    var termsState: TermsDetailStates?
+    
+    func settingBind() {
+        input.selectCell
+            .sink { [weak self] state in
+                if let state = state as? SettingDTO.Terms {
+                    switch state {
+                    case .service:
+                        self?.termsState = .service
+                    case .personal:
+                        self?.termsState = .personal
+                    }
+                    self?.output.handleTermsDetail.send()
+                } else if let state = state as? SettingDTO.SignOut {
+                    switch state {
+                    case .logout:
+                        self?.output.handleLogout.send()
+                    case .withdrawl:
+                        self?.output.handleWithdrawel.send()
+                    }
+                }
+            }
+            .store(in: &cancellables)
     }
     
-    func transform(_ input: Input) -> Output {
-        let signOutHandled = input.tapSignOutButton
-            .compactMap { [weak self] _ in
-                if KeyChain.read(key: .isAppleLogin) == "true" {
-                    self?.handleAppleSignOut()
-                } else {
-                    self?.handleKakaoSignOut()
-                }
-            }.eraseToAnyPublisher()
-        
-        let next = goToNext
-            .eraseToAnyPublisher()
-        
-        return Output(next: next, handleSignOut: signOutHandled)
-            
-    }
+//    func transform(_ input: Input) -> Output {
+//        let signOutHandled = input.tapSignOutButton
+//            .compactMap { [weak self] _ in
+//                if KeyChain.read(key: .isAppleLogin) == "true" {
+//                    self?.handleAppleSignOut()
+//                } else {
+//                    self?.handleKakaoSignOut()
+//                }
+//            }.eraseToAnyPublisher()
+//        
+//        let next = goToNext
+//            .eraseToAnyPublisher()
+//        
+//        return Output(next: next, handleSignOut: signOutHandled)
+//            
+//    }
     
     func handleAppleSignOut() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
