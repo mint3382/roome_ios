@@ -143,7 +143,10 @@ class DIManager {
         
         let settingViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
         let settingViewController = SettingViewController(viewModel: settingViewModel)
+        let settingWebViewController = SettingWebViewController(viewModel: settingViewModel)
         DIContainer.shared.register(SettingViewController.self, dependency: settingViewController)
+        DIContainer.shared.register(SettingWebViewController.self, dependency: settingWebViewController)
+        
         
         let tabBarController = TabBarController()
         DIContainer.shared.register(TabBarController.self, dependency: tabBarController)
