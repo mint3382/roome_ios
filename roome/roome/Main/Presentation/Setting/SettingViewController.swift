@@ -170,6 +170,7 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.register(SettingCollectionViewCell.self, forCellWithReuseIdentifier: SettingCollectionViewCell.id)
+        collectionView.register(FooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: FooterView.id)
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -187,6 +188,12 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0)
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(40)),
+            elementKind: UICollectionView.elementKindSectionFooter,
+            alignment: .bottom)
+        section.boundarySupplementaryItems = [sectionFooter]
         
         return section
     }
@@ -203,6 +210,21 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
             
             return cell
         })
+        
+        let footerRegistration = UICollectionView.SupplementaryRegistration<FooterView>(elementKind: UICollectionView.elementKindSectionFooter) {
+            supplementaryView, elementKind, indexPath in
+            let section = SettingSection(rawValue: indexPath.section)
+            if section == .signOut {
+                guard let version = self.viewModel.version else {
+                    return
+                }
+                supplementaryView.configureLabel(text: "앱 버전 \(version)")
+            }
+        }
+        
+        dataSource?.supplementaryViewProvider = { (view, kind, index) in
+            self.collectionView.dequeueConfiguredReusableSupplementary(using: footerRegistration, for: index)
+        }
     }
     
     private func setSnapShot() {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SettingSection: Hashable {
+enum SettingSection: Int, Hashable {
     case terms
     case version
     case signOut
