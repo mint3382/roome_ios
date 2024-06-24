@@ -31,10 +31,30 @@ class LoginRepository: LoginRepositoryType {
         return nil
     }
     
+    func requestLogOut() async throws {
+        let logoutURL = URLBuilder(host: APIConstants.roomeHost, path: APIConstants.Auth.signOut.name, queries: nil)
+        guard let url = logoutURL.url else {
+            throw TypeError.bindingFailure
+        }
+        
+        let accessToken = KeyChain.read(key: .accessToken) ?? ""
+        let header = ["Content-Type": "application/json",
+                      "Authorization": "Bearer \(accessToken)"]
+        
+        let requestBuilder = RequestBuilder(url: url,
+                                            method: .post,
+                                            headers: header)
+        guard let request = requestBuilder.create() else {
+            throw TypeError.bindingFailure
+        }
+        
+        _ = try await APIProvider().fetchData(from: request)
+    }
+    
     func requestSignOut(body json: [String: Any?]) async throws {
         let withdrawalURL = URLBuilder(host: APIConstants.roomeHost, path: APIConstants.Auth.withdrawal.name, queries: nil)
         guard let url = withdrawalURL.url else {
-            return
+            throw TypeError.bindingFailure
         }
         
         let accessToken = KeyChain.read(key: .accessToken) ?? ""
@@ -46,7 +66,7 @@ class LoginRepository: LoginRepositoryType {
                                             bodyJSON: json,
                                             headers: header)
         guard let request = requestBuilder.create() else {
-            return
+            throw TypeError.bindingFailure
         }
         
         _ = try await APIProvider().fetchData(from: request)
