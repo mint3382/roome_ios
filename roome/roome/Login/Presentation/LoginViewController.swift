@@ -9,6 +9,8 @@ import UIKit
 import Combine
 
 class LoginViewController: UIViewController {
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    private lazy var errorPopUp = PopUpView(frame: window!.bounds, title: "카카오톡 미설치", description: "카카오톡의 설치 여부를 확인해주세요!", colorButtonTitle: "확인")
     private var viewModel: LoginViewModel
     private var cancellables = Set<AnyCancellable>()
     
@@ -82,11 +84,38 @@ class LoginViewController: UIViewController {
         
         output.state
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { error in
-                print(error)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    if let error = error as? NetworkError {
+                        switch error {
+                        case .noKakaoTalk:
+                            self.window?.addSubview(self.errorPopUp)
+                        default:
+                            self.errorPopUp.updatePopUpView(title: "에러 발생", description: "다시 시도해주세요.", colorButtonTitle: "확인")
+                            self.window?.addSubview(self.errorPopUp)
+                        }
+                    } else {
+                        self.errorPopUp.updatePopUpView(title: "에러 발생", description: "다시 시도해주세요.", colorButtonTitle: "확인")
+                        self.window?.addSubview(self.errorPopUp)
+                    }
+                }
             } receiveValue: { state in
                 self.goToNextPage(state)
             }.store(in: &cancellables)
+        
+        errorPopUp.publisherColorButton()
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] _ in
+                DIContainer.shared.removeAll()
+                DIManager.shared.registerAll()
+                let next = DIContainer.shared.resolve(LoginViewController.self)
+                self?.window?.rootViewController?.dismiss(animated: false)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(next, animated: true)
+            }
+            .store(in: &cancellables)
 
     }
     

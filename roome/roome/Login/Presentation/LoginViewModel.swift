@@ -72,6 +72,7 @@ class LoginViewModel: NSObject {
             UserApi.shared.loginWithKakaoTalk { (oauthToken, error) in
                 if let error {
                     print(error)
+                    self.userStates.send(completion: .failure(error))
                 } else {
                     print("loginWithKakaoTalk() success.")
                     //회원가입 성공 시 oauthToken 저장 가능
@@ -91,6 +92,7 @@ class LoginViewModel: NSObject {
             }
         } else {
             print("카카오톡 미설치")
+            self.userStates.send(completion: .failure(NetworkError.noKakaoTalk))
         }
     }
 }
