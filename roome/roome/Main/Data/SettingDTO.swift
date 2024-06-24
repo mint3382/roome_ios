@@ -7,48 +7,31 @@
 
 import Foundation
 
-protocol Statable { }
+enum SettingSection: Hashable {
+    case terms
+    case version
+    case signOut
+}
 
-struct SettingDTO {
+enum SettingItem: Hashable {
+    case service
+    case personal
+    case version
+    case logout
+    case withdrawal
     
-    static let footer = ["앱 버전 1.0.1(3)"]
-    
-    enum Terms: Int, CaseIterable, Statable {
-        case service
-        case personal
-        
-        var title: String {
-            switch self {
-            case .service:
-                "서비스 이용약관"
-            case .personal:
-                "개인정보 처리방침"
-            }
-        }
-    }
-    
-    enum Version: Int, CaseIterable, Statable {
-        case number
-        
-        var title: String {
-            switch self {
-            case .number:
-                "앱 버전"
-            }
-        }
-    }
-    
-    enum SignOut: Int, CaseIterable, Statable {
-        case logout
-        case withdrawal
-        
-        var title: String {
-            switch self {
-            case .logout:
-                "로그아웃"
-            case .withdrawal:
-                "탈퇴하기"
-            }
+    var title: String {
+        switch self {
+        case .service:
+            "서비스 이용약관"
+        case .personal:
+            "개인정보 처리방침"
+        case .version:
+            "앱 버전"
+        case .logout:
+            "로그아웃"
+        case .withdrawal:
+            "탈퇴하기"
         }
     }
 }

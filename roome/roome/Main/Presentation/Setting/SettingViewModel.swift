@@ -12,7 +12,7 @@ import KakaoSDKUser
 
 class SettingViewModel: NSObject {
     struct Input {
-        let selectCell = PassthroughSubject<Statable?, Never>()
+        let selectCell = PassthroughSubject<SettingItem?, Never>()
         let tappedLogout = PassthroughSubject<Void, Never>()
         let tappedWithdrawal = PassthroughSubject<Void, Never>()
     }
@@ -23,6 +23,7 @@ class SettingViewModel: NSObject {
         let handleWithdrawalButton = PassthroughSubject<Void, Never>()
         let handleLogout = PassthroughSubject<Void, Error>()
         let handleWithdrawal = PassthroughSubject<Void, Error>()
+        let handleSelectError = PassthroughSubject<Void, Never>()
     }
     
     let input: Input
@@ -39,27 +40,26 @@ class SettingViewModel: NSObject {
     }
     
     let loginUseCase: LoginUseCase?
-    var goToNext = PassthroughSubject<Void, Error>()
     var termsState: TermsDetailStates?
     
     func settingBind() {
         input.selectCell
             .sink { [weak self] state in
-                if let state = state as? SettingDTO.Terms {
-                    switch state {
-                    case .service:
-                        self?.termsState = .service
-                    case .personal:
-                        self?.termsState = .personal
-                    }
+                switch state {
+                case .service:
+                    self?.termsState = .service
                     self?.output.handleTermsDetail.send()
-                } else if let state = state as? SettingDTO.SignOut {
-                    switch state {
-                    case .logout:
-                        self?.output.handleLogoutButton.send()
-                    case .withdrawal:
-                        self?.output.handleWithdrawalButton.send()
-                    }
+                case .personal:
+                    self?.termsState = .personal
+                    self?.output.handleTermsDetail.send()
+                case .version:
+                    print("version")
+                case .logout:
+                    self?.output.handleLogoutButton.send()
+                case .withdrawal:
+                    self?.output.handleWithdrawalButton.send()
+                case .none:
+                    self?.output.handleSelectError.send()
                 }
             }
             .store(in: &cancellables)
@@ -92,6 +92,7 @@ class SettingViewModel: NSObject {
                 KeyChain.delete(key: .accessToken)
                 KeyChain.delete(key: .refreshToken)
                 KeyChain.delete(key: .isAppleLogin)
+                KeyChain.delete(key: .appleUserID)
                 KeyChain.delete(key: .hasToken)
                 self.output.handleLogout.send()
             } catch(let error) {
