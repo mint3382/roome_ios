@@ -123,6 +123,19 @@ class PopUpView: UIView {
         whiteButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
     
+    func updatePopUpView(title: String, description: String, whiteButtonTitle: String? = nil, colorButtonTitle: String) {
+        titleLabel.text = title
+        descriptionLabel.text = description
+        var titleContainer = AttributeContainer()
+        titleContainer.font = .boldTitle3
+        if let whiteButtonTitle {
+            whiteButton.configuration?.attributedTitle = AttributedString(whiteButtonTitle, attributes: titleContainer)
+            colorButton.configuration?.attributedTitle = AttributedString(colorButtonTitle, attributes: titleContainer)
+        } else {
+            colorButton.configuration?.attributedTitle = AttributedString(colorButtonTitle, attributes: titleContainer)
+        }
+    }
+    
     private func configureStackView() {
         self.addSubview(boxView)
         boxView.addSubview(stackView)
