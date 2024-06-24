@@ -8,10 +8,11 @@
 import UIKit
 import Combine
 
-class SettingViewController: UIViewController {
+class SettingViewController: UIViewController, UICollectionViewDelegate {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
     private let titleLabel = TitleLabel(text: "설정")
-    private lazy var tableView = UITableView(frame: .zero, style: .grouped)
+    private var collectionView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<SettingSection, SettingItem>?
     private lazy var withdrawalPopUp = PopUpView(frame: window!.bounds, title: "정말로 탈퇴하시겠어요?", description: "지금까지 작성된 모든 정보가 삭제되고,\n복구할 수 없어요",whiteButtonTitle: "취소", colorButtonTitle: "탈퇴")
     private lazy var logoutPopUp = PopUpView(frame: window!.bounds, title: "로그아웃", description: "정말 로그아웃하시겠어요?",whiteButtonTitle: "취소", colorButtonTitle: "로그아웃")
     
@@ -31,13 +32,17 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureTitleLabel()
-        setTableView()
         bindOutput()
+        registerCollectionView()
+        configureCollectionView()
+        setDataSource()
+        setSnapShot()
+        collectionView.delegate = self
     }
     
     private func bindOutput() {
         viewModel.output.handleTermsDetail
-            .sink { [weak self] _ in
+            .sink { [weak self] in
                 let view = DIContainer.shared.resolve(SettingWebViewController.self)
                 view.modalPresentationStyle = .fullScreen
                 
@@ -148,74 +153,76 @@ class SettingViewController: UIViewController {
         ])
     }
     
-    private func setTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(SettingCell.self, forCellReuseIdentifier: "cell")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.contentInset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
-        tableView.sectionHeaderHeight = 0
-        
-        view.insertSubview(tableView, at: 3)
+    private func configureCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.backgroundColor = .collectionViewBackground
+        collectionView?.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-}
-
-extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+    
+    private func registerCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        collectionView.register(SettingCollectionViewCell.self, forCellWithReuseIdentifier: SettingCollectionViewCell.id)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+    private func createLayout() -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, _ in
+            return self?.createSection()
+        })
     }
     
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if section == 2 {
-            return SettingDTO.footer[0]
-        }
+    private func createSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        return nil
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0)
+        
+        return section
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return SettingDTO.Terms.allCases.count
-        } else if section == 1 {
-            return SettingDTO.Version.allCases.count
-        } else {
-            return SettingDTO.SignOut.allCases.count
-        }
+    private func setDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<SettingSection, SettingItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: SettingCollectionViewCell.id,
+                for: indexPath) as? SettingCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+    
+            cell.configureCell(viewModel: self.viewModel, title: itemIdentifier.title, state: itemIdentifier.self)
+            
+            return cell
+        })
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SettingCell else {
-            return UITableViewCell()
-        }
+    private func setSnapShot() {
+        var snapshot = NSDiffableDataSourceSnapshot<SettingSection, SettingItem>()
+        let sections: [SettingSection] = [.terms, .version, .signOut]
+        let termsItems: [SettingItem] = [.service, .personal]
+        let versionItem: [SettingItem] = [.version]
+        let signItems: [SettingItem] = [.logout, .withdrawal]
+        snapshot.appendSections(sections)
+        snapshot.appendItems(termsItems, toSection: .terms)
+        snapshot.appendItems(versionItem, toSection: .version)
+        snapshot.appendItems(signItems, toSection: .signOut)
         
-        cell.setViewModel(viewModel: viewModel)
+        dataSource?.apply(snapshot)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? SettingCollectionViewCell
         
-        if indexPath.section == 0 {
-            cell.changeTitle(text: SettingDTO.Terms(rawValue: indexPath.row)?.title)
-            cell.changeState(SettingDTO.Terms(rawValue: indexPath.row))
-            cell.accessoryType = .disclosureIndicator
-        } else if indexPath.section == 1 {
-            cell.changeTitle(text: SettingDTO.Version(rawValue: indexPath.row)?.title)
-            cell.changeState(SettingDTO.Version(rawValue: indexPath.row))
-        } else {
-            cell.changeTitle(text: SettingDTO.SignOut(rawValue: indexPath.row)?.title)
-            cell.changeState(SettingDTO.SignOut(rawValue: indexPath.row))
-            cell.accessoryType = .disclosureIndicator
-        }
-        
-        return cell
+        viewModel.input.selectCell.send(cell?.state)
     }
 }
 

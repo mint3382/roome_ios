@@ -147,9 +147,9 @@
 		9293DC8C2C230CD800545B57 /* KakaoSDKTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 9293DC8B2C230CD800545B57 /* KakaoSDKTemplate */; };
 		9293DC8E2C233D8B00545B57 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC8D2C233D8B00545B57 /* ImageManager.swift */; };
 		9293DC902C24F42C00545B57 /* MyProfileCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC8F2C24F42C00545B57 /* MyProfileCardViewController.swift */; };
-		9293DC922C25192A00545B57 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC912C25192A00545B57 /* SettingCell.swift */; };
 		9293DC982C280F2C00545B57 /* SettingWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC972C280F2C00545B57 /* SettingWebViewController.swift */; };
 		9293DC9A2C28170300545B57 /* SettingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC992C28170300545B57 /* SettingDTO.swift */; };
+		9293DC9C2C29D7DB00545B57 /* SettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC9B2C29D7DB00545B57 /* SettingCollectionViewCell.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -294,9 +294,9 @@
 		9293DC842C230B0900545B57 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
 		9293DC8D2C233D8B00545B57 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9293DC8F2C24F42C00545B57 /* MyProfileCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileCardViewController.swift; sourceTree = "<group>"; };
-		9293DC912C25192A00545B57 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		9293DC972C280F2C00545B57 /* SettingWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWebViewController.swift; sourceTree = "<group>"; };
 		9293DC992C28170300545B57 /* SettingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDTO.swift; sourceTree = "<group>"; };
+		9293DC9B2C29D7DB00545B57 /* SettingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCollectionViewCell.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -850,7 +850,7 @@
 			children = (
 				9293DC7C2C216EAD00545B57 /* UserCell.swift */,
 				9293DC7E2C216EDC00545B57 /* MyProfileCell.swift */,
-				9293DC912C25192A00545B57 /* SettingCell.swift */,
+				9293DC9B2C29D7DB00545B57 /* SettingCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1015,6 +1015,7 @@
 				921695132BF34995006DC44A /* LoginProvider.swift in Sources */,
 				921695382BF84604006DC44A /* NicknameUseCase.swift in Sources */,
 				921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */,
+				9293DC9C2C29D7DB00545B57 /* SettingCollectionViewCell.swift in Sources */,
 				9271F79C2C009E9F00586AFD /* ImportantFactorViewModel.swift in Sources */,
 				9271F7EF2C08989C00586AFD /* StrengthRepositoryType.swift in Sources */,
 				9293DC7D2C216EAD00545B57 /* UserCell.swift in Sources */,
@@ -1061,7 +1062,6 @@
 				9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */,
 				9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */,
 				9271F80B2C08A2EF00586AFD /* DeviceLockRepository.swift in Sources */,
-				9293DC922C25192A00545B57 /* SettingCell.swift in Sources */,
 				928474852C0DB4F9002C3B4C /* SizeButton.swift in Sources */,
 				9271F7E92C086C4200586AFD /* MbtiRepositoryType.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
