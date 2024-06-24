@@ -40,13 +40,13 @@ struct SettingDTO {
     
     enum SignOut: Int, CaseIterable, Statable {
         case logout
-        case withdrawl
+        case withdrawal
         
         var title: String {
             switch self {
             case .logout:
                 "로그아웃"
-            case .withdrawl:
+            case .withdrawal:
                 "탈퇴하기"
             }
         }

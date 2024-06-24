@@ -13,13 +13,16 @@ import KakaoSDKUser
 class SettingViewModel: NSObject {
     struct Input {
         let selectCell = PassthroughSubject<Statable?, Never>()
+        let tappedLogout = PassthroughSubject<Void, Never>()
+        let tappedWithdrawal = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
         let handleTermsDetail = PassthroughSubject<Void, Never>()
-//        let handleTermsPersonal = PassthroughSubject<Void, Never>()
-        let handleLogout = PassthroughSubject<Void, Never>()
-        let handleWithdrawel = PassthroughSubject<Void, Never>()
+        let handleLogoutButton = PassthroughSubject<Void, Never>()
+        let handleWithdrawalButton = PassthroughSubject<Void, Never>()
+        let handleLogout = PassthroughSubject<Void, Error>()
+        let handleWithdrawal = PassthroughSubject<Void, Error>()
     }
     
     let input: Input
@@ -53,31 +56,71 @@ class SettingViewModel: NSObject {
                 } else if let state = state as? SettingDTO.SignOut {
                     switch state {
                     case .logout:
-                        self?.output.handleLogout.send()
-                    case .withdrawl:
-                        self?.output.handleWithdrawel.send()
+                        self?.output.handleLogoutButton.send()
+                    case .withdrawal:
+                        self?.output.handleWithdrawalButton.send()
                     }
+                }
+            }
+            .store(in: &cancellables)
+        
+        input.tappedLogout
+            .sink { [weak self] _ in
+                if KeyChain.read(key: .isAppleLogin) == "true" {
+                    self?.handleAppleLogout()
+                } else {
+                    self?.handleKakaoLogout()
+                }
+            }
+            .store(in: &cancellables)
+        
+        input.tappedWithdrawal
+            .sink { [weak self] _ in
+                if KeyChain.read(key: .isAppleLogin) == "true" {
+                    self?.handleAppleSignOut()
+                } else {
+                    self?.handleKakaoSignOut()
                 }
             }
             .store(in: &cancellables)
     }
     
-//    func transform(_ input: Input) -> Output {
-//        let signOutHandled = input.tapSignOutButton
-//            .compactMap { [weak self] _ in
-//                if KeyChain.read(key: .isAppleLogin) == "true" {
-//                    self?.handleAppleSignOut()
-//                } else {
-//                    self?.handleKakaoSignOut()
-//                }
-//            }.eraseToAnyPublisher()
-//        
-//        let next = goToNext
-//            .eraseToAnyPublisher()
-//        
-//        return Output(next: next, handleSignOut: signOutHandled)
-//            
-//    }
+    func handleAppleLogout() {
+        Task {
+            do {
+                try await self.loginUseCase?.logoutWithAPI()
+                KeyChain.delete(key: .accessToken)
+                KeyChain.delete(key: .refreshToken)
+                KeyChain.delete(key: .isAppleLogin)
+                KeyChain.delete(key: .hasToken)
+                self.output.handleLogout.send()
+            } catch(let error) {
+                self.output.handleLogout.send(completion: .failure(error))
+            }
+        }
+    }
+    
+    func handleKakaoLogout() {
+        UserApi.shared.logout { (error) in
+            if let error {
+                print(error)
+                self.output.handleLogout.send(completion: .failure(error))
+            } else {
+                print("logout success")
+                Task {
+                    do {
+                        try await self.loginUseCase?.logoutWithAPI()
+                        KeyChain.delete(key: .accessToken)
+                        KeyChain.delete(key: .refreshToken)
+                        KeyChain.delete(key: .hasToken)
+                        self.output.handleLogout.send()
+                    } catch(let error) {
+                        self.output.handleLogout.send(completion: .failure(error))
+                    }
+                }
+            }
+        }
+    }
     
     func handleAppleSignOut() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -105,9 +148,10 @@ class SettingViewModel: NSObject {
                         try await self.loginUseCase?.signOutWithAPI(body: bodyJSON)
                         KeyChain.delete(key: .accessToken)
                         KeyChain.delete(key: .refreshToken)
-                        goToNext.send()
+                        KeyChain.delete(key: .hasToken)
+                        output.handleWithdrawal.send()
                     } catch(let error) {
-                        goToNext.send(completion: .failure(error))
+                        output.handleWithdrawal.send(completion: .failure(error))
                     }
                 }
             }
@@ -123,18 +167,19 @@ extension SettingViewModel: ASAuthorizationControllerDelegate {
         //TODO: - 도메인에 넘겨줄 body Type 따로 정의해서 분리하기
         let bodyJSON: [String: Any] = ["provider": LoginProvider.apple.name,
                                         "code": String(data: credential.authorizationCode ?? Data(), encoding: .utf8) ?? ""]
-        //키체인에 유저 정보 삭제
-        KeyChain.delete(key: .isAppleLogin)
-        KeyChain.delete(key: .appleUserID)
         
         Task {
             do {
                 try await loginUseCase?.signOutWithAPI(body: bodyJSON)
+                //키체인에 유저 정보 삭제
                 KeyChain.delete(key: .accessToken)
                 KeyChain.delete(key: .refreshToken)
-                goToNext.send()
+                KeyChain.delete(key: .hasToken)
+                KeyChain.delete(key: .isAppleLogin)
+                KeyChain.delete(key: .appleUserID)
+                output.handleWithdrawal.send()
             } catch(let error) {
-                goToNext.send(completion: .failure(error))
+                output.handleWithdrawal.send(completion: .failure(error))
             }
         }
     }

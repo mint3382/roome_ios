@@ -9,9 +9,11 @@ import UIKit
 import Combine
 
 class SettingViewController: UIViewController {
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
     private let titleLabel = TitleLabel(text: "설정")
     private lazy var tableView = UITableView(frame: .zero, style: .grouped)
-//    private let signOutButton = NextButton(title: "탈퇴하기", backgroundColor: .roomeMain, tintColor: .white)
+    private lazy var withdrawalPopUp = PopUpView(frame: window!.bounds, title: "정말로 탈퇴하시겠어요?", description: "지금까지 작성된 모든 정보가 삭제되고,\n복구할 수 없어요",whiteButtonTitle: "취소", colorButtonTitle: "탈퇴")
+    private lazy var logoutPopUp = PopUpView(frame: window!.bounds, title: "로그아웃", description: "정말 로그아웃하시겠어요?",whiteButtonTitle: "취소", colorButtonTitle: "로그아웃")
     
     private var viewModel: SettingViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -39,8 +41,98 @@ class SettingViewController: UIViewController {
                 let view = DIContainer.shared.resolve(SettingWebViewController.self)
                 view.modalPresentationStyle = .fullScreen
                 
-//                self?.present(view, animated: true)
-                self?.view.window?.rootViewController?.present(view, animated: true)
+                self?.present(view, animated: true)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleWithdrawalButton
+            .sink { [weak self] _ in
+                guard let self else {
+                    return
+                }
+                self.window?.addSubview(self.withdrawalPopUp)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleLogoutButton
+            .sink { [weak self] _ in
+                guard let self else {
+                    return
+                }
+                self.window?.addSubview(self.logoutPopUp)
+            }
+            .store(in: &cancellables)
+        
+        logoutPopUp.publisherWhiteButton()
+            .sink { [weak self] _ in
+                self?.logoutPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        withdrawalPopUp.publisherWhiteButton()
+            .sink { [weak self] _ in
+                self?.withdrawalPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        logoutPopUp.publisherColorButton()
+            .sink { [weak self] _ in
+                self?.viewModel.input.tappedLogout.send()
+            }
+            .store(in: &cancellables)
+        
+        withdrawalPopUp.publisherColorButton()
+            .sink { [weak self] _ in
+                self?.viewModel.input.tappedWithdrawal.send()
+                self?.withdrawalPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleLogout
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    print("logout finish")
+                case .failure(let error):
+                    print("logout fail: \(error)")
+                    DIContainer.shared.removeAll()
+                    DIManager.shared.registerAll()
+                    let next = DIContainer.shared.resolve(LoginViewController.self)
+                    self?.window?.rootViewController?.dismiss(animated: false)
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(next, animated: true)
+                }
+            } receiveValue: { [weak self] _ in
+                print("logout Success✨")
+                DIContainer.shared.removeAll()
+                DIManager.shared.registerAll()
+                let next = DIContainer.shared.resolve(LoginViewController.self)
+                self?.window?.rootViewController?.dismiss(animated: false)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(next, animated: true)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleWithdrawal
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    print("withdrawal finish")
+                case .failure(let error):
+                    print("withdrawal fail: \(error)")
+                    DIContainer.shared.removeAll()
+                    DIManager.shared.registerAll()
+                    let next = DIContainer.shared.resolve(LoginViewController.self)
+                    self?.window?.rootViewController?.dismiss(animated: false)
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(next, animated: true)
+                }
+            } receiveValue: { [weak self] _ in
+                print("✨withdrawal Success")
+                DIContainer.shared.removeAll()
+                DIManager.shared.registerAll()
+                let next = DIContainer.shared.resolve(LoginViewController.self)
+                self?.window?.rootViewController?.dismiss(animated: false)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(next, animated: true)
             }
             .store(in: &cancellables)
     }
@@ -74,50 +166,11 @@ class SettingViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-//    func bind() {
-//        let signOut = signOutButton.publisher(for: .touchUpInside)
-//            .eraseToAnyPublisher()
-//        let output = viewModel.transform(SettingViewModel.Input(tapSignOutButton: signOut))
-//        
-//        output.next
-//            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-//            .sink { error in
-//                print("탈퇴 실패!")
-//                let next = DIContainer.shared.resolve(LoginViewController.self)
-//                    (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
-//                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-//                        .changeRootViewController(next, animated: true)
-//            } receiveValue: { _ in
-//                    DIContainer.shared.resolveAll()
-//                    DIManager.shared.registerAll()
-//                    let next = DIContainer.shared.resolve(LoginViewController.self)
-//                    (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
-//                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-//                        .changeRootViewController(next, animated: true)
-//            }
-//            .store(in: &cancellables)
-//        
-//        output.handleSignOut
-//            .sink {}
-//            .store(in: &cancellables)
-//    }
-    
-    
-//    private func configureSignOutButton() {
-//        view.addSubview(signOutButton)
-//        
-//        NSLayoutConstraint.activate([
-//            signOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            signOutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//        ])
-//    }
-
 }
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -164,13 +217,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SettingCell else {
-//            return
-//        }
-//        viewModel.input.selectCell.send(cell.state)
-//    }
 }
 
 //#Preview {
