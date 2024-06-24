@@ -17,7 +17,7 @@ class TermsAgreeRepository: TermsAgreeRepositoryType {
         let body: [String: Any] = ["ageOverFourteen": states.ageAgree,
                                    "serviceAgreement": states.service,
                                    "personalInfoAgreement": states.personal,
-                                   "marketingAgreement": states.advertise]
+                                   "marketingAgreement": false]
         
         let accessToken = KeyChain.read(key: .accessToken) ?? ""
         let header = ["Content-Type": "application/json",

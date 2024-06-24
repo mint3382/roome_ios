@@ -61,7 +61,7 @@ class TermsDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleLabel.text = viewModel.detailState?.title
+        titleLabel.text = viewModel.detailState.title
         loadWebView()
     }
     
@@ -75,14 +75,10 @@ class TermsDetailViewController: UIViewController {
         agreeButton.publisher(for: .touchUpInside)
             .eraseToAnyPublisher()
             .sink { [weak self] _ in
-                self?.viewModel.handleDetail.send()
+                self?.viewModel.input.handleDetail.send()
                 self?.dismiss(animated: true)
             }
             .store(in: &cancellable)
-    }
-    
-    func agreeButtonPublisher() -> AnyPublisher<Void, Never> {
-        agreeButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
     
     private func configureTitleLabel() {
@@ -131,8 +127,8 @@ class TermsDetailViewController: UIViewController {
     
     private func loadWebView() {
         //웹 링크 띄우기
-        guard let link = viewModel.detailState?.link,
-              let url = URL(string: link) else {
+        let link = viewModel.detailState.link
+        guard let url = URL(string: link) else {
             return
         }
         let request = URLRequest(url: url)

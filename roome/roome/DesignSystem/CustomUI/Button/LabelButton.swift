@@ -28,7 +28,6 @@ class LabelButton: UIView {
     private let detailButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.image = UIImage(systemName: "chevron.right")?.resize(newWidth: 12).changeImageColor(.systemGray4)
-        configuration.imagePadding = 12
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 20)
         
         let button = UIButton(configuration: configuration)
