@@ -152,6 +152,7 @@
 		9293DC9C2C29D7DB00545B57 /* SettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC9B2C29D7DB00545B57 /* SettingCollectionViewCell.swift */; };
 		9293DC9E2C29F82C00545B57 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC9D2C29F82C00545B57 /* FooterView.swift */; };
 		9293DCA02C2A052A00545B57 /* UpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC9F2C2A052A00545B57 /* UpdateError.swift */; };
+		9293DCA42C2AC1B900545B57 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCA32C2AC1B900545B57 /* EditProfileViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -301,6 +302,7 @@
 		9293DC9B2C29D7DB00545B57 /* SettingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCollectionViewCell.swift; sourceTree = "<group>"; };
 		9293DC9D2C29F82C00545B57 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		9293DC9F2C2A052A00545B57 /* UpdateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateError.swift; sourceTree = "<group>"; };
+		9293DCA32C2AC1B900545B57 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -886,6 +888,7 @@
 				9293DC792C216CC000545B57 /* MyProfileViewController.swift */,
 				9293DC8F2C24F42C00545B57 /* MyProfileCardViewController.swift */,
 				9293DC842C230B0900545B57 /* MyProfileViewModel.swift */,
+				9293DCA32C2AC1B900545B57 /* EditProfileViewController.swift */,
 			);
 			path = MyProfile;
 			sourceTree = "<group>";
@@ -1062,6 +1065,7 @@
 				9293DC9E2C29F82C00545B57 /* FooterView.swift in Sources */,
 				9271F80D2C08A3FA00586AFD /* ActivityRepositoryType.swift in Sources */,
 				9271F7F52C089CA400586AFD /* ThemeSelectRepositoryType.swift in Sources */,
+				9293DCA42C2AC1B900545B57 /* EditProfileViewController.swift in Sources */,
 				9284747B2C0CE6BE002C3B4C /* ProfileCardViewController.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
 				921695882BFE0958006DC44A /* NextButton.swift in Sources */,
