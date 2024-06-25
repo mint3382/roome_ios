@@ -72,6 +72,11 @@ class UserCell: UICollectionViewCell {
         userButton.setNeedsLayout()
     }
     
+    func userButtonPublisher() -> AnyPublisher<Void, Never> {
+        Publishers.Merge(userButton.tappedMainButtonPublisher(), userButton.tappedDetailButtonPublisher())
+            .eraseToAnyPublisher()
+    }
+    
     func cardButtonPublisher() -> AnyPublisher<Void, Never> {
         cardButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
