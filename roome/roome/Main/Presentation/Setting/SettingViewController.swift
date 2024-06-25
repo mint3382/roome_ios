@@ -15,6 +15,7 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
     private var dataSource: UICollectionViewDiffableDataSource<SettingSection, SettingItem>?
     private lazy var withdrawalPopUp = PopUpView(frame: window!.bounds, title: "정말로 탈퇴하시겠어요?", description: "지금까지 작성된 모든 정보가 삭제되고,\n복구할 수 없어요",whiteButtonTitle: "취소", colorButtonTitle: "탈퇴")
     private lazy var logoutPopUp = PopUpView(frame: window!.bounds, title: "로그아웃", description: "정말 로그아웃하시겠어요?",whiteButtonTitle: "취소", colorButtonTitle: "로그아웃")
+    private lazy var errorPopUp = PopUpView(frame: window!.bounds, title: "에러 발생", description: "다시 시도해주세요", colorButtonTitle: "확인")
     
     private var viewModel: SettingViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -140,6 +141,25 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(next, animated: true)
             }
             .store(in: &cancellables)
+        
+        viewModel.output.handleUpdate
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("app update finished")
+                case .failure(_):
+                    self.window?.addSubview(self.errorPopUp)
+                }
+            } receiveValue: { _ in
+                print("업데이트 성공!")
+            }
+            .store(in: &cancellables)
+
+        errorPopUp.publisherColorButton()
+            .sink { [weak self] in
+                self?.errorPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
     }
     
     private func configureTitleLabel() {
@@ -244,7 +264,15 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? SettingCollectionViewCell
         
-        viewModel.input.selectCell.send(cell?.state)
+        let section = SettingSection(rawValue: indexPath.section)
+        
+        if section == .version {
+            if cell?.compareVersion() != true {
+                viewModel.input.selectCell.send(cell?.state)
+            }
+        } else {
+            viewModel.input.selectCell.send(cell?.state)
+        }
     }
 }
 

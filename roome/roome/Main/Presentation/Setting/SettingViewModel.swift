@@ -24,10 +24,19 @@ class SettingViewModel: NSObject {
         let handleLogout = PassthroughSubject<Void, Error>()
         let handleWithdrawal = PassthroughSubject<Void, Error>()
         let handleSelectError = PassthroughSubject<Void, Never>()
+        let handleUpdate = PassthroughSubject<Void, Error>()
     }
     
     let input: Input
     let output: Output
+    var version: String? {
+        guard let dictionary = Bundle.main.infoDictionary,
+              let version = dictionary["CFBundleShortVersionString"] as? String else {
+            return nil
+        }
+        
+        return version
+    }
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -42,7 +51,7 @@ class SettingViewModel: NSObject {
     let loginUseCase: LoginUseCase?
     var termsState: TermsDetailStates?
     
-    func settingBind() {
+    private func settingBind() {
         input.selectCell
             .sink { [weak self] state in
                 switch state {
@@ -53,7 +62,7 @@ class SettingViewModel: NSObject {
                     self?.termsState = .personal
                     self?.output.handleTermsDetail.send()
                 case .version:
-                    print("version")
+                    self?.updateVersion()
                 case .logout:
                     self?.output.handleLogoutButton.send()
                 case .withdrawal:
@@ -85,7 +94,24 @@ class SettingViewModel: NSObject {
             .store(in: &cancellables)
     }
     
-    func handleAppleLogout() {
+    private func updateVersion() {
+        guard let url = URL(string: "itms-apps://itunes.apple.com/app/apple-store/6503616766") else {
+            print("invalid app store url")
+            output.handleUpdate.send(completion: .failure(UpdateError.invalidURL))
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            output.handleUpdate.send()
+        } else {
+            print("fail open app store")
+            output.handleUpdate.send(completion: .failure(UpdateError.failedOpenAppStore))
+        }
+        
+    }
+    
+    private func handleAppleLogout() {
         Task {
             do {
                 try await self.loginUseCase?.logoutWithAPI()
@@ -101,7 +127,7 @@ class SettingViewModel: NSObject {
         }
     }
     
-    func handleKakaoLogout() {
+    private func handleKakaoLogout() {
         UserApi.shared.logout { (error) in
             if let error {
                 print(error)
@@ -123,7 +149,7 @@ class SettingViewModel: NSObject {
         }
     }
     
-    func handleAppleSignOut() {
+    private func handleAppleSignOut() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -133,7 +159,7 @@ class SettingViewModel: NSObject {
         authorizationController.performRequests()
     }
     
-    func handleKakaoSignOut() {
+    private func handleKakaoSignOut() {
         UserApi.shared.unlink { [self] error in
             if let error {
                 print(error)

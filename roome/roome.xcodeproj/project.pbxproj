@@ -150,6 +150,8 @@
 		9293DC982C280F2C00545B57 /* SettingWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC972C280F2C00545B57 /* SettingWebViewController.swift */; };
 		9293DC9A2C28170300545B57 /* SettingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC992C28170300545B57 /* SettingDTO.swift */; };
 		9293DC9C2C29D7DB00545B57 /* SettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC9B2C29D7DB00545B57 /* SettingCollectionViewCell.swift */; };
+		9293DC9E2C29F82C00545B57 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC9D2C29F82C00545B57 /* FooterView.swift */; };
+		9293DCA02C2A052A00545B57 /* UpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DC9F2C2A052A00545B57 /* UpdateError.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -297,6 +299,8 @@
 		9293DC972C280F2C00545B57 /* SettingWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWebViewController.swift; sourceTree = "<group>"; };
 		9293DC992C28170300545B57 /* SettingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDTO.swift; sourceTree = "<group>"; };
 		9293DC9B2C29D7DB00545B57 /* SettingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCollectionViewCell.swift; sourceTree = "<group>"; };
+		9293DC9D2C29F82C00545B57 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		9293DC9F2C2A052A00545B57 /* UpdateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateError.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -362,6 +366,7 @@
 				921695662BFC68A7006DC44A /* TypeError.swift */,
 				921695002BF220A6006DC44A /* NetworkError.swift */,
 				9216956F2BFCA5E2006DC44A /* ErrorDTO.swift */,
+				9293DC9F2C2A052A00545B57 /* UpdateError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -860,6 +865,7 @@
 			children = (
 				9293DC822C22F3F400545B57 /* GradientView.swift */,
 				9293DC7B2C216E8900545B57 /* Cell */,
+				9293DC9D2C29F82C00545B57 /* FooterView.swift */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -1053,6 +1059,7 @@
 				9271F8172C08A58000586AFD /* DislikeRepository.swift in Sources */,
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
 				921695302BF71659006DC44A /* Font.swift in Sources */,
+				9293DC9E2C29F82C00545B57 /* FooterView.swift in Sources */,
 				9271F80D2C08A3FA00586AFD /* ActivityRepositoryType.swift in Sources */,
 				9271F7F52C089CA400586AFD /* ThemeSelectRepositoryType.swift in Sources */,
 				9284747B2C0CE6BE002C3B4C /* ProfileCardViewController.swift in Sources */,
@@ -1104,6 +1111,7 @@
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
 				9271F8112C08A45A00586AFD /* ActivityRepository.swift in Sources */,
 				9271F7FB2C089E7C00586AFD /* HorrorThemeRepositoryType.swift in Sources */,
+				9293DCA02C2A052A00545B57 /* UpdateError.swift in Sources */,
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
 				9293DC9A2C28170300545B57 /* SettingDTO.swift in Sources */,
 				9271F7E72C0865EB00586AFD /* MBTIDTO.swift in Sources */,
@@ -1302,7 +1310,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.traum.marchen.roome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1330,7 +1338,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.traum.marchen.roome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -9,6 +9,7 @@ import Foundation
 
 class APIProvider {
     func fetchData(from request: URLRequest) async throws -> Data {
+        //TODO: - 인터넷 연결되어 있는지 체크
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {

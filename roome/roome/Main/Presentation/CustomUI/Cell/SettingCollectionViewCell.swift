@@ -22,7 +22,11 @@ class SettingCollectionViewCell: UICollectionViewListCell {
         didSet {
             switch state {
             case .version:
-                accessories = [.label(text: "최신 버전", options: .init(reservedLayoutWidth: .custom(100)))]
+                if compareVersion() {
+                    accessories = [.label(text: "최신 버전", options: .init(reservedLayoutWidth: .custom(100), font: .regularBody1))]
+                } else {
+                    accessories = [.label(text: "업데이트 하기", options: .init(reservedLayoutWidth: .custom(60), font: .regularBody1)), .disclosureIndicator(options: .init(reservedLayoutWidth: .custom(50)))]
+                }
             default:
                 accessories = [.disclosureIndicator(options: .init(reservedLayoutWidth: .custom(50)))]
                 
@@ -33,7 +37,6 @@ class SettingCollectionViewCell: UICollectionViewListCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureContentView()
         configureLabel()
     }
     
@@ -47,15 +50,34 @@ class SettingCollectionViewCell: UICollectionViewListCell {
         self.state = state
     }
     
-    private func configureContentView() {
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+    func compareVersion() -> Bool {
+        let previousVersion = viewModel?.version
+        let latestVersion = latestVersion()
         
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: self.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24)
-        ])
+        guard let latestVersion else {
+            return true
+        }
+
+        if previousVersion == latestVersion {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func latestVersion() -> String? {
+        let appleID = "6503616766"
+        guard let url = URL(string: "http://itunes.apple.com/lookup?id=\(appleID)"),
+              let data = try? Data(contentsOf: url),
+              let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
+              let resultCount = json["resultCount"] as? Int,
+              resultCount != 0,
+              let results = json["results"] as? [[String: Any]],
+              let appStoreVersion = results[0]["version"] as? String else {
+            return nil
+        }
+        
+        return appStoreVersion
     }
     
     private func configureLabel() {
