@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 class EditProfileViewController: UIViewController {
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    private lazy var photoPopUp = DownPopUpView(frame: window!.bounds)
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "프로필 수정"
@@ -71,7 +74,6 @@ class EditProfileViewController: UIViewController {
         textField.clipsToBounds = true
         textField.clearButtonMode = .whileEditing
         textField.borderStyle = .none
-        textField.text = UserContainer.shared.user?.data.nickname
         textField.backgroundColor = .systemGray6
         textField.addLeftPadding()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -88,18 +90,107 @@ class EditProfileViewController: UIViewController {
         return label
     }()
     
-    private let nextButton = NextButton()
+    private let saveButton = NextButton(title: "저장하기", backgroundColor: .roomeMain, tintColor: .white)
     private var nextButtonWidthConstraint: NSLayoutConstraint?
+    private let viewModel: EditProfileViewModel
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: EditProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .systemBackground
+        
         configureTitleLabel()
         configureCloseButton()
         configureImageView()
         configureNickName()
-        configureNextButton()
+        configureSaveButton()
         registerKeyboardListener()
+        bind()
+    }
+    
+    private func bind() {
+        nicknameTextField.publisher
+            .receive(on: RunLoop.main)
+            .assign(to: &viewModel.$textInput)
+        
+        closeButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.dismiss(animated: true)
+            }
+            .store(in: &cancellables)
+        
+        saveButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tappedSaveButton.send()
+            }
+            .store(in: &cancellables)
+        
+        Publishers.Merge(profileImageButton.publisher(for: .touchUpInside), cameraButton.publisher(for: .touchUpInside))
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
+                self.window?.addSubview(self.photoPopUp)
+            }
+            .store(in: &cancellables)
+        
+        photoPopUp.takePhotoButtonPublisher()
+            .sink { [weak self] in
+                self?.viewModel.input.tappedTakeAPhotoButton.send()
+            }
+            .store(in: &cancellables)
+        
+        photoPopUp.albumButtonPublisher()
+            .sink { [weak self] in
+                self?.viewModel.input.tappedGetPhotoFromAlbumButton.send()
+            }
+            .store(in: &cancellables)
+        
+        photoPopUp.baseImageButtonPublisher()
+            .sink { [weak self] in
+                self?.viewModel.input.tappedBaseImageButton.send()
+            }
+            .store(in: &cancellables)
+        
+        photoPopUp.cancelButtonPublisher()
+            .sink { [weak self] in
+                self?.photoPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleSaveButton
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    self.handleError(error)
+                case .finished:
+                    print("finished")
+                }
+            } receiveValue: { [weak self] in
+                self?.dismiss(animated: true)
+            }
+            .store(in: &cancellables)
+
+    }
+    
+    private func handleError(_ error: NicknameError) {
+        switch error {
+        case .form(let data):
+            formLabel.text = data.message
+            formLabel.textColor = .roomeMain
+            nicknameLabel.textColor = .roomeMain
+        case .network:
+            print("네트워크 에러")
+        }
     }
     
     private func configureTitleLabel() {
@@ -144,6 +235,9 @@ class EditProfileViewController: UIViewController {
     }
     
     private func configureNickName() {
+        nicknameTextField.delegate = self
+        nicknameTextField.text = UserContainer.shared.user?.data.nickname
+        
         view.addSubview(nicknameLabel)
         view.addSubview(nicknameTextField)
         view.addSubview(formLabel)
@@ -165,21 +259,34 @@ class EditProfileViewController: UIViewController {
         ])
     }
     
-    private func configureNextButton() {
-        view.addSubview(nextButton)
+    private func configureSaveButton() {
+        view.addSubview(saveButton)
         
-        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
+        nextButtonWidthConstraint = saveButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         nextButtonWidthConstraint?.isActive = true
         
         NSLayoutConstraint.activate([
-            nextButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
-            nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            saveButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
+            saveButton.heightAnchor.constraint(equalToConstant: 50),
+            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }
 
 extension EditProfileViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if viewModel.canFillTextField() {
+            formLabel.textColor = .label
+            nicknameLabel.textColor = .label
+            formLabel.text = "2-8자리 한글, 영문, 숫자"
+            return true
+        } else {
+            formLabel.textColor = .roomeMain
+            nicknameLabel.textColor = .roomeMain
+            return false
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -204,24 +311,24 @@ extension EditProfileViewController {
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
-        nextButton.layer.cornerRadius = 0
+        saveButton.layer.cornerRadius = 0
         
         nextButtonWidthConstraint?.isActive = false
-        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width)
+        nextButtonWidthConstraint = saveButton.widthAnchor.constraint(equalToConstant: view.frame.width)
         nextButtonWidthConstraint?.isActive = true
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        nextButton.layer.cornerRadius = 10
+        saveButton.layer.cornerRadius = 10
         
         nextButtonWidthConstraint?.isActive = false
-        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
+        nextButtonWidthConstraint = saveButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         nextButtonWidthConstraint?.isActive = true
     }
 }
 
-#Preview {
-    let vc = EditProfileViewController()
-    
-    return vc
-}
+//#Preview {
+//    let vc = EditProfileViewController(viewModel: EditProfileViewModel(usecase: NicknameUseCase(nicknameRepository: NicknameRepository())))
+//    
+//    return vc
+//}

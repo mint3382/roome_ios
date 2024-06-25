@@ -76,6 +76,15 @@ extension MyProfileViewController: UICollectionViewDataSource {
         }
         
         if indexPath.section == 0 {
+            userCell.userButtonPublisher()
+                .sink { [weak self] in
+                    let view = DIContainer.shared.resolve(EditProfileViewController.self)
+                    view.modalPresentationStyle = .fullScreen
+                    
+                    self?.present(view, animated: true)
+                }
+                .store(in: &cancellables)
+            
             userCell.cardButtonPublisher()
                 .sink { [weak self] _ in
                     print("card Button Tapped")
