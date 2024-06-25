@@ -15,7 +15,7 @@ struct ProfileDTO: Codable {
     let data: Profile
     
     struct Profile: Codable {
-        let id: Int
+        let nickname: String
         let state: String
         let count: String
         let preferredGenres: [Detail]

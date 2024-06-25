@@ -57,12 +57,14 @@ class WelcomeViewModel {
             do {
                 try await UserContainer.shared.updateUserProfile()
                 try await UserContainer.shared.updateDefaultProfile()
+                UserContainer.shared.updateUserImage(url: URL(string: UserContainer.shared.user?.data.imageUrl ?? ""))
                 if UserContainer.shared.profile == nil || UserContainer.shared.profile?.data.state == StateDTO.roomCountRanges.rawValue {
                     output.willBeContinue.send(false)
                 } else {
                     output.willBeContinue.send(true)
                 }
             } catch {
+                print(error)
                 output.willBeContinue.send(completion: .failure(error))
             }
         }

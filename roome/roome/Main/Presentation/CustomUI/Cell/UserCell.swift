@@ -11,7 +11,7 @@ import Combine
 class UserCell: UICollectionViewCell {
     private let userButton: LabelButton = {
         let button = LabelButton(frame: .zero, isDetailButton: true, font: .boldTitle3)
-        let image = UIImage(systemName: "person.circle.fill")?.changeImageColor(.white).resize(newWidth: 50)
+        let image = UserContainer.shared.userImage.resize(newWidth: 50)
         let detailImage = UIImage(systemName: "chevron.right")?.changeImageColor(.white).resize(newWidth: 12)
         let name = UserContainer.shared.user?.data.nickname ?? "닉네임"
         button.updateMainButton(title: name, image: image, color: .white, padding: 16)

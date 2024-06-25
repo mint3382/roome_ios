@@ -29,7 +29,7 @@ class EditProfileViewController: UIViewController {
     
     let profileImageButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
-        configuration.image = UIImage(resource: .userProfile).resize(newWidth: 80)
+        configuration.image = UserContainer.shared.userImage
         configuration.cornerStyle = .capsule
         
         let button = UIButton(configuration: configuration)
@@ -54,17 +54,6 @@ class EditProfileViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
-    }()
-    
-    let cameraImageView: UIImageView = {
-        let view = UIImageView(image: UIImage(resource: .camera).resize(newWidth: 16))
-        view.backgroundColor = .white
-        view.contentMode = .center
-        view.layer.cornerRadius = 15
-        view.layer.masksToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
     }()
     
     private let nicknameLabel: UILabel = {
