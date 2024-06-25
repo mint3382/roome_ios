@@ -15,6 +15,11 @@ class UserContainer {
     
     private init() {}
     
+    func resetUser() {
+        user = nil
+        profile = nil
+    }
+    
     func updateUserInformation() async throws {
         let userURL = URLBuilder(host: APIConstants.roomeHost,
                                  path: APIConstants.User.users.name,

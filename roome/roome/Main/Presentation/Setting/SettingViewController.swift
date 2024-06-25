@@ -102,6 +102,7 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
                     print("logout finish")
                 case .failure(let error):
                     print("logout fail: \(error)")
+                    UserContainer.shared.resetUser()
                     DIContainer.shared.removeAll()
                     DIManager.shared.registerAll()
                     let next = DIContainer.shared.resolve(LoginViewController.self)
@@ -110,6 +111,7 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
                 }
             } receiveValue: { [weak self] _ in
                 print("logout Success✨")
+                UserContainer.shared.resetUser()
                 DIContainer.shared.removeAll()
                 DIManager.shared.registerAll()
                 let next = DIContainer.shared.resolve(LoginViewController.self)
@@ -126,6 +128,7 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
                     print("withdrawal finish")
                 case .failure(let error):
                     print("withdrawal fail: \(error)")
+                    UserContainer.shared.resetUser()
                     DIContainer.shared.removeAll()
                     DIManager.shared.registerAll()
                     let next = DIContainer.shared.resolve(LoginViewController.self)
@@ -134,6 +137,7 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
                 }
             } receiveValue: { [weak self] _ in
                 print("✨withdrawal Success")
+                UserContainer.shared.resetUser()
                 DIContainer.shared.removeAll()
                 DIManager.shared.registerAll()
                 let next = DIContainer.shared.resolve(LoginViewController.self)
