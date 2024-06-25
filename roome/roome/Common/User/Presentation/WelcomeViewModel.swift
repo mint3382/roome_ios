@@ -10,80 +10,65 @@ import Combine
 
 class WelcomeViewModel {
     struct Input {
-        let nextButton: AnyPublisher<Void, Never>
+        let nextButton = PassthroughSubject<Void, Never>()
+        let newButton = PassthroughSubject<Void, Never>()
+        let stillButton = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-        let handleNext: AnyPublisher<Bool, Error>
-        let nextState: AnyPublisher<StateDTO, Never>
-        let tapNext: AnyPublisher<Void, Never>
+        let willBeContinue = PassthroughSubject<Bool, Error>()
+        let handleNext = PassthroughSubject<StateDTO, Never>()
     }
     
-    struct PopUpInput {
-        let newButton: AnyPublisher<Void, Never>
-        let stillButton: AnyPublisher<Void, Never>
+    let input: Input
+    let output: Output
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        self.input = Input()
+        self.output = Output()
+        settingBind()
     }
     
-    struct PopUpOutput {
-        let handleNext: AnyPublisher<Void, Never>
-    }
-    
-    private var goToNext = PassthroughSubject<Bool, Error>()
-    private var profileState = PassthroughSubject<StateDTO, Never>()
-    
-    func transforms(_ input: Input) -> Output {
-        let tapNext = input.nextButton
-            .compactMap { [weak self] _ in
+    private func settingBind() {
+        input.nextButton
+            .sink { [weak self] in
                 self?.handlePage()
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
         
-        let next = goToNext
-            .eraseToAnyPublisher()
-        
-        let state = profileState
-            .eraseToAnyPublisher()
-        
-        return Output(handleNext: next, nextState: state, tapNext: tapNext)
-    }
-    
-    func popUpTransforms(_ input: PopUpInput) -> PopUpOutput {
-        let new = input.newButton
-            .map { [weak self] _ in
+        input.newButton
+            .sink { [weak self] in
                 self?.deleteProfile()
+                self?.output.handleNext.send(.roomCountRanges)
             }
-            .compactMap { [weak self] _ in
-                self?.profileState.send(.roomCountRanges)
-            }.eraseToAnyPublisher()
+            .store(in: &cancellables)
         
-        let still = input.stillButton
-            .compactMap { [weak self] _ in
-                self?.profileState.send(StateDTO(rawValue: UserContainer.shared.profile!.data.state)!)
-            }.eraseToAnyPublisher()
-        
-        let next = Publishers.Merge(new, still)
-            .eraseToAnyPublisher()
-        
-        return PopUpOutput(handleNext: next)
+        input.stillButton
+            .sink { [weak self] in
+                self?.output.handleNext.send(StateDTO(rawValue: UserContainer.shared.profile!.data.state)!)
+            }
+            .store(in: &cancellables)
     }
     
-    func handlePage() {
+    private func handlePage() {
         Task {
             do {
                 try await UserContainer.shared.updateUserProfile()
                 try await UserContainer.shared.updateDefaultProfile()
                 if UserContainer.shared.profile == nil || UserContainer.shared.profile?.data.state == StateDTO.roomCountRanges.rawValue {
-                    goToNext.send(false)
+                    output.willBeContinue.send(false)
                 } else {
-                    goToNext.send(true)
+                    output.willBeContinue.send(true)
                 }
             } catch {
-                goToNext.send(completion: .failure(error))
+                output.willBeContinue.send(completion: .failure(error))
             }
         }
     }
     
-    func deleteProfile() {
+    private func deleteProfile() {
         Task {
             do {
                 try await UserContainer.shared.deleteUserProfile()

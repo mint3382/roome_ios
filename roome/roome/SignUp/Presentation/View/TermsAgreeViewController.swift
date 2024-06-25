@@ -9,6 +9,8 @@ import UIKit
 import Combine
 
 class TermsAgreeViewController: UIViewController {
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    private lazy var errorPopUp = PopUpView(frame: window!.bounds, title: "에러 발생", description: "로그인 페이지로 돌아갑니다.", colorButtonTitle: "확인")
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -37,13 +39,14 @@ class TermsAgreeViewController: UIViewController {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
         configuration.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.lightGray).resize(newWidth: 24)
-        configuration.imagePadding = 8
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 15, bottom: 10, trailing: 20)
-        configuration.title = "모두 동의(선택 정보 포함)"
+        configuration.imagePadding = 12
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 12, bottom: 5, trailing: 0)
+        configuration.title = "모두 동의"
         
         let button = UIButton(configuration: configuration)
         button.titleLabel?.font = .regularBody2
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentHorizontalAlignment = .leading
         
         return button
     }()
@@ -75,15 +78,6 @@ class TermsAgreeViewController: UIViewController {
         return button
     }()
     
-    private let advertiseAgreeButton: LabelButton = {
-        let image = UIImage(systemName: "checkmark")?.changeImageColor( .lightGray).resize(newWidth: 12)
-        
-        let button = LabelButton(frame: .zero, isDetailButton: true)
-        button.updateMainButton(title: "광고 및 마케팅 수신에 동의 (선택)", image: image)
-        
-        return button
-    }()
-    
     private let nextButton = NextButton()
     private let backButton = BackButton()
     
@@ -105,21 +99,60 @@ class TermsAgreeViewController: UIViewController {
         configureStackView()
         configureNextButton()
         bind()
-        bindDetailView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        allAgreeButton.titleLabel?.font = .regularBody2
+        ageAgreeButton.setNeedsLayout()
+        serviceAgreeButton.setNeedsLayout()
+        personalInformationAgreeButton.setNeedsLayout()
     }
     
     func bind() {
-        let all = allAgreeButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let age = ageAgreeButton.tappedMainButtonPublisher()
-        let service = serviceAgreeButton.tappedMainButtonPublisher()
-        let personal = personalInformationAgreeButton.tappedMainButtonPublisher()
-        let advertise = advertiseAgreeButton.tappedMainButtonPublisher()
-        let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        allAgreeButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.allAgree.send()
+            }
+            .store(in: &cancellable)
         
-        let output = viewModel.transform(TermsAgreeViewModel.TermsAgreeInput(allAgree: all,ageAgree: age, service: service, personal: personal, advertise: advertise, next: next, back: back))
+        ageAgreeButton.tappedMainButtonPublisher()
+            .sink { [weak self] in
+                self?.viewModel.input.ageAgree.send()
+            }
+            .store(in: &cancellable)
         
-        output.states
+        serviceAgreeButton.tappedMainButtonPublisher()
+            .sink { [weak self] in
+                self?.viewModel.input.service.send(false)
+            }
+            .store(in: &cancellable)
+        
+        personalInformationAgreeButton.tappedMainButtonPublisher()
+            .sink { [weak self] in
+                self?.viewModel.input.personal.send(false)
+            }
+            .store(in: &cancellable)
+        
+        nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    self.window?.addSubview(self.errorPopUp)
+                }
+            } receiveValue: { [weak self] in
+                self?.viewModel.input.next.send()
+            }
+            .store(in: &cancellable)
+
+        backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &cancellable)
+        
+        viewModel.output.states
             .sink { [weak self] states in
                 if states.ageAgree {
                     self?.ageAgreeButton.updateImageColor(.roomeMain)
@@ -138,15 +171,9 @@ class TermsAgreeViewController: UIViewController {
                 } else {
                     self?.personalInformationAgreeButton.updateImageColor(.lightGray)
                 }
-                
-                if states.advertise {
-                    self?.advertiseAgreeButton.updateImageColor(.roomeMain)
-                } else {
-                    self?.advertiseAgreeButton.updateImageColor(.lightGray)
-                }
             }.store(in: &cancellable)
         
-        output.isNextButtonOn
+        viewModel.output.isNextButtonOn
             .sink { [weak self] isEnable in
                 if isEnable {
                     self?.nextButton.isEnabled = true
@@ -155,7 +182,7 @@ class TermsAgreeViewController: UIViewController {
                 }
             }.store(in: &cancellable)
         
-        output.isAllAgreeOn
+        viewModel.output.isAllAgreeOn
             .sink { [weak self] isSelected in
                 if isSelected {
                     self?.allAgreeButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.roomeMain).resize(newWidth: 24)
@@ -164,52 +191,41 @@ class TermsAgreeViewController: UIViewController {
                 }
             }.store(in: &cancellable)
         
-        output.goToNext
-            .sink { _ in
-                let next = DIContainer.shared.resolve(LoginViewController.self)
-                Task { @MainActor in
-                    (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                        .changeRootViewController(next, animated: true)
+        viewModel.output.goToNext
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("terms finished")
+                case .failure(_):
+                    self.window?.addSubview(self.errorPopUp)
                 }
             } receiveValue: { [weak self] _ in
-                Task { @MainActor in
-                    let nextPage = DIContainer.shared.resolve(NicknameViewController.self)
-                    self?.navigationController?.pushViewController(nextPage, animated: true)
-                }
+                let nextPage = DIContainer.shared.resolve(NicknameViewController.self)
+                self?.navigationController?.pushViewController(nextPage, animated: true)
             }
             .store(in: &cancellable)
-
-        output.handleBackButton
+        
+        errorPopUp.publisherColorButton()
             .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
+                let next = DIContainer.shared.resolve(LoginViewController.self)
+                self?.window?.rootViewController?.dismiss(animated: false)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .changeRootViewController(next, animated: true)
             }
             .store(in: &cancellable)
-    }
-    
-    func bindDetailView() {
-        let service = serviceAgreeButton.tappedDetailButtonPublisher()
-        let personal = personalInformationAgreeButton.tappedDetailButtonPublisher()
-        let advertise = advertiseAgreeButton.tappedDetailButtonPublisher()
         
-        let output = viewModel.transformDetail(TermsAgreeViewModel.DetailInput(service: service, personal: personal, advertise: advertise))
-        
-        output.handleService
+        serviceAgreeButton.tappedDetailButtonPublisher()
             .sink { [weak self] _ in
+                self?.viewModel.detailState = .service
                 let detailView = DIContainer.shared.resolve(TermsDetailViewController.self)
                 detailView.modalPresentationStyle = .fullScreen
                 self?.view.window?.rootViewController?.present(detailView, animated: true)
             }.store(in: &cancellable)
         
-        output.handlePersonal
+        personalInformationAgreeButton.tappedDetailButtonPublisher()
             .sink { [weak self] _ in
-                let detailView = DIContainer.shared.resolve(TermsDetailViewController.self)
-                detailView.modalPresentationStyle = .fullScreen
-                self?.view.window?.rootViewController?.present(detailView, animated: true)
-            }.store(in: &cancellable)
-        
-        output.handleAdvertise
-            .sink { [weak self] _ in
+                self?.viewModel.detailState = .personal
                 let detailView = DIContainer.shared.resolve(TermsDetailViewController.self)
                 detailView.modalPresentationStyle = .fullScreen
                 self?.view.window?.rootViewController?.present(detailView, animated: true)
@@ -225,7 +241,6 @@ class TermsAgreeViewController: UIViewController {
         stackView.addArrangedSubview(ageAgreeButton)
         stackView.addArrangedSubview(serviceAgreeButton)
         stackView.addArrangedSubview(personalInformationAgreeButton)
-        stackView.addArrangedSubview(advertiseAgreeButton)
         
         
         NSLayoutConstraint.activate([
@@ -236,15 +251,17 @@ class TermsAgreeViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             stackView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 24),
             
+            allAgreeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            allAgreeButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            
+            ageAgreeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            ageAgreeButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            
             serviceAgreeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             serviceAgreeButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             
             personalInformationAgreeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             personalInformationAgreeButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            
-            advertiseAgreeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            advertiseAgreeButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            
         ])
     }
 

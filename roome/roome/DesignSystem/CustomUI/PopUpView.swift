@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class PopUpView: UIView {
-    let boxView: UIView = {
+    private let boxView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +19,7 @@ class PopUpView: UIView {
         return view
     }()
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.isUserInteractionEnabled = true
@@ -31,7 +31,7 @@ class PopUpView: UIView {
         return stack
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "제작 중인 프로필이 있어요"
         label.textColor = .black
@@ -40,16 +40,18 @@ class PopUpView: UIView {
         return label
     }()
     
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "이어서 만드시겠어요?"
         label.textColor = .black
+        label.textAlignment = .center
         label.font = .regularBody2
+        label.numberOfLines = 0
         
         return label
     }()
     
-    let buttonStackView: UIStackView = {
+    private let buttonStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.isUserInteractionEnabled = true
@@ -60,7 +62,7 @@ class PopUpView: UIView {
         return stack
     }()
     
-    let whiteButton: UIButton = {
+    private let whiteButton: UIButton = {
         var configuration = UIButton.Configuration.borderedTinted()
         configuration.baseBackgroundColor = .white
         configuration.baseForegroundColor = .black
@@ -74,16 +76,13 @@ class PopUpView: UIView {
         return button
     }()
     
-    let colorButton: UIButton = {
-        var configuration = UIButton.Configuration.borderedTinted()
+    private let colorButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.cornerStyle = .medium
         configuration.baseBackgroundColor = .roomeMain
         configuration.baseForegroundColor = .white
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 30, bottom: 30, trailing: 30)
         let button = UIButton(configuration: configuration)
-        button.backgroundColor = .roomeMain
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.roomeMain.cgColor
         
         return button
     }()
@@ -99,36 +98,45 @@ class PopUpView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(frame: CGRect, title: String, description: String, whiteButtonTitle: String? = nil, colorButtonTitle: String, isWhiteButton: Bool) {
+    convenience init(frame: CGRect, title: String, description: String, whiteButtonTitle: String? = nil, colorButtonTitle: String) {
         self.init(frame: frame)
         titleLabel.text = title
         descriptionLabel.text = description
         var titleContainer = AttributeContainer()
-        titleContainer.font = .boldLabel
+        titleContainer.font = .boldTitle3
         
-        if isWhiteButton {
-            buttonStackView.addArrangedSubview(whiteButton)
-            buttonStackView.addArrangedSubview(colorButton)
-            whiteButton.configuration?.attributedTitle = AttributedString(whiteButtonTitle!, attributes: titleContainer)
+        if let whiteButtonTitle {
+            configureWhiteButton()
+            whiteButton.configuration?.attributedTitle = AttributedString(whiteButtonTitle, attributes: titleContainer)
             colorButton.configuration?.attributedTitle = AttributedString(colorButtonTitle, attributes: titleContainer)
         } else {
             buttonStackView.addArrangedSubview(colorButton)
             colorButton.configuration?.attributedTitle = AttributedString(colorButtonTitle, attributes: titleContainer)
-            bind()
         }
     }
     
-    private var cancellables = Set<AnyCancellable>()
-    
-    private func bind() {
-        colorButton.publisher(for: .touchUpInside)
-            .sink { [weak self] _ in
-                self?.removeFromSuperview()
-            }
-            .store(in: &cancellables)
+    func publisherColorButton() -> AnyPublisher<Void, Never> {
+        colorButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
     }
     
-    func configureStackView() {
+    func publisherWhiteButton() -> AnyPublisher<Void, Never> {
+        whiteButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+    }
+    
+    func updatePopUpView(title: String, description: String, whiteButtonTitle: String? = nil, colorButtonTitle: String) {
+        titleLabel.text = title
+        descriptionLabel.text = description
+        var titleContainer = AttributeContainer()
+        titleContainer.font = .boldTitle3
+        if let whiteButtonTitle {
+            whiteButton.configuration?.attributedTitle = AttributedString(whiteButtonTitle, attributes: titleContainer)
+            colorButton.configuration?.attributedTitle = AttributedString(colorButtonTitle, attributes: titleContainer)
+        } else {
+            colorButton.configuration?.attributedTitle = AttributedString(colorButtonTitle, attributes: titleContainer)
+        }
+    }
+    
+    private func configureStackView() {
         self.addSubview(boxView)
         boxView.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
@@ -146,10 +154,22 @@ class PopUpView: UIView {
         ])
     }
     
-    func configureButton() {
+    private func configureButton() {
         NSLayoutConstraint.activate([
             buttonStackView.heightAnchor.constraint(equalToConstant: 45),
-            buttonStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7)
+            buttonStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8)
+        ])
+    }
+    
+    private func configureWhiteButton() {
+        buttonStackView.addArrangedSubview(whiteButton)
+        buttonStackView.addArrangedSubview(colorButton)
+        
+        NSLayoutConstraint.activate([
+            whiteButton.heightAnchor.constraint(equalToConstant: 45),
+            whiteButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.38),
+            colorButton.heightAnchor.constraint(equalToConstant: 45),
+            colorButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.38)
         ])
     }
 }

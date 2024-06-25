@@ -1,15 +1,15 @@
 //
-//  TermsDetailViewController.swift
+//  SettingWebViewController.swift
 //  roome
 //
-//  Created by minsong kim on 6/17/24.
+//  Created by minsong kim on 6/23/24.
 //
 
+import Combine
 import UIKit
 import WebKit
-import Combine
 
-class TermsDetailViewController: UIViewController {
+class SettingWebViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .boldTitle3
@@ -36,11 +36,10 @@ class TermsDetailViewController: UIViewController {
         return view
     }()
     
-    let agreeButton = NextButton(title: "동의", backgroundColor: .roomeMain, tintColor: .white)
-    let viewModel: TermsAgreeViewModel
+    let viewModel: SettingViewModel
     var cancellable = Set<AnyCancellable>()
     
-    init(viewModel: TermsAgreeViewModel) {
+    init(viewModel: SettingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,28 +53,19 @@ class TermsDetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureTitleLabel()
         configureCloseButton()
-        configureNextButton()
         configureWebView()
         bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleLabel.text = viewModel.detailState.title
+        titleLabel.text = viewModel.termsState?.title
         loadWebView()
     }
     
     func bind() {
         closeButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
             .sink { [weak self] _ in
-                self?.dismiss(animated: true)
-            }
-            .store(in: &cancellable)
-        
-        agreeButton.publisher(for: .touchUpInside)
-            .eraseToAnyPublisher()
-            .sink { [weak self] _ in
-                self?.viewModel.input.handleDetail.send()
                 self?.dismiss(animated: true)
             }
             .store(in: &cancellable)
@@ -103,17 +93,6 @@ class TermsDetailViewController: UIViewController {
         ])
     }
     
-    private func configureNextButton() {
-        view.addSubview(agreeButton)
-        
-        NSLayoutConstraint.activate([
-            agreeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            agreeButton.heightAnchor.constraint(equalToConstant: 50),
-            agreeButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            agreeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-    }
-    
     private func configureWebView() {
         view.addSubview(webView)
         
@@ -121,14 +100,14 @@ class TermsDetailViewController: UIViewController {
             webView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             webView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            webView.bottomAnchor.constraint(equalTo: agreeButton.topAnchor, constant: -8)
+            webView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
     private func loadWebView() {
         //웹 링크 띄우기
-        let link = viewModel.detailState.link
-        guard let url = URL(string: link) else {
+        guard let link = viewModel.termsState?.link,
+              let url = URL(string: link) else {
             return
         }
         let request = URLRequest(url: url)
@@ -136,9 +115,3 @@ class TermsDetailViewController: UIViewController {
         webView.load(request)
     }
 }
-
-//#Preview {
-//    let vc = TermsDetailViewController(terms: .service)
-//    
-//    return vc
-//}

@@ -128,10 +128,8 @@ class DIManager {
         
         let profileCardViewModel = ProfileCardViewModel()
         let profileCardViewController = ProfileCardViewController(viewModel: profileCardViewModel)
-        let myProfileCardViewController = MyProfileCardViewController(viewModel: profileCardViewModel)
         
         DIContainer.shared.register(ProfileCardViewController.self, dependency: profileCardViewController)
-        DIContainer.shared.register(MyProfileCardViewController.self, dependency: myProfileCardViewController)
     }
     
     private func registerMainPageDependency() {
@@ -139,9 +137,16 @@ class DIManager {
         let myProfileViewController = MyProfileViewController(viewModel: myProfileViewModel)
         DIContainer.shared.register(MyProfileViewController.self, dependency: myProfileViewController)
         
-        let signOutViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
-        let settingViewController = SettingViewController(viewModel: signOutViewModel)
+        let profileCardViewModel = ProfileCardViewModel()
+        let myProfileCardViewController = MyProfileCardViewController(viewModel: profileCardViewModel)
+        DIContainer.shared.register(MyProfileCardViewController.self, dependency: myProfileCardViewController)
+        
+        let settingViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
+        let settingViewController = SettingViewController(viewModel: settingViewModel)
+        let settingWebViewController = SettingWebViewController(viewModel: settingViewModel)
         DIContainer.shared.register(SettingViewController.self, dependency: settingViewController)
+        DIContainer.shared.register(SettingWebViewController.self, dependency: settingWebViewController)
+        
         
         let tabBarController = TabBarController()
         DIContainer.shared.register(TabBarController.self, dependency: tabBarController)

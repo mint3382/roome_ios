@@ -29,4 +29,8 @@ class LoginUseCase {
     func signOutWithAPI(body json: [String: Any?]) async throws {
         try await loginRepository.requestSignOut(body: json)
     }
+    
+    func logoutWithAPI() async throws {
+        try await loginRepository.requestLogOut()
+    }
 }

@@ -8,19 +8,19 @@
 import Foundation
 
 class KeyChain {
-    enum keys: String {
-        case appleUserID = "appleUserID"
-        case isAppleLogin = "isAppleLogin"
-        case accessToken = "accessToken"
-        case refreshToken = "refreshToken"
-        case hasToken = "hasToken"
+    enum Key: String {
+        case appleUserID
+        case isAppleLogin
+        case accessToken
+        case refreshToken
+        case hasToken
     }
     
-    class func create(key: keys, data: String) {
+    class func create(key: Key, data: String) {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue,
-            kSecValueData: data.data(using: .utf8, allowLossyConversion: false) as Any
+            kSecValueData: data.data(using: .utf8) as Any
         ]
         
         let status = SecItemAdd(query, nil)
@@ -35,7 +35,7 @@ class KeyChain {
         }
     }
     
-    class func read(key: keys) -> String? {
+    class func read(key: Key) -> String? {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue,
@@ -47,7 +47,9 @@ class KeyChain {
         let status = SecItemCopyMatching(query, &dataTypeRef)
         
         if status == errSecSuccess {
-            let retrieveData = dataTypeRef as! Data
+            guard let retrieveData = dataTypeRef as? Data else {
+                return nil
+            }
             let value = String(data: retrieveData, encoding: String.Encoding.utf8)
             return value
         } else {
@@ -55,14 +57,14 @@ class KeyChain {
         }
     }
     
-    class func update(key: keys, data: String) {
+    class func update(key: Key, data: String) {
         let previousQuery: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue,
         ]
         
         let updateQuery: NSDictionary = [
-            kSecValueData: data.data(using: .utf8, allowLossyConversion: false) as Any
+            kSecValueData: data.data(using: .utf8) as Any
         ]
         
         let status = SecItemUpdate(previousQuery, updateQuery)
@@ -75,7 +77,7 @@ class KeyChain {
         }
     }
     
-    class func delete(key: keys) {
+    class func delete(key: Key) {
         let query: NSDictionary = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key.rawValue

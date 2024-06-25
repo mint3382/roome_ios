@@ -62,9 +62,15 @@ class SplashView: UIViewController {
     
     func goToMain() {
         var viewController: UIViewController
-        let userState = UserContainer.shared.user?.data.state
+        guard let userState = UserContainer.shared.user?.data.state else {
+            //UserState가 없을 때?
+            viewController = DIContainer.shared.resolve(LoginViewController.self)
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                .changeRootViewController(viewController, animated: true)
+            return
+        }
         
-        switch UserState(rawValue: userState!) {
+        switch UserState(rawValue: userState) {
         case .termsAgreement:
             viewController = DIContainer.shared.resolve(TermsAgreeViewController.self)
         case .nickname:

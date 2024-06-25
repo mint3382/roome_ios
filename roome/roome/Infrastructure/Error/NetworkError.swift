@@ -11,4 +11,5 @@ enum NetworkError: Error {
     case invalidStatus(Int)
     case failureCode(ErrorDTO)
     case noResponse
+    case noKakaoTalk
 }

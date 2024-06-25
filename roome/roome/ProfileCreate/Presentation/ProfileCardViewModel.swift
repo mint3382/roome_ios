@@ -9,26 +9,26 @@ import UIKit
 import Combine
 
 class ProfileCardViewModel {
-    struct Input1 {
+    struct Input {
         let tapSquareButton = PassthroughSubject<Void, Never>()
         let tapRectangleButton = PassthroughSubject<Void, Never>()
         let tapSaveButton = PassthroughSubject<Void, Never>()
     }
     
-    struct Output1 {
+    struct Output {
         let handleSaveButton = PassthroughSubject<UIImage?, Never>()
         let handleSquareButton = PassthroughSubject<Bool, Never>()
     }
     
-    let input: Input1
-    let output: Output1
+    let input: Input
+    let output: Output
     
     private var cancellables = Set<AnyCancellable>()
     var isSquareSize: Bool = true
     
     init() {
-        self.input = Input1()
-        self.output = Output1()
+        self.input = Input()
+        self.output = Output()
         settingBind()
     }
     
