@@ -34,6 +34,7 @@ class MyProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         print("viewWillAppear")
         //TODO: - 닉네임과 유저 사진이 바뀌었다면 업데이트.
+        collectionView.cellForItem(at: IndexPath(item: 0, section: 0))?.layoutSubviews()
     }
     
     private func configureTitleLabel() {
@@ -152,7 +153,7 @@ extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
         var width = view.frame.width * 0.43
         
         if indexPath.section == 0 {
-            height = view.frame.width * 0.4
+            height = view.frame.width * 0.3
             width = view.frame.width * 0.9
         } else if indexPath.row == 0 || indexPath.row == 1 {
             height = view.frame.width * 0.2

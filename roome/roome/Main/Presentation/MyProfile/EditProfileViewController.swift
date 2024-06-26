@@ -171,8 +171,10 @@ class EditProfileViewController: UIViewController {
             .store(in: &cancellables)
         
         photoPopUp.baseImageButtonPublisher()
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] in
-                self?.viewModel.input.changePhoto.send(completion: .failure(TypeError.bindingFailure))
+                self?.viewModel.input.tappedBaseImage.send()
+                self?.profileImageButton.setImage(UIImage(resource: .userProfile).resize(newWidth: 80), for: .normal)
             }
             .store(in: &cancellables)
         
@@ -395,9 +397,3 @@ extension EditProfileViewController {
         nextButtonWidthConstraint?.isActive = true
     }
 }
-
-//#Preview {
-//    let vc = EditProfileViewController(viewModel: EditProfileViewModel(usecase: NicknameUseCase(nicknameRepository: NicknameRepository())))
-//    
-//    return vc
-//}

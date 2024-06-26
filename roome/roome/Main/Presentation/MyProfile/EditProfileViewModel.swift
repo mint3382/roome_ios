@@ -12,12 +12,14 @@ class EditProfileViewModel {
     struct Input {
         let tappedSaveButton = PassthroughSubject<Void, Never>()
         let tappedCloseButton = PassthroughSubject<Void, Never>()
+        let tappedBaseImage = PassthroughSubject<Void, Never>()
         let changePhoto = CurrentValueSubject<UIImage, Error>(UserContainer.shared.userImage)
     }
     
     struct Output {
         let handleSaveButton = PassthroughSubject<Void, NicknameError>()
         let handleCloseButton = PassthroughSubject<Bool, Never>()
+        let handleBaseImage = PassthroughSubject<Void, Error>()
     }
     
     let input: Input
@@ -44,6 +46,12 @@ class EditProfileViewModel {
             .sink { [weak self] _ in
                 print(self?.textInput ?? "에러")
                 self?.pushedNextButton(self?.textInput)
+            }
+            .store(in: &cancellables)
+        
+        input.tappedBaseImage
+            .sink { [weak self] in
+                self?.removeImage()
             }
             .store(in: &cancellables)
         
@@ -87,6 +95,7 @@ class EditProfileViewModel {
         Task {
             do {
                 try await usecase.nicknameCheckWithAPI(nickname)
+//                try await usecase.imageWithAPI(userImage.resize(newWidth: 20))
                 try await UserContainer.shared.updateUserInformation()
                 self.output.handleSaveButton.send()
             } catch(let error) {
@@ -101,6 +110,18 @@ class EditProfileViewModel {
                 default:
                     self.output.handleSaveButton.send(completion: .failure(NicknameError.network))
                 }
+            }
+        }
+    }
+    
+    private func removeImage() {
+        Task {
+            do {
+//                try await usecase.deleteImageWithAPI()
+                try await UserContainer.shared.updateUserInformation()
+                self.output.handleBaseImage.send()
+            } catch {
+                self.output.handleBaseImage.send(completion: .failure(error))
             }
         }
     }

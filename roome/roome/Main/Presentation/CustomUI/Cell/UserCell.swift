@@ -9,6 +9,16 @@ import UIKit
 import Combine
 
 class UserCell: UICollectionViewCell {
+    private let userLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = UserContainer.shared.user?.data.nickname ?? "닉네임"
+        label.font = .boldTitle3
+        
+        return label
+    }()
+    
     private let userImageButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.image = UserContainer.shared.userImage.resize(newWidth: 50)
@@ -68,7 +78,8 @@ class UserCell: UICollectionViewCell {
         
         configureShadow()
         configureContentView()
-        configureUserButton()
+        configureUserLabel()
+//        configureUserButton()
         configureButton()
         configureLine()
     }
@@ -80,8 +91,8 @@ class UserCell: UICollectionViewCell {
     override func layoutSubviews() {
         shareButton.titleLabel?.font = .boldTitle4
         cardButton.titleLabel?.font = .boldTitle4
-        userButton.setNeedsLayout()
-        updateUserProfile()
+//        userButton.setNeedsLayout()
+//        updateUserProfile()
     }
     
     func updateUserProfile() {
@@ -116,6 +127,17 @@ class UserCell: UICollectionViewCell {
         contentView.backgroundColor = .roomeMain
     }
     
+    private func configureUserLabel() {
+        contentView.addSubview(userLabel)
+        
+        NSLayoutConstraint.activate([
+            userLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            userLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            userLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            userLabel.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
     private func configureUserButton() {
         contentView.addSubview(userImageButton)
         contentView.addSubview(userButton)
@@ -137,7 +159,9 @@ class UserCell: UICollectionViewCell {
         contentView.addSubview(lineView)
         
         NSLayoutConstraint.activate([
-            lineView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
+            lineView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
+            lineView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
+//            lineView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
             lineView.heightAnchor.constraint(equalToConstant: 2),
             lineView.bottomAnchor.constraint(equalTo: cardButton.topAnchor),
             lineView.centerXAnchor.constraint(equalTo: self.centerXAnchor)
