@@ -5,25 +5,29 @@
 //  Created by minsong kim on 6/25/24.
 //
 
-import Foundation
+import UIKit
 import Combine
 
 class EditProfileViewModel {
     struct Input {
         let tappedSaveButton = PassthroughSubject<Void, Never>()
-        let tappedTakeAPhotoButton = PassthroughSubject<Void, Never>()
-        let tappedGetPhotoFromAlbumButton = PassthroughSubject<Void, Never>()
-        let tappedBaseImageButton = PassthroughSubject<Void, Never>()
+        let tappedCloseButton = PassthroughSubject<Void, Never>()
+        let changePhoto = CurrentValueSubject<UIImage, Error>(UserContainer.shared.userImage)
     }
     
     struct Output {
         let handleSaveButton = PassthroughSubject<Void, NicknameError>()
+        let handleCloseButton = PassthroughSubject<Bool, Never>()
     }
     
     let input: Input
     let output: Output
     
     @Published var textInput = UserContainer.shared.user?.data.nickname ?? ""
+    
+    private var userImage: UIImage = UserContainer.shared.userImage
+    private var userNickname: String? = UserContainer.shared.user?.data.nickname
+    var isImageChanged: Bool = false
     
     private let usecase: NicknameUseCase
     private var cancellables = Set<AnyCancellable>()
@@ -43,21 +47,30 @@ class EditProfileViewModel {
             }
             .store(in: &cancellables)
         
-        input.tappedTakeAPhotoButton
-            .sink { [weak self] in
-                //TODO: - 사진 촬영 구현
+        input.changePhoto
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("changePhoto finished")
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { [weak self] image in
+                self?.userImage = image
             }
             .store(in: &cancellables)
-        
-        input.tappedGetPhotoFromAlbumButton
+
+        input.tappedCloseButton
             .sink { [weak self] in
-                //TODO: - 앨범에서 이미지 가져오기 구현
-            }
-            .store(in: &cancellables)
-        
-        input.tappedBaseImageButton
-            .sink { [weak self] in
-                //TODO: - 프로필 이미지 삭제, 기본 이미지로 설정
+                guard let self else {
+                    return
+                }
+                if (textInput == "" || textInput == userNickname)
+                    && isImageChanged == false {
+                    output.handleCloseButton.send(false)
+                } else {
+                    output.handleCloseButton.send(true)
+                }
             }
             .store(in: &cancellables)
     }

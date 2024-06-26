@@ -11,6 +11,11 @@ import Combine
 class EditProfileViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
     private lazy var photoPopUp = DownPopUpView(frame: window!.bounds)
+    private lazy var changePopUp = PopUpView(frame: window!.bounds,
+                                             title: "변경사항이 있어요",
+                                             description: "변경사항을 저장하지 않고 나가시겠어요?",
+                                             whiteButtonTitle: "취소",
+                                             colorButtonTitle: "나가기")
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "프로필 수정"
@@ -33,10 +38,11 @@ class EditProfileViewController: UIViewController {
     let profileImageButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.image = UserContainer.shared.userImage
-        configuration.cornerStyle = .capsule
         
         let button = UIButton(configuration: configuration)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 40
+        button.clipsToBounds = true
         
         return button
     }()
@@ -92,6 +98,9 @@ class EditProfileViewController: UIViewController {
     
     private let saveButton = NextButton(title: "저장하기", backgroundColor: .roomeMain, tintColor: .white)
     private var nextButtonWidthConstraint: NSLayoutConstraint?
+    
+    private let imagePicker = UIImagePickerController()
+    
     private let viewModel: EditProfileViewModel
     private var cancellables = Set<AnyCancellable>()
     
@@ -115,6 +124,12 @@ class EditProfileViewController: UIViewController {
         configureSaveButton()
         registerKeyboardListener()
         bind()
+        imagePicker.delegate = self
+    }
+    
+    override func viewWillLayoutSubviews() {
+        photoPopUp.layoutSubviews()
+        profileImageButton.configuration?.cornerStyle = .capsule
     }
     
     private func bind() {
@@ -124,7 +139,7 @@ class EditProfileViewController: UIViewController {
         
         closeButton.publisher(for: .touchUpInside)
             .sink { [weak self] in
-                self?.dismiss(animated: true)
+                self?.viewModel.input.tappedCloseButton.send()
             }
             .store(in: &cancellables)
         
@@ -145,19 +160,19 @@ class EditProfileViewController: UIViewController {
         
         photoPopUp.takePhotoButtonPublisher()
             .sink { [weak self] in
-                self?.viewModel.input.tappedTakeAPhotoButton.send()
+                self?.openCamera()
             }
             .store(in: &cancellables)
         
         photoPopUp.albumButtonPublisher()
             .sink { [weak self] in
-                self?.viewModel.input.tappedGetPhotoFromAlbumButton.send()
+                self?.openAlbum()
             }
             .store(in: &cancellables)
         
         photoPopUp.baseImageButtonPublisher()
             .sink { [weak self] in
-                self?.viewModel.input.tappedBaseImageButton.send()
+                self?.viewModel.input.changePhoto.send(completion: .failure(TypeError.bindingFailure))
             }
             .store(in: &cancellables)
         
@@ -180,6 +195,32 @@ class EditProfileViewController: UIViewController {
             }
             .store(in: &cancellables)
 
+        viewModel.output.handleCloseButton
+            .sink { [weak self] isChanged in
+                guard let self else {
+                    return
+                }
+                
+                if isChanged {
+                    self.window?.addSubview(changePopUp)
+                } else {
+                    self.dismiss(animated: true)
+                }
+            }
+            .store(in: &cancellables)
+        
+        changePopUp.publisherWhiteButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        changePopUp.publisherColorButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+                self?.dismiss(animated: true)
+            }
+            .store(in: &cancellables)
     }
     
     private func handleError(_ error: NicknameError) {
@@ -270,6 +311,34 @@ class EditProfileViewController: UIViewController {
             saveButton.heightAnchor.constraint(equalToConstant: 50),
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+    }
+}
+
+extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func openCamera() {
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            //에러 전달
+            return
+        }
+        
+        imagePicker.sourceType = .camera
+        present(imagePicker, animated: false, completion: nil)
+    }
+    
+    func openAlbum() {
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: false, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            //이미지 UserCell로 전송??
+            profileImageButton.setImage(image.resize(newWidth: 80), for: .normal)
+            viewModel.input.changePhoto.send(image)
+            viewModel.isImageChanged = true
+        }
+        dismiss(animated: true, completion: nil)
+        photoPopUp.removeFromSuperview()
     }
 }
 

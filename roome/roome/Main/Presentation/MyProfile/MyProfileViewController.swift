@@ -30,6 +30,12 @@ class MyProfileViewController: UIViewController {
         setUpCollectionView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+        //TODO: - 닉네임과 유저 사진이 바뀌었다면 업데이트.
+    }
+    
     private func configureTitleLabel() {
         view.addSubview(titleLabel)
         
@@ -78,7 +84,7 @@ extension MyProfileViewController: UICollectionViewDataSource {
         if indexPath.section == 0 {
             userCell.userButtonPublisher()
                 .sink { [weak self] in
-                    let view = DIContainer.shared.resolve(EditProfileViewController.self)
+                    let view = EditProfileViewController(viewModel: EditProfileViewModel(usecase: DIContainer.shared.resolve(NicknameUseCase.self)))
                     view.modalPresentationStyle = .fullScreen
                     
                     self?.present(view, animated: true)
