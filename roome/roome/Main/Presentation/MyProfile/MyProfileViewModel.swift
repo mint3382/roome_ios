@@ -45,38 +45,26 @@ class MyProfileViewModel {
                     print("🔥🔥🔥🔥🔥")
                     print("imageUpload() success.")
                     let url = imageUploadResult?.infos.original.url
-                    self.configureShare(imageURL: url)
+                    self.useCustomTemplate(imageURL: url)
                 }
             }
         }
     }
     
-    private func configureShare(imageURL: URL?) {
+    private func useCustomTemplate(imageURL: URL?) {
         if ShareApi.isKakaoTalkSharingAvailable() {
             guard let name = UserContainer.shared.user?.data.nickname else {
                 return
             }
-            
-            let appLink = Link(iosExecutionParams: ["key1":"value1"])
-            let button = Button(title: "나도 하러 가기", link: appLink)
-            
-            let content = Content(title: "\(name)님의 방탈출 프로필이 도착했습니다", imageUrl: imageURL, link: appLink)
-            
-            let template = FeedTemplate(content: content, buttons: [button])
-            
-            if let templateJsonData = (try? SdkJSONEncoder.custom.encode(template)) {
-                
-                //생성한 메시지 템플릿 객체를 jsonObject로 변환
-                if let templateJsonObject = SdkUtils.toJsonObject(templateJsonData) {
-                    ShareApi.shared.shareDefault(templateObject:templateJsonObject) {(linkResult, error) in
-                        if let error = error {
-                            print("error : \(error)")
-                        }
-                        else {
-                            print("defaultLink(templateObject:templateJsonObject) success.")
-                            guard let linkResult = linkResult else { return }
-                            UIApplication.shared.open(linkResult.url, options: [:], completionHandler: nil)
-                        }
+            // 카카오톡으로 카카오톡 공유 가능
+            ShareApi.shared.shareCustom(templateId: 109406, templateArgs:["PROFILE_IMAGE": imageURL?.absoluteString ?? "", "NICK":name]) {(sharingResult, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("shareCustom() success.")
+                    if let sharingResult = sharingResult {
+                        UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
                     }
                 }
             }
