@@ -9,60 +9,63 @@ import UIKit
 import Combine
 
 class NicknameViewModel {
-    struct NicknameViewModelInput {
-        let nickname: AnyPublisher<String, Never>
-        let nextButton: AnyPublisher<Void, Never>
-        let back: AnyPublisher<Void, Never>
-    }
-
-    struct NicknameViewModelOutput {
-        let isButtonEnable: AnyPublisher<Bool, Never>
-        let canGoNext: AnyPublisher<Void, Never>
-        let goToNext: AnyPublisher<Void, NicknameError>
-        let handleBackButton: AnyPublisher<Void, Never>
+    struct Input {
+        let enteredNickname = CurrentValueSubject<String, Never>("")
+        let tappedNextButton = PassthroughSubject<Void, Never>()
+        let tappedBackButton = PassthroughSubject<Void, Never>()
     }
     
+    struct Output {
+        let isButtonEnable = PassthroughSubject<Bool, Never>()
+        let handleNextButton = PassthroughSubject<Result<Void, Error>, Never>()
+        let handleBackButton = PassthroughSubject<Void, Never>()
+    }
+    
+    let input: Input
+    let output: Output
+    
     private let usecase: NicknameUseCase
-    private let goToNext = PassthroughSubject<Void, Error>()
+    private var cancellables = Set<AnyCancellable>()
+    
     @Published var textInput = ""
     
     init(usecase: NicknameUseCase) {
         self.usecase = usecase
+        self.input = Input()
+        self.output = Output()
+        settingBind()
     }
     
-    func transform(_ input: NicknameViewModelInput) -> NicknameViewModelOutput {
-        //input을 output으로
-        let isButtonEnable = input.nickname
-            .compactMap { $0 }
-            .compactMap { [weak self] in
-                self?.usecase.checkNicknameCount($0)
-            }.eraseToAnyPublisher()
+    func settingBind() {
+        input.enteredNickname
+            .sink { [weak self] nickname in
+                guard let isButtonEnable = self?.usecase.checkNicknameCount(nickname) else {
+                    self?.output.isButtonEnable.send(false)
+                    return
+                }
+                
+                self?.output.isButtonEnable.send(isButtonEnable)
+            }
+            .store(in: &cancellables)
         
-        let canGoNext = input.nextButton
-            .compactMap { [weak self] _ in
+        input.tappedNextButton
+            .sink { [weak self] in
                 self?.pushedNextButton(self?.textInput)
             }
-            .eraseToAnyPublisher()
-        
-        let next = goToNext
-            .mapError { error -> NicknameError in
-                guard let error = error as? NetworkError else {
-                    return NicknameError.network
-                }
-                switch error {
-                case .failureCode(let errorDTO):
-                    return NicknameError.form(errorDTO)
-                default:
-                    return NicknameError.network
-                }
-            }
-            .eraseToAnyPublisher()
-        
-        let back = input.back
-            .eraseToAnyPublisher()
-        
-        return NicknameViewModelOutput(isButtonEnable: isButtonEnable, canGoNext: canGoNext,goToNext: next, handleBackButton: back)
+            .store(in: &cancellables)
     }
+    
+   
+//            .mapError { error -> NicknameError in
+//                guard let error = error as? NetworkError else {
+//                    return NicknameError.network
+//                }
+//                switch error {
+//                case .failureCode(let errorDTO):
+//                    return NicknameError.form(errorDTO)
+//                default:
+//                    return NicknameError.network
+//                }
     
     func canFillTextField(_ text: String) -> Bool {
         if usecase.checkNicknameText(text) {
@@ -72,14 +75,14 @@ class NicknameViewModel {
         }
     }
     
-    func pushedNextButton(_ nickname: String?) {
+    private func pushedNextButton(_ nickname: String?) {
         Task {
             do {
                 try await usecase.nicknameCheckWithAPI(nickname)
                 try await UserContainer.shared.updateUserInformation()
-                goToNext.send()
+                output.handleNextButton.send(.success({}()))
             } catch {
-                goToNext.send(completion: .failure(error))
+                output.handleNextButton.send(.failure(error))
             }
         }
     }

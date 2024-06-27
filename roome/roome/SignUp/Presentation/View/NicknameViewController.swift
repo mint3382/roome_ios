@@ -109,47 +109,56 @@ class NicknameViewController: UIViewController {
     
     func bind() {
         let text = nicknameTextField.publisher
-        let nextButton = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let backButton = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        
-        let input = NicknameViewModel.NicknameViewModelInput(nickname: text, nextButton: nextButton, back: backButton)
-        let output = viewModel.transform(input)
-        
         text.receive(on: RunLoop.main)
             .assign(to: &viewModel.$textInput)
+        text.sink { [weak self] nickname in
+            self?.viewModel.input.enteredNickname.send(nickname)
+        }
+        .store(in: &cancellables)
         
-        output.isButtonEnable
-            .sink { [weak self] buttonOn in
-            if buttonOn {
-                self?.nextButton.isEnabled = true
-                self?.nextButton.backgroundColor = .roomeMain
-            } else {
-                self?.nextButton.isEnabled = false
-                self?.nextButton.backgroundColor = .gray
+        nextButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tappedNextButton.send()
             }
-        }.store(in: &cancellables)
-        
-        output.canGoNext
-            .sink { }
             .store(in: &cancellables)
         
-        output.goToNext
+        backButton.publisher(for: .touchUpInside)
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink(receiveCompletion: {[weak self] completion in
-                switch completion {
-                case .finished:
-                    print("Nickname finish")
-                case .failure(let error):
-                    self?.handleError(error)
-                }
-            }, receiveValue: { [weak self] _ in
-                self?.handleNextPage()
-            })
-            .store(in: &cancellables)
-
-        output.handleBackButton
-            .sink { [weak self] _ in
+            .sink { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.isButtonEnable
+            .sink { [weak self] isButtonOn in
+                if isButtonOn {
+                    self?.nextButton.isEnabled = true
+                } else {
+                    self?.nextButton.isEnabled = false
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleNextButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: true)
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    self?.handleNextPage()
+                case .failure(let error):
+                    if let error = error as? NetworkError {
+                        var nicknameError: NicknameError
+                        switch error {
+                        case .failureCode(let errorDTO):
+                            nicknameError = NicknameError.form(errorDTO)
+                        default:
+                            nicknameError = NicknameError.network
+                        }
+                        self?.handleError(nicknameError)
+                    } else {
+                        print("그 외의 문제: \(error)")
+                    }
+                }
             }
             .store(in: &cancellables)
     }
@@ -157,21 +166,19 @@ class NicknameViewController: UIViewController {
     func handleError(_ error: NicknameError) {
         switch error {
         case .form(let data):
-                formLabel.text = data.message
-                formLabel.textColor = .roomeMain
-                nicknameLabel.textColor = .roomeMain
+            formLabel.text = data.message
+            formLabel.textColor = .roomeMain
+            nicknameLabel.textColor = .roomeMain
         case .network:
-                let loginPage = DIContainer.shared.resolve(LoginViewController.self)
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                    .changeRootViewController(loginPage, animated: true)
+            let loginPage = DIContainer.shared.resolve(LoginViewController.self)
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                .changeRootViewController(loginPage, animated: true)
         }
     }
     
     func handleNextPage() {
         let nextPage = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
-//        Task { @MainActor in
-            self.navigationController?.pushViewController(nextPage, animated: true)
-//        }
+        self.navigationController?.pushViewController(nextPage, animated: true)
     }
     
     private func configureUI() {
