@@ -5,7 +5,6 @@
 //  Created by minsong kim on 5/20/24.
 //
 
-import Foundation
 import UIKit
 
 class UserContainer {

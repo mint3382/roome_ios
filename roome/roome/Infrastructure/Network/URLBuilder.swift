@@ -29,7 +29,18 @@ struct URLBuilder {
         component.scheme = scheme
         component.host = host
         component.path = path
+        component.queryItems = configureQuery(queries)
         
         return component.url
+    }
+    
+    private func configureQuery(_ query: [URLQueryItem]?) -> [URLQueryItem] {
+        var queries: [URLQueryItem] = []
+        
+        query?.forEach({ URLQueryItem in
+            queries.append(URLQueryItem)
+        })
+        
+        return queries
     }
 }

@@ -57,7 +57,11 @@ class MyProfileViewModel {
                 return
             }
             // 카카오톡으로 카카오톡 공유 가능
-            ShareApi.shared.shareCustom(templateId: 109406, templateArgs:["PROFILE_IMAGE": imageURL?.absoluteString ?? "", "NICK":name]) {(sharingResult, error) in
+            ShareApi.shared.shareCustom(templateId: 109406,
+                                        templateArgs:["TYPE": "profile",
+                                                      "VALUE":name, "PROFILE_IMAGE": imageURL?.absoluteString ?? "",
+                                                      "NICK": name]
+            ){(sharingResult, error) in
                 if let error = error {
                     print(error)
                 }
