@@ -5,11 +5,13 @@
 //  Created by minsong kim on 5/20/24.
 //
 
-import Foundation
+import UIKit
 
 class UserContainer {
     static let shared = UserContainer()
+    private let apiProvider = APIProvider()
     var user: UserDTO?
+    var userImage: UIImage = UIImage(resource: .userProfile).resize(newWidth: 80)
     var profile: ProfileDTO?
     var defaultProfile: ProfileDefaultDTO?
     
@@ -18,6 +20,7 @@ class UserContainer {
     func resetUser() {
         user = nil
         profile = nil
+        userImage = UIImage(resource: .userProfile).resize(newWidth: 80)
     }
     
     func updateUserInformation() async throws {
@@ -36,7 +39,7 @@ class UserContainer {
             throw TypeError.bindingFailure
         }
         
-        user = try await APIProvider().fetchDecodedData(type: UserDTO.self, from: request)
+        user = try await apiProvider.fetchDecodedData(type: UserDTO.self, from: request)
     }
     
     func updateUserProfile() async throws {
@@ -55,7 +58,7 @@ class UserContainer {
             throw TypeError.bindingFailure
         }
         
-        profile = try await APIProvider().fetchDecodedData(type: ProfileDTO.self, from: request)
+        profile = try await apiProvider.fetchDecodedData(type: ProfileDTO.self, from: request)
     }
     
     func deleteUserProfile() async throws {
@@ -94,6 +97,22 @@ class UserContainer {
             throw TypeError.bindingFailure
         }
         
-        defaultProfile = try await APIProvider().fetchDecodedData(type: ProfileDefaultDTO.self, from: request)
+        defaultProfile = try await apiProvider.fetchDecodedData(type: ProfileDefaultDTO.self, from: request)
     }
+    
+//    func updateUserImage(url: URL?) {
+//        Task {
+//            do {
+//                guard let url else {
+//                    userImage = UIImage(resource: .userProfile).resize(newWidth: 80)
+//                    return
+//                }
+//                let data = try await apiProvider.fetchURLData(from: url)
+//                
+//                userImage = UIImage(data: data) ?? UIImage(resource: .userProfile).resize(newWidth: 80)
+//            } catch {
+//                userImage = UIImage(resource: .userProfile).resize(newWidth: 80)
+//            }
+//        }
+//    }
 }

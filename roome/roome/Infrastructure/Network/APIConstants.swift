@@ -33,6 +33,8 @@ struct APIConstants {
         case termsAgree
         case nickname
         case nicknameValidation
+        case image
+        case profile
         
         var name: String {
             switch self{
@@ -44,6 +46,10 @@ struct APIConstants {
                 "/users/nickname"
             case .nicknameValidation:
                 "/users/nickname/validation"
+            case .image:
+                "/users/image"
+            case .profile:
+                "/users/profile"
             }
         }
     }

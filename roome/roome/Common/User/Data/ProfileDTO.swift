@@ -15,7 +15,7 @@ struct ProfileDTO: Codable {
     let data: Profile
     
     struct Profile: Codable {
-        let id: Int
+        let nickname: String
         let state: String
         let count: String
         let preferredGenres: [Detail]
@@ -32,6 +32,7 @@ struct ProfileDTO: Codable {
         struct Detail: Codable {
             let id: Int
             let title: String
+            let text: String
         }
         
         struct ColorDTO: Codable {
@@ -49,14 +50,14 @@ struct ProfileDTO: Codable {
         [
             [data.count],
             [data.mbti],
-            data.preferredGenres.map { $0.title },
-            data.userStrengths.map { $0.title },
-            data.themeImportantFactors.map { $0.title },
-            [data.horrorThemePosition?.title],
-            [data.hintUsagePreference?.title],
-            [data.deviceLockPreference?.title],
-            [data.activity?.title],
-            data.themeDislikedFactors.map { $0.title }
+            data.preferredGenres.map { $0.text },
+            data.userStrengths.map { $0.text },
+            data.themeImportantFactors.map { $0.text },
+            [data.horrorThemePosition?.text],
+            [data.hintUsagePreference?.text],
+            [data.deviceLockPreference?.text],
+            [data.activity?.text],
+            data.themeDislikedFactors.map { $0.text }
         ]
     }
         

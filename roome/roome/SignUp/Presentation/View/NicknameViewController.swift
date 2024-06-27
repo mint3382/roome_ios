@@ -157,17 +157,13 @@ class NicknameViewController: UIViewController {
     func handleError(_ error: NicknameError) {
         switch error {
         case .form(let data):
-//            Task { @MainActor in
                 formLabel.text = data.message
                 formLabel.textColor = .roomeMain
                 nicknameLabel.textColor = .roomeMain
-//            }
         case .network:
-//            Task { @MainActor in
                 let loginPage = DIContainer.shared.resolve(LoginViewController.self)
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
                     .changeRootViewController(loginPage, animated: true)
-//            }
         }
     }
     
@@ -227,7 +223,6 @@ class NicknameViewController: UIViewController {
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
-
 }
 
 extension NicknameViewController: UITextFieldDelegate {

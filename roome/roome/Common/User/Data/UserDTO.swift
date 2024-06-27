@@ -16,6 +16,7 @@ struct UserDTO: Codable {
         let state: String
         let email: String
         let nickname: String
+        let imageUrl: String
     }
 }
 

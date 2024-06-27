@@ -1,21 +1,29 @@
 //
-//  MyProfileViewController.swift
+//  SharingViewController.swift
 //  roome
 //
-//  Created by minsong kim on 6/18/24.
+//  Created by minsong kim on 6/26/24.
 //
 
 import UIKit
 import Combine
 
-class MyProfileViewController: UIViewController {
+class SharingViewController: UIViewController {
+    private let sharingContainer: SharingContainer
     private let titleLabel = TitleLabel(text: "프로필")
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    var viewModel: MyProfileViewModel
+    private let nextButton: UIButton = {
+        if UserContainer.shared.profile?.data.state == "complete" {
+            return NextButton(title: "내 프로필로 이동", backgroundColor: .roomeMain, tintColor: .white)
+        } else {
+            return NextButton(title: "나만의 프로필 만들기", backgroundColor: .roomeMain, tintColor: .white)
+        }
+    }()
+    
     private var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: MyProfileViewModel) {
-        self.viewModel = viewModel
+    init(sharingContainer: SharingContainer) {
+        self.sharingContainer = sharingContainer
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,14 +35,27 @@ class MyProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureTitleLabel()
+        configureNextButton()
         setUpCollectionView()
+        bind()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("viewWillAppear")
-        //TODO: - 닉네임과 유저 사진이 바뀌었다면 업데이트.
-        collectionView.cellForItem(at: IndexPath(item: 0, section: 0))?.layoutSubviews()
+    private func bind() {
+        nextButton.publisher(for: .touchUpInside)
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { _ in
+                //TODO: - 계정 유무에 따라 다르게 이동
+                var next = UIViewController()
+                if UserContainer.shared.profile?.data.state == "complete" {
+                    next = DIContainer.shared.resolve(TabBarController.self)
+                } else {
+                    next = DIContainer.shared.resolve(LoginViewController.self)
+                }
+                (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .changeRootViewController(next, animated: true)
+            }
+            .store(in: &cancellables)
     }
     
     private func configureTitleLabel() {
@@ -50,7 +71,7 @@ class MyProfileViewController: UIViewController {
     private func setUpCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UserCell.self, forCellWithReuseIdentifier: "UserCell")
+        collectionView.register(SharingUserCell.self, forCellWithReuseIdentifier: "SharingUserCell")
         collectionView.register(MyProfileCell.self, forCellWithReuseIdentifier: "MyProfileCell")
         collectionView.alwaysBounceVertical = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,12 +81,23 @@ class MyProfileViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: nextButton.topAnchor)
+        ])
+    }
+    
+    func configureNextButton() {
+        view.addSubview(nextButton)
+        
+        NSLayoutConstraint.activate([
+            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         ])
     }
 }
 
-extension MyProfileViewController: UICollectionViewDataSource {
+extension SharingViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -75,24 +107,17 @@ extension MyProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as? UserCell,
+        guard let sharingUserCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SharingUserCell", for: indexPath) as? SharingUserCell,
               let myProfileCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyProfileCell", for: indexPath) as? MyProfileCell,
-              let profile = UserContainer.shared.profile,
+              let profile = sharingContainer.profile,
               let colorDTO = profile.data.color else {
             return UICollectionViewCell()
         }
         
         if indexPath.section == 0 {
-            userCell.userButtonPublisher()
-                .sink { [weak self] in
-                    let view = EditProfileViewController(viewModel: EditProfileViewModel(usecase: DIContainer.shared.resolve(NicknameUseCase.self)))
-                    view.modalPresentationStyle = .fullScreen
-                    
-                    self?.present(view, animated: true)
-                }
-                .store(in: &cancellables)
+            sharingUserCell.updateNickname(sharingContainer.nickname)
             
-            userCell.cardButtonPublisher()
+            sharingUserCell.cardButtonPublisher()
                 .sink { [weak self] _ in
                     print("card Button Tapped")
                     let popUpView = DIContainer.shared.resolve(MyProfileCardViewController.self)
@@ -102,13 +127,7 @@ extension MyProfileViewController: UICollectionViewDataSource {
                 }
                 .store(in: &cancellables)
             
-            userCell.shareButtonPublisher()
-                .sink { [weak self] _ in
-                    self?.viewModel.input.tappedShareButton.send()
-                }
-                .store(in: &cancellables)
-            
-            return userCell
+            return sharingUserCell
         } else {
             myProfileCell.updateOption(text: MyProfileDTO.category[indexPath.row])
             
@@ -131,7 +150,7 @@ extension MyProfileViewController: UICollectionViewDataSource {
     }
 }
     
-extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
+extension SharingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         10
     }
@@ -162,3 +181,9 @@ extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: height)
     }
 }
+
+//#Preview {
+//    let vc = SharingViewController(sharingContainer: SharingContainer(nickname: ""))
+//    
+//    return vc
+//}
