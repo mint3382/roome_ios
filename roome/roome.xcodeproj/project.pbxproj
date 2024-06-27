@@ -155,6 +155,11 @@
 		9293DCA42C2AC1B900545B57 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCA32C2AC1B900545B57 /* EditProfileViewController.swift */; };
 		9293DCA62C2B02B700545B57 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCA52C2B02B700545B57 /* EditProfileViewModel.swift */; };
 		9293DCA82C2B2D6F00545B57 /* DownPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCA72C2B2D6E00545B57 /* DownPopUpView.swift */; };
+		9293DCAB2C2C60B300545B57 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCAA2C2C60B300545B57 /* SharingViewController.swift */; };
+		9293DCAD2C2C61AE00545B57 /* SharingUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCAC2C2C61AE00545B57 /* SharingUserCell.swift */; };
+		9293DCAF2C2C62AA00545B57 /* SharingCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */; };
+		9293DCB12C2C63BF00545B57 /* SharingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB02C2C63BF00545B57 /* SharingCardView.swift */; };
+		9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB22C2C640800545B57 /* SharingContainer.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -307,6 +312,11 @@
 		9293DCA32C2AC1B900545B57 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		9293DCA52C2B02B700545B57 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		9293DCA72C2B2D6E00545B57 /* DownPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownPopUpView.swift; sourceTree = "<group>"; };
+		9293DCAA2C2C60B300545B57 /* SharingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
+		9293DCAC2C2C61AE00545B57 /* SharingUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingUserCell.swift; sourceTree = "<group>"; };
+		9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardViewController.swift; sourceTree = "<group>"; };
+		9293DCB02C2C63BF00545B57 /* SharingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardView.swift; sourceTree = "<group>"; };
+		9293DCB22C2C640800545B57 /* SharingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingContainer.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -899,6 +909,18 @@
 			path = MyProfile;
 			sourceTree = "<group>";
 		};
+		9293DCA92C2C609400545B57 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				9293DCAA2C2C60B300545B57 /* SharingViewController.swift */,
+				9293DCAC2C2C61AE00545B57 /* SharingUserCell.swift */,
+				9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */,
+				9293DCB02C2C63BF00545B57 /* SharingCardView.swift */,
+				9293DCB22C2C640800545B57 /* SharingContainer.swift */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -929,6 +951,7 @@
 				9271F7B52C00AD3F00586AFD /* ProfileSelect */,
 				928474762C0CE669002C3B4C /* ProfileCreate */,
 				9256E55B2C0EFE5A00A50515 /* Main */,
+				9293DCA92C2C609400545B57 /* Share */,
 				9271F7CF2C038C5A00586AFD /* Common */,
 				921694F52BF21E5C006DC44A /* Infrastructure */,
 				9293DC6E2C12178900545B57 /* DesignSystem */,
@@ -1060,12 +1083,14 @@
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
 				9271F7ED2C086D0F00586AFD /* MbtiUseCase.swift in Sources */,
+				9293DCB12C2C63BF00545B57 /* SharingCardView.swift in Sources */,
 				9271F81F2C08D5E400586AFD /* StateDTO.swift in Sources */,
 				9293DC852C230B0900545B57 /* MyProfileViewModel.swift in Sources */,
 				9271F7C82C00B6D200586AFD /* UIColor+.swift in Sources */,
 				921695922BFE15DB006DC44A /* RoomCountRepository.swift in Sources */,
 				9293DC782C209C4800545B57 /* TermsDetailStates.swift in Sources */,
 				921695152BF35377006DC44A /* LoginRepository.swift in Sources */,
+				9293DCAD2C2C61AE00545B57 /* SharingUserCell.swift in Sources */,
 				9271F8172C08A58000586AFD /* DislikeRepository.swift in Sources */,
 				921695342BF765F2006DC44A /* NicknameViewController.swift in Sources */,
 				921695302BF71659006DC44A /* Font.swift in Sources */,
@@ -1077,6 +1102,7 @@
 				9293DCA82C2B2D6F00545B57 /* DownPopUpView.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
 				921695882BFE0958006DC44A /* NextButton.swift in Sources */,
+				9293DCAF2C2C62AA00545B57 /* SharingCardViewController.swift in Sources */,
 				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
 				9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */,
 				9271F7EB2C086CA400586AFD /* MbtiRepository.swift in Sources */,
@@ -1102,6 +1128,7 @@
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
 				9216958D2BFE10F7006DC44A /* RoomCountUseCase.swift in Sources */,
 				9293DC832C22F3F400545B57 /* GradientView.swift in Sources */,
+				9293DCAB2C2C60B300545B57 /* SharingViewController.swift in Sources */,
 				921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */,
 				9271F80F2C08A42400586AFD /* ActivityUseCase.swift in Sources */,
 				921695822BFE021C006DC44A /* BackButton.swift in Sources */,
@@ -1141,6 +1168,7 @@
 				9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */,
 				9271F7E12C08604800586AFD /* GenreRepository.swift in Sources */,
 				9293DC982C280F2C00545B57 /* SettingWebViewController.swift in Sources */,
+				9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				9271F7E52C08624800586AFD /* GenreUseCase.swift in Sources */,
 				9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */,
