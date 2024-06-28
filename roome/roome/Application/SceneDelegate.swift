@@ -7,9 +7,22 @@
 
 import UIKit
 import KakaoSDKAuth
+import Combine
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    
+    var isConnect: Bool = false  {
+        didSet {
+            print("isConnect = \(isConnect)")
+            if !isConnect, let internetPopUp {
+                window?.addSubview(internetPopUp)
+            }
+        }
+    }
+    
+    private var internetPopUp: PopUpView?
+    private var cancellable = Set<AnyCancellable>()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -25,6 +38,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         self.scene(scene, openURLContexts: connectionOptions.urlContexts)
+        InternetMonitor().startMonitoring()
+        checkingInternetConnecting()
     }
     
     func changeRootViewController(_ viewController: UIViewController, animated: Bool) {
@@ -63,8 +78,38 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
     }
+    
+    private func checkingInternetConnecting() {
+        guard let window else {
+            return
+        }
+        
+        internetPopUp = PopUpView(frame: window.bounds,
+                                  title: "인터넷에 연결할 수 없어요",
+                                  description: "다시 시도하거나 네트워크 설정을 확인해주세요.",
+                                  whiteButtonTitle: "다시 시도",
+                                  colorButtonTitle: "설정")
+        
+        bindInternetPopUp()
+    }
+    
+    private func bindInternetPopUp() {
+        internetPopUp?.publisherWhiteButton()
+            .sink { [weak self]  in
+                self?.internetPopUp?.removeFromSuperview()
+                self?.isConnect = true
+            }
+            .store(in: &cancellable)
+        
+        internetPopUp?.publisherColorButton()
+            .sink { _ in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            }
+            .store(in: &cancellable)
+            
+    }
 
-    func queryParams(url: URL) -> Dictionary<String, String> {
+    private func queryParams(url: URL) -> Dictionary<String, String> {
         var parameters = Dictionary<String, String>()
     
         if let queryComponents = url.query?.components(separatedBy: "&") {

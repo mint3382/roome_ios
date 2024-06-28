@@ -13,14 +13,16 @@ import KakaoSDKAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var isLogin: Bool = false {
-        didSet {
-            Task { @MainActor in
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                    .changeRootViewController(SplashView(), animated: true)
-            }
-        }
-    }
+    var isLogin: Bool = false 
+//    {
+//        didSet {
+//            Task { @MainActor in
+//                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+//                    .changeRootViewController(SplashView(), animated: true)
+//            }
+//        }
+//    }
+
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         KakaoSDK.initSDK(appKey: Bundle.main.infoDictionary?["KakaoAppKey"] as! String)
@@ -33,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func appleAutomaticLogin() {
+    private func appleAutomaticLogin() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         appleIDProvider.getCredentialState(forUserID: KeyChain.read(key: .appleUserID) ?? "") { credentialState, error in
             switch credentialState {
@@ -45,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func kakaoAutomaticLogin() {
+    private func kakaoAutomaticLogin() {
         if AuthApi.hasToken() {
             UserApi.shared.accessTokenInfo { (_, error) in
                 if let error = error {
