@@ -11,6 +11,42 @@ import Combine
 class LoginViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
     private lazy var errorPopUp = PopUpView(frame: window!.bounds, title: "카카오톡 미설치", description: "카카오톡의 설치 여부를 확인해주세요!", colorButtonTitle: "확인")
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "나만의 방탈출 라이프"
+        label.textAlignment = .center
+        label.textColor = .roomeMain
+        label.font = .boldHeadline3
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    private lazy var logoImageView: UIImageView = {
+        let view = UIImageView(image: UIImage(resource: .logo).resize(newWidth: view.frame.width * 0.6).changeImageColor(.roomeMain))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    //로그인 버튼
+    lazy var kakaoLoginButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(resource: .kakaoLoginButton).resize(newWidth: view.frame.width * 0.9), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    lazy var appleLoginButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(resource: .appleLoginButton).resize(newWidth: view.frame.width * 0.9), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     private var viewModel: LoginViewModel
     private var cancellables = Set<AnyCancellable>()
     
@@ -22,55 +58,39 @@ class LoginViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.distribution = .equalCentering
-        stack.spacing = 4
-        
-        return stack
-    }()
-    //로그인 버튼
-    lazy var kakaoLoginButton: UIButton = {
-        let button = UIButton()
-        
-        var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.image = UIImage(resource: .kakaoLoginButton).resize(newWidth: view.frame.width * 0.9)
-        
-        button.configuration = buttonConfiguration
-        
-        return button
-    }()
-    
-    lazy var appleLoginButton: UIButton = {
-        let button = UIButton(type: .custom)
-        
-        var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.image = UIImage(resource: .appleLoginButton).resize(newWidth: view.frame.width * 0.9)
-        
-        button.configuration = buttonConfiguration
-        
-        return button
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .disable
         configureUI()
         bind()
     }
     
     private func configureUI() {
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(kakaoLoginButton)
-        stackView.addArrangedSubview(appleLoginButton)
+        view.addSubview(titleLabel)
+        view.addSubview(logoImageView)
+        view.addSubview(kakaoLoginButton)
+        view.addSubview(appleLoginButton)
         
         NSLayoutConstraint.activate([
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
+            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            logoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.heightAnchor.constraint(equalToConstant: 40),
+            
+            appleLoginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            appleLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            appleLoginButton.heightAnchor.constraint(equalToConstant: 50),
+            appleLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            kakaoLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -8),
+            kakaoLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            kakaoLoginButton.heightAnchor.constraint(equalToConstant: 50),
+            kakaoLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     

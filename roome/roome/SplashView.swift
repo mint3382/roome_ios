@@ -31,7 +31,6 @@ class SplashView: UIViewController {
         super.viewDidAppear(animated)
         if KeyChain.read(key: .hasToken) == "true" {
             Task { @MainActor in
-                DIManager.shared.registerAll()
                 do {
                     try await UserContainer.shared.updateUserInformation()
                     setIsLogin()
@@ -40,7 +39,6 @@ class SplashView: UIViewController {
                 }
             }
         } else {
-            DIManager.shared.registerAll()
             setIsLogin()
         }
     }

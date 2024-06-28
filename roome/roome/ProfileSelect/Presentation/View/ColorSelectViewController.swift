@@ -57,16 +57,15 @@ class ColorSelectViewController: UIViewController{
         output.handleBackButton
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
+                self?.navigationController?.popViewController(animated: false)
             }.store(in: &cancellables)
         
         output.handleNextPage
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
-//                    let nextViewController = DIContainer.shared.resolve(ProfileViewController.self)
                 let nextViewController = ProfileCardViewController(viewModel: ProfileCardViewModel())
                 
-                self?.navigationController?.pushViewController(nextViewController, animated: true)
+                self?.navigationController?.pushViewController(nextViewController, animated: false)
             }.store(in: &cancellables)
         
         output.tapNext
