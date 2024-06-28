@@ -160,6 +160,7 @@
 		9293DCAF2C2C62AA00545B57 /* SharingCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */; };
 		9293DCB12C2C63BF00545B57 /* SharingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB02C2C63BF00545B57 /* SharingCardView.swift */; };
 		9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB22C2C640800545B57 /* SharingContainer.swift */; };
+		92CA2D062C2DF7850084CD5A /* InternetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -317,6 +318,7 @@
 		9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardViewController.swift; sourceTree = "<group>"; };
 		9293DCB02C2C63BF00545B57 /* SharingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardView.swift; sourceTree = "<group>"; };
 		9293DCB22C2C640800545B57 /* SharingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingContainer.swift; sourceTree = "<group>"; };
+		92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetMonitor.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				921694F92BF21F07006DC44A /* RequestBuilder.swift */,
 				921694FB2BF2202A006DC44A /* URLBuilder.swift */,
 				921694FD2BF2207A006DC44A /* APIProvider.swift */,
+				92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1047,6 +1050,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				921695632BFC6362006DC44A /* TermsAgreeRepositoryType.swift in Sources */,
+				92CA2D062C2DF7850084CD5A /* InternetMonitor.swift in Sources */,
 				921695652BFC67D0006DC44A /* TermsAgreeRepository.swift in Sources */,
 				9293DC8E2C233D8B00545B57 /* ImageManager.swift in Sources */,
 				9271F7F32C08993600586AFD /* StrengthRepository.swift in Sources */,
