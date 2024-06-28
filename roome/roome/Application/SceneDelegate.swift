@@ -29,10 +29,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
+        DIManager.shared.registerAll()
         if connectionOptions.urlContexts.isEmpty {
             window?.rootViewController = SplashView()
         } else {
-            DIManager.shared.registerAll()
             self.scene(scene, openURLContexts: connectionOptions.urlContexts)
         }
         window?.makeKeyAndVisible()

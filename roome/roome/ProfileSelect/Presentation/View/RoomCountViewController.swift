@@ -100,7 +100,7 @@ class RoomCountViewController: UIViewController {
         return label
     }()
     
-    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 50, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private let nextButton = NextButton()
     private var nextButtonWidthConstraint: NSLayoutConstraint?
@@ -170,7 +170,7 @@ class RoomCountViewController: UIViewController {
                 }
             }, receiveValue: { _ in
                 let nextPage = DIContainer.shared.resolve(GenreViewController.self)
-                self.navigationController?.pushViewController(nextPage, animated: true)
+                self.navigationController?.pushViewController(nextPage, animated: false)
             })
             .store(in: &cancellables)
         
@@ -204,7 +204,7 @@ class RoomCountViewController: UIViewController {
         backButton.publisher(for: .touchUpInside)
             .throttle(for: 0.05, scheduler: RunLoop.main, latest: true)
             .sink { [weak self]  in
-                self?.navigationController?.popViewController(animated: true)
+                self?.navigationController?.popViewController(animated: false)
             }.store(in: &cancellables)
     }
     

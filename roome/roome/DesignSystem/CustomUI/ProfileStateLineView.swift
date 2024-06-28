@@ -17,7 +17,7 @@ class ProfileStateLineView: UIView {
         self.colorCount = pageNumber
         self.grayCount = 11 - pageNumber
         super.init(frame: frame)
-        self.backgroundColor = .systemBackground
+        self.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
