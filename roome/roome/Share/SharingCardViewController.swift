@@ -23,7 +23,7 @@ class SharingCardViewController: UIViewController {
     //Profile View
     private let profileBackView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .disable
         view.translatesAutoresizingMaskIntoConstraints = false
 
         return view
