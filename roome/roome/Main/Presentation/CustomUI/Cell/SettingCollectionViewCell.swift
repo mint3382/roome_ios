@@ -44,6 +44,12 @@ class SettingCollectionViewCell: UICollectionViewListCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var isSelected: Bool {
+        didSet {
+            self.backgroundColor = .systemBackground
+        }
+    }
+    
     func configureCell(viewModel: SettingViewModel, title: String, state: SettingItem) {
         self.viewModel = viewModel
         self.label.text = title
