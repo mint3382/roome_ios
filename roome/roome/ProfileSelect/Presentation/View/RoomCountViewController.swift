@@ -21,7 +21,7 @@ class RoomCountViewController: UIViewController {
     private lazy var selectButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
-        configuration.title = "0~30번"
+        configuration.title = "선택"
         configuration.cornerStyle = .large
         configuration.background.strokeColor = .disableTint
         configuration.background.strokeWidth = 1
@@ -120,6 +120,7 @@ class RoomCountViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         numberTextField.delegate = self
+        nextButton.isEnabled = false
         configureUI()
         configureSizeButtons()
         configureSelectButton()
@@ -198,7 +199,14 @@ class RoomCountViewController: UIViewController {
         selectButton.publisher(for: .touchUpInside)
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
-                self?.configureTableView()
+                guard let self else {
+                    return
+                }
+                if view.subviews.filter({ $0 == self.tableView }).isEmpty {
+                    configureTableView()
+                } else {
+                    tableView.removeFromSuperview()
+                }
             }.store(in: &cancellables)
         
         backButton.publisher(for: .touchUpInside)
