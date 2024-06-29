@@ -85,7 +85,7 @@ class RoomCountViewController: UIViewController {
         textField.textAlignment = .right
         textField.text = "0"
         textField.keyboardType = .numberPad
-        textField.font = .boldSpecial
+        textField.font = .boldHeadline1
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
@@ -94,7 +94,7 @@ class RoomCountViewController: UIViewController {
         let label = UILabel()
         label.text = "번"
         label.textAlignment = .left
-        label.font = .boldSpecial
+        label.font = .boldHeadline1
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -289,7 +289,7 @@ class RoomCountViewController: UIViewController {
         NSLayoutConstraint.activate([
             textFieldBackgroundView.topAnchor.constraint(equalTo: rangeButton.bottomAnchor, constant: 24),
             textFieldBackgroundView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            textFieldBackgroundView.heightAnchor.constraint(equalToConstant: 100),
+            textFieldBackgroundView.heightAnchor.constraint(equalToConstant: 90),
             textFieldBackgroundView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             numberLineStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
