@@ -33,6 +33,7 @@ class SplashView: UIViewController {
             Task { @MainActor in
                 do {
                     try await UserContainer.shared.updateUserInformation()
+                    try await UserContainer.shared.updateUserProfile()
                     setIsLogin()
                 } catch {
                     goToLogin()
@@ -74,7 +75,11 @@ class SplashView: UIViewController {
         case .nickname:
             viewController = DIContainer.shared.resolve(NicknameViewController.self)
         case .registrationCompleted:
-            viewController = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
+            if UserContainer.shared.profile?.data.state == StateDTO.complete.rawValue {
+                viewController = DIContainer.shared.resolve(TabBarController.self)
+            } else {
+                viewController = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
+            }
         case .none:
             viewController = DIContainer.shared.resolve(LoginViewController.self)
         }

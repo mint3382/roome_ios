@@ -24,6 +24,7 @@ class LoginUseCase {
         KeyChain.create(key: .hasToken, data: "true")
         
         try await UserContainer.shared.updateUserInformation()
+        try await UserContainer.shared.updateUserProfile()
     }
     
     func signOutWithAPI(body json: [String: Any?]) async throws {
