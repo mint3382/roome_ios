@@ -21,7 +21,7 @@ class RoomCountViewController: UIViewController {
     private lazy var selectButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = .label
-        configuration.title = "선택"
+        configuration.title = "0~30번"
         configuration.cornerStyle = .large
         configuration.background.strokeColor = .disableTint
         configuration.background.strokeWidth = 1
@@ -181,15 +181,15 @@ class RoomCountViewController: UIViewController {
                     self?.numberLineStackView.removeFromSuperview()
                     
                     self?.configureSelectButton()
-                    self?.rangeButton.isSelected.toggle()
-                    self?.textFieldButton.isSelected.toggle()
+                    self?.rangeButton.isSelected = true
+                    self?.textFieldButton.isSelected = false
                 } else {
                     self?.selectButton.removeFromSuperview()
                     self?.tableView.removeFromSuperview()
                     
                     self?.configureNumberTextField()
-                    self?.rangeButton.isSelected.toggle()
-                    self?.textFieldButton.isSelected.toggle()
+                    self?.rangeButton.isSelected = false
+                    self?.textFieldButton.isSelected = true
                     self?.selectButton.layoutIfNeeded()
                     self?.numberTextField.becomeFirstResponder()
                 }
@@ -291,6 +291,7 @@ class RoomCountViewController: UIViewController {
     
     private func configureNextButton() {
         view.addSubview(nextButton)
+        nextButton.isEnabled = true
         
         nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         nextButtonWidthConstraint?.isActive = true

@@ -27,7 +27,7 @@ class RoomCountViewModel {
     private let goToNext = PassthroughSubject<Void, Error>()
     @Published var textInput = "0"
     private var isRangeState: Bool = true
-    var isSelected: (min: Int, max: Int) = (0,0)
+    var isSelected: (min: Int, max: Int) = (0,30)
     let canGoNext = PassthroughSubject<Bool, Never>()
     
     init(usecase: RoomCountUseCase) {
