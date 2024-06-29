@@ -316,6 +316,15 @@ extension RoomCountViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
+        // 현재 텍스트 필드의 텍스트
+        let currentText = textField.text ?? ""
+        
+        if currentText == "0" {
+            textField.text = string
+            self.viewModel.textInput = string
+            return false
+        }
+        
         if newText.count == 0 {
             nextButton.isEnabled = false
             nextButton.backgroundColor = .gray
@@ -329,7 +338,6 @@ extension RoomCountViewController: UITextFieldDelegate {
         } else {
             return false
         }
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
