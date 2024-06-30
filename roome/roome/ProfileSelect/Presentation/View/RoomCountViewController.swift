@@ -299,7 +299,6 @@ class RoomCountViewController: UIViewController {
     
     private func configureNextButton() {
         view.addSubview(nextButton)
-        nextButton.isEnabled = true
         
         nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         nextButtonWidthConstraint?.isActive = true
