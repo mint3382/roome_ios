@@ -55,48 +55,53 @@ class MBTIViewController: UIViewController {
     }
     
     func bind() {
-        let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let notAdd = willNotAddButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        nextButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tappedNextButton.send()
+            }
+            .store(in: &cancellables)
         
-        let output = viewModel.transform(MBTIViewModel.Input(tapNextButton: next, tapBackButton: back, tapWillNotAddButton: notAdd))
-        
-        output.handleCellSelect
-            .sink { [weak self] (result, item) in
-                if result == false {
-                    self?.collectionView.deselectItem(at: item, animated: false)
-                }
-            }.store(in: &cancellables)
-        
-        output.canGoNext
-            .sink { [weak self] result in
-                if result {
-                    self?.nextButton.isEnabled = true
-                } else {
-                    self?.nextButton.isEnabled = false
-                }
-            }.store(in: &cancellables)
-        
-        output.handleBackButton
+        backButton.publisher(for: .touchUpInside)
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: false)
             }.store(in: &cancellables)
         
-        output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink(receiveCompletion: { error in
-                //연결 실패 시
-            }, receiveValue: { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: false)
-            })
+        willNotAddButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tappedNotAddButton.send()
+            }
             .store(in: &cancellables)
         
-        output.handleWillNotAddButton
-            .sink { [weak self] result in
-                if result {
+        viewModel.output.deselectCell
+            .sink { [weak self] indexPath in
+                self?.collectionView.deselectItem(at: indexPath, animated: false)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.canGoNext
+            .sink { [weak self] isEnable in
+                self?.nextButton.isEnabled = isEnable
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleNextButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { result in
+                switch result {
+                case .success:
+                    let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
+                    
+                    self.navigationController?.pushViewController(nextViewController, animated: false)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleNotAddButton
+            .sink { [weak self] willNotAdd in
+                if willNotAdd {
                     self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.roomeMain).resize(newWidth: 24)
                     _ = self?.collectionView.visibleCells.map { $0.isSelected = false }
                     _ = self?.collectionView.visibleCells
@@ -109,10 +114,7 @@ class MBTIViewController: UIViewController {
                         .compactMap { $0 as? ButtonCell }
                         .map { $0.isChecked = false }
                 }
-            }.store(in: &cancellables)
-        
-        output.tapNext
-            .sink {}
+            }
             .store(in: &cancellables)
     }
     
@@ -180,7 +182,7 @@ class MBTIViewController: UIViewController {
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         layout.itemSize = CGSize(width: view.frame.width * 0.42, height: 80)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 24, bottom: 50, right: 24)
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24)
         
         return layout
     }
@@ -188,8 +190,12 @@ class MBTIViewController: UIViewController {
 }
 
 extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        4
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        MBTIDTO.allCases.count
+        2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -197,18 +203,27 @@ extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelega
         else {
             return UICollectionViewCell()
         }
-        cell.changeTitle(MBTIDTO(rawValue: indexPath.row)!.title)
-        cell.addDescription(MBTIDTO(rawValue: indexPath.row)!.description)
+        
+        switch indexPath.section {
+        case 0:
+            cell.changeTitle(MBTIDTO.EI(rawValue: indexPath.row)?.title)
+            cell.addDescription(MBTIDTO.EI(rawValue: indexPath.row)?.description)
+        case 1:
+            cell.changeTitle(MBTIDTO.NS(rawValue: indexPath.row)?.title)
+            cell.addDescription(MBTIDTO.NS(rawValue: indexPath.row)?.description)
+        case 2:
+            cell.changeTitle(MBTIDTO.TF(rawValue: indexPath.row)?.title)
+            cell.addDescription(MBTIDTO.TF(rawValue: indexPath.row)?.description)
+        default:
+            cell.changeTitle(MBTIDTO.JP(rawValue: indexPath.row)?.title)
+            cell.addDescription(MBTIDTO.JP(rawValue: indexPath.row)?.description)
+        }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectCell.send(indexPath)
-        _ = collectionView.visibleCells
-            .compactMap { $0 as? ButtonCell }
-            .map { $0.isChecked = false }
-        self.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
+        viewModel.input.cellSelect.send(indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
