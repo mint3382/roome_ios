@@ -33,11 +33,7 @@ class NicknameViewController: UIViewController {
     
     private let warningLabel: UILabel = {
         let label = UILabel()
-        label.text = """
-                        가입 완료 후에는 수정할 수 없으니
-                        신중하게 입력해주세요
-                        """
-        label.numberOfLines = 2
+        label.text = "가입 완료 후에도 수정할 수 있어요"
         label.sizeToFit()
         label.textAlignment = .left
         label.font = .regularBody2

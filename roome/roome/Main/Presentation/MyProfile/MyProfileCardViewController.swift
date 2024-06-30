@@ -57,9 +57,13 @@ class MyProfileCardViewController: UIViewController {
                                                   colorButtonTitle: "확인")
     
     private lazy var saveFailPopUp = PopUpView(frame: window!.frame,
-                                               title: "저장 실패",
-                                               description: "설정을 확인해주세요",
-                                               colorButtonTitle: "확인")
+                                               title: "권한을 허용해 주세요",
+                                               description: """
+                                                            사진 권한을 허용해야
+                                                            이미지를 저장할 수 있어요.
+                                                            """,
+                                               whiteButtonTitle: "취소",
+                                               colorButtonTitle: "설정")
     
     //ViewModel
     private var viewModel: ProfileCardViewModel
@@ -134,9 +138,15 @@ class MyProfileCardViewController: UIViewController {
             }
             .store(in: &cancellable)
         
-        saveFailPopUp.publisherColorButton()
-            .sink { [weak self] _ in
+        saveFailPopUp.publisherWhiteButton()
+            .sink { [weak self] in
                 self?.saveFailPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellable)
+        
+        saveFailPopUp.publisherColorButton()
+            .sink { _ in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }
             .store(in: &cancellable)
     }
