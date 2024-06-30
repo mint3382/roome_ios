@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
     }()
     
     private lazy var logoImageView: UIImageView = {
-        let view = UIImageView(image: UIImage(resource: .logo).resize(newWidth: view.frame.width * 0.6).changeImageColor(.roomeMain))
+        let view = UIImageView(image: UIImage(resource: .colorLogo).resize(newWidth: view.frame.width * 0.6))
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -77,7 +77,7 @@ class LoginViewController: UIViewController {
             titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            logoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            logoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 40),
@@ -144,7 +144,11 @@ class LoginViewController: UIViewController {
             switch state {
             case .registrationCompleted:
                 print("registrationCompleted")
-                nextPage = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
+                if UserContainer.shared.profile?.data.state == StateDTO.complete.rawValue {
+                    nextPage = DIContainer.shared.resolve(TabBarController.self)
+                } else {
+                    nextPage = DIContainer.shared.resolve(WelcomeSignUPViewController.self)
+                }
             case .termsAgreement:
                 nextPage = DIContainer.shared.resolve(TermsAgreeViewController.self)
                 print("termsAgreement")

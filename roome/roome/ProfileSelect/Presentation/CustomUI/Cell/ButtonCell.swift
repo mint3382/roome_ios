@@ -69,12 +69,12 @@ class ButtonCell: UICollectionViewCell {
         }
     }
     
-    func changeTitle(_ text: String) {
+    func changeTitle(_ text: String?) {
         titleLabel.text = text
         titleLabel.font = .boldTitle3
     }
     
-    func addDescription(_ text: String) {
+    func addDescription(_ text: String?) {
         descriptionLabel.text = text
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textColor = .gray

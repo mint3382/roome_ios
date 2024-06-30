@@ -17,6 +17,10 @@ class ColorPaletteCell: UICollectionViewCell {
         contentView.layer.borderWidth = 0
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
+        
+        self.layer.borderColor = UIColor(white: 1.0, alpha: 0.32).cgColor
+        self.layer.borderWidth = 4
+        self.layer.cornerRadius = 10
     }
     
     required init?(coder: NSCoder) {

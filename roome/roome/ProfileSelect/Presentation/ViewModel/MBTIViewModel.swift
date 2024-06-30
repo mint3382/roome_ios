@@ -10,24 +10,24 @@ import Combine
 
 class MBTIViewModel {
     struct Input {
-        let tapNextButton: AnyPublisher<Void, Never>
-        let tapBackButton: AnyPublisher<Void, Never>
-        let tapWillNotAddButton: AnyPublisher<Void, Never>
+        let cellSelect = PassthroughSubject<IndexPath, Never>()
+        let cellDeselect = PassthroughSubject<IndexPath, Never>()
+        let tappedNotAddButton = PassthroughSubject<Void, Never>()
+        let tappedNextButton = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-        let handleCellSelect: AnyPublisher<(Bool, IndexPath), Never>
-        let handleNextButton: AnyPublisher<Void, Error>
-        let tapNext: AnyPublisher<Void, Never>
-        let canGoNext: AnyPublisher<Bool, Never>
-        let handleBackButton: AnyPublisher<Void, Never>
-        let handleWillNotAddButton: AnyPublisher<Bool, Never>
+        let deselectCell = PassthroughSubject<IndexPath, Never>()
+        let canGoNext = PassthroughSubject<Bool, Never>()
+        let handleNotAddButton = PassthroughSubject<Bool, Never>()
+        let handleNextButton = PassthroughSubject<Result<Void, Error>, Never>()
     }
     
-    var selectCell = PassthroughSubject<IndexPath, Never>()
-    var deselectCell = PassthroughSubject<IndexPath, Never>()
-    private var canGoNext = PassthroughSubject<Int,Never>()
-    private var goToNext = PassthroughSubject<Void,Error>()
+    let input: Input
+    let output: Output
+    
+    private var cancellables = Set<AnyCancellable>()
+    
     private var withoutButtonState = false
     private var list: [Int: Int] = [0: -1, 1: -1, 2: -1, 3: -1]
     private var count: Int = 0
@@ -35,81 +35,78 @@ class MBTIViewModel {
     
     init(useCase: MbtiUseCase) {
         self.useCase = useCase
+        self.input = Input()
+        self.output = Output()
+        settingBind()
     }
     
-    func transform(_ input: Input) -> Output {
-        let handleCellSelect = selectCell
-            .compactMap {
-                $0
+    func settingBind() {
+        input.cellSelect
+            .sink { [weak self] indexPath in
+                self?.canSelect(indexPath)
             }
-            .compactMap { [weak self] item in
-                self?.canSelect(item)
+            .store(in: &cancellables)
+        
+        input.tappedNotAddButton
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
+                withoutButtonState.toggle()
+                list = [0: -1, 1: -1, 2: -1, 3: -1]
+                count = 0
+                
+                output.canGoNext.send(withoutButtonState)
+                output.handleNotAddButton.send(withoutButtonState)
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
         
-        let cellSelect = Publishers.Zip(handleCellSelect, deselectCell)
-            .eraseToAnyPublisher()
-        
-        let canGoNext = canGoNext
-            .map { count in
-                count == 4
-            }.eraseToAnyPublisher()
-        
-        let handleWithoutButton = input.tapWillNotAddButton
-            .map { [weak self] _ in
-                self?.withoutButtonState.toggle()
-                self?.list = [0: -1, 1: -1, 2: -1, 3: -1]
-                self?.count = 0
-            }
-            .compactMap { [weak self] _ in
-                self?.isWithoutButtonSelect()
-            }
-            .eraseToAnyPublisher()
-        
-        let tapNext = input.tapNextButton
-            .compactMap { [weak self] _ in
+        input.tappedNextButton
+            .sink { [weak self]  in
                 self?.handlePage()
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
         
-        let handleNextButton = goToNext
-            .eraseToAnyPublisher()
-        
-        let back = input.tapBackButton
-            .eraseToAnyPublisher()
-        
-        return Output(handleCellSelect: cellSelect, handleNextButton: handleNextButton, tapNext: tapNext, canGoNext: canGoNext, handleBackButton: back, handleWillNotAddButton: handleWithoutButton)
+        input.cellDeselect
+            .sink { [weak self] indexPath in
+                self?.deselectItem(indexPath)
+            }
+            .store(in: &cancellables)
     }
     
-    func isWithoutButtonSelect() -> Bool {
-        if withoutButtonState {
-            canGoNext.send(4)
-            return true
-        } else {
-            canGoNext.send(0)
-            return false
-        }
-    }
-    
+    //deselect시 체크
     func deselectItem(_ item: IndexPath) {
-        if list[item.item / 2] != -1 {
-            list[item.item / 2] = -1
+        if list[item.section] != -1 {
+            list[item.section] = -1
             count -= 1
-            canGoNext.send(count)
+        }
+        
+        if count == 4 {
+            output.canGoNext.send(true)
+        } else {
+            output.canGoNext.send(false)
         }
     }
     
-    func canSelect(_ item: IndexPath) -> Bool {
-        deselectCell.send(item)
+    //선택시 체크
+    func canSelect(_ item: IndexPath) {
         //있는지 없는지 체크
-        if list[item.item / 2] != -1 {
-            return false
+        if list[item.section] != -1 {
+            output.deselectCell.send(IndexPath(row: list[item.section] ?? 0, section: item.section)) //기존 cell deselect
+            list[item.section] = item.row
         } else {
-            list[item.item / 2] = item.row
+            list[item.section] = item.row
             count += 1
-            canGoNext.send(count)
-            return true
         }
+        
+        if count == 4 {
+            output.canGoNext.send(true)
+        } else {
+            output.canGoNext.send(false)
+        }
+        
+        self.withoutButtonState = false
+        output.handleNotAddButton.send(withoutButtonState)
     }
     
     //다음 페이지로
@@ -117,17 +114,16 @@ class MBTIViewModel {
         Task {
             do {
                 var mbtis: [String] = []
-                for item in (list.sorted{ $0.0 < $1.0})  {
-                    guard item.value != -1 else {
-                        mbtis = ["NONE"]
-                        break
-                    }
-                    mbtis.append(MBTIDTO(rawValue: item.value)!.title)
-                }
+                
+                mbtis.append(MBTIDTO.EI(rawValue: list[0] ?? -1)?.title ?? "N")
+                mbtis.append(MBTIDTO.NS(rawValue: list[1] ?? -1)?.title ?? "O")
+                mbtis.append(MBTIDTO.TF(rawValue: list[2] ?? -1)?.title ?? "N")
+                mbtis.append(MBTIDTO.JP(rawValue: list[3] ?? -1)?.title ?? "E")
+                
                 try await useCase.mbtiWithAPI(mbti: mbtis)
-                goToNext.send()
+                output.handleNextButton.send(.success({}()))
             } catch {
-                goToNext.send(completion: .failure(error))
+                output.handleNextButton.send(.failure(error))
             }
         }
     }

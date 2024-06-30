@@ -85,7 +85,7 @@ class RoomCountViewController: UIViewController {
         textField.textAlignment = .right
         textField.text = "0"
         textField.keyboardType = .numberPad
-        textField.font = .boldSpecial
+        textField.font = .boldHeadline1
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
@@ -94,7 +94,7 @@ class RoomCountViewController: UIViewController {
         let label = UILabel()
         label.text = "번"
         label.textAlignment = .left
-        label.font = .boldSpecial
+        label.font = .boldHeadline1
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -120,6 +120,7 @@ class RoomCountViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         numberTextField.delegate = self
+        nextButton.isEnabled = false
         configureUI()
         configureSizeButtons()
         configureSelectButton()
@@ -181,15 +182,15 @@ class RoomCountViewController: UIViewController {
                     self?.numberLineStackView.removeFromSuperview()
                     
                     self?.configureSelectButton()
-                    self?.rangeButton.isSelected.toggle()
-                    self?.textFieldButton.isSelected.toggle()
+                    self?.rangeButton.isSelected = true
+                    self?.textFieldButton.isSelected = false
                 } else {
                     self?.selectButton.removeFromSuperview()
                     self?.tableView.removeFromSuperview()
                     
                     self?.configureNumberTextField()
-                    self?.rangeButton.isSelected.toggle()
-                    self?.textFieldButton.isSelected.toggle()
+                    self?.rangeButton.isSelected = false
+                    self?.textFieldButton.isSelected = true
                     self?.selectButton.layoutIfNeeded()
                     self?.numberTextField.becomeFirstResponder()
                 }
@@ -198,7 +199,14 @@ class RoomCountViewController: UIViewController {
         selectButton.publisher(for: .touchUpInside)
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] _ in
-                self?.configureTableView()
+                guard let self else {
+                    return
+                }
+                if view.subviews.filter({ $0 == self.tableView }).isEmpty {
+                    configureTableView()
+                } else {
+                    tableView.removeFromSuperview()
+                }
             }.store(in: &cancellables)
         
         backButton.publisher(for: .touchUpInside)
@@ -281,7 +289,7 @@ class RoomCountViewController: UIViewController {
         NSLayoutConstraint.activate([
             textFieldBackgroundView.topAnchor.constraint(equalTo: rangeButton.bottomAnchor, constant: 24),
             textFieldBackgroundView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            textFieldBackgroundView.heightAnchor.constraint(equalToConstant: 100),
+            textFieldBackgroundView.heightAnchor.constraint(equalToConstant: 90),
             textFieldBackgroundView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             numberLineStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
@@ -307,6 +315,15 @@ extension RoomCountViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
+        // 현재 텍스트 필드의 텍스트
+        let currentText = textField.text ?? ""
+        
+        if currentText == "0" {
+            textField.text = string
+            self.viewModel.textInput = string
+            return false
+        }
+        
         if newText.count == 0 {
             nextButton.isEnabled = false
             nextButton.backgroundColor = .gray
@@ -320,7 +337,6 @@ extension RoomCountViewController: UITextFieldDelegate {
         } else {
             return false
         }
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

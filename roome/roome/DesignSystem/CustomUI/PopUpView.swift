@@ -149,8 +149,9 @@ class PopUpView: UIView {
             boxView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             boxView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.55),
             
-            stackView.centerYAnchor.constraint(equalTo: boxView.centerYAnchor),
-            stackView.centerXAnchor.constraint(equalTo: boxView.centerXAnchor)
+            stackView.centerXAnchor.constraint(equalTo: boxView.centerXAnchor),
+            stackView.topAnchor.constraint(equalTo: boxView.topAnchor, constant: 24),
+            stackView.bottomAnchor.constraint(equalTo: boxView.bottomAnchor, constant: -12)
         ])
     }
     

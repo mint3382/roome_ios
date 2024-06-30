@@ -86,27 +86,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         internetPopUp = PopUpView(frame: window.bounds,
                                   title: "인터넷에 연결할 수 없어요",
-                                  description: "다시 시도하거나 네트워크 설정을 확인해주세요.",
-                                  whiteButtonTitle: "다시 시도",
-                                  colorButtonTitle: "설정")
+                                  description: "다시 시도해주세요.",
+                                  colorButtonTitle: "다시 시도")
         
         bindInternetPopUp()
     }
     
     private func bindInternetPopUp() {
-        internetPopUp?.publisherWhiteButton()
-            .sink { [weak self]  in
-                self?.internetPopUp?.removeFromSuperview()
-                self?.isConnect = true
-            }
-            .store(in: &cancellable)
-        
         internetPopUp?.publisherColorButton()
-            .sink { _ in
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            .sink { [weak self] _ in
+                self?.isConnect = true
+                self?.internetPopUp?.removeFromSuperview()
             }
             .store(in: &cancellable)
-            
     }
 
     private func queryParams(url: URL) -> Dictionary<String, String> {
