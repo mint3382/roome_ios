@@ -81,6 +81,7 @@ class LabelButton: UIView {
     
     func updateImageColor(_ color: UIColor) {
         mainButton.configuration?.image = UIImage(systemName: "checkmark")?.changeImageColor(color).resize(newWidth: 12)
+        setNeedsLayout()
     }
     
     private func configureDetail() {
