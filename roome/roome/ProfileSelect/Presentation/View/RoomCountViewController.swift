@@ -9,8 +9,6 @@ import UIKit
 import Combine
 
 class RoomCountViewController: UIViewController {
-    private let stackView = UIStackView(axis: .vertical)
-    
     private let titleLabel = TitleLabel(text: "현재까지 경험한 방 수를\n알려주세요")
     private let descriptionLabel = DescriptionLabel(text: "프로필 생성 후 마이페이지에서 수정할 수 있어요")
     
@@ -100,7 +98,7 @@ class RoomCountViewController: UIViewController {
         return label
     }()
     
-    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.9 - 10, height: 10))
     private let backButton = BackButton()
     private let nextButton = NextButton()
     private var nextButtonWidthConstraint: NSLayoutConstraint?
@@ -217,20 +215,26 @@ class RoomCountViewController: UIViewController {
     }
     
     func configureUI() {
+        profileCount.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileCount)
         view.addSubview(backButton)
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(descriptionLabel)
+        view.addSubview(titleLabel)
+        view.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            profileCount.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            profileCount.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            profileCount.heightAnchor.constraint(equalToConstant: 15),
+            profileCount.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
-            stackView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.35)
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: profileCount.bottomAnchor, constant: 12),
+            
+            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
     
@@ -239,17 +243,17 @@ class RoomCountViewController: UIViewController {
         view.addSubview(textFieldButton)
         
         NSLayoutConstraint.activate([
-            rangeButton.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            rangeButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             rangeButton.heightAnchor.constraint(equalToConstant: 50),
-            rangeButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 24),
-            rangeButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.42)
+            rangeButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 24),
+            rangeButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -5)
         ])
         
         NSLayoutConstraint.activate([
-            textFieldButton.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            textFieldButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             textFieldButton.heightAnchor.constraint(equalToConstant: 50),
-            textFieldButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -24),
-            textFieldButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.42)
+            textFieldButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
+            textFieldButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 5)
         ])
     }
     

@@ -19,11 +19,14 @@ class SplashView: UIViewController {
     
     func configureLogo() {
         view.addSubview(logoView)
+        logoView.contentMode = .scaleAspectFit
         logoView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             logoView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            logoView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+            logoView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            logoView.widthAnchor.constraint(equalToConstant: 200),
+            logoView.heightAnchor.constraint(equalToConstant: 37)
         ])
     }
     

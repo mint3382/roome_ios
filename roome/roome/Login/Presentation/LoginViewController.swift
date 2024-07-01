@@ -74,22 +74,22 @@ class LoginViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
-            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            titleLabel.widthAnchor.constraint(equalToConstant: titleLabel.intrinsicContentSize.width),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             logoImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-            logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.heightAnchor.constraint(equalToConstant: 40),
+            logoImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            logoImageView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor, multiplier: 0.18),
             
             appleLoginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-            appleLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 50),
+            appleLoginButton.widthAnchor.constraint(equalTo: logoImageView.widthAnchor, multiplier: 1.58),
+            appleLoginButton.heightAnchor.constraint(equalTo: appleLoginButton.widthAnchor, multiplier: 0.16),
             appleLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             kakaoLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -8),
-            kakaoLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            kakaoLoginButton.heightAnchor.constraint(equalToConstant: 50),
+            kakaoLoginButton.widthAnchor.constraint(equalTo: logoImageView.widthAnchor, multiplier: 1.58),
+            kakaoLoginButton.heightAnchor.constraint(equalTo: kakaoLoginButton.widthAnchor, multiplier: 0.16),
             kakaoLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }

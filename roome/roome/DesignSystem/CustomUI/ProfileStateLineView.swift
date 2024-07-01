@@ -37,7 +37,7 @@ class ProfileStateLineView: UIView {
         UIColor.roomeMain.set()
         path.move(to: CGPoint(x: 5, y: 10))
         path.addLine(to: CGPoint(x: end, y: 10))
-        path.lineWidth = 2
+        path.lineWidth = 3
         path.lineCapStyle = .round
         path.setLineDash(pattern, count: pattern.count, phase: 0)
         path.stroke()
@@ -56,7 +56,7 @@ class ProfileStateLineView: UIView {
         UIColor.disableTint.set()
         path.move(to: CGPoint(x: start + space, y: 10))
         path.addLine(to: CGPoint(x: frame.width - 2, y: 10))
-        path.lineWidth = 2
+        path.lineWidth = 3
         path.lineCapStyle = .round
         path.setLineDash(pattern, count: pattern.count, phase: 0)
         path.stroke()

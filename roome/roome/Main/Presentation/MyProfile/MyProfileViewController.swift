@@ -142,21 +142,21 @@ extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section == 1 {
-            return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+            return UIEdgeInsets(top: 10, left: 24, bottom: 10, right: 24)
         } else {
-            return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+            return UIEdgeInsets(top: 10, left: 24, bottom: 0, right: 24)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var height = view.frame.width * 0.25
-        var width = view.frame.width * 0.43
+        var height = 90.0
+        var width = (view.frame.width / 2) - 29
         
         if indexPath.section == 0 {
-            height = view.frame.width * 0.3
-            width = view.frame.width * 0.9
+            height = 120.0
+            width = view.frame.width - 48
         } else if indexPath.row == 0 || indexPath.row == 1 {
-            height = view.frame.width * 0.2
+            height = 70.0
         }
         
         return CGSize(width: width, height: height)

@@ -9,11 +9,9 @@ import UIKit
 import Combine
 
 class DislikeViewController: UIViewController, ToastAlertable {
-    private let stackView = UIStackView(axis: .vertical)
-    
     private let titleLabel = TitleLabel(text: "방탈출 할 때,\n어떤 요소를\n싫어하시나요?")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 10, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 10, frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.9 - 10, height: 10))
     var nextButton = NextButton()
     private let backButton = BackButton()
     private lazy var flowLayout = self.createFlowLayout()
@@ -97,7 +95,7 @@ class DislikeViewController: UIViewController, ToastAlertable {
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
@@ -107,20 +105,26 @@ class DislikeViewController: UIViewController, ToastAlertable {
     
     
     func configureStackView() {
+        profileCount.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileCount)
         view.addSubview(backButton)
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(descriptionLabel)
+        view.addSubview(titleLabel)
+        view.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            profileCount.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            profileCount.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            profileCount.heightAnchor.constraint(equalToConstant: 15),
+            profileCount.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             
-            stackView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.24)
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: profileCount.bottomAnchor, constant: 12),
+            
+            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
     
@@ -139,7 +143,7 @@ class DislikeViewController: UIViewController, ToastAlertable {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: view.frame.width * 0.42, height: 50)
+        layout.itemSize = CGSize(width: (view.frame.width / 2) - 29, height: 50)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 24, bottom: 50, right: 24)
         
         return layout
