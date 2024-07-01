@@ -76,6 +76,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     print(error)
                 }
             }
+        } else {
+            changeRootViewController(SplashView(), animated: false)
         }
     }
     
