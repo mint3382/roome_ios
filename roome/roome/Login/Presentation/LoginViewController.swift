@@ -10,7 +10,7 @@ import Combine
 
 class LoginViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
-    private lazy var errorPopUp = PopUpView(frame: window!.bounds, title: "카카오톡 미설치", description: "카카오톡의 설치 여부를 확인해주세요!", colorButtonTitle: "확인")
+    private lazy var errorPopUp = PopUpView(frame: window!.bounds, title: "카카오톡 미설치", description: "카카오톡 설치 여부를 확인해주세요.", colorButtonTitle: "확인")
     
     private let titleLabel: UILabel = {
         let label = UILabel()

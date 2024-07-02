@@ -9,6 +9,8 @@ import UIKit
 import Combine
 
 class MyProfileViewController: UIViewController {
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    private lazy var errorPopUp = PopUpView(frame: window!.bounds, title: "카카오톡 미설치", description: "카카오톡 설치 여부를 확인해주세요.", colorButtonTitle: "확인")
     private let titleLabel = TitleLabel(text: "프로필")
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var viewModel: MyProfileViewModel
@@ -28,13 +30,34 @@ class MyProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureTitleLabel()
         setUpCollectionView()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("viewWillAppear")
         //TODO: - 닉네임과 유저 사진이 바뀌었다면 업데이트.
-        collectionView.cellForItem(at: IndexPath(item: 0, section: 0))?.layoutSubviews()
+//        collectionView.cellForItem(at: IndexPath(item: 0, section: 0))?.layoutSubviews()
+    }
+    
+    private func bind() {
+        viewModel.output.handleKakaoShare
+            .sink { [weak self] isSuccess in
+                guard let self else {
+                    return
+                }
+                
+                if isSuccess == false {
+                    window?.addSubview(errorPopUp)
+                }
+            }
+            .store(in: &cancellables)
+        
+        errorPopUp.publisherColorButton()
+            .sink { [weak self] in
+                self?.errorPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
     }
     
     private func configureTitleLabel() {

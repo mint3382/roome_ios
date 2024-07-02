@@ -16,12 +16,18 @@ class MyProfileViewModel {
         let tappedShareButton = PassthroughSubject<Void, Never>()
     }
     
+    struct Output {
+        let handleKakaoShare = PassthroughSubject<Bool, Never>()
+    }
+    
     let input: Input
+    let output: Output
     
     var cancellables = Set<AnyCancellable>()
     
     init() {
         self.input = Input()
+        self.output = Output()
         settingBind()
     }
     
@@ -74,6 +80,7 @@ class MyProfileViewModel {
             }
         } else {
             //TODO: - 카카오톡 미설치, 알림창 띄우기
+            output.handleKakaoShare.send(false)
         }
     }
 }
