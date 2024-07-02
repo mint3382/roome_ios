@@ -124,34 +124,44 @@ class WelcomeSignUPViewController: UIViewController {
         viewModel.output.handleNext
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] state in
-                var nextPage: UIViewController
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(RoomCountViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(GenreViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(MBTIViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(StrengthViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(ImportantFactorViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(HorrorPositionViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(HintViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(DeviceAndLockViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(ActivityViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(DislikeViewController.self))
+                self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(ColorSelectViewController.self))
+                
                 switch state {
                 case .roomCountRanges:
-                    nextPage = DIContainer.shared.resolve(RoomCountViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(RoomCountViewController.self), animated: false)
                 case .genres:
-                    nextPage = DIContainer.shared.resolve(GenreViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(GenreViewController.self), animated: false)
                 case .mbti:
-                    nextPage = DIContainer.shared.resolve(MBTIViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(MBTIViewController.self), animated: false)
                 case .strengths:
-                    nextPage = DIContainer.shared.resolve(StrengthViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(StrengthViewController.self), animated: false)
                 case .themes:
-                    nextPage = DIContainer.shared.resolve(ImportantFactorViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(ImportantFactorViewController.self), animated: false)
                 case .horrorPosition:
-                    nextPage = DIContainer.shared.resolve(HorrorPositionViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(HorrorPositionViewController.self), animated: false)
                 case .hint:
-                    nextPage = DIContainer.shared.resolve(HintViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(HintViewController.self), animated: false)
                 case .device:
-                    nextPage = DIContainer.shared.resolve(DeviceAndLockViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(DeviceAndLockViewController.self), animated: false)
                 case .activity:
-                    nextPage = DIContainer.shared.resolve(ActivityViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(ActivityViewController.self), animated: false)
                 case .dislike:
-                    nextPage = DIContainer.shared.resolve(DislikeViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(DislikeViewController.self), animated: false)
                 case .color:
-                    nextPage = DIContainer.shared.resolve(ColorSelectViewController.self)
+                    self?.navigationController?.popToViewController(DIContainer.shared.resolve(ColorSelectViewController.self), animated: false)
                 case .complete:
-                    nextPage = DIContainer.shared.resolve(ProfileCardViewController.self)
+                    self?.navigationController?.pushViewController(DIContainer.shared.resolve(ProfileCardViewController.self), animated: true)
                 }
-                self?.navigationController?.pushViewController(nextPage, animated: true)
             }.store(in: &cancellables)
     }
     
