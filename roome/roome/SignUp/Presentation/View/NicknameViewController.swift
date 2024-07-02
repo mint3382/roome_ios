@@ -9,16 +9,6 @@ import UIKit
 import Combine
 
 class NicknameViewController: UIViewController {
-    private let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.distribution = .fillProportionally
-        stack.spacing = 4
-        
-        return stack
-    }()
-    
     private let welcomeLabel: UILabel = {
         let label = UILabel()
         label.text = "반가워요!\n닉네임을 입력해주세요"
@@ -39,6 +29,7 @@ class NicknameViewController: UIViewController {
         label.font = .regularBody2
         label.textColor = .systemGray
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -47,6 +38,7 @@ class NicknameViewController: UIViewController {
         let label = UILabel()
         label.text = "닉네임"
         label.font = .boldLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -59,6 +51,7 @@ class NicknameViewController: UIViewController {
         textField.borderStyle = .none
         textField.backgroundColor = .systemGray6
         textField.addLeftPadding()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
     }()
@@ -179,7 +172,7 @@ class NicknameViewController: UIViewController {
     
     private func configureUI() {
         configureWelcomeLabel()
-        configureStackView()
+        configureFields()
         configureNextButton()
     }
     
@@ -192,25 +185,32 @@ class NicknameViewController: UIViewController {
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             
             welcomeLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
-            welcomeLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            welcomeLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+            welcomeLabel.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 12),
+            welcomeLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
         ])
         
     }
     
-    private func configureStackView() {
-        view.addSubview(stackView)
-        
-        stackView.addArrangedSubview(warningLabel)
-        stackView.addArrangedSubview(nicknameLabel)
-        stackView.addArrangedSubview(nicknameTextField)
-        stackView.addArrangedSubview(formLabel)
+    private func configureFields() {
+        view.addSubview(warningLabel)
+        view.addSubview(nicknameLabel)
+        view.addSubview(nicknameTextField)
+        view.addSubview(formLabel)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            stackView.heightAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.5),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            warningLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 12),
+            warningLabel.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
+            
+            nicknameLabel.topAnchor.constraint(equalTo: warningLabel.bottomAnchor, constant: 16),
+            nicknameLabel.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
+            
+            nicknameTextField.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 8),
+            nicknameTextField.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
+            nicknameTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -22),
+            nicknameTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            formLabel.topAnchor.constraint(equalTo: nicknameTextField.bottomAnchor, constant: 8),
+            formLabel.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor)
         ])
     }
     

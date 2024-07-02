@@ -10,7 +10,7 @@ import Combine
 
 class DeviceAndLockViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "장치와 자물쇠 중\n어떤 것을 더 선호하시나요?")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 8, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 8, frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var viewModel: DeviceAndLockViewModel
@@ -72,7 +72,7 @@ class DeviceAndLockViewController: UIViewController {
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 22),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
@@ -81,17 +81,22 @@ class DeviceAndLockViewController: UIViewController {
     }
     
     func configureStackView() {
+        profileCount.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileCount)
         view.addSubview(backButton)
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            profileCount.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            profileCount.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            profileCount.heightAnchor.constraint(equalToConstant: 15),
+            profileCount.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             
-            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: profileCount.bottomAnchor, constant: 12),
+            
+            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
 }
@@ -109,6 +114,13 @@ extension DeviceAndLockViewController: UICollectionViewDataSource {
         
         guard let device = UserContainer.shared.defaultProfile?.data.deviceLockPreferences[indexPath.row] else {
             return UICollectionViewCell()
+        }
+        
+        if let userSelect = UserContainer.shared.profile?.data.deviceLockPreference?.id {
+            if userSelect == device.id {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            }
         }
         
         cell.changeTitle(device.title)
@@ -130,10 +142,6 @@ extension DeviceAndLockViewController: UICollectionViewDelegateFlowLayout {
         10
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        10
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         guard let device = UserContainer.shared.defaultProfile?.data.deviceLockPreferences[indexPath.row] else {
@@ -146,7 +154,7 @@ extension DeviceAndLockViewController: UICollectionViewDelegateFlowLayout {
             height = 80
         }
         
-        let width = view.frame.width * 0.9
+        let width = view.frame.width - 48
         
         
         return CGSize(width: width, height: height)

@@ -28,12 +28,12 @@ class MBTIViewModel {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private var withoutButtonState = false
+    var withoutButtonState = false
     private var list: [Int: Int] = [0: -1, 1: -1, 2: -1, 3: -1]
     private var count: Int = 0
-    private var useCase: MbtiUseCase
+    private var useCase: ProfileSelectUseCaseType
     
-    init(useCase: MbtiUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
         self.input = Input()
         self.output = Output()

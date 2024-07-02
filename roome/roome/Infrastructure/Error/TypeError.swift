@@ -9,4 +9,5 @@ import Foundation
 
 enum TypeError: Error {
     case bindingFailure
+    case invalidType
 }

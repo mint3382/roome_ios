@@ -27,9 +27,9 @@ class StrengthViewModel {
     private var canGoNext = PassthroughSubject<Int,Never>()
     private var goToNext = PassthroughSubject<Void,Error>()
     var list = Set<IndexPath>()
-    private let useCase: StrengthUseCase
+    private let useCase: ProfileSelectUseCaseType
     
-    init(useCase: StrengthUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
     }
     

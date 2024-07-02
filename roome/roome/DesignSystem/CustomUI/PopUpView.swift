@@ -146,19 +146,19 @@ class PopUpView: UIView {
         NSLayoutConstraint.activate([
             boxView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             boxView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            boxView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
-            boxView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.55),
+            boxView.widthAnchor.constraint(equalToConstant: 320),
+            boxView.heightAnchor.constraint(equalToConstant: 220),
             
             stackView.centerXAnchor.constraint(equalTo: boxView.centerXAnchor),
             stackView.topAnchor.constraint(equalTo: boxView.topAnchor, constant: 24),
-            stackView.bottomAnchor.constraint(equalTo: boxView.bottomAnchor, constant: -12)
+            stackView.bottomAnchor.constraint(equalTo: boxView.bottomAnchor, constant: -16)
         ])
     }
     
     private func configureButton() {
         NSLayoutConstraint.activate([
             buttonStackView.heightAnchor.constraint(equalToConstant: 45),
-            buttonStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8)
+            buttonStackView.widthAnchor.constraint(equalTo: boxView.widthAnchor, multiplier: 0.9)
         ])
     }
     
@@ -168,9 +168,9 @@ class PopUpView: UIView {
         
         NSLayoutConstraint.activate([
             whiteButton.heightAnchor.constraint(equalToConstant: 45),
-            whiteButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.38),
+            whiteButton.widthAnchor.constraint(equalTo: boxView.widthAnchor, multiplier: 0.44),
             colorButton.heightAnchor.constraint(equalToConstant: 45),
-            colorButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.38)
+            colorButton.widthAnchor.constraint(equalTo: boxView.widthAnchor, multiplier: 0.44)
         ])
     }
 }

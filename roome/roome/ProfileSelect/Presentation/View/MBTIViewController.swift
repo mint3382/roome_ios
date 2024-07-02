@@ -10,7 +10,7 @@ import Combine
 
 class MBTIViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "MBTI를 알려주세요")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 3, frame: CGRect(x: 20, y: 60, width: view.frame.width * 0.9 - 10, height: view.frame.height))
+    lazy var profileCount = ProfileStateLineView(pageNumber: 3, frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.9 - 10, height: view.frame.height))
     private let backButton = BackButton()
     private let nextButton = NextButton()
     private lazy var flowLayout = self.createFlowLayout()
@@ -52,6 +52,14 @@ class MBTIViewController: UIViewController {
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "cell")
         configureUI()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if UserContainer.shared.profile?.data.mbti == "NONE" {
+            viewModel.input.tappedNotAddButton.send()
+        }
     }
     
     func bind() {
@@ -104,9 +112,6 @@ class MBTIViewController: UIViewController {
                 if willNotAdd {
                     self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.roomeMain).resize(newWidth: 24)
                     _ = self?.collectionView.visibleCells.map { $0.isSelected = false }
-                    _ = self?.collectionView.visibleCells
-                        .compactMap { $0 as? ButtonCell }
-                        .map { $0.isChecked = true }
                     self?.collectionView.reloadData()
                 } else {
                     self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
@@ -126,18 +131,22 @@ class MBTIViewController: UIViewController {
     }
     
     func configureTitle() {
+        profileCount.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileCount)
         view.addSubview(backButton)
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            profileCount.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            profileCount.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            profileCount.heightAnchor.constraint(equalToConstant: 15),
+            profileCount.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             
-            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.topAnchor.constraint(equalTo: profileCount.bottomAnchor, constant: 12),
+            
+            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
     
@@ -148,10 +157,10 @@ class MBTIViewController: UIViewController {
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45)
+            collectionView.heightAnchor.constraint(equalToConstant: 360)
         ])
         
     }
@@ -181,12 +190,11 @@ class MBTIViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: view.frame.width * 0.42, height: 80)
+        layout.itemSize = CGSize(width: (view.frame.width / 2) - 29, height: 80)
         layout.sectionInset = UIEdgeInsets(top: 5, left: 24, bottom: 5, right: 24)
         
         return layout
     }
-
 }
 
 extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
@@ -202,6 +210,21 @@ extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ButtonCell
         else {
             return UICollectionViewCell()
+        }
+        
+        if let userSelect = UserContainer.shared.profile?.data.mbti.map({String($0)}), viewModel.withoutButtonState == false {
+            if userSelect[0] == MBTIDTO.EI(rawValue: indexPath.row)?.title ||
+                userSelect[1] == MBTIDTO.NS(rawValue: indexPath.row)?.title ||
+                userSelect[2] == MBTIDTO.TF(rawValue: indexPath.row)?.title ||
+                userSelect[3] == MBTIDTO.JP(rawValue: indexPath.row)?.title {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                viewModel.input.cellSelect.send(indexPath)
+            }
+        }
+        
+        if viewModel.withoutButtonState == true {
+            cell.isChecked = true
         }
         
         switch indexPath.section {
@@ -230,4 +253,3 @@ extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelega
         viewModel.deselectItem(indexPath)
     }
 }
-

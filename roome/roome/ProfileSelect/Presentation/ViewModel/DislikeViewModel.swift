@@ -27,9 +27,9 @@ class DislikeViewModel {
     private var canGoNext = PassthroughSubject<Int,Never>()
     private var goToNext = PassthroughSubject<Void, Error>()
     private var list = Set<IndexPath>()
-    private var useCase: DislikeUseCase
+    private var useCase: ProfileSelectUseCaseType
     
-    init(useCase: DislikeUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
     }
     
