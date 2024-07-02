@@ -21,9 +21,9 @@ class DeviceAndLockViewModel {
     
     var selectCell = PassthroughSubject<Int, Never>()
     private var goToNext = PassthroughSubject<Void, Error>()
-    private var useCase: DeviceLockUseCase
+    private var useCase: ProfileSelectUseCaseType
     
-    init(useCase: DeviceLockUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
     }
     

@@ -23,14 +23,14 @@ class RoomCountViewModel {
         var tapNext: AnyPublisher<Void, Never>
     }
     
-    private let usecase: RoomCountUseCase
+    private let usecase: ProfileSelectUseCaseType
     private let goToNext = PassthroughSubject<Void, Error>()
     @Published var textInput = "0"
     private var isRangeState: Bool = true
     var isSelected: (min: Int, max: Int) = (0,0)
     let canGoNext = PassthroughSubject<Bool, Never>()
     
-    init(usecase: RoomCountUseCase) {
+    init(usecase: ProfileSelectUseCaseType) {
         self.usecase = usecase
     }
     

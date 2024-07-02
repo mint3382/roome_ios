@@ -21,9 +21,9 @@ class ActivityViewModel {
     
     var selectCell = PassthroughSubject<Int, Never>()
     private var goToNext = PassthroughSubject<Void, Error>()
-    private var useCase: ActivityUseCase
+    private var useCase: ProfileSelectUseCaseType
     
-    init(useCase: ActivityUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
     }
     

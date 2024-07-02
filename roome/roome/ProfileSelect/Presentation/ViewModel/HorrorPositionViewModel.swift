@@ -21,9 +21,9 @@ class HorrorPositionViewModel {
     
     var selectCell = PassthroughSubject<Int, Never>()
     private var goToNext = PassthroughSubject<Void, Error>()
-    private var useCase: HorrorThemeUseCase
+    private var useCase: ProfileSelectUseCaseType
     
-    init(useCase: HorrorThemeUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
     }
     

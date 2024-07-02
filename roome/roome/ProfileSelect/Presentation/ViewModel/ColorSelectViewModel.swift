@@ -23,9 +23,9 @@ class ColorSelectViewModel {
     var selectCell = PassthroughSubject<Int, Never>()
     private var loading = PassthroughSubject<Void, Error>()
     private var goToNext = PassthroughSubject<Void, Never>()
-    private var useCase: ColorUseCase
+    private var useCase: ProfileSelectUseCaseType
     
-    init(useCase: ColorUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
     }
     

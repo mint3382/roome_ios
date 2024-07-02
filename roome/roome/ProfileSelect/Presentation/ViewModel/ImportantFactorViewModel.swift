@@ -27,9 +27,9 @@ class ImportantFactorViewModel {
     private var canGoNext = PassthroughSubject<Int,Never>()
     private var goToNext = PassthroughSubject<Void, Error>()
     private var list = Set<IndexPath>()
-    private var useCase: ThemeSelectUseCase
+    private var useCase: ProfileSelectUseCaseType
     
-    init(useCase: ThemeSelectUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
     }
     

@@ -27,9 +27,9 @@ class GenreViewModel {
     private var canGoNext = PassthroughSubject<Int,Never>()
     private var goToNext = PassthroughSubject<Void,Error>()
     var list = Set<IndexPath>()
-    private let useCase: GenreUseCase
+    private let useCase: ProfileSelectUseCaseType
     
-    init(useCase: GenreUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
     }
     

@@ -21,9 +21,9 @@ class HintViewModel {
     
     var selectCell = PassthroughSubject<Int, Never>()
     private var goToNext = PassthroughSubject<Void, Error>()
-    private var useCase: HintUseCase
+    private var useCase: ProfileSelectUseCaseType
     
-    init(useCase: HintUseCase) {
+    init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
     }
     
