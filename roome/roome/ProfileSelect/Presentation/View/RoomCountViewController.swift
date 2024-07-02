@@ -37,7 +37,6 @@ class RoomCountViewController: UIViewController {
         view.contentMode = .scaleAspectFit
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        
         return view
     }()
     let tableView: UITableView = {
@@ -117,7 +116,6 @@ class RoomCountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        numberTextField.delegate = self
         nextButton.isEnabled = false
         configureUI()
         configureSizeButtons()
@@ -125,9 +123,6 @@ class RoomCountViewController: UIViewController {
         configureNextButton()
         bind()
         registerKeyboardListener()
-        tableView.register(DropDownCell.self, forCellReuseIdentifier: "tableViewCell")
-        tableView.dataSource = self
-        tableView.delegate = self
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -274,6 +269,9 @@ class RoomCountViewController: UIViewController {
     }
     
     private func configureTableView() {
+        tableView.register(DropDownCell.self, forCellReuseIdentifier: "tableViewCell")
+        tableView.dataSource = self
+        tableView.delegate = self
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -285,6 +283,7 @@ class RoomCountViewController: UIViewController {
     }
     
     private func configureNumberTextField() {
+        numberTextField.delegate = self
         view.addSubview(textFieldBackgroundView)
         view.addSubview(numberLineStackView)
         numberLineStackView.addArrangedSubview(numberTextField)

@@ -166,6 +166,14 @@ extension DislikeViewController: UICollectionViewDataSource, UICollectionViewDel
             return UICollectionViewCell()
         }
         
+        if let userSelect = UserContainer.shared.profile?.data.themeDislikedFactors.map({ $0.id }) {
+            if userSelect.contains(dislike.id) {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                viewModel.selectCell.send(indexPath)
+            }
+        }
+        
         cell.changeTitle(dislike.title)
         
         return cell

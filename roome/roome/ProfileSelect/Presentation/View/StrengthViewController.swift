@@ -168,7 +168,16 @@ extension StrengthViewController: UICollectionViewDataSource, UICollectionViewDe
         guard let strength = UserContainer.shared.defaultProfile?.data.strengths[indexPath.row] else {
             return UICollectionViewCell()
         }
+        
         cell.changeTitle(strength.title)
+        
+        if let userSelect = UserContainer.shared.profile?.data.userStrengths.map({ $0.id }) {
+            if userSelect.contains(strength.id) {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                viewModel.selectCell.send(indexPath)
+            }
+        }
         
         return cell
     }

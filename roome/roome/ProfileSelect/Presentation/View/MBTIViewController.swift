@@ -54,6 +54,14 @@ class MBTIViewController: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if UserContainer.shared.profile?.data.mbti == "NONE" {
+            viewModel.input.tappedNotAddButton.send()
+        }
+    }
+    
     func bind() {
         nextButton.publisher(for: .touchUpInside)
             .sink { [weak self] in
@@ -104,9 +112,6 @@ class MBTIViewController: UIViewController {
                 if willNotAdd {
                     self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.roomeMain).resize(newWidth: 24)
                     _ = self?.collectionView.visibleCells.map { $0.isSelected = false }
-                    _ = self?.collectionView.visibleCells
-                        .compactMap { $0 as? ButtonCell }
-                        .map { $0.isChecked = true }
                     self?.collectionView.reloadData()
                 } else {
                     self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
@@ -190,7 +195,6 @@ class MBTIViewController: UIViewController {
         
         return layout
     }
-
 }
 
 extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
@@ -206,6 +210,21 @@ extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ButtonCell
         else {
             return UICollectionViewCell()
+        }
+        
+        if let userSelect = UserContainer.shared.profile?.data.mbti.map({String($0)}), viewModel.withoutButtonState == false {
+            if userSelect[0] == MBTIDTO.EI(rawValue: indexPath.row)?.title ||
+                userSelect[1] == MBTIDTO.NS(rawValue: indexPath.row)?.title ||
+                userSelect[2] == MBTIDTO.TF(rawValue: indexPath.row)?.title ||
+                userSelect[3] == MBTIDTO.JP(rawValue: indexPath.row)?.title {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                viewModel.input.cellSelect.send(indexPath)
+            }
+        }
+        
+        if viewModel.withoutButtonState == true {
+            cell.isChecked = true
         }
         
         switch indexPath.section {
@@ -234,4 +253,3 @@ extension MBTIViewController: UICollectionViewDataSource, UICollectionViewDelega
         viewModel.deselectItem(indexPath)
     }
 }
-

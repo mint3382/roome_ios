@@ -125,6 +125,13 @@ extension HorrorPositionViewController: UICollectionViewDataSource, UICollection
             return UICollectionViewCell()
         }
         
+        if let userSelect = UserContainer.shared.profile?.data.horrorThemePosition?.id {
+            if userSelect == horrorPosition.id {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            }
+        }
+        
         cell.changeTitle(horrorPosition.title)
         cell.addDescription(horrorPosition.description)
         

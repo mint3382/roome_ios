@@ -166,7 +166,16 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         guard let genre = UserContainer.shared.defaultProfile?.data.genres[indexPath.row] else {
             return UICollectionViewCell()
         }
+        
         cell.changeTitle(genre.title)
+        
+        if let userSelect = UserContainer.shared.profile?.data.preferredGenres.map({ $0.id }) {
+            if userSelect.contains(genre.id) {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                viewModel.selectCell.send(indexPath)
+            }
+        }
         
         return cell
     }

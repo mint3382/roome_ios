@@ -126,6 +126,13 @@ extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDe
             return UICollectionViewCell()
         }
         
+        if let userSelect = UserContainer.shared.profile?.data.activity?.id {
+            if userSelect == activity.id {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            }
+        }
+        
         cell.changeTitle(activity.title)
         cell.addDescription(activity.description)
         

@@ -116,6 +116,13 @@ extension DeviceAndLockViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        if let userSelect = UserContainer.shared.profile?.data.deviceLockPreference?.id {
+            if userSelect == device.id {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            }
+        }
+        
         cell.changeTitle(device.title)
         cell.addDescription(device.description)
         

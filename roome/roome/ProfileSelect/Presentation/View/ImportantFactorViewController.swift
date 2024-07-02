@@ -166,6 +166,14 @@ extension ImportantFactorViewController: UICollectionViewDataSource, UICollectio
             return UICollectionViewCell()
         }
         
+        if let userSelect = UserContainer.shared.profile?.data.themeImportantFactors.map({ $0.id }) {
+            if userSelect.contains(importantFactor.id) {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                viewModel.selectCell.send(indexPath)
+            }
+        }
+        
         cell.changeTitle(importantFactor.title)
         
         return cell

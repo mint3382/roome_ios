@@ -128,6 +128,14 @@ extension HintViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let hint = UserContainer.shared.defaultProfile?.data.hintUsagePreferences[indexPath.row] else {
             return UICollectionViewCell()
         }
+        
+        if let userSelect = UserContainer.shared.profile?.data.hintUsagePreference?.id {
+            if userSelect == hint.id {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+            }
+        }
+        
         cell.changeTitle(hint.title)
         cell.addDescription(hint.description)
         
