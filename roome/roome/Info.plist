@@ -5,7 +5,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>프로필 사진 등록을 위한 카메라 권한을 허용 하시겠습니까?</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>카드 이미지 다운로드를 위한 앨범 사용 권한을 허용 하시겠습니까? </string>
+	<string>제작된 프로필 이미지 저장을 위해 사진 라이브러리에 접근하도록 허용합니다.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Regular.otf</string>
