@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>프로필 사진 등록을 위한 카메라 권한을 허용 하시겠습니까?</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
+	<string>카드 이미지 다운로드를 위한 앨범 사용 권한을 허용 하시겠습니까? </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Regular.otf</string>
