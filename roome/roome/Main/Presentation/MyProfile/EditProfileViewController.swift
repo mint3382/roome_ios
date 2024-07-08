@@ -36,10 +36,9 @@ class EditProfileViewController: UIViewController {
     }()
     
     let profileImageButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.image = UserContainer.shared.userImage
-        
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.setImage(UserContainer.shared.userImage, for: .normal)
+        button.sizeToFit()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 40
         button.clipsToBounds = true
@@ -173,8 +172,9 @@ class EditProfileViewController: UIViewController {
         photoPopUp.baseImageButtonPublisher()
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] in
-                self?.viewModel.input.tappedBaseImage.send()
+                self?.viewModel.isImageChanged = .reset
                 self?.profileImageButton.setImage(UIImage(resource: .userProfile).resize(newWidth: 80), for: .normal)
+                self?.photoPopUp.removeFromSuperview()
             }
             .store(in: &cancellables)
         
@@ -186,15 +186,13 @@ class EditProfileViewController: UIViewController {
         
         viewModel.output.handleSaveButton
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { completion in
-                switch completion {
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    self?.dismiss(animated: false)
                 case .failure(let error):
-                    self.handleError(error)
-                case .finished:
-                    print("finished")
+                    self?.handleError(error)
                 }
-            } receiveValue: { [weak self] in
-                self?.dismiss(animated: true)
             }
             .store(in: &cancellables)
 
@@ -207,7 +205,7 @@ class EditProfileViewController: UIViewController {
                 if isChanged {
                     self.window?.addSubview(changePopUp)
                 } else {
-                    self.dismiss(animated: true)
+                    self.dismiss(animated: false)
                 }
             }
             .store(in: &cancellables)
@@ -221,7 +219,7 @@ class EditProfileViewController: UIViewController {
         changePopUp.publisherColorButton()
             .sink { [weak self] in
                 self?.changePopUp.removeFromSuperview()
-                self?.dismiss(animated: true)
+                self?.dismiss(animated: false)
             }
             .store(in: &cancellables)
     }
@@ -337,10 +335,10 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //이미지 UserCell로 전송??
             profileImageButton.setImage(image.resize(newWidth: 80), for: .normal)
-            viewModel.input.changePhoto.send(image)
-            viewModel.isImageChanged = true
+            viewModel.input.changePhoto.send(.success(image))
+            viewModel.isImageChanged = .change
         }
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
         photoPopUp.removeFromSuperview()
     }
 }

@@ -12,14 +12,13 @@ class EditProfileViewModel {
     struct Input {
         let tappedSaveButton = PassthroughSubject<Void, Never>()
         let tappedCloseButton = PassthroughSubject<Void, Never>()
-        let tappedBaseImage = PassthroughSubject<Void, Never>()
-        let changePhoto = CurrentValueSubject<UIImage, Error>(UserContainer.shared.userImage)
+        let changePhoto = PassthroughSubject<Result<UIImage, Error>, Never>()
     }
     
     struct Output {
-        let handleSaveButton = PassthroughSubject<Void, NicknameError>()
+        let handleSaveButton = PassthroughSubject<Result<Void, NicknameError>, Never>()
         let handleCloseButton = PassthroughSubject<Bool, Never>()
-        let handleBaseImage = PassthroughSubject<Void, Error>()
+        let handleBaseImage = PassthroughSubject<Result<Void, Error>, Never>()
     }
     
     let input: Input
@@ -29,12 +28,18 @@ class EditProfileViewModel {
     
     private var userImage: UIImage = UserContainer.shared.userImage
     private var userNickname: String? = UserContainer.shared.user?.data.nickname
-    var isImageChanged: Bool = false
+    var isImageChanged: ImageState = .notChange
     
-    private let usecase: NicknameUseCase
+    enum ImageState {
+        case change
+        case notChange
+        case reset
+    }
+    
+    private let usecase: UserProfileUseCase
     private var cancellables = Set<AnyCancellable>()
     
-    init(usecase: NicknameUseCase) {
+    init(usecase: UserProfileUseCase) {
         self.usecase = usecase
         self.input = Input()
         self.output = Output()
@@ -49,22 +54,14 @@ class EditProfileViewModel {
             }
             .store(in: &cancellables)
         
-        input.tappedBaseImage
-            .sink { [weak self] in
-                self?.removeImage()
-            }
-            .store(in: &cancellables)
-        
         input.changePhoto
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    print("changePhoto finished")
+            .sink { [weak self] result in
+                switch result {
+                case .success(let image):
+                    self?.userImage = image
                 case .failure(let error):
                     print(error)
                 }
-            } receiveValue: { [weak self] image in
-                self?.userImage = image
             }
             .store(in: &cancellables)
 
@@ -74,7 +71,7 @@ class EditProfileViewModel {
                     return
                 }
                 if (textInput == "" || textInput == userNickname)
-                    && isImageChanged == false {
+                    && isImageChanged == .notChange {
                     output.handleCloseButton.send(false)
                 } else {
                     output.handleCloseButton.send(true)
@@ -94,34 +91,28 @@ class EditProfileViewModel {
     private func pushedNextButton(_ nickname: String?) {
         Task {
             do {
-                try await usecase.nicknameCheckWithAPI(nickname)
-//                try await usecase.imageWithAPI(userImage.resize(newWidth: 20))
+                if (textInput != "" && textInput != userNickname) {
+                    try await usecase.nicknameCheckWithAPI(nickname)
+                }
+                if isImageChanged == .change {
+                    try await usecase.imageWithAPI(userImage.resize(newWidth: 50))
+                } else if isImageChanged == .reset {
+                    try await usecase.deleteImageWithAPI()
+                }
                 try await UserContainer.shared.updateUserInformation()
-                self.output.handleSaveButton.send()
+                self.output.handleSaveButton.send(.success({}()))
             } catch(let error) {
                 guard let error = error as? NicknameError else {
-                    self.output.handleSaveButton.send(completion: .failure(NicknameError.network))
+                    self.output.handleSaveButton.send(.failure(NicknameError.network))
                     return
                 }
                 
                 switch error {
                 case .form(let errorDTO):
-                    self.output.handleSaveButton.send(completion: .failure(NicknameError.form(errorDTO)))
+                    self.output.handleSaveButton.send(.failure(NicknameError.form(errorDTO)))
                 default:
-                    self.output.handleSaveButton.send(completion: .failure(NicknameError.network))
+                    self.output.handleSaveButton.send(.failure(NicknameError.network))
                 }
-            }
-        }
-    }
-    
-    private func removeImage() {
-        Task {
-            do {
-//                try await usecase.deleteImageWithAPI()
-                try await UserContainer.shared.updateUserInformation()
-                self.output.handleBaseImage.send()
-            } catch {
-                self.output.handleBaseImage.send(completion: .failure(error))
             }
         }
     }
