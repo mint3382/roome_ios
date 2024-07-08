@@ -120,9 +120,11 @@ class DIManager {
         let myProfileCardViewController = MyProfileCardViewController(viewModel: profileCardViewModel)
         DIContainer.shared.register(MyProfileCardViewController.self, dependency: myProfileCardViewController)
         
-        let nicknameUseCase = DIContainer.shared.resolve(NicknameUseCase.self)
-        let editProfileViewModel = EditProfileViewModel(usecase: nicknameUseCase)
+        let userProfileRepository = UserProfileRepository()
+        let userProfileUseCase = UserProfileUseCase(userProfileRepository: userProfileRepository)
+        let editProfileViewModel = EditProfileViewModel(usecase: userProfileUseCase)
         let editProfileViewController = EditProfileViewController(viewModel: editProfileViewModel)
+        DIContainer.shared.register(UserProfileUseCase.self, dependency: userProfileUseCase)
         DIContainer.shared.register(EditProfileViewController.self, dependency: editProfileViewController)
         
         let settingViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))

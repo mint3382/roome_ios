@@ -132,6 +132,9 @@
 		92CA2D0D2C3387280084CD5A /* ProfileSelectRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0C2C3387280084CD5A /* ProfileSelectRepositoryType.swift */; };
 		92CA2D0F2C3387C10084CD5A /* ProfileSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0E2C3387C10084CD5A /* ProfileSelectRepository.swift */; };
 		92CA2D112C338D780084CD5A /* ProfileSelectUseCaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D102C338D780084CD5A /* ProfileSelectUseCaseType.swift */; };
+		92CA2DC02C3BF4670084CD5A /* UserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */; };
+		92CA2DC22C3BF4A20084CD5A /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */; };
+		92CA2DC42C3BF4C80084CD5A /* UserProfileRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -261,6 +264,9 @@
 		92CA2D0C2C3387280084CD5A /* ProfileSelectRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectRepositoryType.swift; sourceTree = "<group>"; };
 		92CA2D0E2C3387C10084CD5A /* ProfileSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectRepository.swift; sourceTree = "<group>"; };
 		92CA2D102C338D780084CD5A /* ProfileSelectUseCaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectUseCaseType.swift; sourceTree = "<group>"; };
+		92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileUseCase.swift; sourceTree = "<group>"; };
+		92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
+		92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepositoryType.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -434,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				9293DC992C28170300545B57 /* SettingDTO.swift */,
+				92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -441,6 +448,8 @@
 		9256E55D2C0EFE8700A50515 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */,
+				92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1020,6 +1029,7 @@
 				9293DC812C22E70700545B57 /* TabBarController.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
+				92CA2DC22C3BF4A20084CD5A /* UserProfileRepository.swift in Sources */,
 				921695592BFB8D38006DC44A /* UserContainer.swift in Sources */,
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				9256E5692C10CA1F00A50515 /* DropDownCell.swift in Sources */,
@@ -1046,10 +1056,12 @@
 				9293DC7A2C216CC000545B57 /* MyProfileViewController.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
+				92CA2DC02C3BF4670084CD5A /* UserProfileUseCase.swift in Sources */,
 				9293DCA02C2A052A00545B57 /* UpdateError.swift in Sources */,
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
 				92CA2D112C338D780084CD5A /* ProfileSelectUseCaseType.swift in Sources */,
 				9293DC9A2C28170300545B57 /* SettingDTO.swift in Sources */,
+				92CA2DC42C3BF4C80084CD5A /* UserProfileRepositoryType.swift in Sources */,
 				9271F7E72C0865EB00586AFD /* MBTIDTO.swift in Sources */,
 				921695A12BFE743D006DC44A /* ImportantFactorViewController.swift in Sources */,
 				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
