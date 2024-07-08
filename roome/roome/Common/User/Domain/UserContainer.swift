@@ -40,6 +40,7 @@ class UserContainer {
         }
         
         user = try await apiProvider.fetchDecodedData(type: UserDTO.self, from: request)
+        try await updateUserImage(user?.data.imageUrl ?? "")
     }
     
     func updateUserProfile() async throws {
@@ -100,19 +101,16 @@ class UserContainer {
         defaultProfile = try await apiProvider.fetchDecodedData(type: ProfileDefaultDTO.self, from: request)
     }
     
-//    func updateUserImage(url: URL?) {
-//        Task {
-//            do {
-//                guard let url else {
-//                    userImage = UIImage(resource: .userProfile).resize(newWidth: 80)
-//                    return
-//                }
-//                let data = try await apiProvider.fetchURLData(from: url)
-//                
-//                userImage = UIImage(data: data) ?? UIImage(resource: .userProfile).resize(newWidth: 80)
-//            } catch {
-//                userImage = UIImage(resource: .userProfile).resize(newWidth: 80)
-//            }
-//        }
-//    }
+    private func updateUserImage(_ imageURL: String) async throws {
+        let url = URL(string: imageURL)
+        
+        guard let url else {
+            userImage = UIImage(resource: .userProfile).resize(newWidth: 80)
+            return
+        }
+        
+        let data = try await apiProvider.fetchURLData(from: url)
+        
+        userImage = UIImage(data: data) ?? UIImage(resource: .userProfile).resize(newWidth: 80)
+    }
 }

@@ -1,17 +1,17 @@
 //
-//  NicknameUseCase.swift
+//  UserProfileUseCase.swift
 //  roome
 //
-//  Created by minsong kim on 5/18/24.
+//  Created by minsong kim on 7/8/24.
 //
 
-import Foundation
+import UIKit
 
-class NicknameUseCase {
-    private let nicknameRepository: NicknameRepositoryType
+class UserProfileUseCase {
+    private let userProfileRepository: UserProfileRepositoryType
     
-    init(nicknameRepository: NicknameRepositoryType) {
-        self.nicknameRepository = nicknameRepository
+    init(userProfileRepository: UserProfileRepositoryType) {
+        self.userProfileRepository = userProfileRepository
     }
     
     func checkNicknameText(_ text: String) -> Bool {
@@ -33,6 +33,14 @@ class NicknameUseCase {
             throw TypeError.bindingFailure
         }
         
-        try await nicknameRepository.requestNickname(text)
+        try await userProfileRepository.requestNickname(text)
+    }
+    
+    func imageWithAPI(_ image: UIImage) async throws {
+        try await userProfileRepository.requestImage(image)
+    }
+
+    func deleteImageWithAPI() async throws {
+        try await userProfileRepository.requestImageDelete()
     }
 }

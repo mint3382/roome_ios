@@ -7,6 +7,8 @@
 
 import UIKit
 import Combine
+import AVFoundation
+import Photos
 
 class EditProfileViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -16,6 +18,11 @@ class EditProfileViewController: UIViewController {
                                              description: "변경사항을 저장하지 않고 나가시겠어요?",
                                              whiteButtonTitle: "취소",
                                              colorButtonTitle: "나가기")
+    private lazy var errorPopUp = PopUpView(frame: window!.bounds,
+                                            title: "권한을 허용해 주세요",
+                                            description: "사진 권한을 허용해야\n이미지를 불러올 수 있어요.",
+                                            whiteButtonTitle: "취소",
+                                            colorButtonTitle: "설정")
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "프로필 수정"
@@ -36,10 +43,9 @@ class EditProfileViewController: UIViewController {
     }()
     
     let profileImageButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.image = UserContainer.shared.userImage
-        
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.setImage(UserContainer.shared.userImage, for: .normal)
+        button.sizeToFit()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 40
         button.clipsToBounds = true
@@ -173,8 +179,9 @@ class EditProfileViewController: UIViewController {
         photoPopUp.baseImageButtonPublisher()
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] in
-                self?.viewModel.input.tappedBaseImage.send()
+                self?.viewModel.isImageChanged = .reset
                 self?.profileImageButton.setImage(UIImage(resource: .userProfile).resize(newWidth: 80), for: .normal)
+                self?.photoPopUp.removeFromSuperview()
             }
             .store(in: &cancellables)
         
@@ -185,15 +192,14 @@ class EditProfileViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleSaveButton
-            .sink { completion in
-                switch completion {
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    self?.dismiss(animated: false)
                 case .failure(let error):
-                    self.handleError(error)
-                case .finished:
-                    print("finished")
+                    self?.handleError(error)
                 }
-            } receiveValue: { [weak self] in
-                self?.dismiss(animated: true)
             }
             .store(in: &cancellables)
 
@@ -206,7 +212,7 @@ class EditProfileViewController: UIViewController {
                 if isChanged {
                     self.window?.addSubview(changePopUp)
                 } else {
-                    self.dismiss(animated: true)
+                    self.dismiss(animated: false)
                 }
             }
             .store(in: &cancellables)
@@ -220,7 +226,19 @@ class EditProfileViewController: UIViewController {
         changePopUp.publisherColorButton()
             .sink { [weak self] in
                 self?.changePopUp.removeFromSuperview()
-                self?.dismiss(animated: true)
+                self?.dismiss(animated: false)
+            }
+            .store(in: &cancellables)
+        
+        errorPopUp.publisherWhiteButton()
+            .sink { [weak self] in
+                self?.errorPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        errorPopUp.publisherColorButton()
+            .sink { _ in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }
             .store(in: &cancellables)
     }
@@ -233,6 +251,7 @@ class EditProfileViewController: UIViewController {
             nicknameLabel.textColor = .roomeMain
         case .network:
             print("네트워크 에러")
+            //TODO: - Toast 띄우기
         }
     }
     
@@ -318,29 +337,47 @@ class EditProfileViewController: UIViewController {
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func openCamera() {
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            //에러 전달
-            return
+        if checkCameraPermission() {
+            imagePicker.sourceType = .camera
+            present(imagePicker, animated: false, completion: nil)
+        } else {
+            window?.addSubview(errorPopUp)
         }
-        
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: false, completion: nil)
     }
     
     func openAlbum() {
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: false, completion: nil)
+        if checkAlbumPermission() {
+            imagePicker.sourceType = .photoLibrary
+            present(imagePicker, animated: false, completion: nil)
+        } else {
+            window?.addSubview(errorPopUp)
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             //이미지 UserCell로 전송??
             profileImageButton.setImage(image.resize(newWidth: 80), for: .normal)
-            viewModel.input.changePhoto.send(image)
-            viewModel.isImageChanged = true
+            viewModel.input.changePhoto.send(.success(image))
+            viewModel.isImageChanged = .change
         }
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
         photoPopUp.removeFromSuperview()
+    }
+    
+    private func checkCameraPermission() -> Bool {
+        AVCaptureDevice.authorizationStatus(for: .video) == AVAuthorizationStatus.authorized
+    }
+    
+    private func checkAlbumPermission() -> Bool {
+        let authorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        
+        switch authorizationStatus {
+        case .authorized:
+            return true
+        default:
+            return false
+        }
     }
 }
 

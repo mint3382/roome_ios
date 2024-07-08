@@ -37,7 +37,8 @@ class MyProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         print("viewWillAppear")
         //TODO: - 닉네임과 유저 사진이 바뀌었다면 업데이트.
-//        collectionView.cellForItem(at: IndexPath(item: 0, section: 0))?.layoutSubviews()
+        (collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? UserCell)?.updateUserProfile()
+//        collectionView.reloadData()
     }
     
     private func bind() {
@@ -108,7 +109,7 @@ extension MyProfileViewController: UICollectionViewDataSource {
         if indexPath.section == 0 {
             userCell.userButtonPublisher()
                 .sink { [weak self] in
-                    let view = EditProfileViewController(viewModel: EditProfileViewModel(usecase: DIContainer.shared.resolve(NicknameUseCase.self)))
+                    let view = EditProfileViewController(viewModel: EditProfileViewModel(usecase: DIContainer.shared.resolve(UserProfileUseCase.self)))
                     view.modalPresentationStyle = .fullScreen
                     
                     self?.present(view, animated: true)
@@ -176,7 +177,7 @@ extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
         var width = (view.frame.width / 2) - 29
         
         if indexPath.section == 0 {
-            height = 120.0
+            height = 140.0
             width = view.frame.width - 48
         } else if indexPath.row == 0 || indexPath.row == 1 {
             height = 70.0
