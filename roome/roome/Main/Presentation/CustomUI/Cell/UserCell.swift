@@ -10,10 +10,9 @@ import Combine
 
 class UserCell: UICollectionViewCell {
     private let userImageButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.image = UserContainer.shared.userImage.resize(newWidth: 50)
-        
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.setImage(UserContainer.shared.userImage, for: .normal)
+        button.sizeToFit()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 25
         button.clipsToBounds = true
@@ -92,7 +91,7 @@ class UserCell: UICollectionViewCell {
     override func layoutSubviews() {
         shareButton.titleLabel?.font = .boldTitle4
         cardButton.titleLabel?.font = .boldTitle4
-//        userButton.setNeedsLayout()
+//        userImageButton.setNeedsLayout()
         updateUserProfile()
     }
     
