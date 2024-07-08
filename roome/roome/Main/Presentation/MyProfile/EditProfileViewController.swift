@@ -185,6 +185,7 @@ class EditProfileViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleSaveButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { completion in
                 switch completion {
                 case .failure(let error):

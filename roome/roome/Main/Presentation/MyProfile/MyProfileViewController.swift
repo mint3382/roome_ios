@@ -176,7 +176,7 @@ extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
         var width = (view.frame.width / 2) - 29
         
         if indexPath.section == 0 {
-            height = 120.0
+            height = 140.0
             width = view.frame.width - 48
         } else if indexPath.row == 0 || indexPath.row == 1 {
             height = 70.0
