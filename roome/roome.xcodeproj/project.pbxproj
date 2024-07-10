@@ -271,6 +271,7 @@
 		92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepositoryType.swift; sourceTree = "<group>"; };
 		92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGenreViewController.swift; sourceTree = "<group>"; };
 		92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMBTIViewController.swift; sourceTree = "<group>"; };
+		92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStrengthViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -856,6 +857,7 @@
 			children = (
 				92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */,
 				92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */,
+				92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */,
 			);
 			path = EditProfileCard;
 			sourceTree = "<group>";
@@ -1018,6 +1020,7 @@
 				9293DC7F2C216EDC00545B57 /* MyProfileCell.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9271F8292C09A39900586AFD /* PopUpView.swift in Sources */,
+				92CA2DCF2C3CE3800084CD5A /* EditStrengthViewController.swift in Sources */,
 				928474812C0D9F0F002C3B4C /* UIStackView+.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
