@@ -135,6 +135,7 @@
 		92CA2DC02C3BF4670084CD5A /* UserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */; };
 		92CA2DC22C3BF4A20084CD5A /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */; };
 		92CA2DC42C3BF4C80084CD5A /* UserProfileRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */; };
+		92CA2DCB2C3CE1220084CD5A /* EditGenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -267,6 +268,7 @@
 		92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileUseCase.swift; sourceTree = "<group>"; };
 		92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
 		92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepositoryType.swift; sourceTree = "<group>"; };
+		92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGenreViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 		9256E55E2C0EFE8C00A50515 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				92CA2DC72C3CBCA10084CD5A /* EditProfileCard */,
 				9293DC962C27DCBE00545B57 /* MyProfile */,
 				9293DC952C27DCB300545B57 /* Setting */,
 				9293DC802C22E70700545B57 /* TabBarController.swift */,
@@ -846,6 +849,14 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		92CA2DC72C3CBCA10084CD5A /* EditProfileCard */ = {
+			isa = PBXGroup;
+			children = (
+				92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */,
+			);
+			path = EditProfileCard;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
@@ -1036,6 +1047,7 @@
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
+				92CA2DCB2C3CE1220084CD5A /* EditGenreViewController.swift in Sources */,
 				928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
