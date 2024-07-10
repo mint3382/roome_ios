@@ -1,14 +1,14 @@
 //
-//  EditStrengthViewController.swift
+//  EditHorrorPositionViewController.swift
 //  roome
 //
-//  Created by minsong kim on 7/9/24.
+//  Created by minsong kim on 7/10/24.
 //
 
 import UIKit
 import Combine
 
-class EditStrengthViewController: UIViewController, ToastAlertable {
+class EditHorrorPositionViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
     private lazy var changePopUp = PopUpView(frame: window!.bounds,
                                              title: "변경사항이 있어요",
@@ -22,16 +22,14 @@ class EditStrengthViewController: UIViewController, ToastAlertable {
         
         return button
     }()
-    private let titleLabel = TitleLabel(text: "방탈출 할 때,\n본인의 강점이 무엇이라고\n생각하시나요?")
-    private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
-    var nextButton = NextButton(title: "저장", backgroundColor: .roomeMain, tintColor: .white)
+    private let titleLabel = TitleLabel(text: "공포 테마에서,\n어떤 포지션인가요?")
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
-    
-    var viewModel: StrengthViewModel
+    private var nextButton = NextButton(title: "저장", backgroundColor: .roomeMain, tintColor: .white)
+    var viewModel: HorrorPositionViewModel
     var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: StrengthViewModel) {
+    init(viewModel: HorrorPositionViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -53,7 +51,7 @@ class EditStrengthViewController: UIViewController, ToastAlertable {
     func bind() {
         nextButton.publisher(for: .touchUpInside)
             .sink { [weak self] in
-                self?.viewModel.input.tapNextButton.send()
+                self?.viewModel.input.tapSaveButton.send()
             }
             .store(in: &cancellables)
         
@@ -74,23 +72,6 @@ class EditStrengthViewController: UIViewController, ToastAlertable {
             }
             .store(in: &cancellables)
         
-        viewModel.output.handleCellSelect
-            .sink { [weak self] (result, item) in
-                if result == false {
-                    self?.collectionView.deselectItem(at: item, animated: false)
-                    self?.showToast(count: 2)
-                }
-            }.store(in: &cancellables)
-        
-        viewModel.output.handleCanGoNext
-            .sink { [weak self] result in
-                if result {
-                    self?.nextButton.isEnabled = true
-                } else {
-                    self?.nextButton.isEnabled = false
-                }
-            }.store(in: &cancellables)
-        
         viewModel.output.handleNextButton
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] result in
@@ -98,8 +79,8 @@ class EditStrengthViewController: UIViewController, ToastAlertable {
                 case .success:
                     self?.dismiss(animated: false)
                 case .failure(let error):
-                    //TODO: - 토스트로 에러 띄우기
                     print(error)
+                    //TODO: error Toast 띄우기
                 }
             }
             .store(in: &cancellables)
@@ -127,21 +108,20 @@ class EditStrengthViewController: UIViewController, ToastAlertable {
     func setUpCollectionView() {
         collectionView.alwaysBounceVertical = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.allowsMultipleSelection = true
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
         ])
+        
     }
     
-    func configureStackView() {
+    private func configureStackView() {
         view.addSubview(closeButton)
         view.addSubview(titleLabel)
-        view.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
             closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
@@ -150,10 +130,7 @@ class EditStrengthViewController: UIViewController, ToastAlertable {
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 12),
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
     
@@ -171,18 +148,16 @@ class EditStrengthViewController: UIViewController, ToastAlertable {
     func createFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: (view.frame.width / 2) - 29, height: 50)
+        layout.itemSize = CGSize(width: view.frame.width - 48, height: 70)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 24, bottom: 50, right: 24)
         
         return layout
     }
-
 }
 
-extension EditStrengthViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
+extension EditHorrorPositionViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        UserContainer.shared.defaultProfile?.data.strengths.count ?? 0
+        UserContainer.shared.defaultProfile?.data.horrorThemePositions.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -190,28 +165,29 @@ extension EditStrengthViewController: UICollectionViewDataSource, UICollectionVi
         else {
             return UICollectionViewCell()
         }
-        guard let strength = UserContainer.shared.defaultProfile?.data.strengths[indexPath.row] else {
+        
+        guard let horrorPosition = UserContainer.shared.defaultProfile?.data.horrorThemePositions[indexPath.row] else {
             return UICollectionViewCell()
         }
         
-        cell.changeTitle(strength.title)
-        
-        if let userSelect = UserContainer.shared.profile?.data.userStrengths.map({ $0.id }) {
-            if userSelect.contains(strength.id) {
+        if let userSelect = UserContainer.shared.profile?.data.horrorThemePosition?.id {
+            if userSelect == horrorPosition.id {
                 cell.isSelected = true
                 collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
-                viewModel.input.selectCell.send(indexPath)
+                viewModel.input.selectCell.send((true, userSelect))
             }
         }
+        
+        cell.changeTitle(horrorPosition.title)
+        cell.addDescription(horrorPosition.description)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.input.selectCell.send(indexPath)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        viewModel.input.deselectCell.send(indexPath)
+        guard let horrorPosition = UserContainer.shared.defaultProfile?.data.horrorThemePositions[indexPath.row] else {
+            return
+        }
+        viewModel.input.selectCell.send((true, horrorPosition.id))
     }
 }

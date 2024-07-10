@@ -139,6 +139,7 @@
 		92CA2DCD2C3CE2AF0084CD5A /* EditMBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */; };
 		92CA2DCF2C3CE3800084CD5A /* EditStrengthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */; };
 		92CA2DD12C3CE4170084CD5A /* EditImportantFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD02C3CE4170084CD5A /* EditImportantFactorViewController.swift */; };
+		92CA2DD32C3E99A30084CD5A /* EditHorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD22C3E99A30084CD5A /* EditHorrorPositionViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -275,6 +276,7 @@
 		92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMBTIViewController.swift; sourceTree = "<group>"; };
 		92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStrengthViewController.swift; sourceTree = "<group>"; };
 		92CA2DD02C3CE4170084CD5A /* EditImportantFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImportantFactorViewController.swift; sourceTree = "<group>"; };
+		92CA2DD22C3E99A30084CD5A /* EditHorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHorrorPositionViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -862,6 +864,7 @@
 				92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */,
 				92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */,
 				92CA2DD02C3CE4170084CD5A /* EditImportantFactorViewController.swift */,
+				92CA2DD22C3E99A30084CD5A /* EditHorrorPositionViewController.swift */,
 			);
 			path = EditProfileCard;
 			sourceTree = "<group>";
@@ -1077,6 +1080,7 @@
 				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
 				928474872C0DBDEB002C3B4C /* ProfileCardViewModel.swift in Sources */,
 				9293DC7A2C216CC000545B57 /* MyProfileViewController.swift in Sources */,
+				92CA2DD32C3E99A30084CD5A /* EditHorrorPositionViewController.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
 				92CA2DD12C3CE4170084CD5A /* EditImportantFactorViewController.swift in Sources */,

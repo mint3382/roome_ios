@@ -143,4 +143,3 @@ extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDe
         viewModel.input.selectCell.send((false,activity.id))
     }
 }
-

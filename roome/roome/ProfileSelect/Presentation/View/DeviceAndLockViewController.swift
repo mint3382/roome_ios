@@ -157,4 +157,3 @@ extension DeviceAndLockViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: height)
     }
 }
-
