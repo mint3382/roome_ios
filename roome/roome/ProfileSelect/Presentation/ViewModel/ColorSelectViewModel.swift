@@ -12,13 +12,13 @@ class ColorSelectViewModel {
     struct Input {
         let tapSaveButton = PassthroughSubject<Void, Never>()
         let selectCell = PassthroughSubject<(isEdit: Bool, id: Int), Never>()
-        let deselectCell = PassthroughSubject<Int, Never>()
+        let tapCloseButton = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
         let handleCellSelect = PassthroughSubject<Result<Void, Error>,Never>()
         let handleNextButton = PassthroughSubject<Result<Void, Error>, Never>()
-        let handleCanGoNext = PassthroughSubject<Bool, Never>()
+        let handleCloseButton = PassthroughSubject<Bool, Never>()
         let handleLoading = PassthroughSubject<Bool, Never>()
     }
 
@@ -40,17 +40,9 @@ class ColorSelectViewModel {
             .sink { [weak self] (isEdit, id) in
                 if isEdit {
                     self?.id = id
-                    self?.output.handleCanGoNext.send(true)
                 } else {
                     self?.handlePage(id: id, isEdit: false)
                 }
-            }
-            .store(in: &cancellables)
-        
-        input.deselectCell
-            .sink { [weak self] id in
-                self?.id = -1
-                self?.output.handleCanGoNext.send(false)
             }
             .store(in: &cancellables)
         
@@ -61,6 +53,25 @@ class ColorSelectViewModel {
                 }
             }
             .store(in: &cancellables)
+        
+        input.tapCloseButton
+            .sink { [weak self] in
+                self?.checkEdit()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func checkEdit() {
+        let userSelect =  UserContainer.shared.defaultProfile?.data.colors.filter {
+            $0.id == id
+        }[0].id
+        let profileItem = UserContainer.shared.profile?.data.color.map { $0.id }
+        
+        if userSelect == profileItem {
+            output.handleCloseButton.send(false)
+        } else {
+            output.handleCloseButton.send(true)
+        }
     }
     
     private func handlePage(id: Int, isEdit: Bool) {

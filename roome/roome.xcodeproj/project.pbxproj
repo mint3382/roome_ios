@@ -144,6 +144,7 @@
 		92CA2DD72C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD62C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift */; };
 		92CA2DD92C3EBB990084CD5A /* EditActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD82C3EBB990084CD5A /* EditActivityViewController.swift */; };
 		92CA2DDB2C3EBD6C0084CD5A /* EditDislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */; };
+		92CA2DDD2C3EC6000084CD5A /* EditColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -285,6 +286,7 @@
 		92CA2DD62C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		92CA2DD82C3EBB990084CD5A /* EditActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActivityViewController.swift; sourceTree = "<group>"; };
 		92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDislikeViewController.swift; sourceTree = "<group>"; };
+		92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditColorViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -877,6 +879,7 @@
 				92CA2DD62C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift */,
 				92CA2DD82C3EBB990084CD5A /* EditActivityViewController.swift */,
 				92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */,
+				92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */,
 			);
 			path = EditProfileCard;
 			sourceTree = "<group>";
@@ -1117,6 +1120,7 @@
 				92CA2DD52C3EB7790084CD5A /* EditHintViewController.swift in Sources */,
 				9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */,
 				9293DC982C280F2C00545B57 /* SettingWebViewController.swift in Sources */,
+				92CA2DDD2C3EC6000084CD5A /* EditColorViewController.swift in Sources */,
 				9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */,
