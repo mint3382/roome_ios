@@ -37,39 +37,38 @@ class ColorSelectViewController: UIViewController{
     }
     
     func bind() {
-        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        backButton.publisher(for: .touchUpInside)
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: false)
+            }
+            .store(in: &cancellables)
         
-        let output = viewModel.transform(ColorSelectViewModel.Input(tapBackButton: back))
+        viewModel.output.handleNextButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] result in
+                switch result {
+                case .success(let isEdit):
+                    let nextViewController = ProfileCardViewController(viewModel: ProfileCardViewModel())
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                case .failure(let error):
+                    print(error)
+                    //TODO: error Toast 띄우기
+                }
+            }
+            .store(in: &cancellables)
         
-        output.handleCellSelect
-            .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-            .sink(receiveCompletion: { error in
-                //실패 시
-            }, receiveValue: { _ in
-                Task { @MainActor in
+        viewModel.output.handleLoading
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { isEdit in
+                if isEdit == false {
                     let loadingView = DIContainer.shared.resolve(LoadingView.self)
                     let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
                     
                     window?.addSubview(loadingView)
                 }
-            }).store(in: &cancellables)
-        
-        output.handleBackButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: false)
-            }.store(in: &cancellables)
-        
-        output.handleNextPage
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] _ in
-                let nextViewController = ProfileCardViewController(viewModel: ProfileCardViewModel())
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: false)
-            }.store(in: &cancellables)
-        
-        output.tapNext
-            .sink {}
+            }
             .store(in: &cancellables)
     }
     
@@ -151,6 +150,6 @@ extension ColorSelectViewController: UICollectionViewDataSource, UICollectionVie
         guard let colorDTO = UserContainer.shared.defaultProfile?.data.colors[indexPath.row] else {
             return
         }
-        viewModel.selectCell.send(colorDTO.id)
+        viewModel.input.selectCell.send((false,colorDTO.id))
     }
 }
