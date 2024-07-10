@@ -90,8 +90,9 @@ class StrengthViewModel {
     }
     
     private func checkEdit() {
-        let userSelect = list.map { UserContainer.shared.defaultProfile?.data.strengths[$0.row].id ?? -1 }
-        let profileItem = UserContainer.shared.profile?.data.userStrengths.map { $0.id }
+        let userSelect = list.map { UserContainer.shared.defaultProfile?.data.strengths[$0.row].id ?? -1 }.sorted()
+        let profileItem = UserContainer.shared.profile?.data.userStrengths.map { $0.id }.sorted()
+        
         if userSelect == profileItem {
             output.handleCloseButton.send(false)
         } else {

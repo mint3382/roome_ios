@@ -90,8 +90,8 @@ class ImportantFactorViewModel {
     }
     
     private func checkEdit() {
-        let userSelect = list.map { UserContainer.shared.defaultProfile?.data.importantFactors[$0.row].id ?? -1 }
-        let profileItem = UserContainer.shared.profile?.data.themeImportantFactors.map { $0.id }
+        let userSelect = list.map { UserContainer.shared.defaultProfile?.data.importantFactors[$0.row].id ?? -1 }.sorted()
+        let profileItem = UserContainer.shared.profile?.data.themeImportantFactors.map { $0.id }.sorted()
         if userSelect == profileItem {
             output.handleCloseButton.send(false)
         } else {
