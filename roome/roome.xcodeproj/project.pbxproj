@@ -136,6 +136,7 @@
 		92CA2DC22C3BF4A20084CD5A /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */; };
 		92CA2DC42C3BF4C80084CD5A /* UserProfileRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */; };
 		92CA2DCB2C3CE1220084CD5A /* EditGenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */; };
+		92CA2DCD2C3CE2AF0084CD5A /* EditMBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -269,6 +270,7 @@
 		92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
 		92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepositoryType.swift; sourceTree = "<group>"; };
 		92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGenreViewController.swift; sourceTree = "<group>"; };
+		92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMBTIViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -853,6 +855,7 @@
 			isa = PBXGroup;
 			children = (
 				92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */,
+				92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */,
 			);
 			path = EditProfileCard;
 			sourceTree = "<group>";
@@ -984,6 +987,7 @@
 			files = (
 				921695632BFC6362006DC44A /* TermsAgreeRepositoryType.swift in Sources */,
 				92CA2D0F2C3387C10084CD5A /* ProfileSelectRepository.swift in Sources */,
+				92CA2DCD2C3CE2AF0084CD5A /* EditMBTIViewController.swift in Sources */,
 				92CA2D062C2DF7850084CD5A /* InternetMonitor.swift in Sources */,
 				921695652BFC67D0006DC44A /* TermsAgreeRepository.swift in Sources */,
 				9293DC8E2C233D8B00545B57 /* ImageManager.swift in Sources */,
