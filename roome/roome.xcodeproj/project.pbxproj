@@ -135,6 +135,7 @@
 		92CA2DC02C3BF4670084CD5A /* UserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */; };
 		92CA2DC22C3BF4A20084CD5A /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */; };
 		92CA2DC42C3BF4C80084CD5A /* UserProfileRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */; };
+		92CA2DC92C3CBCDF0084CD5A /* EditRoomCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC82C3CBCDF0084CD5A /* EditRoomCountViewController.swift */; };
 		92CA2DCB2C3CE1220084CD5A /* EditGenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */; };
 		92CA2DCD2C3CE2AF0084CD5A /* EditMBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */; };
 		92CA2DCF2C3CE3800084CD5A /* EditStrengthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */; };
@@ -277,6 +278,7 @@
 		92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileUseCase.swift; sourceTree = "<group>"; };
 		92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
 		92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepositoryType.swift; sourceTree = "<group>"; };
+		92CA2DC82C3CBCDF0084CD5A /* EditRoomCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoomCountViewController.swift; sourceTree = "<group>"; };
 		92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGenreViewController.swift; sourceTree = "<group>"; };
 		92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMBTIViewController.swift; sourceTree = "<group>"; };
 		92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStrengthViewController.swift; sourceTree = "<group>"; };
@@ -870,6 +872,7 @@
 		92CA2DC72C3CBCA10084CD5A /* EditProfileCard */ = {
 			isa = PBXGroup;
 			children = (
+				92CA2DC82C3CBCDF0084CD5A /* EditRoomCountViewController.swift */,
 				92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */,
 				92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */,
 				92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */,
@@ -1017,6 +1020,7 @@
 				9293DC8E2C233D8B00545B57 /* ImageManager.swift in Sources */,
 				921695132BF34995006DC44A /* LoginProvider.swift in Sources */,
 				921695382BF84604006DC44A /* NicknameUseCase.swift in Sources */,
+				92CA2DC92C3CBCDF0084CD5A /* EditRoomCountViewController.swift in Sources */,
 				921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */,
 				9293DC9C2C29D7DB00545B57 /* SettingCollectionViewCell.swift in Sources */,
 				9271F79C2C009E9F00586AFD /* ImportantFactorViewModel.swift in Sources */,

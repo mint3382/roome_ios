@@ -9,128 +9,154 @@ import Foundation
 import Combine
 
 class RoomCountViewModel {
-    struct Input {
+    struct Input1 {
         var count: AnyPublisher<String, Never>
         var nextButton: AnyPublisher<Void, Never>
         var rangeButton: AnyPublisher<Void, Never>
         var textButton: AnyPublisher<Void, Never>
     }
     
-    struct Output {
+    struct Input {
+        let count = PassthroughSubject<String, Never>()
+        let tapNextButton = PassthroughSubject<Void, Never>()
+        let tapRangeButton = PassthroughSubject<Void, Never>()
+        let tapTextButton = PassthroughSubject<Void, Never>()
+        let tapCloseButton = PassthroughSubject<Void, Never>()
+    }
+    
+    struct Output1 {
         var handleNextButton: AnyPublisher<Bool, Never>
         var handleNextPage: AnyPublisher<Void, Error>
         var handleRangeOrText: AnyPublisher<Bool, Never>
         var tapNext: AnyPublisher<Void, Never>
     }
     
+    struct Output {
+        let handleNextButton = PassthroughSubject<Result<Void, Error>, Never>()
+        let handleCanGoNext = PassthroughSubject<Bool, Never>()
+        let handleRangeOrText = PassthroughSubject<Bool, Never>()
+        let handleCloseButton = PassthroughSubject<Bool, Never>()
+    }
+    
     private let usecase: ProfileSelectUseCaseType
-    private let goToNext = PassthroughSubject<Void, Error>()
-    @Published var textInput = "0"
+    let input: Input
+    let output: Output
+    private var cancellables = Set<AnyCancellable>()
+//    private let goToNext = PassthroughSubject<Void, Error>()
+    @Published var textInput: String = "0"
+//    {
+//        if let count = UserContainer.shared.profile?.data.count, count.contains("~") == false {
+//            return count
+//        } else {
+//            return "0"
+//        }
+//    }()
     private var isRangeState: Bool = true
     var isSelected: (min: Int, max: Int) = (0,0)
-    let canGoNext = PassthroughSubject<Bool, Never>()
+//    {
+//        if let count = UserContainer.shared.profile?.data.count, count.contains("~") == false {
+//            let range = count.split(separator: "~").compactMap { Int($0) }
+//            return (range[0], range[1])
+//        } else {
+//            return (0,0)
+//        }
+//    }()
     
     init(usecase: ProfileSelectUseCaseType) {
         self.usecase = usecase
+        self.input = Input()
+        self.output = Output()
+        settingBind()
     }
     
-    func transform(_ input: Input) -> Output {
-        let goNext = canGoNext
-            .eraseToAnyPublisher()
-        
-        let tapNext = input.nextButton
-            .compactMap { [weak self] _ in
-                self
-            }
-            .compactMap { owner in
-                if owner.isRangeState {
-                    owner.handlePage(range: owner.isSelected)
+    private func settingBind() {
+        input.tapRangeButton
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
+                
+                isRangeState = true
+                if isSelected.max == 0 {
+                    output.handleCanGoNext.send(false)
                 } else {
-                    owner.handlePage(count: owner.textInput)
+                    output.handleCanGoNext.send(true)
+                }
+                
+                output.handleRangeOrText.send(isRangeState)
+            }
+            .store(in: &cancellables)
+        
+        input.tapTextButton
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
+                
+                isRangeState = false
+                if textInput.count == 0 {
+                    output.handleCanGoNext.send(false)
+                } else {
+                    output.handleCanGoNext.send(true)
+                }
+                
+                output.handleRangeOrText.send(isRangeState)
+            }
+            .store(in: &cancellables)
+        
+        input.tapNextButton
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
+                
+                if isRangeState {
+                    handlePage(range: isSelected)
+                } else {
+                    handlePage(count: textInput)
                 }
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
         
-        let handleNextPage = input.nextButton
-            .compactMap { [weak self] _ in
-                self
+        input.tapCloseButton
+            .sink { [weak self] in
+                self?.checkEdit()
             }
-            .flatMap{ owner in
-                owner.goToNext
-            }
-            .eraseToAnyPublisher()
-        
-        let range = input.rangeButton
-            .map { [weak self] _ in
-                self?.isRangeState = true
-            }
-            .compactMap { [weak self] _ in
-                self
-            }
-            .map { owner in
-                owner.isSelected
-            }
-            .map { [weak self] (min, max) in
-                if max == 0 {
-                    self?.canGoNext.send(false)
-                } else {
-                    self?.canGoNext.send(true)
-                }
-            }
-            .map {
-                true
-            }
-            .eraseToAnyPublisher()
-        
-        let textButton = input.textButton
-            .map { [weak self] _ in
-                self?.isRangeState = false
-            }
-            .compactMap { [weak self] _ in
-                self
-            }
-            .map { owner in
-                owner.textInput.count
-            }
-            .map { [weak self] count in
-                if count == 0 {
-                    self?.canGoNext.send(false)
-                } else {
-                    self?.canGoNext.send(true)
-                }
-            }
-            .map {
-                false
-            }
-            .eraseToAnyPublisher()
-        
-        let handleRangeOrText = Publishers.Merge(range, textButton)
-            .eraseToAnyPublisher()
-        
-        return Output(handleNextButton: goNext,
-                      handleNextPage: handleNextPage,
-                      handleRangeOrText: handleRangeOrText,
-                      tapNext: tapNext)
+            .store(in: &cancellables)
     }
     
-    func handlePage(count: String?) {
+    private func checkEdit() {
+        let userRange = "\(isSelected.min)~\(isSelected.max)"
+        let userCount = textInput
+        let profileItem = UserContainer.shared.profile?.data.count
+        
+        if profileItem == userRange || profileItem == userCount {
+            output.handleCloseButton.send(false)
+        } else {
+            output.handleCloseButton.send(true)
+        }
+    }
+    
+    private func handlePage(count: String?) {
         Task {
             do {
                 try await usecase.roomCountWithAPI(count)
-                goToNext.send()
+                try await UserContainer.shared.updateUserProfile()
+                output.handleNextButton.send(.success({}()))
             } catch {
-                goToNext.send(completion: .failure(error))
+                output.handleNextButton.send(.failure(error))
             }
         }
     }
     
-    func handlePage(range: (min: Int, max: Int)) {
+    private func handlePage(range: (min: Int, max: Int)) {
         Task {
             do {
                 try await usecase.roomRangeWithAPI(range)
-                goToNext.send()
+                try await UserContainer.shared.updateUserProfile()
+                output.handleNextButton.send(.success({}()))
             } catch {
-                goToNext.send(completion: .failure(error))
+                output.handleNextButton.send(.failure(error))
             }
         }
     }

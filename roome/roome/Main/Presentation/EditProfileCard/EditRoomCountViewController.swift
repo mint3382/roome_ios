@@ -1,16 +1,29 @@
 //
-//  RoomCountViewController.swift
+//  EditRoomCountViewController.swift
 //  roome
 //
-//  Created by minsong kim on 5/22/24.
+//  Created by minsong kim on 7/9/24.
 //
 
 import UIKit
 import Combine
 
-class RoomCountViewController: UIViewController {
+class EditRoomCountViewController: UIViewController {
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    private lazy var changePopUp = PopUpView(frame: window!.bounds,
+                                             title: "변경사항이 있어요",
+                                             description: "변경사항을 저장하지 않고 나가시겠어요?",
+                                             whiteButtonTitle: "취소",
+                                             colorButtonTitle: "나가기")
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark")?.changeImageColor(.label).resize(newWidth: 16), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     private let titleLabel = TitleLabel(text: "현재까지 경험한 방 수를\n알려주세요")
-    private let descriptionLabel = DescriptionLabel(text: "프로필 생성 후 마이페이지에서 수정할 수 있어요")
     
     private let rangeButton = SizeButton(title: "범위 선택", isSelected: true)
     private let textFieldButton = SizeButton(title: "직접 입력", isSelected: false)
@@ -97,10 +110,8 @@ class RoomCountViewController: UIViewController {
         return label
     }()
     
-    lazy var profileCount = ProfileStateLineView(pageNumber: 1, frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.9 - 10, height: 10))
-    private let backButton = BackButton()
-    private let nextButton = NextButton()
-    private var nextButtonWidthConstraint: NSLayoutConstraint?
+    private let nextButton = NextButton(title: "저장", backgroundColor: .roomeMain, tintColor: .white)
+    private var saveButtonWidthConstraint: NSLayoutConstraint?
     private var viewModel: RoomCountViewModel
     private var cancellables = Set<AnyCancellable>()
     
@@ -123,6 +134,25 @@ class RoomCountViewController: UIViewController {
         configureNextButton()
         bind()
         registerKeyboardListener()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let count = UserContainer.shared.profile?.data.count else {
+            return
+        }
+        
+        if count.contains("~") {
+            let range = count.split(separator: "~").compactMap { Int($0) }
+            viewModel.isSelected = (range[0], range[1])
+            viewModel.textInput = "0"
+            selectButton.titleLabel?.text = "\(count)번"
+            numberTextField.text = "0"
+        } else {
+            viewModel.isSelected = (0,0)
+            viewModel.textInput = count
+            selectButton.titleLabel?.text = "선택"
+            numberTextField.text = count
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -152,6 +182,23 @@ class RoomCountViewController: UIViewController {
             }
             .store(in: &cancellables)
         
+        closeButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapCloseButton.send()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleCloseButton
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] didEdit in
+                if let self, didEdit {
+                    window?.addSubview(changePopUp)
+                } else {
+                    self?.dismiss(animated: false)
+                }
+            }
+            .store(in: &cancellables)
+        
         viewModel.output.handleCanGoNext
             .sink { [weak self] isNextButtonOn in
                 if isNextButtonOn {
@@ -167,8 +214,7 @@ class RoomCountViewController: UIViewController {
             .sink { [weak self] result in
                 switch result {
                 case .success:
-                    let nextPage = DIContainer.shared.resolve(GenreViewController.self)
-                    self?.navigationController?.pushViewController(nextPage, animated: false)
+                    self?.dismiss(animated: false)
                 case .failure(let error):
                     print(error)
                 }
@@ -209,34 +255,32 @@ class RoomCountViewController: UIViewController {
                 }
             }.store(in: &cancellables)
         
-        backButton.publisher(for: .touchUpInside)
-            .throttle(for: 0.05, scheduler: RunLoop.main, latest: true)
-            .sink { [weak self]  in
-                self?.navigationController?.popViewController(animated: false)
-            }.store(in: &cancellables)
+        changePopUp.publisherWhiteButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        changePopUp.publisherColorButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+                self?.dismiss(animated: false)
+            }
+            .store(in: &cancellables)
     }
     
     func configureUI() {
-        profileCount.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(profileCount)
-        view.addSubview(backButton)
+        view.addSubview(closeButton)
         view.addSubview(titleLabel)
-        view.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            profileCount.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            profileCount.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileCount.heightAnchor.constraint(equalToConstant: 15),
-            profileCount.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
+            closeButton.widthAnchor.constraint(equalToConstant: 24),
+            closeButton.heightAnchor.constraint(equalToConstant: 24),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            backButton.topAnchor.constraint(equalTo: profileCount.bottomAnchor, constant: 12),
-            
-            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 12),
             titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
     
@@ -245,14 +289,14 @@ class RoomCountViewController: UIViewController {
         view.addSubview(textFieldButton)
         
         NSLayoutConstraint.activate([
-            rangeButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            rangeButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             rangeButton.heightAnchor.constraint(equalToConstant: 50),
             rangeButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 24),
             rangeButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -5)
         ])
         
         NSLayoutConstraint.activate([
-            textFieldButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            textFieldButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             textFieldButton.heightAnchor.constraint(equalToConstant: 50),
             textFieldButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
             textFieldButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 5)
@@ -310,8 +354,8 @@ class RoomCountViewController: UIViewController {
     private func configureNextButton() {
         view.addSubview(nextButton)
         
-        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
-        nextButtonWidthConstraint?.isActive = true
+        saveButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
+        saveButtonWidthConstraint?.isActive = true
         
         NSLayoutConstraint.activate([
             nextButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
@@ -321,7 +365,7 @@ class RoomCountViewController: UIViewController {
     }
 }
 
-extension RoomCountViewController: UITextFieldDelegate {
+extension EditRoomCountViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
@@ -336,10 +380,8 @@ extension RoomCountViewController: UITextFieldDelegate {
         
         if newText.count == 0 {
             nextButton.isEnabled = false
-            nextButton.backgroundColor = .gray
         } else {
             nextButton.isEnabled = true
-            nextButton.backgroundColor = .roomeMain
         }
         
         if newText.count < 6 {
@@ -355,7 +397,7 @@ extension RoomCountViewController: UITextFieldDelegate {
     }
 }
 
-extension RoomCountViewController {
+extension EditRoomCountViewController {
     private func registerKeyboardListener() {
         NotificationCenter.default.addObserver(
             self,
@@ -375,21 +417,21 @@ extension RoomCountViewController {
     @objc private func keyboardWillShow(_ notification: Notification) {
         nextButton.layer.cornerRadius = 0
         
-        nextButtonWidthConstraint?.isActive = false
-        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width)
-        nextButtonWidthConstraint?.isActive = true
+        saveButtonWidthConstraint?.isActive = false
+        saveButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width)
+        saveButtonWidthConstraint?.isActive = true
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
         nextButton.layer.cornerRadius = 10
         
-        nextButtonWidthConstraint?.isActive = false
-        nextButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
-        nextButtonWidthConstraint?.isActive = true
+        saveButtonWidthConstraint?.isActive = false
+        saveButtonWidthConstraint = nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
+        saveButtonWidthConstraint?.isActive = true
     }
 }
 
-extension RoomCountViewController: UITableViewDelegate, UITableViewDataSource {
+extension EditRoomCountViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         UserContainer.shared.defaultProfile?.data.roomCountRanges.count ?? 0
     }
@@ -421,7 +463,7 @@ extension RoomCountViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 //#Preview {
-//    let vc = RoomCountViewController(viewModel: RoomCountViewModel(usecase: RoomCountUseCase(repository: RoomCountRepository())))
-//    
+//    let vc = EditRoomCountViewController(viewModel: RoomCountViewModel(usecase: ProfileSelectUseCase(repository: ProfileSelectRepository())))
+//
 //    return vc
 //}
