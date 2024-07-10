@@ -37,6 +37,7 @@ class SplashView: UIViewController {
                 do {
                     try await UserContainer.shared.updateUserInformation()
                     try await UserContainer.shared.updateUserProfile()
+                    try await UserContainer.shared.updateDefaultProfile()
                     setIsLogin()
                 } catch {
                     goToLogin()

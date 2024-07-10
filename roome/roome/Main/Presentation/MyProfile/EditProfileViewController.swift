@@ -33,10 +33,8 @@ class EditProfileViewController: UIViewController {
     }()
     
     private let closeButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.image = UIImage(systemName: "xmark")?.changeImageColor(.label).resize(newWidth: 16)
-        
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark")?.changeImageColor(.label).resize(newWidth: 16), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -346,11 +344,13 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     }
     
     func openAlbum() {
-        if checkAlbumPermission() {
-            imagePicker.sourceType = .photoLibrary
-            present(imagePicker, animated: false, completion: nil)
-        } else {
-            window?.addSubview(errorPopUp)
+        if let isPermission = checkAlbumPermission() {
+            if isPermission {
+                imagePicker.sourceType = .photoLibrary
+                present(imagePicker, animated: false, completion: nil)
+            } else {
+                window?.addSubview(errorPopUp)
+            }
         }
     }
     
@@ -369,15 +369,29 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         AVCaptureDevice.authorizationStatus(for: .video) == AVAuthorizationStatus.authorized
     }
     
-    private func checkAlbumPermission() -> Bool {
+    private func checkAlbumPermission() -> Bool? {
         let authorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         
         switch authorizationStatus {
-        case .authorized:
+        case .notDetermined:
+            Task {
+                await PHPhotoLibrary.requestAuthorization(for: .readWrite)
+                let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+                switch status {
+                case .authorized, .limited:
+                    imagePicker.sourceType = .photoLibrary
+                    present(imagePicker, animated: false, completion: nil)
+                default:
+                    window?.addSubview(errorPopUp)
+                }
+            }
+        case .authorized, .limited:
             return true
         default:
             return false
         }
+        
+        return nil
     }
 }
 

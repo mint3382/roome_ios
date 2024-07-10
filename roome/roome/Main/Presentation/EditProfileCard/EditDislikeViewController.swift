@@ -1,25 +1,36 @@
 //
-//  ThemeSelectViewController.swift
+//  EditDislikeViewController.swift
 //  roome
 //
-//  Created by minsong kim on 5/23/24.
+//  Created by minsong kim on 7/10/24.
 //
 
 import UIKit
 import Combine
 
-class ImportantFactorViewController: UIViewController, ToastAlertable {
-    private let titleLabel = TitleLabel(text: "테마 선택 시,\n어떤 요소를 중요하게\n생각하시나요?")
+class EditDislikeViewController: UIViewController, ToastAlertable {
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    private lazy var changePopUp = PopUpView(frame: window!.bounds,
+                                             title: "변경사항이 있어요",
+                                             description: "변경사항을 저장하지 않고 나가시겠어요?",
+                                             whiteButtonTitle: "취소",
+                                             colorButtonTitle: "나가기")
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark")?.changeImageColor(.label).resize(newWidth: 16), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    private let titleLabel = TitleLabel(text: "방탈출 할 때,\n어떤 요소를\n싫어하시나요?")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 5, frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.9 - 10, height: view.frame.height))
-    private let backButton = BackButton()
-    var nextButton = NextButton()
+    var nextButton = NextButton(title: "저장", backgroundColor: .roomeMain, tintColor: .white)
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
-    var viewModel: ImportantFactorViewModel
+    var viewModel: DislikeViewModel
     var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: ImportantFactorViewModel) {
+    init(viewModel: DislikeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -45,11 +56,22 @@ class ImportantFactorViewController: UIViewController, ToastAlertable {
             }
             .store(in: &cancellables)
         
-        backButton.publisher(for: .touchUpInside)
+        closeButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapCloseButton.send()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleCloseButton
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: false)
-            }.store(in: &cancellables)
+            .sink { [weak self] didEdit in
+                if let self, didEdit {
+                    window?.addSubview(changePopUp)
+                } else {
+                    self?.dismiss(animated: false)
+                }
+            }
+            .store(in: &cancellables)
         
         viewModel.output.handleCellSelect
             .sink { [weak self] (result, item) in
@@ -73,12 +95,24 @@ class ImportantFactorViewController: UIViewController, ToastAlertable {
             .sink { [weak self] result in
                 switch result {
                 case .success:
-                    let nextViewController = DIContainer.shared.resolve(HorrorPositionViewController.self)
-                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.dismiss(animated: false)
                 case .failure(let error):
                     //TODO: - 토스트로 에러 띄우기
                     print(error)
                 }
+            }
+            .store(in: &cancellables)
+        
+        changePopUp.publisherWhiteButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        changePopUp.publisherColorButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+                self?.dismiss(animated: false)
             }
             .store(in: &cancellables)
     }
@@ -101,27 +135,20 @@ class ImportantFactorViewController: UIViewController, ToastAlertable {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
         ])
-        
     }
     
-    
     func configureStackView() {
-        profileCount.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(profileCount)
-        view.addSubview(backButton)
+        view.addSubview(closeButton)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            profileCount.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            profileCount.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileCount.heightAnchor.constraint(equalToConstant: 15),
-            profileCount.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
+            closeButton.widthAnchor.constraint(equalToConstant: 24),
+            closeButton.heightAnchor.constraint(equalToConstant: 24),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            backButton.topAnchor.constraint(equalTo: profileCount.bottomAnchor, constant: 12),
-            
-            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 12),
             titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
@@ -143,17 +170,17 @@ class ImportantFactorViewController: UIViewController, ToastAlertable {
     func createFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
-        layout.itemSize = CGSize(width: view.frame.width - 48, height: 50)
+        layout.minimumInteritemSpacing = 10
+        layout.itemSize = CGSize(width: (view.frame.width / 2) - 29, height: 50)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 24, bottom: 50, right: 24)
         
         return layout
     }
-
 }
 
-extension ImportantFactorViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
+extension EditDislikeViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        UserContainer.shared.defaultProfile?.data.importantFactors.count ?? 0
+        UserContainer.shared.defaultProfile?.data.dislikedFactors.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -162,19 +189,19 @@ extension ImportantFactorViewController: UICollectionViewDataSource, UICollectio
             return UICollectionViewCell()
         }
         
-        guard let importantFactor = UserContainer.shared.defaultProfile?.data.importantFactors[indexPath.row] else {
+        guard let dislike = UserContainer.shared.defaultProfile?.data.dislikedFactors[indexPath.row] else {
             return UICollectionViewCell()
         }
         
-        if let userSelect = UserContainer.shared.profile?.data.themeImportantFactors.map({ $0.id }) {
-            if userSelect.contains(importantFactor.id) {
+        if let userSelect = UserContainer.shared.profile?.data.themeDislikedFactors.map({ $0.id }) {
+            if userSelect.contains(dislike.id) {
                 cell.isSelected = true
                 collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
                 viewModel.input.selectCell.send(indexPath)
             }
         }
         
-        cell.changeTitle(importantFactor.title)
+        cell.changeTitle(dislike.title)
         
         return cell
     }
@@ -187,4 +214,3 @@ extension ImportantFactorViewController: UICollectionViewDataSource, UICollectio
         viewModel.input.deselectCell.send(indexPath)
     }
 }
-

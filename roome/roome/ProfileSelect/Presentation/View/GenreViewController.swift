@@ -40,12 +40,19 @@ class GenreViewController: UIViewController, ToastAlertable {
     }
     
     func bind() {
-        let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        nextButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapNextButton.send()
+            }
+            .store(in: &cancellables)
         
-        let output = viewModel.transform(GenreViewModel.Input(tapNextButton: next, tapBackButton: back))
+        backButton.publisher(for: .touchUpInside)
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: false)
+            }.store(in: &cancellables)
         
-        output.handleCellSelect
+        viewModel.output.handleCellSelect
             .sink { [weak self] (result, item) in
                 if result == false {
                     self?.collectionView.deselectItem(at: item, animated: false)
@@ -53,7 +60,7 @@ class GenreViewController: UIViewController, ToastAlertable {
                 }
             }.store(in: &cancellables)
         
-        output.canGoNext
+        viewModel.output.handleCanGoNext
             .sink { [weak self] result in
                 if result {
                     self?.nextButton.isEnabled = true
@@ -62,24 +69,18 @@ class GenreViewController: UIViewController, ToastAlertable {
                 }
             }.store(in: &cancellables)
         
-        output.handleBackButton
+        viewModel.output.handleNextButton
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: false)
-            }.store(in: &cancellables)
-        
-        output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink(receiveCompletion: { error in
-                //연결 실패 시?
-            }, receiveValue: { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(MBTIViewController.self)
-                self?.navigationController?.pushViewController(nextViewController, animated: false)
-            })
-            .store(in: &cancellables)
-        
-        output.tapNext
-            .sink { }
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    let nextViewController = DIContainer.shared.resolve(MBTIViewController.self)
+                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                case .failure(let error):
+                    //TODO: - 토스트로 에러 띄우기
+                    print(error)
+                }
+            }
             .store(in: &cancellables)
     }
     
@@ -173,7 +174,7 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
             if userSelect.contains(genre.id) {
                 cell.isSelected = true
                 collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
-                viewModel.selectCell.send(indexPath)
+                viewModel.input.selectCell.send(indexPath)
             }
         }
         
@@ -181,10 +182,10 @@ extension GenreViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectCell.send(indexPath)
+        viewModel.input.selectCell.send(indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        viewModel.deselectItem(indexPath)
+        viewModel.input.deselectCell.send(indexPath)
     }
 }

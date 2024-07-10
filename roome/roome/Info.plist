@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>프로필 이미지 변경을 위해 사진 라이브러리에 접근하도록 허용합니다. </string>
 	<key>NSCameraUsageDescription</key>
 	<string>프로필 이미지 변경을 위해 사진 라이브러리에 접근하도록 허용합니다. </string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

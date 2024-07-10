@@ -10,57 +10,82 @@ import Combine
 
 class ColorSelectViewModel {
     struct Input {
-        let tapBackButton: AnyPublisher<Void, Never>
+        let tapSaveButton = PassthroughSubject<Void, Never>()
+        let selectCell = PassthroughSubject<(isEdit: Bool, id: Int), Never>()
+        let tapCloseButton = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-        let handleCellSelect: AnyPublisher<Void, Error>
-        let handleBackButton: AnyPublisher<Void, Never>
-        let handleNextPage: AnyPublisher<Void, Never>
-        let tapNext: AnyPublisher<Void, Never>
+        let handleCellSelect = PassthroughSubject<Result<Void, Error>,Never>()
+        let handleNextButton = PassthroughSubject<Result<Void, Error>, Never>()
+        let handleCloseButton = PassthroughSubject<Bool, Never>()
+        let handleLoading = PassthroughSubject<Bool, Never>()
     }
-    
-    var selectCell = PassthroughSubject<Int, Never>()
-    private var loading = PassthroughSubject<Void, Error>()
-    private var goToNext = PassthroughSubject<Void, Never>()
+
     private var useCase: ProfileSelectUseCaseType
+    private var cancellables = Set<AnyCancellable>()
+    let input: Input
+    let output: Output
+    private var id: Int = -1
     
     init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
+        self.input = Input()
+        self.output = Output()
+        settingBind()
     }
     
-    func transform(_ input: Input) -> Output {
-        let tapNext = selectCell
-            .compactMap { [weak self] id in
-                self?.handlePage(id: id)
+    func settingBind() {
+        input.selectCell
+            .sink { [weak self] (isEdit, id) in
+                if isEdit {
+                    self?.id = id
+                } else {
+                    self?.handlePage(id: id, isEdit: false)
+                }
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
         
-        let cellSelect = loading
-            .eraseToAnyPublisher()
+        input.tapSaveButton
+            .sink { [weak self] in
+                if let self {
+                    handlePage(id: id, isEdit: true)
+                }
+            }
+            .store(in: &cancellables)
         
-        let back = input.tapBackButton
-            .eraseToAnyPublisher()
-        
-        let next = goToNext
-            .eraseToAnyPublisher()
-        
-        return Output(handleCellSelect: cellSelect,
-                      handleBackButton: back,
-                      handleNextPage: next,
-                      tapNext: tapNext)
+        input.tapCloseButton
+            .sink { [weak self] in
+                self?.checkEdit()
+            }
+            .store(in: &cancellables)
     }
     
-    func handlePage(id: Int) {
+    private func checkEdit() {
+        let userSelect =  UserContainer.shared.defaultProfile?.data.colors.filter {
+            $0.id == id
+        }[0].id
+        let profileItem = UserContainer.shared.profile?.data.color.map { $0.id }
+        
+        if userSelect == profileItem {
+            output.handleCloseButton.send(false)
+        } else {
+            output.handleCloseButton.send(true)
+        }
+    }
+    
+    private func handlePage(id: Int, isEdit: Bool) {
         Task {
             do {
                 try await useCase.colorWithAPI(id: id)
-                loading.send()
                 try await UserContainer.shared.updateUserProfile()
-                try await Task.sleep(nanoseconds: 1_000_000_000)
-                goToNext.send()
+                output.handleLoading.send(isEdit)
+                if isEdit == false {
+                    try await Task.sleep(nanoseconds: 1_000_000_000)
+                }
+                output.handleNextButton.send(.success({}()))
             } catch {
-                loading.send(completion: .failure(error))
+                output.handleNextButton.send(.failure(error))
             }
         }
     }

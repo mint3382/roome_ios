@@ -1,19 +1,31 @@
 //
-//  HintViewController.swift
+//  EditHintViewController.swift
 //  roome
 //
-//  Created by minsong kim on 5/23/24.
+//  Created by minsong kim on 7/10/24.
 //
 
 import UIKit
 import Combine
 
-class HintViewController: UIViewController {
+class EditHintViewController: UIViewController {
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    private lazy var changePopUp = PopUpView(frame: window!.bounds,
+                                             title: "변경사항이 있어요",
+                                             description: "변경사항을 저장하지 않고 나가시겠어요?",
+                                             whiteButtonTitle: "취소",
+                                             colorButtonTitle: "나가기")
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark")?.changeImageColor(.label).resize(newWidth: 16), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
     private let titleLabel = TitleLabel(text: "힌트 사용에 대해,\n어떻게 생각하시나요?")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 7, frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.9 - 10, height: view.frame.height))
-    private let backButton = BackButton()
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+    private var nextButton = NextButton(title: "저장", backgroundColor: .roomeMain, tintColor: .white)
     var viewModel: HintViewModel
     var cancellables = Set<AnyCancellable>()
     
@@ -37,10 +49,26 @@ class HintViewController: UIViewController {
     }
     
     func bind() {
-        backButton.publisher(for: .touchUpInside)
+        nextButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapSaveButton.send()
+            }
+            .store(in: &cancellables)
+        
+        closeButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapCloseButton.send()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleCloseButton
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: false)
+            .sink { [weak self] didEdit in
+                if let self, didEdit {
+                    window?.addSubview(changePopUp)
+                } else {
+                    self?.dismiss(animated: false)
+                }
             }
             .store(in: &cancellables)
         
@@ -49,12 +77,24 @@ class HintViewController: UIViewController {
             .sink { [weak self] result in
                 switch result {
                 case .success:
-                    let nextViewController = DIContainer.shared.resolve(DeviceAndLockViewController.self)
-                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.dismiss(animated: false)
                 case .failure(let error):
                     print(error)
                     //TODO: error Toast 띄우기
                 }
+            }
+            .store(in: &cancellables)
+        
+        changePopUp.publisherWhiteButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        changePopUp.publisherColorButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+                self?.dismiss(animated: false)
             }
             .store(in: &cancellables)
     }
@@ -63,6 +103,7 @@ class HintViewController: UIViewController {
     func configureUI() {
         configureStackView()
         setUpCollectionView()
+        configureNextButton()
     }
     
     func setUpCollectionView() {
@@ -80,22 +121,28 @@ class HintViewController: UIViewController {
     }
     
     func configureStackView() {
-        profileCount.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(profileCount)
-        view.addSubview(backButton)
+        view.addSubview(closeButton)
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            profileCount.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            profileCount.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileCount.heightAnchor.constraint(equalToConstant: 15),
-            profileCount.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
+            closeButton.widthAnchor.constraint(equalToConstant: 24),
+            closeButton.heightAnchor.constraint(equalToConstant: 24),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            backButton.topAnchor.constraint(equalTo: profileCount.bottomAnchor, constant: 12),
-            
-            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 12),
             titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+        ])
+    }
+    
+    private func configureNextButton() {
+        view.addSubview(nextButton)
+        
+        NSLayoutConstraint.activate([
+            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         ])
     }
     
@@ -107,10 +154,9 @@ class HintViewController: UIViewController {
         
         return layout
     }
-
 }
 
-extension HintViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
+extension EditHintViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         UserContainer.shared.defaultProfile?.data.hintUsagePreferences.count ?? 0
     }
@@ -128,6 +174,7 @@ extension HintViewController: UICollectionViewDataSource, UICollectionViewDelega
             if userSelect == hint.id {
                 cell.isSelected = true
                 collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                viewModel.input.selectCell.send((true, userSelect))
             }
         }
         
@@ -141,6 +188,6 @@ extension HintViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let hint = UserContainer.shared.defaultProfile?.data.hintUsagePreferences[indexPath.row] else {
             return
         }
-        viewModel.input.selectCell.send((false, hint.id))
+        viewModel.input.selectCell.send((true, hint.id))
     }
 }

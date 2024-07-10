@@ -1,17 +1,29 @@
 //
-//  ColorSelectViewController.swift
+//  EditColorViewController.swift
 //  roome
 //
-//  Created by minsong kim on 5/24/24.
+//  Created by minsong kim on 7/10/24.
 //
 
 import UIKit
 import Combine
 
-class ColorSelectViewController: UIViewController{
+class EditColorViewController: UIViewController{
+    private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+    private lazy var changePopUp = PopUpView(frame: window!.bounds,
+                                             title: "변경사항이 있어요",
+                                             description: "변경사항을 저장하지 않고 나가시겠어요?",
+                                             whiteButtonTitle: "취소",
+                                             colorButtonTitle: "나가기")
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark")?.changeImageColor(.label).resize(newWidth: 16), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
     private let titleLabel = TitleLabel(text: "프로필 배경으로 쓰일\n색상을 골라주세요")
-    lazy var profileCount = ProfileStateLineView(pageNumber: 11, frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.9 - 10, height: view.frame.height))
-    private let backButton = BackButton()
+    var nextButton = NextButton(title: "저장", backgroundColor: .roomeMain, tintColor: .white)
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
     var viewModel: ColorSelectViewModel
@@ -37,10 +49,26 @@ class ColorSelectViewController: UIViewController{
     }
     
     func bind() {
-        backButton.publisher(for: .touchUpInside)
+        nextButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapSaveButton.send()
+            }
+            .store(in: &cancellables)
+        
+        closeButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapCloseButton.send()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleCloseButton
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: false)
+            .sink { [weak self] didEdit in
+                if let self, didEdit {
+                    window?.addSubview(changePopUp)
+                } else {
+                    self?.dismiss(animated: false)
+                }
             }
             .store(in: &cancellables)
         
@@ -48,10 +76,8 @@ class ColorSelectViewController: UIViewController{
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
             .sink { [weak self] result in
                 switch result {
-                case .success(let isEdit):
-                    let nextViewController = ProfileCardViewController(viewModel: ProfileCardViewModel())
-                    
-                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                case .success(_):
+                    self?.dismiss(animated: false)
                 case .failure(let error):
                     print(error)
                     //TODO: error Toast 띄우기
@@ -59,15 +85,16 @@ class ColorSelectViewController: UIViewController{
             }
             .store(in: &cancellables)
         
-        viewModel.output.handleLoading
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { isEdit in
-                if isEdit == false {
-                    let loadingView = DIContainer.shared.resolve(LoadingView.self)
-                    let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
-                    
-                    window?.addSubview(loadingView)
-                }
+        changePopUp.publisherWhiteButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        changePopUp.publisherColorButton()
+            .sink { [weak self] in
+                self?.changePopUp.removeFromSuperview()
+                self?.dismiss(animated: false)
             }
             .store(in: &cancellables)
     }
@@ -75,25 +102,32 @@ class ColorSelectViewController: UIViewController{
     func configureUI() {
         configureStackView()
         setUpCollectionView()
+        configureNextButton()
     }
     
     func configureStackView() {
-        profileCount.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(profileCount)
-        view.addSubview(backButton)
+        view.addSubview(closeButton)
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            profileCount.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            profileCount.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileCount.heightAnchor.constraint(equalToConstant: 15),
-            profileCount.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
+            closeButton.widthAnchor.constraint(equalToConstant: 24),
+            closeButton.heightAnchor.constraint(equalToConstant: 24),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            backButton.topAnchor.constraint(equalTo: profileCount.bottomAnchor, constant: 12),
-            
-            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 12),
             titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+        ])
+    }
+    
+    private func configureNextButton() {
+        view.addSubview(nextButton)
+        
+        NSLayoutConstraint.activate([
+            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nextButton.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9)
         ])
     }
     
@@ -121,7 +155,7 @@ class ColorSelectViewController: UIViewController{
     }
 }
 
-extension ColorSelectViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
+extension EditColorViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         UserContainer.shared.defaultProfile?.data.colors.count ?? 0
     }
@@ -134,12 +168,21 @@ extension ColorSelectViewController: UICollectionViewDataSource, UICollectionVie
         guard let colorDTO = UserContainer.shared.defaultProfile?.data.colors[indexPath.row] else {
             return UICollectionViewCell()
         }
+        
         let color = BackgroundColor(
             mode: Mode(rawValue: colorDTO.mode) ?? .gradient,
             shape: Shape(rawValue: colorDTO.shape) ?? .linear,
             direction: Direction(rawValue: colorDTO.direction) ?? .tlBR,
             startColor: colorDTO.startColor,
             endColor: colorDTO.endColor)
+        
+        if let userSelect = UserContainer.shared.profile?.data.color?.id {
+            if userSelect == colorDTO.id {
+                cell.isSelected = true
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+                viewModel.input.selectCell.send((true, userSelect))
+            }
+        }
         
         cell.changeColor(color)
         
@@ -150,6 +193,6 @@ extension ColorSelectViewController: UICollectionViewDataSource, UICollectionVie
         guard let colorDTO = UserContainer.shared.defaultProfile?.data.colors[indexPath.row] else {
             return
         }
-        viewModel.input.selectCell.send((false,colorDTO.id))
+        viewModel.input.selectCell.send((true,colorDTO.id))
     }
 }
