@@ -141,6 +141,7 @@
 		92CA2DD12C3CE4170084CD5A /* EditImportantFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD02C3CE4170084CD5A /* EditImportantFactorViewController.swift */; };
 		92CA2DD32C3E99A30084CD5A /* EditHorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD22C3E99A30084CD5A /* EditHorrorPositionViewController.swift */; };
 		92CA2DD52C3EB7790084CD5A /* EditHintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD42C3EB7790084CD5A /* EditHintViewController.swift */; };
+		92CA2DD72C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD62C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -279,6 +280,7 @@
 		92CA2DD02C3CE4170084CD5A /* EditImportantFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImportantFactorViewController.swift; sourceTree = "<group>"; };
 		92CA2DD22C3E99A30084CD5A /* EditHorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHorrorPositionViewController.swift; sourceTree = "<group>"; };
 		92CA2DD42C3EB7790084CD5A /* EditHintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHintViewController.swift; sourceTree = "<group>"; };
+		92CA2DD62C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -868,6 +870,7 @@
 				92CA2DD02C3CE4170084CD5A /* EditImportantFactorViewController.swift */,
 				92CA2DD22C3E99A30084CD5A /* EditHorrorPositionViewController.swift */,
 				92CA2DD42C3EB7790084CD5A /* EditHintViewController.swift */,
+				92CA2DD62C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift */,
 			);
 			path = EditProfileCard;
 			sourceTree = "<group>";
@@ -1117,6 +1120,7 @@
 				9284747F2C0D9EE3002C3B4C /* ProfileLabel.swift in Sources */,
 				921695512BFB1A71006DC44A /* SplashView.swift in Sources */,
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
+				92CA2DD72C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift in Sources */,
 				928474722C0CE4AA002C3B4C /* LoadingView.swift in Sources */,
 				921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */,
 				9271F7A22C00A64500586AFD /* DeviceAndLockViewModel.swift in Sources */,
