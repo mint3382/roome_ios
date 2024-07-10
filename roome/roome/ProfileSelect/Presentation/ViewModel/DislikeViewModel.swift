@@ -13,12 +13,14 @@ class DislikeViewModel {
         let tapNextButton = PassthroughSubject<Void, Never>()
         let selectCell = PassthroughSubject<IndexPath, Never>()
         let deselectCell = PassthroughSubject<IndexPath, Never>()
+        let tapCloseButton = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
         let handleCellSelect = PassthroughSubject<(Bool, IndexPath), Never>()
         let handleNextButton = PassthroughSubject<Result<Void, Error>, Never>()
         let handleCanGoNext = PassthroughSubject<Bool, Never>()
+        let handleCloseButton = PassthroughSubject<Bool, Never>()
     }
 
     var list = Set<IndexPath>()
@@ -54,6 +56,12 @@ class DislikeViewModel {
                 self?.handlePage()
             }
             .store(in: &cancellables)
+        
+        input.tapCloseButton
+            .sink { [weak self] in
+                self?.checkEdit()
+            }
+            .store(in: &cancellables)
     }
     
     private func deselectItem(_ item: IndexPath) {
@@ -81,11 +89,22 @@ class DislikeViewModel {
         }
     }
     
+    private func checkEdit() {
+        let userSelect = list.map { UserContainer.shared.defaultProfile?.data.dislikedFactors[$0.row].id ?? -1 }.sorted()
+        let profileItem = UserContainer.shared.profile?.data.themeDislikedFactors.map { $0.id }.sorted()
+        if userSelect == profileItem {
+            output.handleCloseButton.send(false)
+        } else {
+            output.handleCloseButton.send(true)
+        }
+    }
+    
     private func handlePage() {
         Task {
             do {
                 let ids = self.list.compactMap { UserContainer.shared.defaultProfile?.data.dislikedFactors[$0.row].id }
                 try await useCase.dislikeWithAPI(ids: ids)
+                try await UserContainer.shared.updateUserProfile()
                 output.handleNextButton.send(.success({}()))
             } catch {
                 output.handleNextButton.send(.failure(error))
