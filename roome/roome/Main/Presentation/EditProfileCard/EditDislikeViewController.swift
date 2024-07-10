@@ -95,8 +95,7 @@ class EditDislikeViewController: UIViewController, ToastAlertable {
             .sink { [weak self] result in
                 switch result {
                 case .success:
-                    let nextViewController = DIContainer.shared.resolve(ColorSelectViewController.self)
-                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.dismiss(animated: false)
                 case .failure(let error):
                     //TODO: - 토스트로 에러 띄우기
                     print(error)
