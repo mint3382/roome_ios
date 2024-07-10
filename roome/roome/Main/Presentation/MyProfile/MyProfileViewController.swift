@@ -37,8 +37,8 @@ class MyProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         print("viewWillAppear")
         //TODO: - 닉네임과 유저 사진이 바뀌었다면 업데이트.
-        (collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? UserCell)?.updateUserProfile()
-//        collectionView.reloadData()
+//        (collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? UserCell)?.updateUserProfile()
+        collectionView.reloadData()
     }
     
     private func bind() {
@@ -184,5 +184,39 @@ extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
         }
         
         return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var next = UIViewController()
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0:
+                next = DIContainer.shared.resolve(EditRoomCountViewController.self)
+            case 1:
+                next = DIContainer.shared.resolve(EditMBTIViewController.self)
+            case 2:
+                next = DIContainer.shared.resolve(EditGenreViewController.self)
+            case 3:
+                next = DIContainer.shared.resolve(EditStrengthViewController.self)
+            case 4:
+                next = DIContainer.shared.resolve(EditImportantFactorViewController.self)
+            case 5:
+                next = DIContainer.shared.resolve(EditHorrorPositionViewController.self)
+            case 6:
+                next = DIContainer.shared.resolve(EditHintViewController.self)
+            case 7:
+                next = DIContainer.shared.resolve(EditDeviceAndLockViewController.self)
+            case 8:
+                next = DIContainer.shared.resolve(EditActivityViewController.self)
+            case 9:
+                next = DIContainer.shared.resolve(EditDislikeViewController.self)
+            case 10:
+                next = DIContainer.shared.resolve(EditColorViewController.self)
+            default:
+                print("default")
+            }
+            next.modalPresentationStyle = .fullScreen
+            self.present(next, animated: false)
+        }
     }
 }
