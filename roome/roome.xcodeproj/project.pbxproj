@@ -146,6 +146,7 @@
 		92CA2DD92C3EBB990084CD5A /* EditActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD82C3EBB990084CD5A /* EditActivityViewController.swift */; };
 		92CA2DDB2C3EBD6C0084CD5A /* EditDislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */; };
 		92CA2DDD2C3EC6000084CD5A /* EditColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */; };
+		92CA2DDF2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDE2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -289,6 +290,7 @@
 		92CA2DD82C3EBB990084CD5A /* EditActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActivityViewController.swift; sourceTree = "<group>"; };
 		92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDislikeViewController.swift; sourceTree = "<group>"; };
 		92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditColorViewController.swift; sourceTree = "<group>"; };
+		92CA2DDE2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDefaultDTO.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -749,6 +751,7 @@
 			isa = PBXGroup;
 			children = (
 				9271F81E2C08D5E400586AFD /* StateDTO.swift */,
+				92CA2DDE2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift */,
 				9271F7E62C0865EB00586AFD /* MBTIDTO.swift */,
 				9271F7C92C00B70200586AFD /* BackgroundColor.swift */,
 			);
@@ -1013,6 +1016,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				921695632BFC6362006DC44A /* TermsAgreeRepositoryType.swift in Sources */,
+				92CA2DDF2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift in Sources */,
 				92CA2D0F2C3387C10084CD5A /* ProfileSelectRepository.swift in Sources */,
 				92CA2DCD2C3CE2AF0084CD5A /* EditMBTIViewController.swift in Sources */,
 				92CA2D062C2DF7850084CD5A /* InternetMonitor.swift in Sources */,
