@@ -147,6 +147,8 @@
 		92CA2DDB2C3EBD6C0084CD5A /* EditDislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */; };
 		92CA2DDD2C3EC6000084CD5A /* EditColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */; };
 		92CA2DDF2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDE2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift */; };
+		92CA2DE22C3FEA1E0084CD5A /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE12C3FEA1E0084CD5A /* WithdrawalViewController.swift */; };
+		92CA2DE42C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE32C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -291,6 +293,8 @@
 		92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDislikeViewController.swift; sourceTree = "<group>"; };
 		92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditColorViewController.swift; sourceTree = "<group>"; };
 		92CA2DDE2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDefaultDTO.swift; sourceTree = "<group>"; };
+		92CA2DE12C3FEA1E0084CD5A /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
+		92CA2DE32C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCollectionViewCell.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -824,6 +828,7 @@
 				9293DC7C2C216EAD00545B57 /* UserCell.swift */,
 				9293DC7E2C216EDC00545B57 /* MyProfileCell.swift */,
 				9293DC9B2C29D7DB00545B57 /* SettingCollectionViewCell.swift */,
+				92CA2DE32C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -841,6 +846,7 @@
 		9293DC952C27DCB300545B57 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				92CA2DE02C3FE9E10084CD5A /* Withdrawal */,
 				9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */,
 				9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */,
 				9293DC972C280F2C00545B57 /* SettingWebViewController.swift */,
@@ -888,6 +894,14 @@
 				92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */,
 			);
 			path = EditProfileCard;
+			sourceTree = "<group>";
+		};
+		92CA2DE02C3FE9E10084CD5A /* Withdrawal */ = {
+			isa = PBXGroup;
+			children = (
+				92CA2DE12C3FEA1E0084CD5A /* WithdrawalViewController.swift */,
+			);
+			path = Withdrawal;
 			sourceTree = "<group>";
 		};
 		92DBD9F62BCFCF5900E299E2 = {
@@ -1094,6 +1108,7 @@
 				921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */,
 				921695822BFE021C006DC44A /* BackButton.swift in Sources */,
 				9216959B2BFE65AC006DC44A /* ButtonCell.swift in Sources */,
+				92CA2DE42C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift in Sources */,
 				9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */,
 				9216955D2BFBBE2F006DC44A /* DIContainer.swift in Sources */,
 				921695412BF9008A006DC44A /* TermsAgreeViewController.swift in Sources */,
@@ -1127,6 +1142,7 @@
 				921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */,
 				92CA2DD52C3EB7790084CD5A /* EditHintViewController.swift in Sources */,
 				9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */,
+				92CA2DE22C3FEA1E0084CD5A /* WithdrawalViewController.swift in Sources */,
 				9293DC982C280F2C00545B57 /* SettingWebViewController.swift in Sources */,
 				92CA2DDD2C3EC6000084CD5A /* EditColorViewController.swift in Sources */,
 				9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */,
