@@ -66,7 +66,6 @@ class NicknameViewController: UIViewController {
     }()
     
     private let nextButton = NextButton()
-    
     private var nextButtonWidthConstraint: NSLayoutConstraint?
     private let backButton = BackButton()
     
