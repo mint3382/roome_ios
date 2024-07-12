@@ -62,8 +62,9 @@ class WithdrawalDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         
+        view.backgroundColor = .systemBackground
+        configureUI()
         textView.delegate = self
     }
     
@@ -115,14 +116,6 @@ class WithdrawalDetailViewController: UIViewController {
         ])
     }
     
-    private func configureCountLabel() {
-        view.addSubview(remainCountLabel)
-        
-        NSLayoutConstraint.activate([
-        
-        ])
-    }
-    
     private func configureNextButton() {
         view.addSubview(nextButton)
         
@@ -135,10 +128,6 @@ class WithdrawalDetailViewController: UIViewController {
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
-    
-    private func updateCountLabel(characterCount: Int) {
-            remainCountLabel.text = "\(characterCount)/3000"
-        }
 }
 
 extension WithdrawalDetailViewController: UITextViewDelegate {
@@ -204,9 +193,9 @@ extension WithdrawalDetailViewController {
     }
 }
 
-
-#Preview {
-    let vc = WithdrawalDetailViewController()
-    
-    return vc
-}
+//
+//#Preview {
+//    let vc = WithdrawalDetailViewController()
+//    
+//    return vc
+//}

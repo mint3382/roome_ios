@@ -150,6 +150,7 @@
 		92CA2DE22C3FEA1E0084CD5A /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE12C3FEA1E0084CD5A /* WithdrawalViewController.swift */; };
 		92CA2DE42C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE32C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift */; };
 		92CA2DE62C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE52C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift */; };
+		92CA2DE82C402CEC0084CD5A /* WithdrawalAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -297,6 +298,7 @@
 		92CA2DE12C3FEA1E0084CD5A /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
 		92CA2DE32C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCollectionViewCell.swift; sourceTree = "<group>"; };
 		92CA2DE52C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalDetailViewController.swift; sourceTree = "<group>"; };
+		92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAgreeViewController.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -903,6 +905,7 @@
 			children = (
 				92CA2DE12C3FEA1E0084CD5A /* WithdrawalViewController.swift */,
 				92CA2DE52C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift */,
+				92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */,
 			);
 			path = Withdrawal;
 			sourceTree = "<group>";
@@ -1054,6 +1057,7 @@
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				92CA2D0B2C3385D00084CD5A /* ProfileSelectUseCase.swift in Sources */,
+				92CA2DE82C402CEC0084CD5A /* WithdrawalAgreeViewController.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
 				9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */,
 				9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */,
