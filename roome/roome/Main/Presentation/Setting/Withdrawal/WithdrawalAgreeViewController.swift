@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class WithdrawalAgreeViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -46,7 +47,7 @@ class WithdrawalAgreeViewController: UIViewController {
         let label = UILabel()
         label.text = "작성하신 계정, 프로필 정보, 후기와 같은 모든 정보가 삭제되고 재가입하더라도 복구할 수 없어요."
         label.numberOfLines = 0
-        label.font = .regularBody2
+        label.font = .regularBody1
         label.textAlignment = .left
         label.textColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -54,31 +55,94 @@ class WithdrawalAgreeViewController: UIViewController {
         return label
     }()
     
-    private let agreeButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.disable).resize(newWidth: 24)
-        configuration.titleLineBreakMode = .byCharWrapping
-        configuration.imagePadding = 8
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0)
-        configuration.title = "안내사항을 모두 확인하였으며, 이에 동의합니다."
-        
-        let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = .regularBody2
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentHorizontalAlignment = .leading
-        
-        return button
-    }()
+    private let agreeButton = AgreeButton(title: "안내사항을 모두 확인하였으며, 이에 동의합니다.")
     
     private let nextButton = NextButton(title: "탈퇴하기", backgroundColor: .roomeMain, tintColor: .white)
-
+    
+    private var viewModel: WithdrawalViewModel
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: WithdrawalViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        configureUI()
         nextButton.isEnabled = false
+        configureUI()
+        bind()
+    }
+    
+    private func bind() {
+        backButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.dismiss(animated: false)
+            }
+            .store(in: &cancellables)
+        
+        agreeButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.agreeButton.isSelected.toggle()
+                if let self, agreeButton.isSelected {
+                    nextButton.isEnabled = true
+                } else {
+                    self?.nextButton.isEnabled = false
+                }
+            }
+            .store(in: &cancellables)
+        
+        nextButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
+                window?.addSubview(withdrawalPopUp)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleWithdrawal
+            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    guard let self else {
+                        return
+                    }
+                    print("✨withdrawal Success")
+                    UserContainer.shared.resetUser()
+                    DIContainer.shared.removeAll()
+                    DIManager.shared.registerAll()
+                    let next = DIContainer.shared.resolve(LoginViewController.self)
+                    window?.rootViewController?.dismiss(animated: false)
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(next, animated: true)
+                    successWithdrawalPopUp.dismissViewWithColorButton()
+                    window?.addSubview(successWithdrawalPopUp)
+                case .failure(let error):
+                    print("withdrawal fail: \(error)") //ToastView로 띄우기
+                    self?.dismiss(animated: false)
+                }
+            }
+            .store(in: &cancellables)
+        
+        withdrawalPopUp.publisherWhiteButton()
+            .sink { [weak self] _ in
+                self?.withdrawalPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
+        
+        withdrawalPopUp.publisherColorButton()
+            .sink { [weak self] _ in
+                self?.viewModel.input.tappedWithdrawal.send()
+                self?.withdrawalPopUp.removeFromSuperview()
+            }
+            .store(in: &cancellables)
     }
     
     private func configureUI() {
@@ -112,17 +176,18 @@ class WithdrawalAgreeViewController: UIViewController {
     private func configureDescription() {
         view.addSubview(dotView)
         view.addSubview(descriptionLabel)
+        let descriptionSize = descriptionLabel.sizeThatFits(CGSize(width: 0, height: CGFloat.greatestFiniteMagnitude))
         
         NSLayoutConstraint.activate([
             dotView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             dotView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 32),
-            dotView.heightAnchor.constraint(equalToConstant: 24),
-            dotView.widthAnchor.constraint(equalToConstant: 24),
+            dotView.heightAnchor.constraint(equalToConstant: 16),
+            dotView.widthAnchor.constraint(equalToConstant: 16),
             
             descriptionLabel.leadingAnchor.constraint(equalTo: dotView.trailingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: dotView.topAnchor, constant: -4),
-            descriptionLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
+            descriptionLabel.topAnchor.constraint(equalTo: dotView.topAnchor),
+            descriptionLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: descriptionSize.height)
         ])
     }
     
@@ -130,7 +195,7 @@ class WithdrawalAgreeViewController: UIViewController {
         view.addSubview(agreeButton)
         
         NSLayoutConstraint.activate([
-            agreeButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor),
+            agreeButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12),
             agreeButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             agreeButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
         ])
@@ -147,9 +212,3 @@ class WithdrawalAgreeViewController: UIViewController {
         ])
     }
 }
-
-//#Preview {
-//    let vc = WithdrawalAgreeViewController()
-//    
-//    return vc
-//}
