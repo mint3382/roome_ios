@@ -5,16 +5,14 @@
 //  Created by minsong kim on 6/4/24.
 //
 
-import Foundation
 import Combine
-import AuthenticationServices
 import KakaoSDKUser
+import UIKit
 
 class SettingViewModel: NSObject {
     struct Input {
         let selectCell = PassthroughSubject<SettingItem?, Never>()
         let tappedLogout = PassthroughSubject<Void, Never>()
-        let tappedWithdrawal = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -22,7 +20,6 @@ class SettingViewModel: NSObject {
         let handleLogoutButton = PassthroughSubject<Void, Never>()
         let handleWithdrawalButton = PassthroughSubject<Void, Never>()
         let handleLogout = PassthroughSubject<Void, Error>()
-        let handleWithdrawal = PassthroughSubject<Void, Error>()
         let handleSelectError = PassthroughSubject<Void, Never>()
         let handleUpdate = PassthroughSubject<Void, Error>()
     }
@@ -82,16 +79,6 @@ class SettingViewModel: NSObject {
                 }
             }
             .store(in: &cancellables)
-        
-        input.tappedWithdrawal
-            .sink { [weak self] _ in
-                if KeyChain.read(key: .isAppleLogin) == "true" {
-                    self?.handleAppleSignOut()
-                } else {
-                    self?.handleKakaoSignOut()
-                }
-            }
-            .store(in: &cancellables)
     }
     
     private func updateVersion() {
@@ -145,68 +132,6 @@ class SettingViewModel: NSObject {
                         self.output.handleLogout.send(completion: .failure(error))
                     }
                 }
-            }
-        }
-    }
-    
-    private func handleAppleSignOut() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.performRequests()
-    }
-    
-    private func handleKakaoSignOut() {
-        UserApi.shared.unlink { [self] error in
-            if let error {
-                print(error)
-            } else {
-                print("unlink() success")
-                
-                let bodyJSON: [String: Any?] = ["provider": LoginProvider.kakao.name,
-                                               "code": nil]
-                
-                //탈퇴 시켜줘
-                Task {
-                    do {
-                        try await self.loginUseCase?.signOutWithAPI(body: bodyJSON)
-                        KeyChain.delete(key: .accessToken)
-                        KeyChain.delete(key: .refreshToken)
-                        KeyChain.delete(key: .hasToken)
-                        output.handleWithdrawal.send()
-                    } catch(let error) {
-                        output.handleWithdrawal.send(completion: .failure(error))
-                    }
-                }
-            }
-        }
-    }
-}
-
-extension SettingViewModel: ASAuthorizationControllerDelegate {
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            return
-        }
-        //TODO: - 도메인에 넘겨줄 body Type 따로 정의해서 분리하기
-        let bodyJSON: [String: Any] = ["provider": LoginProvider.apple.name,
-                                        "code": String(data: credential.authorizationCode ?? Data(), encoding: .utf8) ?? ""]
-        
-        Task {
-            do {
-                try await loginUseCase?.signOutWithAPI(body: bodyJSON)
-                //키체인에 유저 정보 삭제
-                KeyChain.delete(key: .accessToken)
-                KeyChain.delete(key: .refreshToken)
-                KeyChain.delete(key: .hasToken)
-                KeyChain.delete(key: .isAppleLogin)
-                KeyChain.delete(key: .appleUserID)
-                output.handleWithdrawal.send()
-            } catch(let error) {
-                output.handleWithdrawal.send(completion: .failure(error))
             }
         }
     }

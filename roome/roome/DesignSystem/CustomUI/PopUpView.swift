@@ -87,6 +87,8 @@ class PopUpView: UIView {
         return button
     }()
     
+    private var cancellables = Set<AnyCancellable>()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3).cgColor
@@ -121,6 +123,14 @@ class PopUpView: UIView {
     
     func publisherWhiteButton() -> AnyPublisher<Void, Never> {
         whiteButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+    }
+    
+    func dismissViewWithColorButton() {
+        colorButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.removeFromSuperview()
+            }
+            .store(in: &cancellables)
     }
     
     func updatePopUpView(title: String, description: String, whiteButtonTitle: String? = nil, colorButtonTitle: String) {

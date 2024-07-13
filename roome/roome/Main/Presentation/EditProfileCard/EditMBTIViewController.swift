@@ -27,21 +27,7 @@ class EditMBTIViewController: UIViewController {
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
     
-    private let willNotAddButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
-        configuration.imagePadding = 8
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 24, bottom: 10, trailing: 20)
-        configuration.title = "프로필에 추가하지 않을래요"
-        
-        let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = .regularBody2
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentHorizontalAlignment = .leading
-        
-        return button
-    }()
+    private let willNotAddButton = AgreeButton(title: "프로필에 추가하지 않을래요")
     
     var viewModel: MBTIViewModel
     var cancellables = Set<AnyCancellable>()
@@ -128,12 +114,11 @@ class EditMBTIViewController: UIViewController {
         
         viewModel.output.handleNotAddButton
             .sink { [weak self] willNotAdd in
+                self?.willNotAddButton.isSelected = willNotAdd
                 if willNotAdd {
-                    self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.roomeMain).resize(newWidth: 24)
                     _ = self?.collectionView.visibleCells.map { $0.isSelected = false }
                     self?.collectionView.reloadData()
                 } else {
-                    self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
                     _ = self?.collectionView.visibleCells
                         .compactMap { $0 as? ButtonCell }
                         .map { $0.isChecked = false }
@@ -196,9 +181,9 @@ class EditMBTIViewController: UIViewController {
         view.addSubview(willNotAddButton)
         
         NSLayoutConstraint.activate([
-            willNotAddButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            willNotAddButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            willNotAddButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            willNotAddButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 12),
+            willNotAddButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            willNotAddButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
         ])
     }
     

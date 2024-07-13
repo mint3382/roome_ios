@@ -116,7 +116,7 @@ class ProfileSelectRepository: ProfileSelectRepositoryType {
     }
     
     private func checkURL(_ state: StateDTO) throws -> URL {
-        var path: APIConstants.Profile = {
+        let path: APIConstants.Profile = {
             switch state {
             case .roomCountRanges:
                     .roomCount

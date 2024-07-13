@@ -66,7 +66,6 @@ class NicknameViewController: UIViewController {
     }()
     
     private let nextButton = NextButton()
-    
     private var nextButtonWidthConstraint: NSLayoutConstraint?
     private let backButton = BackButton()
     
@@ -188,7 +187,6 @@ class NicknameViewController: UIViewController {
             welcomeLabel.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 12),
             welcomeLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
         ])
-        
     }
     
     private func configureFields() {

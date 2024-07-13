@@ -18,15 +18,6 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
                                              description: "정말 로그아웃하시겠어요?",
                                              whiteButtonTitle: "취소",
                                              colorButtonTitle: "로그아웃")
-    private lazy var withdrawalPopUp = PopUpView(frame: window!.bounds,
-                                                 title: "정말로 탈퇴하시겠어요?",
-                                                 description: "지금까지 작성된 모든 정보가 삭제되고,\n복구할 수 없어요",
-                                                 whiteButtonTitle: "취소",
-                                                 colorButtonTitle: "탈퇴")
-    private lazy var successWithdrawalPopUp = PopUpView(frame: window!.bounds,
-                                                        title: "탈퇴 완료",
-                                                        description: "탈퇴 처리가 성공적으로 완료되었습니다.",
-                                                        colorButtonTitle: "확인")
     private lazy var errorPopUp = PopUpView(frame: window!.bounds,
                                             title: "에러 발생",
                                             description: "다시 시도해주세요",
@@ -68,10 +59,9 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
         
         viewModel.output.handleWithdrawalButton
             .sink { [weak self] _ in
-                guard let self else {
-                    return
-                }
-                self.window?.addSubview(self.withdrawalPopUp)
+                let next = DIContainer.shared.resolve(WithdrawalViewController.self)
+                next.modalPresentationStyle = .fullScreen
+                self?.present(next, animated: false)
             }
             .store(in: &cancellables)
         
@@ -90,22 +80,9 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
             }
             .store(in: &cancellables)
         
-        withdrawalPopUp.publisherWhiteButton()
-            .sink { [weak self] _ in
-                self?.withdrawalPopUp.removeFromSuperview()
-            }
-            .store(in: &cancellables)
-        
         logoutPopUp.publisherColorButton()
             .sink { [weak self] _ in
                 self?.viewModel.input.tappedLogout.send()
-            }
-            .store(in: &cancellables)
-        
-        withdrawalPopUp.publisherColorButton()
-            .sink { [weak self] _ in
-                self?.viewModel.input.tappedWithdrawal.send()
-                self?.withdrawalPopUp.removeFromSuperview()
             }
             .store(in: &cancellables)
         
@@ -135,36 +112,6 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
             }
             .store(in: &cancellables)
         
-        viewModel.output.handleWithdrawal
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] completion in
-                switch completion {
-                case .finished:
-                    print("withdrawal finish")
-                case .failure(let error):
-                    print("withdrawal fail: \(error)")
-                    UserContainer.shared.resetUser()
-                    DIContainer.shared.removeAll()
-                    DIManager.shared.registerAll()
-                    let next = DIContainer.shared.resolve(LoginViewController.self)
-                    self?.window?.rootViewController?.dismiss(animated: false)
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(next, animated: true)
-                }
-            } receiveValue: { [weak self] _ in
-                guard let self else {
-                    return
-                }
-                print("✨withdrawal Success")
-                UserContainer.shared.resetUser()
-                DIContainer.shared.removeAll()
-                DIManager.shared.registerAll()
-                let next = DIContainer.shared.resolve(LoginViewController.self)
-                window?.rootViewController?.dismiss(animated: false)
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(next, animated: true)
-                window?.addSubview(successWithdrawalPopUp)
-            }
-            .store(in: &cancellables)
-        
         viewModel.output.handleUpdate
             .sink { completion in
                 switch completion {
@@ -181,12 +128,6 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
         errorPopUp.publisherColorButton()
             .sink { [weak self] in
                 self?.errorPopUp.removeFromSuperview()
-            }
-            .store(in: &cancellables)
-        
-        successWithdrawalPopUp.publisherColorButton()
-            .sink { [weak self] in
-                self?.successWithdrawalPopUp.removeFromSuperview()
             }
             .store(in: &cancellables)
     }
