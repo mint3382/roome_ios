@@ -168,6 +168,14 @@ class DIManager {
         
         let tabBarController = TabBarController()
         DIContainer.shared.register(TabBarController.self, dependency: tabBarController)
+        
+        let withdrawalViewModel = WithdrawalViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
+        let withdrawalViewController = WithdrawalViewController(viewModel: withdrawalViewModel)
+        let withdrawalDetailViewController = WithdrawalDetailViewController(viewModel: withdrawalViewModel)
+        let withdrawalAgreeViewController = WithdrawalAgreeViewController(viewModel: withdrawalViewModel)
+        DIContainer.shared.register(WithdrawalViewController.self, dependency: withdrawalViewController)
+        DIContainer.shared.register(WithdrawalDetailViewController.self, dependency: withdrawalDetailViewController)
+        DIContainer.shared.register(WithdrawalAgreeViewController.self, dependency: withdrawalAgreeViewController)
     }
     
     private func registerExtraDependency() {
