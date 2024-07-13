@@ -25,7 +25,6 @@ class TermsAgreeViewController: UIViewController {
     private let titleLabel: PaddingLabel = {
         let label = PaddingLabel()
         label.text = "서비스 이용약관"
-        label.numberOfLines = 2
         label.sizeToFit()
         label.textAlignment = .left
         label.textColor = .label
@@ -138,7 +137,7 @@ class TermsAgreeViewController: UIViewController {
                 switch completion {
                 case .finished:
                     print("finished")
-                case .failure(let error):
+                case .failure(_):
                     self.window?.addSubview(self.errorPopUp)
                 }
             } receiveValue: { [weak self] in
