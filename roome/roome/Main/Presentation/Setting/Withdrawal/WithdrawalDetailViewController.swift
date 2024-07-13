@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class WithdrawalDetailViewController: UIViewController {
     private let placeHolderText = "후기 작성 시 유의사항 한 번 확인하기!\n후기를 보는 사용자와 사업자에게 상처가 되는\n욕설, 비방, 명예훼손성 표현은 사용하지 말아주세요"
@@ -59,13 +60,50 @@ class WithdrawalDetailViewController: UIViewController {
     
     private let nextButton = NextButton(title: "확인", backgroundColor: .roomeMain, tintColor: .white)
     private var nextButtonWidthConstraint: NSLayoutConstraint?
+    
+    private var viewModel: WithdrawalViewModel
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(viewModel: WithdrawalViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        configureUI()
         textView.delegate = self
+        configureUI()
+        bind()
+    }
+    
+    private func bind() {
+        backButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.dismiss(animated: false)
+            }
+            .store(in: &cancellables)
+        
+        jumpButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                let next = DIContainer.shared.resolve(WithdrawalAgreeViewController.self)
+                next.modalPresentationStyle = .fullScreen
+                self?.present(next, animated: false)
+            }
+            .store(in: &cancellables)
+        
+        nextButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                let next = DIContainer.shared.resolve(WithdrawalAgreeViewController.self)
+                next.modalPresentationStyle = .fullScreen
+                self?.present(next, animated: false)
+            }
+            .store(in: &cancellables)
     }
     
     private func configureUI() {

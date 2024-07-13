@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
     private let backButton = BackButton()
@@ -33,6 +34,17 @@ class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
     
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Int, WithdrawalItem>?
+    private var cancellables = Set<AnyCancellable>()
+    private var viewModel: WithdrawalViewModel
+    
+    init(viewModel: WithdrawalViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +57,36 @@ class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
         setDataSource()
         setSnapShot()
         collectionView.delegate = self
+        bind()
+    }
+    
+    private func bind() {
+        backButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.dismiss(animated: false)
+            }
+            .store(in: &cancellables)
+        
+        jumpButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                let next = DIContainer.shared.resolve(WithdrawalAgreeViewController.self)
+                next.modalPresentationStyle = .fullScreen
+                self?.present(next, animated: false)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleReason
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    let next = DIContainer.shared.resolve(WithdrawalAgreeViewController.self)
+                    next.modalPresentationStyle = .fullScreen
+                    self?.present(next, animated: false)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .store(in: &cancellables)
     }
     
     private func configureNavigationBar() {
@@ -130,6 +172,19 @@ class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
         snapshot.appendItems(withdrawalItems, toSection: 0)
         
         dataSource?.apply(snapshot)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let withdrawalReason = WithdrawalItem.allCases[indexPath.row]
+        
+        switch withdrawalReason {
+        case .etc:
+            let next = DIContainer.shared.resolve(WithdrawalDetailViewController.self)
+            next.modalPresentationStyle = .fullScreen
+            self.present(next, animated: false)
+        default:
+            viewModel.input.tappedWithdrawalReasonCell.send(withdrawalReason)
+        }
     }
 }
 
