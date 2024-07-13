@@ -118,7 +118,7 @@ class LoginViewController: UIViewController {
                             self.window?.addSubview(self.errorPopUp)
                         }
                     } else {
-                        self.errorPopUp.updatePopUpView(title: "에러 발생", description: "다시 시도해주세요.", colorButtonTitle: "확인")
+                        self.errorPopUp.updatePopUpView(title: "로그인을 취소했어요", description: "다시 시도해주세요.", colorButtonTitle: "다시 시도")
                         self.window?.addSubview(self.errorPopUp)
                     }
                 }
