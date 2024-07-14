@@ -83,6 +83,8 @@ class LoginViewModel: NSObject {
                     Task {
                         try await self.loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
                         let state = UserContainer.shared.user?.data.state
+                        try await UserContainer.shared.updateUserProfile()
+                        try await UserContainer.shared.updateDefaultProfile()
                         
                         self.userStates.send(state)
                     }
@@ -114,6 +116,8 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         Task {
             try await loginUseCase?.loginWithAPI(body: bodyJSON, decodedDataType: LoginDTO.self)
             let state = UserContainer.shared.user?.data.state
+            try await UserContainer.shared.updateUserProfile()
+            try await UserContainer.shared.updateDefaultProfile()
             
             userStates.send(state)
         }
