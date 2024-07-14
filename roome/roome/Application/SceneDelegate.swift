@@ -5,6 +5,7 @@
 //  Created by minsong kim on 4/17/24.
 //
 
+import FirebaseAnalytics
 import UIKit
 import KakaoSDKAuth
 import Combine
@@ -23,6 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private var internetPopUp: PopUpView?
     private var cancellable = Set<AnyCancellable>()
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        Analytics.setAnalyticsCollectionEnabled(true)  
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
