@@ -64,6 +64,7 @@
 		921695A12BFE743D006DC44A /* ImportantFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A02BFE743D006DC44A /* ImportantFactorViewController.swift */; };
 		921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */; };
 		921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A42BFE786B006DC44A /* DislikeViewController.swift */; };
+		925087682C42A44C002CFF39 /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925087672C42A44C002CFF39 /* Tracking.swift */; };
 		9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9256E5572C0ED6DB00A50515 /* Lottie */; };
 		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
 		9256E5602C0EFEAD00A50515 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */; };
@@ -153,6 +154,9 @@
 		92CA2DE82C402CEC0084CD5A /* WithdrawalAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */; };
 		92CA2DEA2C415FCD0084CD5A /* WithdrawalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE92C415FCD0084CD5A /* WithdrawalViewModel.swift */; };
 		92CA2DEC2C425BF90084CD5A /* AgreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DEB2C425BF90084CD5A /* AgreeButton.swift */; };
+		92CA2DEE2C42746D0084CD5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CA2DED2C42746D0084CD5A /* GoogleService-Info.plist */; };
+		92CA2DEF2C427AAB0084CD5A /* Pods_roome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */; };
+		92CA2DF02C427AAB0084CD5A /* Pods_roome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -160,7 +164,23 @@
 		92DBDA0F2BCFCF5B00E299E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		92CA2DF12C427AAB0084CD5A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				92CA2DF02C427AAB0084CD5A /* Pods_roome.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1465AD59F6E3EB9BC89DE552 /* Pods-roome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roome.release.xcconfig"; path = "Target Support Files/Pods-roome/Pods-roome.release.xcconfig"; sourceTree = "<group>"; };
+		161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_roome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921694F72BF21E70006DC44A /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		921694F92BF21F07006DC44A /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		921694FB2BF2202A006DC44A /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
@@ -217,6 +237,7 @@
 		921695A02BFE743D006DC44A /* ImportantFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantFactorViewController.swift; sourceTree = "<group>"; };
 		921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
+		925087672C42A44C002CFF39 /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -303,6 +324,7 @@
 		92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAgreeViewController.swift; sourceTree = "<group>"; };
 		92CA2DE92C415FCD0084CD5A /* WithdrawalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewModel.swift; sourceTree = "<group>"; };
 		92CA2DEB2C425BF90084CD5A /* AgreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreeButton.swift; sourceTree = "<group>"; };
+		92CA2DED2C42746D0084CD5A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -310,6 +332,7 @@
 		92DBDA0B2BCFCF5B00E299E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92DBDA0E2BCFCF5B00E299E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92DBDA102BCFCF5B00E299E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7F7179FACDB53F74466248B /* Pods-roome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roome.debug.xcconfig"; path = "Target Support Files/Pods-roome/Pods-roome.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +342,7 @@
 			files = (
 				921695212BF4D600006DC44A /* KakaoSDKCommon in Frameworks */,
 				921695232BF4D60E006DC44A /* KakaoSDKAuth in Frameworks */,
+				92CA2DEF2C427AAB0084CD5A /* Pods_roome.framework in Frameworks */,
 				9293DC8A2C230C4F00545B57 /* KakaoSDKShare in Frameworks */,
 				921695252BF4D613006DC44A /* KakaoSDKUser in Frameworks */,
 				9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */,
@@ -329,6 +353,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DC8F19CD06A584579CC3836 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B7F7179FACDB53F74466248B /* Pods-roome.debug.xcconfig */,
+				1465AD59F6E3EB9BC89DE552 /* Pods-roome.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		921694EA2BF1BA7C006DC44A /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +423,7 @@
 		9216951F2BF4D600006DC44A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -756,6 +790,7 @@
 			children = (
 				9293DC8D2C233D8B00545B57 /* ImageManager.swift */,
 				9216954E2BFAFC8D006DC44A /* KeyChain.swift */,
+				925087672C42A44C002CFF39 /* Tracking.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -922,6 +957,7 @@
 				92DBDA012BCFCF5900E299E2 /* roome */,
 				92DBDA002BCFCF5900E299E2 /* Products */,
 				9216951F2BF4D600006DC44A /* Frameworks */,
+				4DC8F19CD06A584579CC3836 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -940,6 +976,7 @@
 				921695052BF26E73006DC44A /* roome.entitlements */,
 				921695502BFB1A71006DC44A /* SplashView.swift */,
 				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
+				92CA2DED2C42746D0084CD5A /* GoogleService-Info.plist */,
 				921694EA2BF1BA7C006DC44A /* Application */,
 				9271F7A92C00ABAC00586AFD /* Login */,
 				9271F7AD2C00AC5600586AFD /* SignUp */,
@@ -963,9 +1000,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92DBDA132BCFCF5B00E299E2 /* Build configuration list for PBXNativeTarget "roome" */;
 			buildPhases = (
+				75BE1DE0D3DC890FA2AE0E9A /* [CP] Check Pods Manifest.lock */,
 				92DBD9FB2BCFCF5900E299E2 /* Sources */,
 				92DBD9FC2BCFCF5900E299E2 /* Frameworks */,
 				92DBD9FD2BCFCF5900E299E2 /* Resources */,
+				92CA2DF12C427AAB0084CD5A /* Embed Frameworks */,
+				40F6A51EDD509A4D969DDF49 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1031,10 +1071,53 @@
 				9216952C2BF712F0006DC44A /* Pretendard-Bold.otf in Resources */,
 				921695292BF7126E006DC44A /* Pretendard-Regular.otf in Resources */,
 				92DBDA0C2BCFCF5B00E299E2 /* Assets.xcassets in Resources */,
+				92CA2DEE2C42746D0084CD5A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40F6A51EDD509A4D969DDF49 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roome/Pods-roome-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roome/Pods-roome-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-roome/Pods-roome-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75BE1DE0D3DC890FA2AE0E9A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-roome-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		92DBD9FB2BCFCF5900E299E2 /* Sources */ = {
@@ -1143,6 +1226,7 @@
 				9293DCA02C2A052A00545B57 /* UpdateError.swift in Sources */,
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
 				92CA2D112C338D780084CD5A /* ProfileSelectUseCaseType.swift in Sources */,
+				925087682C42A44C002CFF39 /* Tracking.swift in Sources */,
 				92CA2DDB2C3EBD6C0084CD5A /* EditDislikeViewController.swift in Sources */,
 				9293DC9A2C28170300545B57 /* SettingDTO.swift in Sources */,
 				92CA2DC42C3BF4C80084CD5A /* UserProfileRepositoryType.swift in Sources */,
@@ -1236,7 +1320,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1300,7 +1384,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1321,12 +1405,14 @@
 		};
 		92DBDA142BCFCF5B00E299E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7F7179FACDB53F74466248B /* Pods-roome.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = roome/roome.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BMG3X5CM6G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = roome/Info.plist;
@@ -1349,6 +1435,7 @@
 		};
 		92DBDA152BCFCF5B00E299E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1465AD59F6E3EB9BC89DE552 /* Pods-roome.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
