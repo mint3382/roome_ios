@@ -1,5 +1,4 @@
 {
-  "originHash" : "26810224996681d4bec59282ba08a0d9724e8ad03cd7f9b5a24a6ddc0ecf1359",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -16,7 +15,7 @@
       "location" : "https://github.com/kakao/kakao-ios-sdk",
       "state" : {
         "branch" : "master",
-        "revision" : "ab226a7a3625d64e73a52aa3800595dab810156b"
+        "revision" : "08089eeffc9b442da1c7343a70bf66c6de1a72c9"
       }
     },
     {
@@ -24,10 +23,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-spm.git",
       "state" : {
-        "revision" : "1d29eccc24cc8b75bff9f6804155112c0ffc9605",
-        "version" : "4.4.3"
+        "revision" : "b842598f1295f3ffa1475b1580672d1fe5b83580",
+        "version" : "4.5.0"
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }
