@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class TermsAgreeViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -100,6 +101,11 @@ class TermsAgreeViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.ServiceTerms.termsView, parameters: nil)
+    }
+    
     override func viewDidLayoutSubviews() {
         allAgreeButton.titleLabel?.font = .regularBody2
         ageAgreeButton.setNeedsLayout()
@@ -133,14 +139,10 @@ class TermsAgreeViewController: UIViewController {
             .store(in: &cancellable)
         
         nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    print("finished")
-                case .failure(_):
-                    self.window?.addSubview(self.errorPopUp)
-                }
-            } receiveValue: { [weak self] in
+            .map {
+                Analytics.logEvent(Tracking.ServiceTerms.termsNextButton, parameters: nil)
+            }
+            .sink { [weak self] in
                 self?.viewModel.input.next.send()
             }
             .store(in: &cancellable)

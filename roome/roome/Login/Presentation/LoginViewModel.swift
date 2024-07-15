@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import FirebaseAnalytics
 import AuthenticationServices
 import KakaoSDKUser
 
@@ -29,11 +30,17 @@ class LoginViewModel: NSObject {
     
     func transform(_ input: LoginInput) -> LoginOutput {
         let apple = input.apple
+            .map { _ in
+                Analytics.logEvent(Tracking.Login.appleButton, parameters: nil)
+            }
             .map { [weak self] _ in
                 self?.pushedAppleLoginButton()
             }
         
         let kakao = input.kakao
+            .map { _ in
+                Analytics.logEvent(Tracking.Login.kakaoButton, parameters: nil)
+            }
             .map { [weak self] _ in
                 self?.pushedKakaoLoginButton()
             }

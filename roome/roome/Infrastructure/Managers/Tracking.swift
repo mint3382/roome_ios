@@ -16,7 +16,7 @@ struct Tracking {
     
     struct ServiceTerms {
         static let termsView = "view_sign_up_terms_page"
-        static let termseNextButton = "tap_terms_next_button"
+        static let termsNextButton = "tap_terms_next_button"
         static let serviceDetail = "view_terms_page"
         static let serviceAgreeButton = "tap_terms_agree_button"
         static let personalDetail = "view_info_page"

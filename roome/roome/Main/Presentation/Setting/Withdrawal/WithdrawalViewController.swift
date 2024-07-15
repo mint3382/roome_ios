@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
     private let backButton = BackButton()
@@ -58,6 +59,11 @@ class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
         setSnapShot()
         collectionView.delegate = self
         bind()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Withdrawal.reasonView, parameters: nil)
     }
     
     private func bind() {

@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class GenreViewController: UIViewController, ToastAlertable {
     private let titleLabel = TitleLabel(text: "선호하는 방탈출 장르를\n알려주세요")
@@ -39,8 +40,16 @@ class GenreViewController: UIViewController, ToastAlertable {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.genreView, parameters: nil)
+    }
+    
     func bind() {
         nextButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Profile.genreNextButton, parameters: nil)
+            }
             .sink { [weak self] in
                 self?.viewModel.input.tapNextButton.send()
             }

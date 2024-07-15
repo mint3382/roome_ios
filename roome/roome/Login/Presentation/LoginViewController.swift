@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class LoginViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -64,6 +65,11 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .disable
         configureUI()
         bind()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Login.loginView, parameters: nil)
     }
     
     private func configureUI() {

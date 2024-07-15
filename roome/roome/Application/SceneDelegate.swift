@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private var cancellable = Set<AnyCancellable>()
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        Analytics.setAnalyticsCollectionEnabled(true)  
+        Analytics.setAnalyticsCollectionEnabled(true)
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

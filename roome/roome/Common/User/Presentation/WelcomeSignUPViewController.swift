@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class WelcomeSignUPViewController: UIViewController {
     private let stackView = UIStackView(axis: .vertical, alignment: .center, spacing: 20)
@@ -76,6 +77,11 @@ class WelcomeSignUPViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.createView, parameters: nil)
+    }
+    
     func updateNickName() {
         welcomeLabel.text = """
                             \(UserContainer.shared.user?.data.nickname ?? "{Error2}")님,
@@ -86,6 +92,9 @@ class WelcomeSignUPViewController: UIViewController {
     func bind() {
         makeProfileButton.publisher(for: .touchUpInside)
             .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .map {
+                Analytics.logEvent(Tracking.Profile.createNextButton, parameters: nil)
+            }
             .sink { [weak self] in
                 self?.viewModel.input.nextButton.send()
             }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class HorrorPositionViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "공포 테마에서,\n어떤 포지션인가요?")
@@ -34,6 +35,11 @@ class HorrorPositionViewController: UIViewController {
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "cell")
         configureUI()
         bind()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.positionView, parameters: nil)
     }
     
     func bind() {

@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class ActivityViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "어느 정도의 활동성을\n선호하시나요?")
@@ -34,6 +35,11 @@ class ActivityViewController: UIViewController {
         collectionView.register(ButtonCell.self, forCellWithReuseIdentifier: "cell")
         configureUI()
         bind()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.activityView, parameters: nil)
     }
     
     func bind() {

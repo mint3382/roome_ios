@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class RoomCountViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "현재까지 경험한 방 수를\n알려주세요")
@@ -125,12 +126,20 @@ class RoomCountViewController: UIViewController {
         registerKeyboardListener()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.numberView, parameters: nil)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     func bind() {
         nextButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Profile.numberNextButton, parameters: nil)
+            }
             .sink { [weak self] in
                 self?.viewModel.input.tapNextButton.send()
             }

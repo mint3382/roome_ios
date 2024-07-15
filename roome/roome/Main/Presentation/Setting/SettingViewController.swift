@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class SettingViewController: UIViewController, UICollectionViewDelegate {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -47,6 +48,11 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
         collectionView.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Setting.settingView, parameters: nil)
+    }
+    
     private func bindOutput() {
         viewModel.output.handleTermsDetail
             .sink { [weak self] in
@@ -58,6 +64,9 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
             .store(in: &cancellables)
         
         viewModel.output.handleWithdrawalButton
+            .map {
+                Analytics.logEvent(Tracking.Setting.withdrawalButton, parameters: nil)
+            }
             .sink { [weak self] _ in
                 let next = DIContainer.shared.resolve(WithdrawalViewController.self)
                 next.modalPresentationStyle = .fullScreen
