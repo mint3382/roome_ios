@@ -38,8 +38,8 @@ class MyProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         print("viewWillAppear")
         //TODO: - 닉네임과 유저 사진이 바뀌었다면 업데이트.
-//        (collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? UserCell)?.updateUserProfile()
-        collectionView.reloadData()
+        (collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? UserCell)?.updateUserProfile()
+        collectionView.reloadSections(IndexSet.init(arrayLiteral: 1))
     }
     
     override func viewDidAppear(_ animated: Bool) {
