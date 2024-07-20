@@ -44,14 +44,14 @@ class HintViewController: UIViewController {
     
     func bind() {
         backButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: false)
             }
             .store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
                 case .success:

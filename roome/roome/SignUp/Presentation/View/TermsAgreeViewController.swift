@@ -193,7 +193,7 @@ class TermsAgreeViewController: UIViewController {
             }.store(in: &cancellable)
         
         viewModel.output.goToNext
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { completion in
                 switch completion {
                 case .finished:

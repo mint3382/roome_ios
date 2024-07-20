@@ -96,7 +96,7 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
             .store(in: &cancellables)
         
         viewModel.output.handleLogout
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] completion in
                 switch completion {
                 case .finished:

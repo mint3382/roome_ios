@@ -109,7 +109,7 @@ class LoginViewController: UIViewController {
         let output = viewModel.transform(LoginViewModel.LoginInput(apple: apple, kakao: kakao))
         
         output.state
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -133,7 +133,7 @@ class LoginViewController: UIViewController {
             }.store(in: &cancellables)
         
         errorPopUp.publisherColorButton()
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 DIContainer.shared.removeAll()
                 DIManager.shared.registerAll()

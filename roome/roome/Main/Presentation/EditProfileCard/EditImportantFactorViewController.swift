@@ -24,7 +24,7 @@ class EditImportantFactorViewController: UIViewController, ToastAlertable {
     }()
     private let titleLabel = TitleLabel(text: "테마 선택 시,\n어떤 요소를 중요하게\n생각하시나요?")
     private let descriptionLabel = DescriptionLabel(text: "최대 2개까지 선택할 수 있어요")
-    var nextButton = NextButton()
+    var nextButton = NextButton(title: "저장", backgroundColor: .roomeMain, tintColor: .white)
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
     var viewModel: ImportantFactorViewModel
@@ -63,7 +63,7 @@ class EditImportantFactorViewController: UIViewController, ToastAlertable {
             .store(in: &cancellables)
         
         viewModel.output.handleCloseButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] didEdit in
                 if let self, didEdit {
                     window?.addSubview(changePopUp)
@@ -91,7 +91,7 @@ class EditImportantFactorViewController: UIViewController, ToastAlertable {
             }.store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
                 case .success:

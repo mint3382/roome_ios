@@ -175,7 +175,7 @@ class EditProfileViewController: UIViewController {
             .store(in: &cancellables)
         
         photoPopUp.baseImageButtonPublisher()
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] in
                 self?.viewModel.isImageChanged = .reset
                 self?.profileImageButton.setImage(UIImage(resource: .userProfile).resize(newWidth: 80), for: .normal)
@@ -190,7 +190,7 @@ class EditProfileViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleSaveButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
                 case .success:

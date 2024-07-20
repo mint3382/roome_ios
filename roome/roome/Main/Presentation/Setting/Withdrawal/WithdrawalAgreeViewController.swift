@@ -117,7 +117,7 @@ class WithdrawalAgreeViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleWithdrawal
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
                 case .success:

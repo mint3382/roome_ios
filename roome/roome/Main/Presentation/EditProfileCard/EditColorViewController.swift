@@ -62,7 +62,7 @@ class EditColorViewController: UIViewController{
             .store(in: &cancellables)
         
         viewModel.output.handleCloseButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] didEdit in
                 if let self, didEdit {
                     window?.addSubview(changePopUp)
@@ -73,7 +73,7 @@ class EditColorViewController: UIViewController{
             .store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
                 case .success(_):

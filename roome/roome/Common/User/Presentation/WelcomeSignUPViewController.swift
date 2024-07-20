@@ -91,7 +91,7 @@ class WelcomeSignUPViewController: UIViewController {
     
     func bind() {
         makeProfileButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .map {
                 Analytics.logEvent(Tracking.Profile.createNextButton, parameters: nil)
             }
@@ -101,7 +101,7 @@ class WelcomeSignUPViewController: UIViewController {
             .store(in: &cancellables)
         
         popUpView.publisherWhiteButton()
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] in
                 self?.viewModel.input.newButton.send()
                 self?.popUpView.removeFromSuperview()
@@ -109,7 +109,7 @@ class WelcomeSignUPViewController: UIViewController {
             .store(in: &cancellables)
         
         popUpView.publisherColorButton()
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] in
                 self?.viewModel.input.stillButton.send()
                 self?.popUpView.removeFromSuperview()
@@ -117,7 +117,7 @@ class WelcomeSignUPViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.willBeContinue
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { error in
                 //fail
             } receiveValue: { [weak self] state in
@@ -131,7 +131,7 @@ class WelcomeSignUPViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleNext
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] state in
                 self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(RoomCountViewController.self))
                 self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(GenreViewController.self))

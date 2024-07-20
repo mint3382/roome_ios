@@ -172,7 +172,7 @@ class RoomCountViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
                 case .success:
@@ -206,7 +206,7 @@ class RoomCountViewController: UIViewController {
             }.store(in: &cancellables)
         
         selectButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else {
                     return
@@ -219,7 +219,7 @@ class RoomCountViewController: UIViewController {
             }.store(in: &cancellables)
         
         backButton.publisher(for: .touchUpInside)
-            .throttle(for: 0.05, scheduler: RunLoop.main, latest: true)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self]  in
                 self?.navigationController?.popViewController(animated: false)
             }.store(in: &cancellables)

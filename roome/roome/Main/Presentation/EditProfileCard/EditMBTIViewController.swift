@@ -101,7 +101,7 @@ class EditMBTIViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { result in
                 switch result {
                 case .success:
