@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class DislikeViewController: UIViewController, ToastAlertable {
     private let titleLabel = TitleLabel(text: "방탈출 할 때,\n어떤 요소를\n싫어하시나요?")
@@ -38,15 +39,23 @@ class DislikeViewController: UIViewController, ToastAlertable {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.dislikeView, parameters: nil)
+    }
+    
     func bind() {
         nextButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Profile.dislikeNextButton, parameters: nil)
+            }
             .sink { [weak self] in
                 self?.viewModel.input.tapNextButton.send()
             }
             .store(in: &cancellables)
         
         backButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: false)
             }.store(in: &cancellables)
@@ -69,7 +78,7 @@ class DislikeViewController: UIViewController, ToastAlertable {
             }.store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
                 case .success:

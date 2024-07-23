@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class ProfileCardViewController: UIViewController {
     private let backButton = BackButton()
@@ -127,6 +128,9 @@ class ProfileCardViewController: UIViewController {
             .store(in: &cancellable)
         
         saveButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Profile.downloadImageButton, parameters: nil)
+            }
             .sink { [weak self] _ in
                 self?.viewModel.input.tapSaveButton.send()
             }
@@ -139,6 +143,9 @@ class ProfileCardViewController: UIViewController {
             .store(in: &cancellable)
         
         pageButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Profile.moveMyProfileViewButton, parameters: nil)
+            }
             .sink {  _ in
                 let next = TabBarController()
                 (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController?.dismiss(animated: false)

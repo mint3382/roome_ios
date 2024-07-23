@@ -5,11 +5,13 @@
 //  Created by minsong kim on 4/17/24.
 //
 
-import UIKit
-import KakaoSDKCommon
 import AuthenticationServices
-import KakaoSDKUser
+import AppTrackingTransparency
+import Firebase
 import KakaoSDKAuth
+import KakaoSDKCommon
+import KakaoSDKUser
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             kakaoAutomaticLogin()
         }
+        FirebaseApp.configure()
+        
         return true
     }
     
@@ -61,4 +65,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-

@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class WithdrawalAgreeViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -80,6 +81,11 @@ class WithdrawalAgreeViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Withdrawal.withdrawalAgreeView, parameters: nil)
+    }
+    
     private func bind() {
         backButton.publisher(for: .touchUpInside)
             .sink { [weak self] in
@@ -99,6 +105,9 @@ class WithdrawalAgreeViewController: UIViewController {
             .store(in: &cancellables)
         
         nextButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Withdrawal.withdrawalAgreeButton, parameters: nil)
+            }
             .sink { [weak self] in
                 guard let self else {
                     return
@@ -108,7 +117,7 @@ class WithdrawalAgreeViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleWithdrawal
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
                 case .success:
@@ -138,6 +147,9 @@ class WithdrawalAgreeViewController: UIViewController {
             .store(in: &cancellables)
         
         withdrawalPopUp.publisherColorButton()
+            .map {
+                Analytics.logEvent(Tracking.Withdrawal.withdrawalFinalButton, parameters: nil)
+            }
             .sink { [weak self] _ in
                 self?.viewModel.input.tappedWithdrawal.send()
                 self?.withdrawalPopUp.removeFromSuperview()

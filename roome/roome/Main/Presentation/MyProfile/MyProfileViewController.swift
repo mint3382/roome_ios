@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class MyProfileViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -37,8 +38,13 @@ class MyProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         print("viewWillAppear")
         //TODO: - 닉네임과 유저 사진이 바뀌었다면 업데이트.
-//        (collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? UserCell)?.updateUserProfile()
-        collectionView.reloadData()
+        (collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? UserCell)?.updateUserProfile()
+        collectionView.reloadSections(IndexSet.init(arrayLiteral: 1))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.MyProfile.myProfileView, parameters: nil)
     }
     
     private func bind() {
@@ -117,6 +123,9 @@ extension MyProfileViewController: UICollectionViewDataSource {
                 .store(in: &cancellables)
             
             userCell.cardButtonPublisher()
+                .map {
+                    Analytics.logEvent(Tracking.MyProfile.myProfileCardButton, parameters: nil)
+                }
                 .sink { [weak self] _ in
                     print("card Button Tapped")
                     let popUpView = DIContainer.shared.resolve(MyProfileCardViewController.self)
@@ -127,6 +136,9 @@ extension MyProfileViewController: UICollectionViewDataSource {
                 .store(in: &cancellables)
             
             userCell.shareButtonPublisher()
+                .map {
+                    Analytics.logEvent(Tracking.MyProfile.shareKakaoButton, parameters: nil)
+                }
                 .sink { [weak self] _ in
                     self?.viewModel.input.tappedShareButton.send()
                 }

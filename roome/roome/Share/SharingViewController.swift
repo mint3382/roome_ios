@@ -42,7 +42,7 @@ class SharingViewController: UIViewController {
     
     private func bind() {
         nextButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { _ in
                 //TODO: - 계정 유무에 따라 다르게 이동
                 var next = UIViewController()

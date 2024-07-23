@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class NicknameViewController: UIViewController {
     private let welcomeLabel: UILabel = {
@@ -91,6 +92,11 @@ class NicknameViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Nickname.nicknameView, parameters: nil)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -111,7 +117,7 @@ class NicknameViewController: UIViewController {
             .store(in: &cancellables)
         
         backButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             }
@@ -128,12 +134,14 @@ class NicknameViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: true)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
                 case .success:
+                    Analytics.logEvent(Tracking.Nickname.nicknameSuccess, parameters: nil)
                     self?.handleNextPage()
                 case .failure(let error):
+                    Analytics.logEvent(Tracking.Nickname.nicknameFailure, parameters: nil)
                     if let error = error as? NetworkError {
                         var nicknameError: NicknameError
                         switch error {

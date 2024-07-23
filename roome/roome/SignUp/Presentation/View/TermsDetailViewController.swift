@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 import Combine
+import Firebase
 
 class TermsDetailViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
@@ -65,6 +66,16 @@ class TermsDetailViewController: UIViewController {
         loadWebView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if viewModel.detailState == .service {
+            Analytics.logEvent(Tracking.ServiceTerms.serviceDetail, parameters: nil)
+        } else {
+            Analytics.logEvent(Tracking.ServiceTerms.personalDetail, parameters: nil)
+        }
+    }
+    
     func bind() {
         closeButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
             .sink { [weak self] _ in
@@ -77,6 +88,12 @@ class TermsDetailViewController: UIViewController {
             .sink { [weak self] _ in
                 self?.viewModel.input.handleDetail.send()
                 self?.dismiss(animated: true)
+                
+                if self?.viewModel.detailState == .service {
+                    Analytics.logEvent(Tracking.ServiceTerms.serviceAgreeButton, parameters: nil)
+                } else {
+                    Analytics.logEvent(Tracking.ServiceTerms.personalAgreeButton, parameters: nil)
+                }
             }
             .store(in: &cancellable)
     }

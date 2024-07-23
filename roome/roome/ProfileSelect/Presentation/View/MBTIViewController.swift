@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class MBTIViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "MBTI를 알려주세요")
@@ -48,15 +49,23 @@ class MBTIViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.mbtiView, parameters: nil)
+    }
+    
     func bind() {
         nextButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Profile.mbtiNextButton, parameters: nil)
+            }
             .sink { [weak self] in
                 self?.viewModel.input.tappedNextButton.send()
             }
             .store(in: &cancellables)
         
         backButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: false)
             }.store(in: &cancellables)
@@ -80,7 +89,7 @@ class MBTIViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { result in
                 switch result {
                 case .success:

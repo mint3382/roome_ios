@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class WithdrawalDetailViewController: UIViewController {
     private let placeHolderText = "후기 작성 시 유의사항 한 번 확인하기!\n후기를 보는 사용자와 사업자에게 상처가 되는\n욕설, 비방, 명예훼손성 표현은 사용하지 말아주세요"
@@ -98,6 +99,9 @@ class WithdrawalDetailViewController: UIViewController {
             .store(in: &cancellables)
         
         nextButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Withdrawal.reasonNextButton, parameters: nil)
+            }
             .sink { [weak self] in
                 let next = DIContainer.shared.resolve(WithdrawalAgreeViewController.self)
                 next.modalPresentationStyle = .fullScreen

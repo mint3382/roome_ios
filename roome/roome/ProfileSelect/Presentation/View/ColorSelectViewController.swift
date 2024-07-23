@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class ColorSelectViewController: UIViewController{
     private let titleLabel = TitleLabel(text: "프로필 배경으로 쓰일\n색상을 골라주세요")
@@ -36,19 +37,24 @@ class ColorSelectViewController: UIViewController{
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.colorView, parameters: nil)
+    }
+    
     func bind() {
         backButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: false)
             }
             .store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] result in
                 switch result {
-                case .success(let isEdit):
+                case .success(_):
                     let nextViewController = ProfileCardViewController(viewModel: ProfileCardViewModel())
                     
                     self?.navigationController?.pushViewController(nextViewController, animated: false)
@@ -60,7 +66,7 @@ class ColorSelectViewController: UIViewController{
             .store(in: &cancellables)
         
         viewModel.output.handleLoading
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { isEdit in
                 if isEdit == false {
                     let loadingView = DIContainer.shared.resolve(LoadingView.self)
