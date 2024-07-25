@@ -70,4 +70,8 @@ struct APIConstants {
         case important = "/profiles/theme-important-factors"
         case dislike = "/profiles/theme-disliked-factors"
     }
+    
+    enum Version: String {
+        case iOS = "/versions/ios"
+    }
 }
