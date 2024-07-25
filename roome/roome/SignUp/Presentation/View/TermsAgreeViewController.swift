@@ -148,8 +148,11 @@ class TermsAgreeViewController: UIViewController {
             .store(in: &cancellable)
 
         backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-            .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
+            .sink { _ in
+                let viewController = DIContainer.shared.resolve(LoginViewController.self)
+                
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .changeRootViewController(viewController, animated: true)
             }
             .store(in: &cancellable)
         
