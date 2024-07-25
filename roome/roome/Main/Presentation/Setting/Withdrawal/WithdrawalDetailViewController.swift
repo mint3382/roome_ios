@@ -10,7 +10,7 @@ import Combine
 import FirebaseAnalytics
 
 class WithdrawalDetailViewController: UIViewController {
-    private let placeHolderText = "후기 작성 시 유의사항 한 번 확인하기!\n후기를 보는 사용자와 사업자에게 상처가 되는\n욕설, 비방, 명예훼손성 표현은 사용하지 말아주세요"
+    private let placeHolderText = "내용을 작성해주세요"
     private let backButton = BackButton()
     
     private let jumpButton: UIButton = {
