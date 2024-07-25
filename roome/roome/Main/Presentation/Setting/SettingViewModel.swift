@@ -26,15 +26,6 @@ class SettingViewModel: NSObject {
     
     let input: Input
     let output: Output
-    var version: String? {
-        guard let dictionary = Bundle.main.infoDictionary,
-              let version = dictionary["CFBundleShortVersionString"] as? String else {
-            return nil
-        }
-        
-        return version
-    }
-    
     private var cancellables = Set<AnyCancellable>()
     
     init(loginUseCase: LoginUseCase) {

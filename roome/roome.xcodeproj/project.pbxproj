@@ -129,6 +129,7 @@
 		9293DCAF2C2C62AA00545B57 /* SharingCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */; };
 		9293DCB12C2C63BF00545B57 /* SharingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB02C2C63BF00545B57 /* SharingCardView.swift */; };
 		9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB22C2C640800545B57 /* SharingContainer.swift */; };
+		92C0D4D62C52986E00109C4E /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C0D4D52C52986E00109C4E /* VersionManager.swift */; };
 		92CA2D062C2DF7850084CD5A /* InternetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */; };
 		92CA2D0B2C3385D00084CD5A /* ProfileSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0A2C3385D00084CD5A /* ProfileSelectUseCase.swift */; };
 		92CA2D0D2C3387280084CD5A /* ProfileSelectRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0C2C3387280084CD5A /* ProfileSelectRepositoryType.swift */; };
@@ -300,6 +301,7 @@
 		9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardViewController.swift; sourceTree = "<group>"; };
 		9293DCB02C2C63BF00545B57 /* SharingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardView.swift; sourceTree = "<group>"; };
 		9293DCB22C2C640800545B57 /* SharingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingContainer.swift; sourceTree = "<group>"; };
+		92C0D4D52C52986E00109C4E /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
 		92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetMonitor.swift; sourceTree = "<group>"; };
 		92CA2D0A2C3385D00084CD5A /* ProfileSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectUseCase.swift; sourceTree = "<group>"; };
 		92CA2D0C2C3387280084CD5A /* ProfileSelectRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectRepositoryType.swift; sourceTree = "<group>"; };
@@ -794,6 +796,7 @@
 				9293DC8D2C233D8B00545B57 /* ImageManager.swift */,
 				9216954E2BFAFC8D006DC44A /* KeyChain.swift */,
 				925087672C42A44C002CFF39 /* Tracking.swift */,
+				92C0D4D52C52986E00109C4E /* VersionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1161,6 +1164,7 @@
 				9293DCA62C2B02B700545B57 /* EditProfileViewModel.swift in Sources */,
 				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
 				92CA2D0D2C3387280084CD5A /* ProfileSelectRepositoryType.swift in Sources */,
+				92C0D4D62C52986E00109C4E /* VersionManager.swift in Sources */,
 				9293DC902C24F42C00545B57 /* MyProfileCardViewController.swift in Sources */,
 				9293DC702C1F3EA300545B57 /* DIManager.swift in Sources */,
 				9293DC7F2C216EDC00545B57 /* MyProfileCell.swift in Sources */,
@@ -1428,7 +1432,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.traum.marchen.roome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1457,7 +1461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.traum.marchen.roome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
