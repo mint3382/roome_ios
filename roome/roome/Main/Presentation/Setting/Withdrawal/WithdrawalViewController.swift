@@ -34,7 +34,7 @@ class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
     }()
     
     private var collectionView: UICollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<Int, WithdrawalItem>?
+    private var dataSource: UICollectionViewDiffableDataSource<Int, WithdrawalReason>?
     private var cancellables = Set<AnyCancellable>()
     private var viewModel: WithdrawalViewModel
     
@@ -158,22 +158,22 @@ class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func setDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Int, WithdrawalItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<Int, WithdrawalReason>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: WithdrawalCollectionViewCell.id,
                 for: indexPath) as? WithdrawalCollectionViewCell else {
                 return UICollectionViewCell()
             }
     
-            cell.configureCell(title: WithdrawalItem.allCases[indexPath.row].rawValue)
+            cell.configureCell(title: WithdrawalReason.allCases[indexPath.row].rawValue)
             
             return cell
         })
     }
     
     private func setSnapShot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, WithdrawalItem>()
-        let withdrawalItems: [WithdrawalItem] = [.notEnoughFunction, .rarelyUseService, .tooManyError, .worriedPersonalInformation, .wantReSignIn, .etc]
+        var snapshot = NSDiffableDataSourceSnapshot<Int, WithdrawalReason>()
+        let withdrawalItems: [WithdrawalReason] = [.noFunction, .rarelyUseService, .tooManyError, .worriedPersonalInformation, .wantRejoin, .etCetera]
         snapshot.appendSections([0])
         snapshot.appendItems(withdrawalItems, toSection: 0)
         
@@ -181,10 +181,11 @@ class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let withdrawalReason = WithdrawalItem.allCases[indexPath.row]
+        let withdrawalReason = WithdrawalReason.allCases[indexPath.row]
         
         switch withdrawalReason {
-        case .etc:
+        case .etCetera:
+            viewModel.reasonState = .etCetera
             let next = DIContainer.shared.resolve(WithdrawalDetailViewController.self)
             next.modalPresentationStyle = .fullScreen
             self.present(next, animated: false)
@@ -194,13 +195,14 @@ class WithdrawalViewController: UIViewController, UICollectionViewDelegate {
     }
 }
 
-enum WithdrawalItem: String, CaseIterable {
-    case notEnoughFunction = "원하는 기능이 없어요"
+enum WithdrawalReason: String, CaseIterable {
+    case noFunction = "원하는 기능이 없어요"
     case rarelyUseService = "서비스를 자주 사용하지 않아요"
     case tooManyError = "서비스 오류가 많아요"
     case worriedPersonalInformation = "개인 정보 및 보안이 걱정돼요"
-    case wantReSignIn = "탈퇴 후 재가입하고 싶어요"
-    case etc = "기타"
+    case wantRejoin = "탈퇴 후 재가입하고 싶어요"
+    case etCetera = "기타"
+    case jump = ""
 }
 
 //#Preview {

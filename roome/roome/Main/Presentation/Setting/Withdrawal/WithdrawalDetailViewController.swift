@@ -84,6 +84,10 @@ class WithdrawalDetailViewController: UIViewController {
     }
     
     private func bind() {
+        textView.publisher
+            .receive(on: RunLoop.main)
+            .assign(to: &viewModel.$textInput)
+        
         backButton.publisher(for: .touchUpInside)
             .sink { [weak self] in
                 self?.dismiss(animated: false)

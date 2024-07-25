@@ -65,6 +65,7 @@
 		921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */; };
 		921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A42BFE786B006DC44A /* DislikeViewController.swift */; };
 		925087682C42A44C002CFF39 /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925087672C42A44C002CFF39 /* Tracking.swift */; };
+		9250876A2C4FDC4F002CFF39 /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925087692C4FDC4F002CFF39 /* UITextView+.swift */; };
 		9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9256E5572C0ED6DB00A50515 /* Lottie */; };
 		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
 		9256E5602C0EFEAD00A50515 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */; };
@@ -238,6 +239,7 @@
 		921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
 		925087672C42A44C002CFF39 /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
+		925087692C4FDC4F002CFF39 /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
 		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				9271F7C72C00B6D200586AFD /* UIColor+.swift */,
 				928474802C0D9F0F002C3B4C /* UIStackView+.swift */,
 				9256E5592C0EFC0D00A50515 /* UILabel+.swift */,
+				925087692C4FDC4F002CFF39 /* UITextView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1201,6 +1204,7 @@
 				92CA2DCB2C3CE1220084CD5A /* EditGenreViewController.swift in Sources */,
 				928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
+				9250876A2C4FDC4F002CFF39 /* UITextView+.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
 				9293DC832C22F3F400545B57 /* GradientView.swift in Sources */,
 				9293DCAB2C2C60B300545B57 /* SharingViewController.swift in Sources */,
