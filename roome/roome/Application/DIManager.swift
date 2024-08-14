@@ -150,6 +150,7 @@ class DIManager {
         
         let profileCardViewModel = ProfileCardViewModel()
         let myProfileCardViewController = MyProfileCardViewController(viewModel: profileCardViewModel)
+        DIContainer.shared.register(ProfileCardViewModel.self, dependency: profileCardViewModel)
         DIContainer.shared.register(MyProfileCardViewController.self, dependency: myProfileCardViewController)
         
         let userProfileRepository = UserProfileRepository()

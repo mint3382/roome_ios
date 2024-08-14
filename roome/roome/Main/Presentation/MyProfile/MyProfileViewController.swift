@@ -128,8 +128,7 @@ extension MyProfileViewController: UICollectionViewDataSource {
                 }
                 .sink { [weak self] _ in
                     print("card Button Tapped")
-                    let popUpView = DIContainer.shared.resolve(MyProfileCardViewController.self)
-                    let cardViewModel = ProfileCardViewModel()
+                    let cardViewModel = DIContainer.shared.resolve(ProfileCardViewModel.self)
                     let view = MyProfileCardViewController(viewModel: cardViewModel)
                     view.modalPresentationStyle = .fullScreen
                     
