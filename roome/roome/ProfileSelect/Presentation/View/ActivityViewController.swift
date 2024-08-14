@@ -57,8 +57,10 @@ class ActivityViewController: UIViewController {
                 case .success:
                     let nextViewController = DIContainer.shared.resolve(DislikeViewController.self)
                     self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.collectionView.allowsSelection = true
                 case .failure(let error):
                     print(error)
+                    self?.collectionView.allowsSelection = true
                     //TODO: error Toast 띄우기
                 }
             }
@@ -146,6 +148,7 @@ extension ActivityViewController: UICollectionViewDataSource, UICollectionViewDe
         guard let activity = UserContainer.shared.defaultProfile?.data.activities[indexPath.row] else {
             return
         }
+        collectionView.allowsSelection = false
         viewModel.input.selectCell.send((false,activity.id))
     }
 }

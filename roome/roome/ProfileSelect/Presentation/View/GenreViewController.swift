@@ -51,6 +51,7 @@ class GenreViewController: UIViewController, ToastAlertable {
                 Analytics.logEvent(Tracking.Profile.genreNextButton, parameters: nil)
             }
             .sink { [weak self] in
+                self?.nextButton.loadingButton()
                 self?.viewModel.input.tapNextButton.send()
             }
             .store(in: &cancellables)
@@ -85,8 +86,10 @@ class GenreViewController: UIViewController, ToastAlertable {
                 case .success:
                     let nextViewController = DIContainer.shared.resolve(MBTIViewController.self)
                     self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.nextButton.stopLoading()
                 case .failure(let error):
                     //TODO: - 토스트로 에러 띄우기
+                    self?.nextButton.stopLoading()
                     print(error)
                 }
             }

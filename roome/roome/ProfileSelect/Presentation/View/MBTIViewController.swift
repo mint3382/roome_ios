@@ -60,6 +60,7 @@ class MBTIViewController: UIViewController {
                 Analytics.logEvent(Tracking.Profile.mbtiNextButton, parameters: nil)
             }
             .sink { [weak self] in
+                self?.nextButton.loadingButton()
                 self?.viewModel.input.tappedNextButton.send()
             }
             .store(in: &cancellables)
@@ -90,13 +91,15 @@ class MBTIViewController: UIViewController {
         
         viewModel.output.handleNextButton
             .debounce(for: 0.3, scheduler: RunLoop.main)
-            .sink { result in
+            .sink { [weak self] result in
                 switch result {
                 case .success:
                     let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
                     
-                    self.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.nextButton.stopLoading()
                 case .failure(let error):
+                    self?.nextButton.stopLoading()
                     print(error)
                 }
             }

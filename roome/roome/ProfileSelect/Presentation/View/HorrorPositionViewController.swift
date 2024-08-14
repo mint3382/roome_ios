@@ -57,8 +57,10 @@ class HorrorPositionViewController: UIViewController {
                 case .success:
                     let nextViewController = DIContainer.shared.resolve(HintViewController.self)
                     self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.collectionView.allowsSelection = true
                 case .failure(let error):
                     print(error)
+                    self?.collectionView.allowsSelection = true
                     //TODO: error Toast 띄우기
                 }
             }
@@ -146,6 +148,7 @@ extension HorrorPositionViewController: UICollectionViewDataSource, UICollection
         guard let horrorPosition = UserContainer.shared.defaultProfile?.data.horrorThemePositions[indexPath.row] else {
             return
         }
+        collectionView.allowsSelection = false
         viewModel.input.selectCell.send((false, horrorPosition.id))
     }
 }

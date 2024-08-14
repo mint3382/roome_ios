@@ -50,6 +50,7 @@ class ImportantFactorViewController: UIViewController, ToastAlertable {
                 Analytics.logEvent(Tracking.Profile.importantFactorNextButton, parameters: nil)
             }
             .sink { [weak self] in
+                self?.nextButton.loadingButton()
                 self?.viewModel.input.tapNextButton.send()
             }
             .store(in: &cancellables)
@@ -84,8 +85,10 @@ class ImportantFactorViewController: UIViewController, ToastAlertable {
                 case .success:
                     let nextViewController = DIContainer.shared.resolve(HorrorPositionViewController.self)
                     self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.nextButton.stopLoading()
                 case .failure(let error):
                     //TODO: - 토스트로 에러 띄우기
+                    self?.nextButton.stopLoading()
                     print(error)
                 }
             }
