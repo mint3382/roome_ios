@@ -64,6 +64,8 @@
 		921695A12BFE743D006DC44A /* ImportantFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A02BFE743D006DC44A /* ImportantFactorViewController.swift */; };
 		921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */; };
 		921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A42BFE786B006DC44A /* DislikeViewController.swift */; };
+		925087682C42A44C002CFF39 /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925087672C42A44C002CFF39 /* Tracking.swift */; };
+		9250876A2C4FDC4F002CFF39 /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925087692C4FDC4F002CFF39 /* UITextView+.swift */; };
 		9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9256E5572C0ED6DB00A50515 /* Lottie */; };
 		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
 		9256E5602C0EFEAD00A50515 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */; };
@@ -127,11 +129,36 @@
 		9293DCAF2C2C62AA00545B57 /* SharingCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */; };
 		9293DCB12C2C63BF00545B57 /* SharingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB02C2C63BF00545B57 /* SharingCardView.swift */; };
 		9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB22C2C640800545B57 /* SharingContainer.swift */; };
+		92A315F12C6D0FD1006FCEE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92A315F02C6D0FD1006FCEE3 /* GoogleService-Info.plist */; };
+		92C0D4D62C52986E00109C4E /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C0D4D52C52986E00109C4E /* VersionManager.swift */; };
 		92CA2D062C2DF7850084CD5A /* InternetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */; };
 		92CA2D0B2C3385D00084CD5A /* ProfileSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0A2C3385D00084CD5A /* ProfileSelectUseCase.swift */; };
 		92CA2D0D2C3387280084CD5A /* ProfileSelectRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0C2C3387280084CD5A /* ProfileSelectRepositoryType.swift */; };
 		92CA2D0F2C3387C10084CD5A /* ProfileSelectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0E2C3387C10084CD5A /* ProfileSelectRepository.swift */; };
 		92CA2D112C338D780084CD5A /* ProfileSelectUseCaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D102C338D780084CD5A /* ProfileSelectUseCaseType.swift */; };
+		92CA2DC02C3BF4670084CD5A /* UserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */; };
+		92CA2DC22C3BF4A20084CD5A /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */; };
+		92CA2DC42C3BF4C80084CD5A /* UserProfileRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */; };
+		92CA2DC92C3CBCDF0084CD5A /* EditRoomCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DC82C3CBCDF0084CD5A /* EditRoomCountViewController.swift */; };
+		92CA2DCB2C3CE1220084CD5A /* EditGenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */; };
+		92CA2DCD2C3CE2AF0084CD5A /* EditMBTIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */; };
+		92CA2DCF2C3CE3800084CD5A /* EditStrengthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */; };
+		92CA2DD12C3CE4170084CD5A /* EditImportantFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD02C3CE4170084CD5A /* EditImportantFactorViewController.swift */; };
+		92CA2DD32C3E99A30084CD5A /* EditHorrorPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD22C3E99A30084CD5A /* EditHorrorPositionViewController.swift */; };
+		92CA2DD52C3EB7790084CD5A /* EditHintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD42C3EB7790084CD5A /* EditHintViewController.swift */; };
+		92CA2DD72C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD62C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift */; };
+		92CA2DD92C3EBB990084CD5A /* EditActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DD82C3EBB990084CD5A /* EditActivityViewController.swift */; };
+		92CA2DDB2C3EBD6C0084CD5A /* EditDislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */; };
+		92CA2DDD2C3EC6000084CD5A /* EditColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */; };
+		92CA2DDF2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DDE2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift */; };
+		92CA2DE22C3FEA1E0084CD5A /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE12C3FEA1E0084CD5A /* WithdrawalViewController.swift */; };
+		92CA2DE42C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE32C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift */; };
+		92CA2DE62C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE52C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift */; };
+		92CA2DE82C402CEC0084CD5A /* WithdrawalAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */; };
+		92CA2DEA2C415FCD0084CD5A /* WithdrawalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE92C415FCD0084CD5A /* WithdrawalViewModel.swift */; };
+		92CA2DEC2C425BF90084CD5A /* AgreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DEB2C425BF90084CD5A /* AgreeButton.swift */; };
+		92CA2DEF2C427AAB0084CD5A /* Pods_roome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */; };
+		92CA2DF02C427AAB0084CD5A /* Pods_roome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
 		92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */; };
 		92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA062BCFCF5900E299E2 /* LoginViewController.swift */; };
@@ -139,7 +166,23 @@
 		92DBDA0F2BCFCF5B00E299E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		92CA2DF12C427AAB0084CD5A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				92CA2DF02C427AAB0084CD5A /* Pods_roome.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1465AD59F6E3EB9BC89DE552 /* Pods-roome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roome.release.xcconfig"; path = "Target Support Files/Pods-roome/Pods-roome.release.xcconfig"; sourceTree = "<group>"; };
+		161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_roome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		921694F72BF21E70006DC44A /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		921694F92BF21F07006DC44A /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		921694FB2BF2202A006DC44A /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
@@ -196,6 +239,8 @@
 		921695A02BFE743D006DC44A /* ImportantFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantFactorViewController.swift; sourceTree = "<group>"; };
 		921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
+		925087672C42A44C002CFF39 /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
+		925087692C4FDC4F002CFF39 /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
 		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -256,11 +301,34 @@
 		9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardViewController.swift; sourceTree = "<group>"; };
 		9293DCB02C2C63BF00545B57 /* SharingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardView.swift; sourceTree = "<group>"; };
 		9293DCB22C2C640800545B57 /* SharingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingContainer.swift; sourceTree = "<group>"; };
+		92A315F02C6D0FD1006FCEE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		92C0D4D52C52986E00109C4E /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
 		92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetMonitor.swift; sourceTree = "<group>"; };
 		92CA2D0A2C3385D00084CD5A /* ProfileSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectUseCase.swift; sourceTree = "<group>"; };
 		92CA2D0C2C3387280084CD5A /* ProfileSelectRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectRepositoryType.swift; sourceTree = "<group>"; };
 		92CA2D0E2C3387C10084CD5A /* ProfileSelectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectRepository.swift; sourceTree = "<group>"; };
 		92CA2D102C338D780084CD5A /* ProfileSelectUseCaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectUseCaseType.swift; sourceTree = "<group>"; };
+		92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileUseCase.swift; sourceTree = "<group>"; };
+		92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
+		92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepositoryType.swift; sourceTree = "<group>"; };
+		92CA2DC82C3CBCDF0084CD5A /* EditRoomCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoomCountViewController.swift; sourceTree = "<group>"; };
+		92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGenreViewController.swift; sourceTree = "<group>"; };
+		92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMBTIViewController.swift; sourceTree = "<group>"; };
+		92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStrengthViewController.swift; sourceTree = "<group>"; };
+		92CA2DD02C3CE4170084CD5A /* EditImportantFactorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditImportantFactorViewController.swift; sourceTree = "<group>"; };
+		92CA2DD22C3E99A30084CD5A /* EditHorrorPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHorrorPositionViewController.swift; sourceTree = "<group>"; };
+		92CA2DD42C3EB7790084CD5A /* EditHintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHintViewController.swift; sourceTree = "<group>"; };
+		92CA2DD62C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDeviceAndLockViewController.swift; sourceTree = "<group>"; };
+		92CA2DD82C3EBB990084CD5A /* EditActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActivityViewController.swift; sourceTree = "<group>"; };
+		92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDislikeViewController.swift; sourceTree = "<group>"; };
+		92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditColorViewController.swift; sourceTree = "<group>"; };
+		92CA2DDE2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDefaultDTO.swift; sourceTree = "<group>"; };
+		92CA2DE12C3FEA1E0084CD5A /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
+		92CA2DE32C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCollectionViewCell.swift; sourceTree = "<group>"; };
+		92CA2DE52C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalDetailViewController.swift; sourceTree = "<group>"; };
+		92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAgreeViewController.swift; sourceTree = "<group>"; };
+		92CA2DE92C415FCD0084CD5A /* WithdrawalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewModel.swift; sourceTree = "<group>"; };
+		92CA2DEB2C425BF90084CD5A /* AgreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreeButton.swift; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -268,6 +336,7 @@
 		92DBDA0B2BCFCF5B00E299E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92DBDA0E2BCFCF5B00E299E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92DBDA102BCFCF5B00E299E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7F7179FACDB53F74466248B /* Pods-roome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roome.debug.xcconfig"; path = "Target Support Files/Pods-roome/Pods-roome.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +346,7 @@
 			files = (
 				921695212BF4D600006DC44A /* KakaoSDKCommon in Frameworks */,
 				921695232BF4D60E006DC44A /* KakaoSDKAuth in Frameworks */,
+				92CA2DEF2C427AAB0084CD5A /* Pods_roome.framework in Frameworks */,
 				9293DC8A2C230C4F00545B57 /* KakaoSDKShare in Frameworks */,
 				921695252BF4D613006DC44A /* KakaoSDKUser in Frameworks */,
 				9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */,
@@ -287,6 +357,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DC8F19CD06A584579CC3836 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B7F7179FACDB53F74466248B /* Pods-roome.debug.xcconfig */,
+				1465AD59F6E3EB9BC89DE552 /* Pods-roome.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		921694EA2BF1BA7C006DC44A /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +420,7 @@
 				9271F7C72C00B6D200586AFD /* UIColor+.swift */,
 				928474802C0D9F0F002C3B4C /* UIStackView+.swift */,
 				9256E5592C0EFC0D00A50515 /* UILabel+.swift */,
+				925087692C4FDC4F002CFF39 /* UITextView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -348,6 +428,7 @@
 		9216951F2BF4D600006DC44A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -405,6 +486,7 @@
 				921695812BFE021B006DC44A /* BackButton.swift */,
 				921695872BFE0958006DC44A /* NextButton.swift */,
 				928474842C0DB4F9002C3B4C /* SizeButton.swift */,
+				92CA2DEB2C425BF90084CD5A /* AgreeButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -434,6 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				9293DC992C28170300545B57 /* SettingDTO.swift */,
+				92CA2DC12C3BF4A20084CD5A /* UserProfileRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -441,6 +524,8 @@
 		9256E55D2C0EFE8700A50515 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				92CA2DBF2C3BF4670084CD5A /* UserProfileUseCase.swift */,
+				92CA2DC32C3BF4C80084CD5A /* UserProfileRepositoryType.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -448,6 +533,7 @@
 		9256E55E2C0EFE8C00A50515 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				92CA2DC72C3CBCA10084CD5A /* EditProfileCard */,
 				9293DC962C27DCBE00545B57 /* MyProfile */,
 				9293DC952C27DCB300545B57 /* Setting */,
 				9293DC802C22E70700545B57 /* TabBarController.swift */,
@@ -709,6 +795,8 @@
 			children = (
 				9293DC8D2C233D8B00545B57 /* ImageManager.swift */,
 				9216954E2BFAFC8D006DC44A /* KeyChain.swift */,
+				925087672C42A44C002CFF39 /* Tracking.swift */,
+				92C0D4D52C52986E00109C4E /* VersionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -717,6 +805,7 @@
 			isa = PBXGroup;
 			children = (
 				9271F81E2C08D5E400586AFD /* StateDTO.swift */,
+				92CA2DDE2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift */,
 				9271F7E62C0865EB00586AFD /* MBTIDTO.swift */,
 				9271F7C92C00B70200586AFD /* BackgroundColor.swift */,
 			);
@@ -789,6 +878,7 @@
 				9293DC7C2C216EAD00545B57 /* UserCell.swift */,
 				9293DC7E2C216EDC00545B57 /* MyProfileCell.swift */,
 				9293DC9B2C29D7DB00545B57 /* SettingCollectionViewCell.swift */,
+				92CA2DE32C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -806,6 +896,7 @@
 		9293DC952C27DCB300545B57 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				92CA2DE02C3FE9E10084CD5A /* Withdrawal */,
 				9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */,
 				9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */,
 				9293DC972C280F2C00545B57 /* SettingWebViewController.swift */,
@@ -837,12 +928,42 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		92CA2DC72C3CBCA10084CD5A /* EditProfileCard */ = {
+			isa = PBXGroup;
+			children = (
+				92CA2DC82C3CBCDF0084CD5A /* EditRoomCountViewController.swift */,
+				92CA2DCA2C3CE1220084CD5A /* EditGenreViewController.swift */,
+				92CA2DCC2C3CE2AF0084CD5A /* EditMBTIViewController.swift */,
+				92CA2DCE2C3CE3800084CD5A /* EditStrengthViewController.swift */,
+				92CA2DD02C3CE4170084CD5A /* EditImportantFactorViewController.swift */,
+				92CA2DD22C3E99A30084CD5A /* EditHorrorPositionViewController.swift */,
+				92CA2DD42C3EB7790084CD5A /* EditHintViewController.swift */,
+				92CA2DD62C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift */,
+				92CA2DD82C3EBB990084CD5A /* EditActivityViewController.swift */,
+				92CA2DDA2C3EBD6C0084CD5A /* EditDislikeViewController.swift */,
+				92CA2DDC2C3EC6000084CD5A /* EditColorViewController.swift */,
+			);
+			path = EditProfileCard;
+			sourceTree = "<group>";
+		};
+		92CA2DE02C3FE9E10084CD5A /* Withdrawal */ = {
+			isa = PBXGroup;
+			children = (
+				92CA2DE12C3FEA1E0084CD5A /* WithdrawalViewController.swift */,
+				92CA2DE52C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift */,
+				92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */,
+				92CA2DE92C415FCD0084CD5A /* WithdrawalViewModel.swift */,
+			);
+			path = Withdrawal;
+			sourceTree = "<group>";
+		};
 		92DBD9F62BCFCF5900E299E2 = {
 			isa = PBXGroup;
 			children = (
 				92DBDA012BCFCF5900E299E2 /* roome */,
 				92DBDA002BCFCF5900E299E2 /* Products */,
 				9216951F2BF4D600006DC44A /* Frameworks */,
+				4DC8F19CD06A584579CC3836 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -861,6 +982,7 @@
 				921695052BF26E73006DC44A /* roome.entitlements */,
 				921695502BFB1A71006DC44A /* SplashView.swift */,
 				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
+				92A315F02C6D0FD1006FCEE3 /* GoogleService-Info.plist */,
 				921694EA2BF1BA7C006DC44A /* Application */,
 				9271F7A92C00ABAC00586AFD /* Login */,
 				9271F7AD2C00AC5600586AFD /* SignUp */,
@@ -884,9 +1006,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92DBDA132BCFCF5B00E299E2 /* Build configuration list for PBXNativeTarget "roome" */;
 			buildPhases = (
+				75BE1DE0D3DC890FA2AE0E9A /* [CP] Check Pods Manifest.lock */,
 				92DBD9FB2BCFCF5900E299E2 /* Sources */,
 				92DBD9FC2BCFCF5900E299E2 /* Frameworks */,
 				92DBD9FD2BCFCF5900E299E2 /* Resources */,
+				92CA2DF12C427AAB0084CD5A /* Embed Frameworks */,
+				40F6A51EDD509A4D969DDF49 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -952,10 +1077,53 @@
 				9216952C2BF712F0006DC44A /* Pretendard-Bold.otf in Resources */,
 				921695292BF7126E006DC44A /* Pretendard-Regular.otf in Resources */,
 				92DBDA0C2BCFCF5B00E299E2 /* Assets.xcassets in Resources */,
+				92A315F12C6D0FD1006FCEE3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40F6A51EDD509A4D969DDF49 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roome/Pods-roome-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roome/Pods-roome-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-roome/Pods-roome-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75BE1DE0D3DC890FA2AE0E9A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-roome-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		92DBD9FB2BCFCF5900E299E2 /* Sources */ = {
@@ -963,14 +1131,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				921695632BFC6362006DC44A /* TermsAgreeRepositoryType.swift in Sources */,
+				92CA2DDF2C3ECD2D0084CD5A /* ProfileDefaultDTO.swift in Sources */,
 				92CA2D0F2C3387C10084CD5A /* ProfileSelectRepository.swift in Sources */,
+				92CA2DCD2C3CE2AF0084CD5A /* EditMBTIViewController.swift in Sources */,
 				92CA2D062C2DF7850084CD5A /* InternetMonitor.swift in Sources */,
 				921695652BFC67D0006DC44A /* TermsAgreeRepository.swift in Sources */,
 				9293DC8E2C233D8B00545B57 /* ImageManager.swift in Sources */,
 				921695132BF34995006DC44A /* LoginProvider.swift in Sources */,
 				921695382BF84604006DC44A /* NicknameUseCase.swift in Sources */,
+				92CA2DC92C3CBCDF0084CD5A /* EditRoomCountViewController.swift in Sources */,
 				921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */,
 				9293DC9C2C29D7DB00545B57 /* SettingCollectionViewCell.swift in Sources */,
+				92CA2DEC2C425BF90084CD5A /* AgreeButton.swift in Sources */,
 				9271F79C2C009E9F00586AFD /* ImportantFactorViewModel.swift in Sources */,
 				9293DC7D2C216EAD00545B57 /* UserCell.swift in Sources */,
 				9271F7882BFF027000586AFD /* HorrorPositionViewController.swift in Sources */,
@@ -981,19 +1153,24 @@
 				921694FA2BF21F07006DC44A /* RequestBuilder.swift in Sources */,
 				9216950F2BF33E9D006DC44A /* LoginDTO.swift in Sources */,
 				92CA2D0B2C3385D00084CD5A /* ProfileSelectUseCase.swift in Sources */,
+				92CA2DE82C402CEC0084CD5A /* WithdrawalAgreeViewController.swift in Sources */,
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
 				9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */,
 				9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */,
+				92CA2DE62C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift in Sources */,
 				921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */,
 				9293DC6D2C12167F00545B57 /* UIFontMetrics+.swift in Sources */,
+				92CA2DD92C3EBB990084CD5A /* EditActivityViewController.swift in Sources */,
 				9293DCA62C2B02B700545B57 /* EditProfileViewModel.swift in Sources */,
 				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
 				92CA2D0D2C3387280084CD5A /* ProfileSelectRepositoryType.swift in Sources */,
+				92C0D4D62C52986E00109C4E /* VersionManager.swift in Sources */,
 				9293DC902C24F42C00545B57 /* MyProfileCardViewController.swift in Sources */,
 				9293DC702C1F3EA300545B57 /* DIManager.swift in Sources */,
 				9293DC7F2C216EDC00545B57 /* MyProfileCell.swift in Sources */,
 				921695092BF302D2006DC44A /* LoginViewModel.swift in Sources */,
 				9271F8292C09A39900586AFD /* PopUpView.swift in Sources */,
+				92CA2DCF2C3CE3800084CD5A /* EditStrengthViewController.swift in Sources */,
 				928474812C0D9F0F002C3B4C /* UIStackView+.swift in Sources */,
 				9216954C2BFA65EE006DC44A /* UIControl+.swift in Sources */,
 				9271F79A2C009A3E00586AFD /* ToastAlertable.swift in Sources */,
@@ -1016,24 +1193,29 @@
 				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
 				9271F79E2C00A1B400586AFD /* HorrorPositionViewModel.swift in Sources */,
 				928474852C0DB4F9002C3B4C /* SizeButton.swift in Sources */,
+				92CA2DEA2C415FCD0084CD5A /* WithdrawalViewModel.swift in Sources */,
 				921695692BFC8839006DC44A /* NicknameRepositoryType.swift in Sources */,
 				9293DC812C22E70700545B57 /* TabBarController.swift in Sources */,
 				921694FE2BF2207A006DC44A /* APIProvider.swift in Sources */,
 				921695462BF9B661006DC44A /* PaddingLabel.swift in Sources */,
+				92CA2DC22C3BF4A20084CD5A /* UserProfileRepository.swift in Sources */,
 				921695592BFB8D38006DC44A /* UserContainer.swift in Sources */,
 				921694F82BF21E70006DC44A /* HTTP.swift in Sources */,
 				9256E5692C10CA1F00A50515 /* DropDownCell.swift in Sources */,
 				921695322BF7450E006DC44A /* UIFont+.swift in Sources */,
 				921695612BFC62F7006DC44A /* TermsAgreeUseCase.swift in Sources */,
 				921695362BF79BB7006DC44A /* NicknameViewModel.swift in Sources */,
+				92CA2DCB2C3CE1220084CD5A /* EditGenreViewController.swift in Sources */,
 				928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
+				9250876A2C4FDC4F002CFF39 /* UITextView+.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
 				9293DC832C22F3F400545B57 /* GradientView.swift in Sources */,
 				9293DCAB2C2C60B300545B57 /* SharingViewController.swift in Sources */,
 				921695532BFB2A3D006DC44A /* UserDTO.swift in Sources */,
 				921695822BFE021C006DC44A /* BackButton.swift in Sources */,
 				9216959B2BFE65AC006DC44A /* ButtonCell.swift in Sources */,
+				92CA2DE42C3FF5590084CD5A /* WithdrawalCollectionViewCell.swift in Sources */,
 				9271F7862BFEF9A700586AFD /* MBTIViewController.swift in Sources */,
 				9216955D2BFBBE2F006DC44A /* DIContainer.swift in Sources */,
 				921695412BF9008A006DC44A /* TermsAgreeViewController.swift in Sources */,
@@ -1044,12 +1226,18 @@
 				9271F7A02C00A53100586AFD /* HintViewModel.swift in Sources */,
 				928474872C0DBDEB002C3B4C /* ProfileCardViewModel.swift in Sources */,
 				9293DC7A2C216CC000545B57 /* MyProfileViewController.swift in Sources */,
+				92CA2DD32C3E99A30084CD5A /* EditHorrorPositionViewController.swift in Sources */,
 				921695042BF22DCD006DC44A /* UIImage+.swift in Sources */,
 				92DBDA052BCFCF5900E299E2 /* SceneDelegate.swift in Sources */,
+				92CA2DD12C3CE4170084CD5A /* EditImportantFactorViewController.swift in Sources */,
+				92CA2DC02C3BF4670084CD5A /* UserProfileUseCase.swift in Sources */,
 				9293DCA02C2A052A00545B57 /* UpdateError.swift in Sources */,
 				9271F78E2BFF509100586AFD /* GenreViewModel.swift in Sources */,
 				92CA2D112C338D780084CD5A /* ProfileSelectUseCaseType.swift in Sources */,
+				925087682C42A44C002CFF39 /* Tracking.swift in Sources */,
+				92CA2DDB2C3EBD6C0084CD5A /* EditDislikeViewController.swift in Sources */,
 				9293DC9A2C28170300545B57 /* SettingDTO.swift in Sources */,
+				92CA2DC42C3BF4C80084CD5A /* UserProfileRepositoryType.swift in Sources */,
 				9271F7E72C0865EB00586AFD /* MBTIDTO.swift in Sources */,
 				921695A12BFE743D006DC44A /* ImportantFactorViewController.swift in Sources */,
 				9216957C2BFD18C7006DC44A /* RoomCountViewController.swift in Sources */,
@@ -1060,8 +1248,11 @@
 				921695942BFE1B8C006DC44A /* GenreViewController.swift in Sources */,
 				921695862BFE08C9006DC44A /* DescriptionLabel.swift in Sources */,
 				921695842BFE03AE006DC44A /* TitleLabel.swift in Sources */,
+				92CA2DD52C3EB7790084CD5A /* EditHintViewController.swift in Sources */,
 				9271F78C2BFF049F00586AFD /* ActivityViewController.swift in Sources */,
+				92CA2DE22C3FEA1E0084CD5A /* WithdrawalViewController.swift in Sources */,
 				9293DC982C280F2C00545B57 /* SettingWebViewController.swift in Sources */,
+				92CA2DDD2C3EC6000084CD5A /* EditColorViewController.swift in Sources */,
 				9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */,
@@ -1073,6 +1264,7 @@
 				9284747F2C0D9EE3002C3B4C /* ProfileLabel.swift in Sources */,
 				921695512BFB1A71006DC44A /* SplashView.swift in Sources */,
 				9216956B2BFC8891006DC44A /* NicknameRepository.swift in Sources */,
+				92CA2DD72C3EB8F00084CD5A /* EditDeviceAndLockViewController.swift in Sources */,
 				928474722C0CE4AA002C3B4C /* LoadingView.swift in Sources */,
 				921695702BFCA5E2006DC44A /* ErrorDTO.swift in Sources */,
 				9271F7A22C00A64500586AFD /* DeviceAndLockViewModel.swift in Sources */,
@@ -1136,7 +1328,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1200,7 +1392,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1221,12 +1413,14 @@
 		};
 		92DBDA142BCFCF5B00E299E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7F7179FACDB53F74466248B /* Pods-roome.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = roome/roome.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BMG3X5CM6G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = roome/Info.plist;
@@ -1238,7 +1432,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.traum.marchen.roome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1249,12 +1443,13 @@
 		};
 		92DBDA152BCFCF5B00E299E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1465AD59F6E3EB9BC89DE552 /* Pods-roome.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = roome/roome.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BMG3X5CM6G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = roome/Info.plist;
@@ -1266,7 +1461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.traum.marchen.roome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -27,6 +27,16 @@ class ColorPaletteCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                self.layer.borderColor = UIColor.roomeMain.cgColor
+            } else {
+                self.layer.borderColor = UIColor(white: 1.0, alpha: 0.32).cgColor
+            }
+        }
+    }
+    
     func changeColor(_ type: BackgroundColor) {
         self.gradientLayer.colors = type.color
         self.gradientLayer.startPoint = type.direction.point.start

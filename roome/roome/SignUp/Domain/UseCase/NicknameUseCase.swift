@@ -5,7 +5,7 @@
 //  Created by minsong kim on 5/18/24.
 //
 
-import UIKit
+import Foundation
 
 class NicknameUseCase {
     private let nicknameRepository: NicknameRepositoryType
@@ -35,12 +35,4 @@ class NicknameUseCase {
         
         try await nicknameRepository.requestNickname(text)
     }
-    
-//    func imageWithAPI(_ image: UIImage) async throws {
-//        try await nicknameRepository.requestImage(image)
-//    }
-//    
-//    func deleteImageWithAPI() async throws {
-//        try await nicknameRepository.requestImageDelete()
-//    }
 }

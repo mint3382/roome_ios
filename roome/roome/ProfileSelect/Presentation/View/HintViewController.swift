@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class HintViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "힌트 사용에 대해,\n어떻게 생각하시나요?")
@@ -36,30 +37,33 @@ class HintViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.hintView, parameters: nil)
+    }
+    
     func bind() {
-        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        
-        let output = viewModel.transform(HintViewModel.Input(tapBackButton: back))
-        
-        output.handleCellSelect
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink(receiveCompletion: { error in
-                //실패 시
-            }, receiveValue: { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(DeviceAndLockViewController.self)
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: false)
-            })
-            .store(in: &cancellables)
-        
-        output.handleBackButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+        backButton.publisher(for: .touchUpInside)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: false)
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
         
-        output.tapNext
-            .sink {}
+        viewModel.output.handleNextButton
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    let nextViewController = DIContainer.shared.resolve(DeviceAndLockViewController.self)
+                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.collectionView.allowsSelection = true
+                case .failure(let error):
+                    print(error)
+                    self?.collectionView.allowsSelection = true
+                    //TODO: error Toast 띄우기
+                }
+            }
             .store(in: &cancellables)
     }
     
@@ -82,7 +86,6 @@ class HintViewController: UIViewController {
         ])
         
     }
-    
     
     func configureStackView() {
         profileCount.translatesAutoresizingMaskIntoConstraints = false
@@ -146,7 +149,7 @@ extension HintViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let hint = UserContainer.shared.defaultProfile?.data.hintUsagePreferences[indexPath.row] else {
             return
         }
-        viewModel.selectCell.send(hint.id)
+        collectionView.allowsSelection = false
+        viewModel.input.selectCell.send((false, hint.id))
     }
 }
-

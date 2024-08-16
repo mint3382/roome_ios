@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class StrengthViewController: UIViewController, ToastAlertable {
     private let titleLabel = TitleLabel(text: "방탈출 할 때,\n본인의 강점이 무엇이라고\n생각하시나요?")
@@ -39,13 +40,29 @@ class StrengthViewController: UIViewController, ToastAlertable {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.strengthView, parameters: nil)
+    }
+    
     func bind() {
-        let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        nextButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Profile.strengthNextButton, parameters: nil)
+            }
+            .sink { [weak self] in
+                self?.nextButton.loadingButton()
+                self?.viewModel.input.tapNextButton.send()
+            }
+            .store(in: &cancellables)
         
-        let output = viewModel.transform(StrengthViewModel.Input(tapNextButton: next, tapBackButton: back))
+        backButton.publisher(for: .touchUpInside)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: false)
+            }.store(in: &cancellables)
         
-        output.handleCellSelect
+        viewModel.output.handleCellSelect
             .sink { [weak self] (result, item) in
                 if result == false {
                     self?.collectionView.deselectItem(at: item, animated: false)
@@ -53,36 +70,29 @@ class StrengthViewController: UIViewController, ToastAlertable {
                 }
             }.store(in: &cancellables)
         
-        output.canGoNext
+        viewModel.output.handleCanGoNext
             .sink { [weak self] result in
                 if result {
                     self?.nextButton.isEnabled = true
-                    self?.nextButton.backgroundColor = .roomeMain
                 } else {
                     self?.nextButton.isEnabled = false
-                    self?.nextButton.backgroundColor = .gray
                 }
             }.store(in: &cancellables)
         
-        output.handleBackButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: false)
-            }.store(in: &cancellables)
-        
-        output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink(receiveCompletion: { error in
-                //API 연결 실패 시
-            }, receiveValue: { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(ImportantFactorViewController.self)
-                    
-                self?.navigationController?.pushViewController(nextViewController, animated: false)
-            })
-            .store(in: &cancellables)
-        
-        output.tapNext
-            .sink { }
+        viewModel.output.handleNextButton
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    let nextViewController = DIContainer.shared.resolve(ImportantFactorViewController.self)
+                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.nextButton.stopLoading()
+                case .failure(let error):
+                    //TODO: - 토스트로 에러 띄우기
+                    self?.nextButton.stopLoading()
+                    print(error)
+                }
+            }
             .store(in: &cancellables)
     }
     
@@ -175,7 +185,7 @@ extension StrengthViewController: UICollectionViewDataSource, UICollectionViewDe
             if userSelect.contains(strength.id) {
                 cell.isSelected = true
                 collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
-                viewModel.selectCell.send(indexPath)
+                viewModel.input.selectCell.send(indexPath)
             }
         }
         
@@ -183,10 +193,10 @@ extension StrengthViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectCell.send(indexPath)
+        viewModel.input.selectCell.send(indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        viewModel.deselectItem(indexPath)
+        viewModel.input.deselectCell.send(indexPath)
     }
 }

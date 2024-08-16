@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class LoginViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -66,6 +67,11 @@ class LoginViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Login.loginView, parameters: nil)
+    }
+    
     private func configureUI() {
         view.addSubview(titleLabel)
         view.addSubview(logoImageView)
@@ -103,7 +109,7 @@ class LoginViewController: UIViewController {
         let output = viewModel.transform(LoginViewModel.LoginInput(apple: apple, kakao: kakao))
         
         output.state
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -118,7 +124,7 @@ class LoginViewController: UIViewController {
                             self.window?.addSubview(self.errorPopUp)
                         }
                     } else {
-                        self.errorPopUp.updatePopUpView(title: "에러 발생", description: "다시 시도해주세요.", colorButtonTitle: "확인")
+                        self.errorPopUp.updatePopUpView(title: "로그인을 취소했어요", description: "다시 시도해주세요.", colorButtonTitle: "다시 시도")
                         self.window?.addSubview(self.errorPopUp)
                     }
                 }
@@ -127,7 +133,7 @@ class LoginViewController: UIViewController {
             }.store(in: &cancellables)
         
         errorPopUp.publisherColorButton()
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 DIContainer.shared.removeAll()
                 DIManager.shared.registerAll()

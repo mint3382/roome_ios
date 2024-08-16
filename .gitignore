@@ -7,6 +7,13 @@
 xcuserdata/
 *.xcconfig
 
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+
+GoogleService-Info.plist
+
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
 *.xccheckout

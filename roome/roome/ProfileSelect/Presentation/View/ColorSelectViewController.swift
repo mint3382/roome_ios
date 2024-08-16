@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class ColorSelectViewController: UIViewController{
     private let titleLabel = TitleLabel(text: "프로필 배경으로 쓰일\n색상을 골라주세요")
@@ -36,40 +37,46 @@ class ColorSelectViewController: UIViewController{
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.colorView, parameters: nil)
+    }
+    
     func bind() {
-        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        backButton.publisher(for: .touchUpInside)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.navigationController?.popViewController(animated: false)
+            }
+            .store(in: &cancellables)
         
-        let output = viewModel.transform(ColorSelectViewModel.Input(tapBackButton: back))
+        viewModel.output.handleNextButton
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { [weak self] result in
+                switch result {
+                case .success(_):
+                    let nextViewController = ProfileCardViewController(viewModel: ProfileCardViewModel())
+                    
+                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.collectionView.allowsSelection = true
+                case .failure(let error):
+                    print(error)
+                    self?.collectionView.allowsSelection = true
+                    //TODO: error Toast 띄우기
+                }
+            }
+            .store(in: &cancellables)
         
-        output.handleCellSelect
-            .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-            .sink(receiveCompletion: { error in
-                //실패 시
-            }, receiveValue: { _ in
-                Task { @MainActor in
+        viewModel.output.handleLoading
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { isEdit in
+                if isEdit == false {
                     let loadingView = DIContainer.shared.resolve(LoadingView.self)
                     let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
                     
                     window?.addSubview(loadingView)
                 }
-            }).store(in: &cancellables)
-        
-        output.handleBackButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: false)
-            }.store(in: &cancellables)
-        
-        output.handleNextPage
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { [weak self] _ in
-                let nextViewController = ProfileCardViewController(viewModel: ProfileCardViewModel())
-                
-                self?.navigationController?.pushViewController(nextViewController, animated: false)
-            }.store(in: &cancellables)
-        
-        output.tapNext
-            .sink {}
+            }
             .store(in: &cancellables)
     }
     
@@ -151,6 +158,7 @@ extension ColorSelectViewController: UICollectionViewDataSource, UICollectionVie
         guard let colorDTO = UserContainer.shared.defaultProfile?.data.colors[indexPath.row] else {
             return
         }
-        viewModel.selectCell.send(colorDTO.id)
+        collectionView.allowsSelection = false
+        viewModel.input.selectCell.send((false,colorDTO.id))
     }
 }

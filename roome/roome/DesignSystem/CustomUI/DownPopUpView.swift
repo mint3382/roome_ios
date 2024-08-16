@@ -20,12 +20,10 @@ class DownPopUpView: UIView {
     }()
     
     private let takePhotoButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.title = "사진 촬영"
-        configuration.titleAlignment = .center
-        configuration.baseForegroundColor = .label
-        
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.setTitle("사진 촬영", for: .normal)
+        button.titleLabel?.font = .boldTitle3
+        button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
         button.layer.cornerRadius = 10
@@ -34,12 +32,10 @@ class DownPopUpView: UIView {
     }()
     
     private let albumButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.title = "앨범에서 사진 선택"
-        configuration.titleAlignment = .center
-        configuration.baseForegroundColor = .label
-        
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.setTitle("앨범에서 사진 선택", for: .normal)
+        button.titleLabel?.font = .boldTitle3
+        button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
         
@@ -47,12 +43,10 @@ class DownPopUpView: UIView {
     }()
     
     private let baseImageButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.title = "기본 이미지 사용"
-        configuration.titleAlignment = .center
-        configuration.baseForegroundColor = .label
-        
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.setTitle("기본 이미지 사용", for: .normal)
+        button.titleLabel?.font = .boldTitle3
+        button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
         
@@ -60,12 +54,10 @@ class DownPopUpView: UIView {
     }()
     
     private let cancelButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.title = "취소"
-        configuration.titleAlignment = .center
-        configuration.baseForegroundColor = .roomeMain
-        
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.setTitle("취소", for: .normal)
+        button.titleLabel?.font = .boldTitle3
+        button.setTitleColor(.roomeMain, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
         
@@ -80,13 +72,6 @@ class DownPopUpView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        takePhotoButton.titleLabel?.font = .boldTitle3
-        albumButton.titleLabel?.font = .boldTitle3
-        baseImageButton.titleLabel?.font = .boldTitle3
-        cancelButton.titleLabel?.font = .boldTitle3
     }
     
     func takePhotoButtonPublisher() -> AnyPublisher<Void, Never> {

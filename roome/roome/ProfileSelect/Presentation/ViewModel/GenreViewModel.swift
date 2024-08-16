@@ -10,88 +10,104 @@ import Combine
 
 class GenreViewModel {
     struct Input {
-        let tapNextButton: AnyPublisher<Void, Never>
-        let tapBackButton: AnyPublisher<Void, Never>
+        let tapNextButton = PassthroughSubject<Void, Never>()
+        let selectCell = PassthroughSubject<IndexPath, Never>()
+        let deselectCell = PassthroughSubject<IndexPath, Never>()
+        let tapCloseButton = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-        let handleCellSelect: AnyPublisher<(Bool, IndexPath), Never>
-        let handleNextButton: AnyPublisher<Void, Error>
-        let canGoNext: AnyPublisher<Bool, Never>
-        let handleBackButton: AnyPublisher<Void, Never>
-        let tapNext: AnyPublisher<Void, Never>
+        let handleCellSelect = PassthroughSubject<(Bool, IndexPath), Never>()
+        let handleNextButton = PassthroughSubject<Result<Void, Error>, Never>()
+        let handleCanGoNext = PassthroughSubject<Bool, Never>()
+        let handleCloseButton = PassthroughSubject<Bool, Never>()
     }
-    
-    var selectCell = PassthroughSubject<IndexPath, Never>()
-    var deselectCell = PassthroughSubject<IndexPath, Never>()
-    private var canGoNext = PassthroughSubject<Int,Never>()
-    private var goToNext = PassthroughSubject<Void,Error>()
+
     var list = Set<IndexPath>()
     private let useCase: ProfileSelectUseCaseType
+    private var cancellables = Set<AnyCancellable>()
+    let input: Input
+    let output: Output
     
     init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
+        self.input = Input()
+        self.output = Output()
+        settingBind()
     }
     
-    func transform(_ input: Input) -> Output {
-        let handleCellSelect = selectCell
-            .compactMap {
-                $0
+    func settingBind() {
+        input.selectCell
+            .sink { [weak self] indexPath in
+                if let isSelect = self?.canSelectCount(indexPath) {
+                    self?.output.handleCellSelect.send((isSelect, indexPath))
+                }
             }
-            .compactMap { [weak self] item in
-                self?.canSelectCount(item)
+            .store(in: &cancellables)
+        
+        input.deselectCell
+            .sink { [weak self] indexPath in
+                self?.deselectItem(indexPath)
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
         
-        let cellSelect = Publishers.Zip(handleCellSelect, deselectCell)
-            .eraseToAnyPublisher()
-        
-        let canGoNext = canGoNext
-            .map { count in
-                0 < count && count <= 2
-            }.eraseToAnyPublisher()
-        
-        let tapNext = input.tapNextButton
-            .compactMap { [weak self] _ in
+        input.tapNextButton
+            .sink { [weak self] in
                 self?.handlePage()
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
         
-        let handleNextButton = goToNext
-            .eraseToAnyPublisher()
-        
-        let back = input.tapBackButton
-            .eraseToAnyPublisher()
-        
-        return Output(handleCellSelect: cellSelect, handleNextButton: handleNextButton, canGoNext: canGoNext, handleBackButton: back, tapNext: tapNext)
+        input.tapCloseButton
+            .sink { [weak self] in
+                self?.checkEdit()
+            }
+            .store(in: &cancellables)
     }
     
-    func deselectItem(_ item: IndexPath) {
+    private func deselectItem(_ item: IndexPath) {
         if list.contains(item) {
             list.remove(item)
-            canGoNext.send(list.count)
+            checkNextButton()
         }
     }
     
-    func canSelectCount(_ item: IndexPath) -> Bool? {
-        deselectCell.send(item)
+    private func canSelectCount(_ item: IndexPath) -> Bool? {
         if list.count < 2 {
             list.insert(item)
-            canGoNext.send(list.count)
+            checkNextButton()
             return true
         } else {
             return false
         }
     }
     
-    func handlePage() {
+    private func checkNextButton() {
+        if 0 < list.count, list.count <= 2 {
+            output.handleCanGoNext.send(true)
+        } else {
+            output.handleCanGoNext.send(false)
+        }
+    }
+    
+    private func checkEdit() {
+        let userSelect = list.map { UserContainer.shared.defaultProfile?.data.genres[$0.row].id ?? -1 }.sorted()
+        let profileItem = UserContainer.shared.profile?.data.preferredGenres.map { $0.id }.sorted()
+        if userSelect == profileItem {
+            output.handleCloseButton.send(false)
+        } else {
+            output.handleCloseButton.send(true)
+        }
+    }
+    
+    private func handlePage() {
         Task {
             do {
                 let ids = self.list.compactMap { UserContainer.shared.defaultProfile?.data.genres[$0.row].id }
                 try await useCase.genresWithAPI(ids: ids)
-                goToNext.send()
+                try await UserContainer.shared.updateUserProfile()
+                output.handleNextButton.send(.success({}()))
             } catch {
-                goToNext.send(completion: .failure(error))
+                output.handleNextButton.send(.failure(error))
             }
         }
     }

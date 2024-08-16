@@ -5,11 +5,12 @@
 //  Created by minsong kim on 4/17/24.
 //
 
+import FirebaseAnalytics
 import UIKit
 import KakaoSDKAuth
 import Combine
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIGestureRecognizerDelegate {
     var window: UIWindow?
     
     var isConnect: Bool = false  {
@@ -23,6 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private var internetPopUp: PopUpView?
     private var cancellable = Set<AnyCancellable>()
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        Analytics.setAnalyticsCollectionEnabled(true)
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -48,6 +53,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         let navigateViewController = UINavigationController(rootViewController: viewController)
         navigateViewController.isNavigationBarHidden = true
+        navigateViewController.interactivePopGestureRecognizer?.isEnabled = true
+        navigateViewController.interactivePopGestureRecognizer?.delegate = self
         window.rootViewController = navigateViewController
     }
     
@@ -119,5 +126,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         return parameters
     }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
-

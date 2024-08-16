@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class RoomCountViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "현재까지 경험한 방 수를\n알려주세요")
@@ -125,50 +126,68 @@ class RoomCountViewController: UIViewController {
         registerKeyboardListener()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.numberView, parameters: nil)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     func bind() {
-        let next = nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let count = numberTextField.publisher
-        let range = rangeButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        let textFieldInput = textFieldButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
+        nextButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Profile.numberNextButton, parameters: nil)
+            }
+            .sink { [weak self] in
+                self?.nextButton.loadingButton()
+                self?.viewModel.input.tapNextButton.send()
+            }
+            .store(in: &cancellables)
         
-        count.receive(on: RunLoop.main)
+        numberTextField.publisher
+            .receive(on: RunLoop.main)
             .assign(to: &viewModel.$textInput)
         
-        let output = viewModel.transform(RoomCountViewModel.Input(count: count, nextButton: next, rangeButton: range, textButton: textFieldInput))
+        rangeButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapRangeButton.send()
+            }
+            .store(in: &cancellables)
         
-        output.handleNextButton
-            .sink(receiveValue: { [weak self] isNextButtonOn in
+        textFieldButton.publisher(for: .touchUpInside)
+            .sink { [weak self] in
+                self?.viewModel.input.tapTextButton.send()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.output.handleCanGoNext
+            .sink { [weak self] isNextButtonOn in
                 if isNextButtonOn {
                     self?.nextButton.isEnabled = true
                 } else {
                     self?.nextButton.isEnabled = false
                 }
-            }).store(in: &cancellables)
-        
-        output.tapNext
-            .sink {}
+            }
             .store(in: &cancellables)
         
-        output.handleNextPage
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    print("roomcount finish")
-                case .failure(_):
-                    self.navigationController?.popToRootViewController(animated: true)
+        viewModel.output.handleNextButton
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    let nextPage = DIContainer.shared.resolve(GenreViewController.self)
+                    self?.navigationController?.pushViewController(nextPage, animated: false)
+                    self?.nextButton.stopLoading()
+                case .failure(let error):
+                    self?.nextButton.stopLoading()
+                    print(error)
                 }
-            }, receiveValue: { _ in
-                let nextPage = DIContainer.shared.resolve(GenreViewController.self)
-                self.navigationController?.pushViewController(nextPage, animated: false)
-            })
+            }
             .store(in: &cancellables)
         
-        output.handleRangeOrText
+        viewModel.output.handleRangeOrText
             .sink { [weak self] isRange in
                 if isRange {
                     self?.textFieldBackgroundView.removeFromSuperview()
@@ -190,7 +209,7 @@ class RoomCountViewController: UIViewController {
             }.store(in: &cancellables)
         
         selectButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else {
                     return
@@ -203,7 +222,7 @@ class RoomCountViewController: UIViewController {
             }.store(in: &cancellables)
         
         backButton.publisher(for: .touchUpInside)
-            .throttle(for: 0.05, scheduler: RunLoop.main, latest: true)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self]  in
                 self?.navigationController?.popViewController(animated: false)
             }.store(in: &cancellables)
@@ -329,10 +348,8 @@ extension RoomCountViewController: UITextFieldDelegate {
         
         if newText.count == 0 {
             nextButton.isEnabled = false
-            nextButton.backgroundColor = .gray
         } else {
             nextButton.isEnabled = true
-            nextButton.backgroundColor = .roomeMain
         }
         
         if newText.count < 6 {
@@ -406,7 +423,7 @@ extension RoomCountViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        viewModel.canGoNext.send(true)
+        viewModel.output.handleCanGoNext.send(true)
         viewModel.isSelected = (range.minCount, range.maxCount)
         selectButton.setTitle(range.title, for: .normal)
         self.tableView.removeFromSuperview()

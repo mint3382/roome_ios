@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class TermsAgreeViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -25,7 +26,6 @@ class TermsAgreeViewController: UIViewController {
     private let titleLabel: PaddingLabel = {
         let label = PaddingLabel()
         label.text = "서비스 이용약관"
-        label.numberOfLines = 2
         label.sizeToFit()
         label.textAlignment = .left
         label.textColor = .label
@@ -101,6 +101,11 @@ class TermsAgreeViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.ServiceTerms.termsView, parameters: nil)
+    }
+    
     override func viewDidLayoutSubviews() {
         allAgreeButton.titleLabel?.font = .regularBody2
         ageAgreeButton.setNeedsLayout()
@@ -134,21 +139,20 @@ class TermsAgreeViewController: UIViewController {
             .store(in: &cancellable)
         
         nextButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    print("finished")
-                case .failure(let error):
-                    self.window?.addSubview(self.errorPopUp)
-                }
-            } receiveValue: { [weak self] in
+            .map {
+                Analytics.logEvent(Tracking.ServiceTerms.termsNextButton, parameters: nil)
+            }
+            .sink { [weak self] in
                 self?.viewModel.input.next.send()
             }
             .store(in: &cancellable)
 
         backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-            .sink { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
+            .sink { _ in
+                let viewController = DIContainer.shared.resolve(LoginViewController.self)
+                
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .changeRootViewController(viewController, animated: true)
             }
             .store(in: &cancellable)
         
@@ -192,7 +196,7 @@ class TermsAgreeViewController: UIViewController {
             }.store(in: &cancellable)
         
         viewModel.output.goToNext
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { completion in
                 switch completion {
                 case .finished:

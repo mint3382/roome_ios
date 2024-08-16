@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class HorrorPositionViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "공포 테마에서,\n어떤 포지션인가요?")
@@ -36,28 +37,33 @@ class HorrorPositionViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.positionView, parameters: nil)
+    }
+    
     func bind() {
-        let back = backButton.publisher(for: .touchUpInside).eraseToAnyPublisher()
-        
-        let output = viewModel.transform(HorrorPositionViewModel.Input(tapBackButton: back))
-        
-        output.handleCellSelect
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink(receiveCompletion: { error in
-                // 실패 시
-            }, receiveValue: { [weak self] _ in
-                let nextViewController = DIContainer.shared.resolve(HintViewController.self)
-                self?.navigationController?.pushViewController(nextViewController, animated: false)
-            }).store(in: &cancellables)
-        
-        output.handleBackButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+        backButton.publisher(for: .touchUpInside)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: false)
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
         
-        output.tapNext
-            .sink {}
+        viewModel.output.handleNextButton
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { [weak self] result in
+                switch result {
+                case .success:
+                    let nextViewController = DIContainer.shared.resolve(HintViewController.self)
+                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.collectionView.allowsSelection = true
+                case .failure(let error):
+                    print(error)
+                    self?.collectionView.allowsSelection = true
+                    //TODO: error Toast 띄우기
+                }
+            }
             .store(in: &cancellables)
     }
     
@@ -142,6 +148,7 @@ extension HorrorPositionViewController: UICollectionViewDataSource, UICollection
         guard let horrorPosition = UserContainer.shared.defaultProfile?.data.horrorThemePositions[indexPath.row] else {
             return
         }
-        viewModel.selectCell.send(horrorPosition.id)
+        collectionView.allowsSelection = false
+        viewModel.input.selectCell.send((false, horrorPosition.id))
     }
 }

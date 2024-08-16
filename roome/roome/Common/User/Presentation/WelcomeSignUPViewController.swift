@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class WelcomeSignUPViewController: UIViewController {
     private let stackView = UIStackView(axis: .vertical, alignment: .center, spacing: 20)
@@ -76,6 +77,11 @@ class WelcomeSignUPViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.createView, parameters: nil)
+    }
+    
     func updateNickName() {
         welcomeLabel.text = """
                             \(UserContainer.shared.user?.data.nickname ?? "{Error2}")님,
@@ -85,14 +91,17 @@ class WelcomeSignUPViewController: UIViewController {
     
     func bind() {
         makeProfileButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .map {
+                Analytics.logEvent(Tracking.Profile.createNextButton, parameters: nil)
+            }
             .sink { [weak self] in
                 self?.viewModel.input.nextButton.send()
             }
             .store(in: &cancellables)
         
         popUpView.publisherWhiteButton()
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] in
                 self?.viewModel.input.newButton.send()
                 self?.popUpView.removeFromSuperview()
@@ -100,7 +109,7 @@ class WelcomeSignUPViewController: UIViewController {
             .store(in: &cancellables)
         
         popUpView.publisherColorButton()
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] in
                 self?.viewModel.input.stillButton.send()
                 self?.popUpView.removeFromSuperview()
@@ -108,7 +117,7 @@ class WelcomeSignUPViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.willBeContinue
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { error in
                 //fail
             } receiveValue: { [weak self] state in
@@ -122,7 +131,7 @@ class WelcomeSignUPViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleNext
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] state in
                 self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(RoomCountViewController.self))
                 self?.navigationController?.viewControllers.append(DIContainer.shared.resolve(GenreViewController.self))

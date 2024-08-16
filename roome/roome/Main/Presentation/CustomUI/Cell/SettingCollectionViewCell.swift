@@ -57,33 +57,14 @@ class SettingCollectionViewCell: UICollectionViewListCell {
     }
     
     func compareVersion() -> Bool {
-        let previousVersion = viewModel?.version
-        let latestVersion = latestVersion()
+        let previousVersion = VersionManager.currentVersion
+        let latestVersion = VersionManager.currentVersion
         
-        guard let latestVersion else {
-            return true
-        }
-
         if previousVersion == latestVersion {
             return true
         } else {
             return false
         }
-    }
-    
-    func latestVersion() -> String? {
-        let appleID = "6503616766"
-        guard let url = URL(string: "http://itunes.apple.com/lookup?id=\(appleID)"),
-              let data = try? Data(contentsOf: url),
-              let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
-              let resultCount = json["resultCount"] as? Int,
-              resultCount != 0,
-              let results = json["results"] as? [[String: Any]],
-              let appStoreVersion = results[0]["version"] as? String else {
-            return nil
-        }
-        
-        return appStoreVersion
     }
     
     private func configureLabel() {

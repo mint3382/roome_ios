@@ -10,49 +10,78 @@ import Combine
 
 class DeviceAndLockViewModel {
     struct Input {
-        let tapBackButton: AnyPublisher<Void, Never>
+        let tapSaveButton = PassthroughSubject<Void, Never>()
+        let selectCell = PassthroughSubject<(isEdit: Bool, id: Int), Never>()
+        let tapCloseButton = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
-        let handleCellSelect: AnyPublisher<Void, Error>
-        let handleBackButton: AnyPublisher<Void, Never>
-        let tapNext: AnyPublisher<Void, Never>
+        let handleCellSelect = PassthroughSubject<Result<Void, Error>,Never>()
+        let handleNextButton = PassthroughSubject<Result<Void, Error>, Never>()
+        let handleCloseButton = PassthroughSubject<Bool, Never>()
     }
-    
-    var selectCell = PassthroughSubject<Int, Never>()
-    private var goToNext = PassthroughSubject<Void, Error>()
+
     private var useCase: ProfileSelectUseCaseType
+    private var cancellables = Set<AnyCancellable>()
+    let input: Input
+    let output: Output
+    private var id: Int = -1
     
     init(useCase: ProfileSelectUseCaseType) {
         self.useCase = useCase
+        self.input = Input()
+        self.output = Output()
+        settingBind()
     }
     
-    func transform(_ input: Input) -> Output {
-        let tapNext = selectCell
-            .compactMap { [weak self] id in
-                self?.handlePage(id: id)
+    func settingBind() {
+        input.selectCell
+            .sink { [weak self] (isEdit, id) in
+                if isEdit {
+                    self?.id = id
+                } else {
+                    self?.handlePage(id: id)
+                }
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
         
-        let cellSelect = goToNext
-            .eraseToAnyPublisher()
-        let back = input.tapBackButton
-            .eraseToAnyPublisher()
+        input.tapSaveButton
+            .sink { [weak self] in
+                if let self {
+                    handlePage(id: id)
+                }
+            }
+            .store(in: &cancellables)
         
-        return Output(handleCellSelect: cellSelect,
-                      handleBackButton: back,
-                      tapNext: tapNext)
+        input.tapCloseButton
+            .sink { [weak self] in
+                self?.checkEdit()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func checkEdit() {
+        let userSelect =  UserContainer.shared.defaultProfile?.data.deviceLockPreferences.filter {
+            $0.id == id
+        }[0].id
+        let profileItem = UserContainer.shared.profile?.data.deviceLockPreference.map { $0.id }
+        
+        if userSelect == profileItem {
+            output.handleCloseButton.send(false)
+        } else {
+            output.handleCloseButton.send(true)
+        }
     }
     
     func handlePage(id: Int) {
         Task {
             do {
                 try await useCase.deviceAndLockWithAPI(id: id)
-                goToNext.send()
+                try await UserContainer.shared.updateUserProfile()
+                output.handleNextButton.send(.success({}()))
             } catch {
-                goToNext.send(completion: .failure(error))
+                output.handleNextButton.send(.failure(error))
             }
         }
     }
 }
-

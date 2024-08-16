@@ -107,8 +107,40 @@ class DIManager {
         
         let profileCardViewModel = ProfileCardViewModel()
         let profileCardViewController = ProfileCardViewController(viewModel: profileCardViewModel)
-        
         DIContainer.shared.register(ProfileCardViewController.self, dependency: profileCardViewController)
+        
+        let editRoomContViewController = EditRoomCountViewController(viewModel: roomCountViewModel)
+        DIContainer.shared.register(EditRoomCountViewController.self, dependency: editRoomContViewController)
+        
+        let editGenreViewController = EditGenreViewController(viewModel: genreViewModel)
+        DIContainer.shared.register(EditGenreViewController.self, dependency: editGenreViewController)
+        
+        let editMBTIViewController = EditMBTIViewController(viewModel: mbtiViewModel)
+        DIContainer.shared.register(EditMBTIViewController.self, dependency: editMBTIViewController)
+        
+        let editStrengthViewController = EditStrengthViewController(viewModel: strengthViewModel)
+        DIContainer.shared.register(EditStrengthViewController.self, dependency: editStrengthViewController)
+        
+        let editImportantFactorViewController = EditImportantFactorViewController(viewModel: themeViewModel)
+        DIContainer.shared.register(EditImportantFactorViewController.self, dependency: editImportantFactorViewController)
+        
+        let editHorrorPositionViewController = EditHorrorPositionViewController(viewModel: horrorViewModel)
+        DIContainer.shared.register(EditHorrorPositionViewController.self, dependency: editHorrorPositionViewController)
+        
+        let editHintViewController = EditHintViewController(viewModel: hintViewModel)
+        DIContainer.shared.register(EditHintViewController.self, dependency: editHintViewController)
+        
+        let editDeviceAndLockViewController = EditDeviceAndLockViewController(viewModel: deviceLockViewModel)
+        DIContainer.shared.register(EditDeviceAndLockViewController.self, dependency: editDeviceAndLockViewController)
+        
+        let editActivityViewController = EditActivityViewController(viewModel: activityViewModel)
+        DIContainer.shared.register(EditActivityViewController.self, dependency: editActivityViewController)
+        
+        let editDislikeViewController = EditDislikeViewController(viewModel: dislikeViewModel)
+        DIContainer.shared.register(EditDislikeViewController.self, dependency: editDislikeViewController)
+        
+        let editColorViewController = EditColorViewController(viewModel: colorViewModel)
+        DIContainer.shared.register(EditColorViewController.self, dependency: editColorViewController)
     }
     
     private func registerMainPageDependency() {
@@ -118,11 +150,14 @@ class DIManager {
         
         let profileCardViewModel = ProfileCardViewModel()
         let myProfileCardViewController = MyProfileCardViewController(viewModel: profileCardViewModel)
+        DIContainer.shared.register(ProfileCardViewModel.self, dependency: profileCardViewModel)
         DIContainer.shared.register(MyProfileCardViewController.self, dependency: myProfileCardViewController)
         
-        let nicknameUseCase = DIContainer.shared.resolve(NicknameUseCase.self)
-        let editProfileViewModel = EditProfileViewModel(usecase: nicknameUseCase)
+        let userProfileRepository = UserProfileRepository()
+        let userProfileUseCase = UserProfileUseCase(userProfileRepository: userProfileRepository)
+        let editProfileViewModel = EditProfileViewModel(usecase: userProfileUseCase)
         let editProfileViewController = EditProfileViewController(viewModel: editProfileViewModel)
+        DIContainer.shared.register(UserProfileUseCase.self, dependency: userProfileUseCase)
         DIContainer.shared.register(EditProfileViewController.self, dependency: editProfileViewController)
         
         let settingViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
@@ -134,6 +169,14 @@ class DIManager {
         
         let tabBarController = TabBarController()
         DIContainer.shared.register(TabBarController.self, dependency: tabBarController)
+        
+        let withdrawalViewModel = WithdrawalViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
+        let withdrawalViewController = WithdrawalViewController(viewModel: withdrawalViewModel)
+        let withdrawalDetailViewController = WithdrawalDetailViewController(viewModel: withdrawalViewModel)
+        let withdrawalAgreeViewController = WithdrawalAgreeViewController(viewModel: withdrawalViewModel)
+        DIContainer.shared.register(WithdrawalViewController.self, dependency: withdrawalViewController)
+        DIContainer.shared.register(WithdrawalDetailViewController.self, dependency: withdrawalDetailViewController)
+        DIContainer.shared.register(WithdrawalAgreeViewController.self, dependency: withdrawalAgreeViewController)
     }
     
     private func registerExtraDependency() {

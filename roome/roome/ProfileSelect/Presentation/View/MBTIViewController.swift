@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class MBTIViewController: UIViewController {
     private let titleLabel = TitleLabel(text: "MBTI를 알려주세요")
@@ -16,21 +17,7 @@ class MBTIViewController: UIViewController {
     private lazy var flowLayout = self.createFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
     
-    private let willNotAddButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.baseForegroundColor = .label
-        configuration.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
-        configuration.imagePadding = 8
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 24, bottom: 10, trailing: 20)
-        configuration.title = "프로필에 추가하지 않을래요"
-        
-        let button = UIButton(configuration: configuration)
-        button.titleLabel?.font = .regularBody2
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentHorizontalAlignment = .leading
-        
-        return button
-    }()
+    private let willNotAddButton = AgreeButton(title: "프로필에 추가하지 않을래요")
     
     var viewModel: MBTIViewModel
     var cancellables = Set<AnyCancellable>()
@@ -62,15 +49,24 @@ class MBTIViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.Profile.mbtiView, parameters: nil)
+    }
+    
     func bind() {
         nextButton.publisher(for: .touchUpInside)
+            .map {
+                Analytics.logEvent(Tracking.Profile.mbtiNextButton, parameters: nil)
+            }
             .sink { [weak self] in
+                self?.nextButton.loadingButton()
                 self?.viewModel.input.tappedNextButton.send()
             }
             .store(in: &cancellables)
         
         backButton.publisher(for: .touchUpInside)
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 self?.navigationController?.popViewController(animated: false)
             }.store(in: &cancellables)
@@ -94,14 +90,16 @@ class MBTIViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.handleNextButton
-            .throttle(for: 1, scheduler: RunLoop.main, latest: false)
-            .sink { result in
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { [weak self] result in
                 switch result {
                 case .success:
                     let nextViewController = DIContainer.shared.resolve(StrengthViewController.self)
                     
-                    self.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.nextButton.stopLoading()
                 case .failure(let error):
+                    self?.nextButton.stopLoading()
                     print(error)
                 }
             }
@@ -109,12 +107,11 @@ class MBTIViewController: UIViewController {
         
         viewModel.output.handleNotAddButton
             .sink { [weak self] willNotAdd in
+                self?.willNotAddButton.isSelected = willNotAdd
                 if willNotAdd {
-                    self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.roomeMain).resize(newWidth: 24)
                     _ = self?.collectionView.visibleCells.map { $0.isSelected = false }
                     self?.collectionView.reloadData()
                 } else {
-                    self?.willNotAddButton.configuration?.image = UIImage(systemName: "checkmark.circle.fill")?.changeImageColor(.gray).resize(newWidth: 24)
                     _ = self?.collectionView.visibleCells
                         .compactMap { $0 as? ButtonCell }
                         .map { $0.isChecked = false }
@@ -169,9 +166,9 @@ class MBTIViewController: UIViewController {
         view.addSubview(willNotAddButton)
         
         NSLayoutConstraint.activate([
-            willNotAddButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            willNotAddButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            willNotAddButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            willNotAddButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 12),
+            willNotAddButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            willNotAddButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
         ])
     }
     

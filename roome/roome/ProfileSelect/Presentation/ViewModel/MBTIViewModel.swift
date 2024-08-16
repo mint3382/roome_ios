@@ -14,6 +14,7 @@ class MBTIViewModel {
         let cellDeselect = PassthroughSubject<IndexPath, Never>()
         let tappedNotAddButton = PassthroughSubject<Void, Never>()
         let tappedNextButton = PassthroughSubject<Void, Never>()
+        let tappedCloseButton = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -21,6 +22,7 @@ class MBTIViewModel {
         let canGoNext = PassthroughSubject<Bool, Never>()
         let handleNotAddButton = PassthroughSubject<Bool, Never>()
         let handleNextButton = PassthroughSubject<Result<Void, Error>, Never>()
+        let handleCloseButton = PassthroughSubject<Bool, Never>()
     }
     
     let input: Input
@@ -72,6 +74,30 @@ class MBTIViewModel {
                 self?.deselectItem(indexPath)
             }
             .store(in: &cancellables)
+        
+        input.tappedCloseButton
+            .sink { [weak self] in
+                self?.checkEdit()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func checkEdit() {
+        var mbtis: [String] = []
+        
+        mbtis.append(MBTIDTO.EI(rawValue: list[0] ?? -1)?.title ?? "N")
+        mbtis.append(MBTIDTO.NS(rawValue: list[1] ?? -1)?.title ?? "O")
+        mbtis.append(MBTIDTO.TF(rawValue: list[2] ?? -1)?.title ?? "N")
+        mbtis.append(MBTIDTO.JP(rawValue: list[3] ?? -1)?.title ?? "E")
+        
+        let mbti = mbtis.joined()
+        let userMbti = UserContainer.shared.profile?.data.mbti
+        
+        if userMbti == mbti {
+            output.handleCloseButton.send(false)
+        } else {
+            output.handleCloseButton.send(true)
+        }
     }
     
     //deselect시 체크
@@ -121,6 +147,7 @@ class MBTIViewModel {
                 mbtis.append(MBTIDTO.JP(rawValue: list[3] ?? -1)?.title ?? "E")
                 
                 try await useCase.mbtiWithAPI(mbti: mbtis)
+                try await UserContainer.shared.updateUserProfile()
                 output.handleNextButton.send(.success({}()))
             } catch {
                 output.handleNextButton.send(.failure(error))

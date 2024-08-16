@@ -35,6 +35,13 @@ class MyProfileCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        optionLabel.text = ""
+        stackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+    
     func updateOption(text: String?) {
         optionLabel.text = text
     }

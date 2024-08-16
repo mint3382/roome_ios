@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FirebaseAnalytics
 
 class MyProfileViewController: UIViewController {
     private let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
@@ -37,7 +38,13 @@ class MyProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         print("viewWillAppear")
         //TODO: - 닉네임과 유저 사진이 바뀌었다면 업데이트.
-//        collectionView.cellForItem(at: IndexPath(item: 0, section: 0))?.layoutSubviews()
+        (collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? UserCell)?.updateUserProfile()
+        collectionView.reloadSections(IndexSet.init(arrayLiteral: 1))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Analytics.logEvent(Tracking.MyProfile.myProfileView, parameters: nil)
     }
     
     private func bind() {
@@ -108,7 +115,7 @@ extension MyProfileViewController: UICollectionViewDataSource {
         if indexPath.section == 0 {
             userCell.userButtonPublisher()
                 .sink { [weak self] in
-                    let view = EditProfileViewController(viewModel: EditProfileViewModel(usecase: DIContainer.shared.resolve(NicknameUseCase.self)))
+                    let view = EditProfileViewController(viewModel: EditProfileViewModel(usecase: DIContainer.shared.resolve(UserProfileUseCase.self)))
                     view.modalPresentationStyle = .fullScreen
                     
                     self?.present(view, animated: true)
@@ -116,16 +123,23 @@ extension MyProfileViewController: UICollectionViewDataSource {
                 .store(in: &cancellables)
             
             userCell.cardButtonPublisher()
+                .map {
+                    Analytics.logEvent(Tracking.MyProfile.myProfileCardButton, parameters: nil)
+                }
                 .sink { [weak self] _ in
                     print("card Button Tapped")
-                    let popUpView = DIContainer.shared.resolve(MyProfileCardViewController.self)
-                    popUpView.modalPresentationStyle = .fullScreen
+                    let cardViewModel = DIContainer.shared.resolve(ProfileCardViewModel.self)
+                    let view = MyProfileCardViewController(viewModel: cardViewModel)
+                    view.modalPresentationStyle = .fullScreen
                     
-                    self?.present(popUpView, animated: true)
+                    self?.present(view, animated: true)
                 }
                 .store(in: &cancellables)
             
             userCell.shareButtonPublisher()
+                .map {
+                    Analytics.logEvent(Tracking.MyProfile.shareKakaoButton, parameters: nil)
+                }
                 .sink { [weak self] _ in
                     self?.viewModel.input.tappedShareButton.send()
                 }
@@ -176,12 +190,46 @@ extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
         var width = (view.frame.width / 2) - 29
         
         if indexPath.section == 0 {
-            height = 120.0
+            height = 140.0
             width = view.frame.width - 48
         } else if indexPath.row == 0 || indexPath.row == 1 {
             height = 70.0
         }
         
         return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var next = UIViewController()
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0:
+                next = DIContainer.shared.resolve(EditRoomCountViewController.self)
+            case 1:
+                next = DIContainer.shared.resolve(EditMBTIViewController.self)
+            case 2:
+                next = DIContainer.shared.resolve(EditGenreViewController.self)
+            case 3:
+                next = DIContainer.shared.resolve(EditStrengthViewController.self)
+            case 4:
+                next = DIContainer.shared.resolve(EditImportantFactorViewController.self)
+            case 5:
+                next = DIContainer.shared.resolve(EditHorrorPositionViewController.self)
+            case 6:
+                next = DIContainer.shared.resolve(EditHintViewController.self)
+            case 7:
+                next = DIContainer.shared.resolve(EditDeviceAndLockViewController.self)
+            case 8:
+                next = DIContainer.shared.resolve(EditActivityViewController.self)
+            case 9:
+                next = DIContainer.shared.resolve(EditDislikeViewController.self)
+            case 10:
+                next = DIContainer.shared.resolve(EditColorViewController.self)
+            default:
+                print("default")
+            }
+            next.modalPresentationStyle = .fullScreen
+            self.present(next, animated: false)
+        }
     }
 }
