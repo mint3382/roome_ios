@@ -13,7 +13,7 @@ import KakaoSDKUser
 class WithdrawalViewModel: NSObject {
     struct Input {
         let tappedWithdrawal = PassthroughSubject<Void, Never>()
-        let tappedWithdrawalReasonCell = PassthroughSubject<WithdrawalItem, Never>()
+        let tappedWithdrawalReasonCell = PassthroughSubject<WithdrawalReason, Never>()
     }
     
     struct Output {
@@ -23,6 +23,7 @@ class WithdrawalViewModel: NSObject {
     
     let input: Input
     let output: Output
+    var reasonState: WithdrawalReason = .jump
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -35,6 +36,8 @@ class WithdrawalViewModel: NSObject {
     }
     
     let loginUseCase: LoginUseCase?
+    
+    @Published var textInput = ""
     
     private func settingBind() {
         input.tappedWithdrawal
@@ -50,6 +53,7 @@ class WithdrawalViewModel: NSObject {
         input.tappedWithdrawalReasonCell
             .sink { [weak self] reason in
                 //API로 이유 전송
+                self?.reasonState = reason
                 self?.output.handleReason.send(.success({}()))
             }
             .store(in: &cancellables)
@@ -73,7 +77,9 @@ class WithdrawalViewModel: NSObject {
                 print("unlink() success")
                 
                 let bodyJSON: [String: Any?] = ["provider": LoginProvider.kakao.name,
-                                               "code": nil]
+                                                "code": nil,
+                                                "reason": reasonState.rawValue,
+                                                "content": textInput]
                 //탈퇴 시켜줘
                 Task {
                     do {
@@ -98,7 +104,9 @@ extension WithdrawalViewModel: ASAuthorizationControllerDelegate {
         }
         //TODO: - 도메인에 넘겨줄 body Type 따로 정의해서 분리하기
         let bodyJSON: [String: Any] = ["provider": LoginProvider.apple.name,
-                                        "code": String(data: credential.authorizationCode ?? Data(), encoding: .utf8) ?? ""]
+                                       "code": String(data: credential.authorizationCode ?? Data(), encoding: .utf8) ?? "",
+                                       "reason": reasonState.rawValue,
+                                       "content": textInput]
         
         Task {
             do {

@@ -214,7 +214,7 @@ class SettingViewController: UIViewController, UICollectionViewDelegate {
             supplementaryView, elementKind, indexPath in
             let section = SettingSection(rawValue: indexPath.section)
             if section == .signOut {
-                guard let version = self.viewModel.version else {
+                guard let version = VersionManager.currentVersion else {
                     return
                 }
                 supplementaryView.configureLabel(text: "앱 버전 \(version)")

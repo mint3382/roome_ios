@@ -10,7 +10,7 @@ import UIKit
 import KakaoSDKAuth
 import Combine
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIGestureRecognizerDelegate {
     var window: UIWindow?
     
     var isConnect: Bool = false  {
@@ -53,6 +53,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         let navigateViewController = UINavigationController(rootViewController: viewController)
         navigateViewController.isNavigationBarHidden = true
+        navigateViewController.interactivePopGestureRecognizer?.isEnabled = true
+        navigateViewController.interactivePopGestureRecognizer?.delegate = self
         window.rootViewController = navigateViewController
     }
     
@@ -124,5 +126,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         return parameters
     }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
-

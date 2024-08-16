@@ -65,6 +65,7 @@
 		921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */; };
 		921695A52BFE786B006DC44A /* DislikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921695A42BFE786B006DC44A /* DislikeViewController.swift */; };
 		925087682C42A44C002CFF39 /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925087672C42A44C002CFF39 /* Tracking.swift */; };
+		9250876A2C4FDC4F002CFF39 /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925087692C4FDC4F002CFF39 /* UITextView+.swift */; };
 		9256E5582C0ED6DB00A50515 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9256E5572C0ED6DB00A50515 /* Lottie */; };
 		9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E5592C0EFC0D00A50515 /* UILabel+.swift */; };
 		9256E5602C0EFEAD00A50515 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */; };
@@ -128,6 +129,8 @@
 		9293DCAF2C2C62AA00545B57 /* SharingCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */; };
 		9293DCB12C2C63BF00545B57 /* SharingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB02C2C63BF00545B57 /* SharingCardView.swift */; };
 		9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB22C2C640800545B57 /* SharingContainer.swift */; };
+		92A315F12C6D0FD1006FCEE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92A315F02C6D0FD1006FCEE3 /* GoogleService-Info.plist */; };
+		92C0D4D62C52986E00109C4E /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C0D4D52C52986E00109C4E /* VersionManager.swift */; };
 		92CA2D062C2DF7850084CD5A /* InternetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */; };
 		92CA2D0B2C3385D00084CD5A /* ProfileSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0A2C3385D00084CD5A /* ProfileSelectUseCase.swift */; };
 		92CA2D0D2C3387280084CD5A /* ProfileSelectRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0C2C3387280084CD5A /* ProfileSelectRepositoryType.swift */; };
@@ -154,7 +157,6 @@
 		92CA2DE82C402CEC0084CD5A /* WithdrawalAgreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */; };
 		92CA2DEA2C415FCD0084CD5A /* WithdrawalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DE92C415FCD0084CD5A /* WithdrawalViewModel.swift */; };
 		92CA2DEC2C425BF90084CD5A /* AgreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2DEB2C425BF90084CD5A /* AgreeButton.swift */; };
-		92CA2DEE2C42746D0084CD5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CA2DED2C42746D0084CD5A /* GoogleService-Info.plist */; };
 		92CA2DEF2C427AAB0084CD5A /* Pods_roome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */; };
 		92CA2DF02C427AAB0084CD5A /* Pods_roome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 161E65BCA8AAE36125BC5B16 /* Pods_roome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */; };
@@ -238,6 +240,7 @@
 		921695A22BFE773C006DC44A /* DeviceAndLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAndLockViewController.swift; sourceTree = "<group>"; };
 		921695A42BFE786B006DC44A /* DislikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DislikeViewController.swift; sourceTree = "<group>"; };
 		925087672C42A44C002CFF39 /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
+		925087692C4FDC4F002CFF39 /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
 		9256E5592C0EFC0D00A50515 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		9256E55F2C0EFEAD00A50515 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9256E5612C0EFFBB00A50515 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -298,6 +301,8 @@
 		9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardViewController.swift; sourceTree = "<group>"; };
 		9293DCB02C2C63BF00545B57 /* SharingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardView.swift; sourceTree = "<group>"; };
 		9293DCB22C2C640800545B57 /* SharingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingContainer.swift; sourceTree = "<group>"; };
+		92A315F02C6D0FD1006FCEE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		92C0D4D52C52986E00109C4E /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
 		92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetMonitor.swift; sourceTree = "<group>"; };
 		92CA2D0A2C3385D00084CD5A /* ProfileSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectUseCase.swift; sourceTree = "<group>"; };
 		92CA2D0C2C3387280084CD5A /* ProfileSelectRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectRepositoryType.swift; sourceTree = "<group>"; };
@@ -324,7 +329,6 @@
 		92CA2DE72C402CEC0084CD5A /* WithdrawalAgreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAgreeViewController.swift; sourceTree = "<group>"; };
 		92CA2DE92C415FCD0084CD5A /* WithdrawalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewModel.swift; sourceTree = "<group>"; };
 		92CA2DEB2C425BF90084CD5A /* AgreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreeButton.swift; sourceTree = "<group>"; };
-		92CA2DED2C42746D0084CD5A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		92DBD9FF2BCFCF5900E299E2 /* roome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBDA022BCFCF5900E299E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DBDA042BCFCF5900E299E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -416,6 +420,7 @@
 				9271F7C72C00B6D200586AFD /* UIColor+.swift */,
 				928474802C0D9F0F002C3B4C /* UIStackView+.swift */,
 				9256E5592C0EFC0D00A50515 /* UILabel+.swift */,
+				925087692C4FDC4F002CFF39 /* UITextView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -791,6 +796,7 @@
 				9293DC8D2C233D8B00545B57 /* ImageManager.swift */,
 				9216954E2BFAFC8D006DC44A /* KeyChain.swift */,
 				925087672C42A44C002CFF39 /* Tracking.swift */,
+				92C0D4D52C52986E00109C4E /* VersionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -976,7 +982,7 @@
 				921695052BF26E73006DC44A /* roome.entitlements */,
 				921695502BFB1A71006DC44A /* SplashView.swift */,
 				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
-				92CA2DED2C42746D0084CD5A /* GoogleService-Info.plist */,
+				92A315F02C6D0FD1006FCEE3 /* GoogleService-Info.plist */,
 				921694EA2BF1BA7C006DC44A /* Application */,
 				9271F7A92C00ABAC00586AFD /* Login */,
 				9271F7AD2C00AC5600586AFD /* SignUp */,
@@ -1071,7 +1077,7 @@
 				9216952C2BF712F0006DC44A /* Pretendard-Bold.otf in Resources */,
 				921695292BF7126E006DC44A /* Pretendard-Regular.otf in Resources */,
 				92DBDA0C2BCFCF5B00E299E2 /* Assets.xcassets in Resources */,
-				92CA2DEE2C42746D0084CD5A /* GoogleService-Info.plist in Resources */,
+				92A315F12C6D0FD1006FCEE3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1158,6 +1164,7 @@
 				9293DCA62C2B02B700545B57 /* EditProfileViewModel.swift in Sources */,
 				9271F7CA2C00B70200586AFD /* BackgroundColor.swift in Sources */,
 				92CA2D0D2C3387280084CD5A /* ProfileSelectRepositoryType.swift in Sources */,
+				92C0D4D62C52986E00109C4E /* VersionManager.swift in Sources */,
 				9293DC902C24F42C00545B57 /* MyProfileCardViewController.swift in Sources */,
 				9293DC702C1F3EA300545B57 /* DIManager.swift in Sources */,
 				9293DC7F2C216EDC00545B57 /* MyProfileCell.swift in Sources */,
@@ -1201,6 +1208,7 @@
 				92CA2DCB2C3CE1220084CD5A /* EditGenreViewController.swift in Sources */,
 				928474832C0DA12B002C3B4C /* SizeDTO.swift in Sources */,
 				92DBDA032BCFCF5900E299E2 /* AppDelegate.swift in Sources */,
+				9250876A2C4FDC4F002CFF39 /* UITextView+.swift in Sources */,
 				921695482BF9FC5B006DC44A /* LabelButton.swift in Sources */,
 				9293DC832C22F3F400545B57 /* GradientView.swift in Sources */,
 				9293DCAB2C2C60B300545B57 /* SharingViewController.swift in Sources */,
@@ -1424,7 +1432,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.traum.marchen.roome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1453,7 +1461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.traum.marchen.roome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

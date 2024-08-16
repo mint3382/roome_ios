@@ -141,6 +141,7 @@ class RoomCountViewController: UIViewController {
                 Analytics.logEvent(Tracking.Profile.numberNextButton, parameters: nil)
             }
             .sink { [weak self] in
+                self?.nextButton.loadingButton()
                 self?.viewModel.input.tapNextButton.send()
             }
             .store(in: &cancellables)
@@ -178,7 +179,9 @@ class RoomCountViewController: UIViewController {
                 case .success:
                     let nextPage = DIContainer.shared.resolve(GenreViewController.self)
                     self?.navigationController?.pushViewController(nextPage, animated: false)
+                    self?.nextButton.stopLoading()
                 case .failure(let error):
+                    self?.nextButton.stopLoading()
                     print(error)
                 }
             }
@@ -345,10 +348,8 @@ extension RoomCountViewController: UITextFieldDelegate {
         
         if newText.count == 0 {
             nextButton.isEnabled = false
-            nextButton.backgroundColor = .gray
         } else {
             nextButton.isEnabled = true
-            nextButton.backgroundColor = .roomeMain
         }
         
         if newText.count < 6 {

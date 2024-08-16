@@ -56,8 +56,10 @@ class DeviceAndLockViewController: UIViewController {
                 case .success:
                     let nextViewController = DIContainer.shared.resolve(ActivityViewController.self)
                     self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.collectionView.allowsSelection = true
                 case .failure(let error):
                     print(error)
+                    self?.collectionView.allowsSelection = true
                     //TODO: error Toast 띄우기
                 }
             }
@@ -136,6 +138,7 @@ extension DeviceAndLockViewController: UICollectionViewDataSource {
         guard let device = UserContainer.shared.defaultProfile?.data.deviceLockPreferences[indexPath.row] else {
             return
         }
+        collectionView.allowsSelection = false
         viewModel.input.selectCell.send((false,device.id))
     }
 }
@@ -158,7 +161,6 @@ extension DeviceAndLockViewController: UICollectionViewDelegateFlowLayout {
         }
         
         let width = view.frame.width - 48
-        
         
         return CGSize(width: width, height: height)
     }

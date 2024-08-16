@@ -58,8 +58,10 @@ class ColorSelectViewController: UIViewController{
                     let nextViewController = ProfileCardViewController(viewModel: ProfileCardViewModel())
                     
                     self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.collectionView.allowsSelection = true
                 case .failure(let error):
                     print(error)
+                    self?.collectionView.allowsSelection = true
                     //TODO: error Toast 띄우기
                 }
             }
@@ -156,6 +158,7 @@ extension ColorSelectViewController: UICollectionViewDataSource, UICollectionVie
         guard let colorDTO = UserContainer.shared.defaultProfile?.data.colors[indexPath.row] else {
             return
         }
+        collectionView.allowsSelection = false
         viewModel.input.selectCell.send((false,colorDTO.id))
     }
 }

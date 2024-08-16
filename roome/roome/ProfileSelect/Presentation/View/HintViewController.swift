@@ -57,8 +57,10 @@ class HintViewController: UIViewController {
                 case .success:
                     let nextViewController = DIContainer.shared.resolve(DeviceAndLockViewController.self)
                     self?.navigationController?.pushViewController(nextViewController, animated: false)
+                    self?.collectionView.allowsSelection = true
                 case .failure(let error):
                     print(error)
+                    self?.collectionView.allowsSelection = true
                     //TODO: error Toast 띄우기
                 }
             }
@@ -147,6 +149,7 @@ extension HintViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let hint = UserContainer.shared.defaultProfile?.data.hintUsagePreferences[indexPath.row] else {
             return
         }
+        collectionView.allowsSelection = false
         viewModel.input.selectCell.send((false, hint.id))
     }
 }

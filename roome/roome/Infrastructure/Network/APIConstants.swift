@@ -6,7 +6,7 @@
 //
 
 struct APIConstants {
-    static let roomeHost = "roome.site"
+    static let roomeHost = "roome.asia"
     
     enum Auth {
         case signIn
@@ -17,13 +17,13 @@ struct APIConstants {
         var name: String {
             switch self {
             case .signIn:
-                "/signin"
+                "/auth/signin"
             case .withdrawal:
-                "/withdrawal"
+                "/auth/deactivate"
             case .token:
-                "/token"
+                "/auth/token"
             case .signOut:
-                "/signout"
+                "/auth/signout"
             }
         }
     }
@@ -69,5 +69,9 @@ struct APIConstants {
         case strengths = "/profiles/user-strengths"
         case important = "/profiles/theme-important-factors"
         case dislike = "/profiles/theme-disliked-factors"
+    }
+    
+    enum Version: String {
+        case iOS = "/versions/ios"
     }
 }
