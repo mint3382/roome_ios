@@ -160,6 +160,12 @@ class DIManager {
         DIContainer.shared.register(UserProfileUseCase.self, dependency: userProfileUseCase)
         DIContainer.shared.register(EditProfileViewController.self, dependency: editProfileViewController)
         
+        let recordViewController = RecordViewController()
+        DIContainer.shared.register(RecordViewController.self, dependency: recordViewController)
+        
+        let recordListViewController = RecordListViewController()
+        DIContainer.shared.register(RecordListViewController.self, dependency: recordListViewController)
+        
         let settingViewModel = SettingViewModel(loginUseCase: DIContainer.shared.resolve(LoginUseCase.self))
         let settingViewController = SettingViewController(viewModel: settingViewModel)
         let settingWebViewController = SettingWebViewController(viewModel: settingViewModel)

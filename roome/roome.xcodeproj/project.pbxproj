@@ -129,7 +129,10 @@
 		9293DCAF2C2C62AA00545B57 /* SharingCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */; };
 		9293DCB12C2C63BF00545B57 /* SharingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB02C2C63BF00545B57 /* SharingCardView.swift */; };
 		9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293DCB22C2C640800545B57 /* SharingContainer.swift */; };
-		92A315F12C6D0FD1006FCEE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92A315F02C6D0FD1006FCEE3 /* GoogleService-Info.plist */; };
+		92A315F52C6F02B8006FCEE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92A315F42C6F02B8006FCEE3 /* GoogleService-Info.plist */; };
+		92A315F82C6F03B3006FCEE3 /* NoRecordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A315F72C6F03B3006FCEE3 /* NoRecordListViewController.swift */; };
+		92A315FB2C6F047B006FCEE3 /* RecordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A315FA2C6F047B006FCEE3 /* RecordListViewController.swift */; };
+		92A315FD2C6F1432006FCEE3 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A315FC2C6F1432006FCEE3 /* RecordViewController.swift */; };
 		92C0D4D62C52986E00109C4E /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C0D4D52C52986E00109C4E /* VersionManager.swift */; };
 		92CA2D062C2DF7850084CD5A /* InternetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */; };
 		92CA2D0B2C3385D00084CD5A /* ProfileSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CA2D0A2C3385D00084CD5A /* ProfileSelectUseCase.swift */; };
@@ -301,7 +304,10 @@
 		9293DCAE2C2C62AA00545B57 /* SharingCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardViewController.swift; sourceTree = "<group>"; };
 		9293DCB02C2C63BF00545B57 /* SharingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingCardView.swift; sourceTree = "<group>"; };
 		9293DCB22C2C640800545B57 /* SharingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingContainer.swift; sourceTree = "<group>"; };
-		92A315F02C6D0FD1006FCEE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		92A315F42C6F02B8006FCEE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		92A315F72C6F03B3006FCEE3 /* NoRecordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRecordListViewController.swift; sourceTree = "<group>"; };
+		92A315FA2C6F047B006FCEE3 /* RecordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewController.swift; sourceTree = "<group>"; };
+		92A315FC2C6F1432006FCEE3 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		92C0D4D52C52986E00109C4E /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
 		92CA2D052C2DF7850084CD5A /* InternetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetMonitor.swift; sourceTree = "<group>"; };
 		92CA2D0A2C3385D00084CD5A /* ProfileSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectUseCase.swift; sourceTree = "<group>"; };
@@ -533,10 +539,12 @@
 		9256E55E2C0EFE8C00A50515 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				92CA2DC72C3CBCA10084CD5A /* EditProfileCard */,
-				9293DC962C27DCBE00545B57 /* MyProfile */,
-				9293DC952C27DCB300545B57 /* Setting */,
 				9293DC802C22E70700545B57 /* TabBarController.swift */,
+				9293DC962C27DCBE00545B57 /* MyProfile */,
+				92CA2DC72C3CBCA10084CD5A /* EditProfileCard */,
+				92A315F62C6F0395006FCEE3 /* Record */,
+				92A315F92C6F0464006FCEE3 /* List */,
+				9293DC952C27DCB300545B57 /* Setting */,
 				9293DC862C230B1000545B57 /* CustomUI */,
 			);
 			path = Presentation;
@@ -928,6 +936,23 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		92A315F62C6F0395006FCEE3 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				92A315FC2C6F1432006FCEE3 /* RecordViewController.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		92A315F92C6F0464006FCEE3 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				92A315F72C6F03B3006FCEE3 /* NoRecordListViewController.swift */,
+				92A315FA2C6F047B006FCEE3 /* RecordListViewController.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		92CA2DC72C3CBCA10084CD5A /* EditProfileCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -982,7 +1007,7 @@
 				921695052BF26E73006DC44A /* roome.entitlements */,
 				921695502BFB1A71006DC44A /* SplashView.swift */,
 				92DBDA0D2BCFCF5B00E299E2 /* LaunchScreen.storyboard */,
-				92A315F02C6D0FD1006FCEE3 /* GoogleService-Info.plist */,
+				92A315F42C6F02B8006FCEE3 /* GoogleService-Info.plist */,
 				921694EA2BF1BA7C006DC44A /* Application */,
 				9271F7A92C00ABAC00586AFD /* Login */,
 				9271F7AD2C00AC5600586AFD /* SignUp */,
@@ -1077,7 +1102,7 @@
 				9216952C2BF712F0006DC44A /* Pretendard-Bold.otf in Resources */,
 				921695292BF7126E006DC44A /* Pretendard-Regular.otf in Resources */,
 				92DBDA0C2BCFCF5B00E299E2 /* Assets.xcassets in Resources */,
-				92A315F12C6D0FD1006FCEE3 /* GoogleService-Info.plist in Resources */,
+				92A315F52C6F02B8006FCEE3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,6 +1182,7 @@
 				921695012BF220A6006DC44A /* NetworkError.swift in Sources */,
 				9256E55A2C0EFC0D00A50515 /* UILabel+.swift in Sources */,
 				9271F7CC2C00E65800586AFD /* ColorSelectViewModel.swift in Sources */,
+				92A315FD2C6F1432006FCEE3 /* RecordViewController.swift in Sources */,
 				92CA2DE62C3FFE8F0084CD5A /* WithdrawalDetailViewController.swift in Sources */,
 				921695A32BFE773C006DC44A /* DeviceAndLockViewController.swift in Sources */,
 				9293DC6D2C12167F00545B57 /* UIFontMetrics+.swift in Sources */,
@@ -1188,6 +1214,7 @@
 				9284747B2C0CE6BE002C3B4C /* ProfileCardViewController.swift in Sources */,
 				9293DCA82C2B2D6F00545B57 /* DownPopUpView.swift in Sources */,
 				92DBDA072BCFCF5900E299E2 /* LoginViewController.swift in Sources */,
+				92A315FB2C6F047B006FCEE3 /* RecordListViewController.swift in Sources */,
 				921695882BFE0958006DC44A /* NextButton.swift in Sources */,
 				9293DCAF2C2C62AA00545B57 /* SharingCardViewController.swift in Sources */,
 				9216959D2BFE72D1006DC44A /* StrengthViewController.swift in Sources */,
@@ -1254,6 +1281,7 @@
 				9293DC982C280F2C00545B57 /* SettingWebViewController.swift in Sources */,
 				92CA2DDD2C3EC6000084CD5A /* EditColorViewController.swift in Sources */,
 				9293DCB32C2C640800545B57 /* SharingContainer.swift in Sources */,
+				92A315F82C6F03B3006FCEE3 /* NoRecordListViewController.swift in Sources */,
 				921695112BF34256006DC44A /* LoginRepositoryType.swift in Sources */,
 				9216958A2BFE100F006DC44A /* RoomCountViewModel.swift in Sources */,
 				921694FC2BF2202A006DC44A /* URLBuilder.swift in Sources */,
